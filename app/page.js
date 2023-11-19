@@ -1,11 +1,10 @@
+"use client";
+import FAQ from "@/components/FAQ";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 import Stats from "@/components/Stats";
 import Timeline from "@/components/Timeline";
-import TopBar from "@/components/TopBar";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -30,6 +29,7 @@ export default function Home() {
         </span>
       </div>
       <Timeline />
+      <FAQ />
     </main>
   );
 }
