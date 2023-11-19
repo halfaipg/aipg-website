@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 import Stats from "@/components/Stats";
+import Timeline from "@/components/Timeline";
 import TopBar from "@/components/TopBar";
 import Image from "next/image";
 
@@ -23,6 +24,12 @@ export default function Home() {
         </span>
       </div>
       <Features />
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50">
+        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
+          Roadmap
+        </span>
+      </div>
+      <Timeline />
     </main>
   );
 }
