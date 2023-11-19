@@ -99,7 +99,7 @@ const Navbar = () => {
                 className="md:w-full md:h-[50px] w-auto h-auto object-cover"
                 alt="logo"
               /> */}
-              <h1 className="text-3xl font-semibold tracking-wide">
+              <h1 className="text-xl sm:text-3xl font-semibold tracking-wide">
                 AIPOWERGRID
               </h1>
             </Link>
