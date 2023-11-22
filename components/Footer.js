@@ -26,9 +26,9 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/account-management"
+                    href="/mining-pool"
                   >
-                    Account Management
+                    Mining Pool
                   </a>
                 </p>
                 <p>
@@ -36,7 +36,7 @@ const Footer = () => {
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
                     href="/growth-management"
                   >
-                    Growth Management
+                    Wallets
                   </a>
                 </p>
                 <p>
@@ -61,22 +61,6 @@ const Footer = () => {
                   >
                     About us
                   </a>
-                </p>
-                <p>
-                  <a
-                    className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/blog"
-                  >
-                    Blog
-                  </a>
-                </p>
-                <p>
-                  <a
-                    className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/contact"
-                  >
-                    Contact
-                  </a>{" "}
                 </p>
               </div>
             </div>

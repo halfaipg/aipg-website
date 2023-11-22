@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,23 +20,6 @@ const Navbar = () => {
 
   const [isManagementOpen, setManagementOpen] = useState(false);
 
-  const components = [
-    {
-      title: "Account Management",
-      href: "/account-management",
-      description: "Lorem ipsum something something",
-    },
-    {
-      title: "Growth Management",
-      href: "/growth-management",
-      description: "Lorem Ipsum something something",
-    },
-    {
-      title: "FAQs",
-      href: "/faqs",
-      description: "Frequently Asked Questions",
-    },
-  ];
   const [isOverlayOpen, setOverlayOpen] = useState(false);
 
   useEffect(() => {
@@ -119,24 +101,6 @@ const Navbar = () => {
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
-                  <Link href="/#slide-2">
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Services
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
-                  <Link href="/#slide-3">
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Features
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
                   <Link href="/about">
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
@@ -146,20 +110,38 @@ const Navbar = () => {
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
-                  <Link href="/blog">
+                  <Link href="/mining-pool">
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
-                      Roadmap
+                      Mining Pool
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
-                  <Link href="/contact">
+                  <Link href="/wallet">
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
-                      Contact
+                      Wallets
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
+                  <Link href="/gallery">
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      Gallery
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black">
+                  <Link href="/faqs">
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      FAQs
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -167,8 +149,9 @@ const Navbar = () => {
             </NavigationMenu>
           </ul>
         </div>
+
         <Link
-          href="/contact"
+          href="#"
           className="px-8 w-[70%] sm:w-auto py-4 bg-black rounded-lg text-white font-semibold hover:bg-blue-600  text-sm transition duration-200 ease-in-out hover:scale-105 flex flex-row items-center justify-center"
         >
           CTA!
@@ -214,12 +197,12 @@ const Navbar = () => {
                       } flex-col`}
                     >
                       <ul className="flex flex-col space-y-2">
-                        <Link href="/account-management">
+                        <Link href="/about">
                           <li className="p-2 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl text-sm w-full">
-                            Services
+                            About Us
                           </li>
                         </Link>
-                        <Link href="/growth-management">
+                        <Link href="/whitepaper">
                           <li className="p-2 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl text-sm w-full">
                             Whitepaper
                           </li>
@@ -232,22 +215,24 @@ const Navbar = () => {
                       </ul>
                     </motion.div>
                   </li>
-                  <Link href="/about">
+                  <Link href="/wallet">
                     <li className="p-4 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl w-full flex flex-row items-baseline space-x-3">
                       <span className="text-sm font-semibold ">03. </span>{" "}
-                      <span className="font-bold tracking-wide">Team</span>
+                      <span className="font-bold tracking-wide">Wallets</span>
                     </li>
                   </Link>
-                  {/* <Link href="/blog">
+                  <Link href="/blog">
                     <li className="p-4 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl w-full flex flex-row items-baseline space-x-3">
                       <span className="text-sm font-semibold ">04. </span>{" "}
-                      <span className="font-bold tracking-wide">Blogs</span>
+                      <span className="font-bold tracking-wide">Gallery</span>
                     </li>
-                  </Link> */}
-                  <Link href="/contact">
+                  </Link>
+                  <Link href="/mining-pool">
                     <li className="p-4 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl w-full flex flex-row items-baseline space-x-3">
-                      <span className="text-sm font-semibold ">04. </span>{" "}
-                      <span className="font-bold tracking-wide">Contact</span>
+                      <span className="text-sm font-semibold ">05. </span>{" "}
+                      <span className="font-bold tracking-wide">
+                        Mining Pools
+                      </span>
                     </li>
                   </Link>
                 </ul>
