@@ -24,7 +24,7 @@ const TopBar = () => {
         <div className="flex items-center space-x-2">
           <Switch id="airplane-mode" />
           <Label htmlFor="airplane-mode" className="text-white">
-            Airplane Mode
+            Dark Mode
           </Label>
         </div>
       </div>
