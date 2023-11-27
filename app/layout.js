@@ -3,6 +3,7 @@ import "./globals.css";
 import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "@/context/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,12 +15,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <TopBar />
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
+      <Providers attribute="class">
+        <body className={inter.className}>
+          <TopBar />
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </Providers>
     </html>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { BsSun, BsMoon } from "react-icons/bs";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 
 const TopBar = () => {
+  const { theme, setTheme } = useTheme();
   return (
     <div className={`flex w-full bg-black items-center justify-center`}>
       <div className="sm:w-[80%] flex flex-row px-8 py-[14px] items-center justify-between">
@@ -22,10 +23,16 @@ const TopBar = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-2">
-          <Switch id="airplane-mode" />
-          <Label htmlFor="airplane-mode" className="text-white">
-            Dark Mode
-          </Label>
+          <button
+            className="bg-gray-50 dark:bg-gray-900 py-2 px-4 rounded"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? (
+              <BsMoon className="h-4 w-4" />
+            ) : (
+              <BsSun className="h-4 w-4" />
+            )}
+          </button>
         </div>
       </div>
     </div>
