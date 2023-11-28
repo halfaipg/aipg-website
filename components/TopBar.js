@@ -1,25 +1,29 @@
 "use client";
+
+import Link from "next/link";
 import { BsSun, BsMoon } from "react-icons/bs";
 import { useTheme } from "next-themes";
-import Link from "next/link";
 
 const TopBar = () => {
   const { theme, setTheme } = useTheme();
+
   return (
-    <div className={`flex w-full bg-black items-center justify-center`}>
-      <div className="sm:w-[80%] flex flex-row px-8 py-[14px] items-center justify-between">
-        <div className="flex flex-row text-gray-300 justify-start items-center px-4 text-xs w-full sm:w-1/2 space-x-4">
+    <div
+      className={`flex w-full bg-black items-center justify-center dark:bg-gray-50`}
+    >
+      <div className="sm:w-[80%] flex flex-row px-8 py-[4px] items-center justify-between">
+        <div className="flex flex-row text-gray-300 dark:text-black justify-start items-center px-4 text-xs w-full sm:w-1/2 space-x-4">
           <Link
             href="/faqs"
-            className="font-semibold hover:text-cyan-300 duration-300"
+            className="font-semibold hover:text-cyan-300  duration-300"
           >
-            Lorem <span className="px-2 text-stone-400">|</span>
+            FAQs <span className="px-2 text-stone-400 dark:text-black">|</span>
           </Link>
           <Link
-            href="/contact"
-            className="font-semibold hover:text-cyan-300 duration-300"
+            href="/wallet"
+            className="font-semibold hover:text-cyan-300 dark:text-black duration-300"
           >
-            Ipsum
+            Wallet
           </Link>
         </div>
         <div className="flex items-center space-x-2">

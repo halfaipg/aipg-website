@@ -7,7 +7,7 @@ import "react-vertical-timeline-component/style.min.css";
 
 const Timeline = () => {
   return (
-    <div class="container bg-gray-50 mx-auto w-full h-full p-8">
+    <div class="container bg-gray-50 mx-auto w-full h-full p-8 dark:bg-transparent">
       <VerticalTimeline>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"

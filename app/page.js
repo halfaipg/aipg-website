@@ -1,4 +1,4 @@
-"use client";
+import BlogsSection from "@/components/BlogsSection";
 import FAQ from "@/components/FAQ";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
@@ -11,25 +11,26 @@ export default function Home() {
     <main className="">
       <Hero />
       <Stats />
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50">
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-zinc-900">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
           Our Services
         </span>
       </div>
       <Services />
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50">
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-zinc-900">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
           Features
         </span>
       </div>
       <Features />
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50">
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-zinc-900">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
           Roadmap
         </span>
       </div>
       <Timeline />
       <FAQ />
+      <BlogsSection />
     </main>
   );
 }
