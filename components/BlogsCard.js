@@ -7,7 +7,7 @@ const BlogsCard = ({ image, title, _createdAt, overview, slug }) => {
   return (
     <Link
       className="group rounded-xl overflow-hidden"
-      href={`/blog/${slug.current}`}
+      href={`/blogs/${slug.current}`}
     >
       <div className="sm:flex bg-gray-100 rounded p-4">
         <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
