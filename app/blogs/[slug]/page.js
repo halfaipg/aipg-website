@@ -75,16 +75,16 @@ const PortableTextComponent = {
 };
 const Post = ({ data }) => {
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-zinc-900 dark:text-white">
       {data.map((post) => (
-        <section className="p-8 sm:p-16 min-h-screen">
+        <section className="p-8 sm:p-16 min-h-screen ">
           <div className="flex flex-row justify-between items-center mx-4 my-4">
-            <p className="font-semibold tracking-tight text-lg">
+            <p className="font-semibold tracking-tight md:text-lg text-xs">
               Published On:{" "}
               {new Date(post._createdAt).toISOString().split("T")[0]}
             </p>
             <Link
-              href="/blog"
+              href="/blogs"
               className="hover:scale-105 transition duration-200 ease-in-out text-lg font-semibold bg-black rounded text-white px-4 py-2"
             >
               Go Back

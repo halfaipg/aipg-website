@@ -32,13 +32,13 @@ const BlogsSection = async () => {
               href={`/blogs/${post.slug.current}`}
             >
               <div className="aspect-w-16 aspect-h-11">
-                {/* <Image
+                <Image
                   className="w-full object-cover rounded-xl"
                   src={urlFor(post.image.asset._ref).url()}
                   alt={post.title}
                   height={200}
                   width={200}
-                /> */}
+                />
               </div>
               <div className="my-6">
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-300 dark:group-hover:text-white">
