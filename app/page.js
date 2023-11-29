@@ -11,19 +11,19 @@ export default function Home() {
     <main className="">
       <Hero />
       <Stats />
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-zinc-900">
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-black">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
           Our Services
         </span>
       </div>
       <Services />
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-zinc-900">
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-black">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
           Features
         </span>
       </div>
       <Features />
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-zinc-900">
+      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-black">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
           Roadmap
         </span>

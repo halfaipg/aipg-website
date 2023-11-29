@@ -7,67 +7,65 @@ const page = () => {
   const FAQ_Questions = [
     {
       id: 1,
-      question: "Q. What is your pricing structure?",
+      question: "Q. What is AI Power Grid (AIPG)?",
       answer:
-        "A. Our pricing structure is based on a flat rate minimum + a % of revenue, whichever is higher. The rates depend on the size of your account. Please contact us for a proposal for your account.",
+        "A. AIPG is a pioneering blockchain-based platform designed to democratize access to advanced AI technologies, including Large Language Models (LLM) for natural language processing and Stable Diffusion for AI-generated art. It provides free AI services for individuals and developers, validated and secured by the blockchain.",
     },
     {
       id: 2,
-      question: "Q. What should I expect from the proposal process?",
+      question: "Q. How does AIPG benefit developers and creators?",
       answer:
-        "A. After sending us your information, please give our team a day or two to get back to you. We'll ask a few follow-up questions and schedule a discovery call to make sure you can ask all the questions you want from our team. Following that call, we'll package a proposal for your review and approval.",
+        "A. AIPG allows developers to deploy and improve their AI models with community feedback rapidly. For creators, especially artists, AIPG offers AI art generation tools and a platform, the NFT AI Gallery, to mint, showcase, and sell their AI-generated artwork as NFTs.",
     },
     {
       id: 3,
-      question:
-        "Q. How long does it take to see results from your marketing campaigns?",
+      question: "Q. Is it free to use the AI services on AIPG?",
       answer:
-        "A. The timeframe for seeing results can vary depending on several factors, such as the type of campaign, your target audience, and the industry you're in. Some campaigns may yield noticeable results within a few weeks, while others might take a few months. We work closely with our clients to set realistic expectations and provide regular updates on the progress of the campaigns.",
+        "A. Yes, AIPG provides free access to LLM inference and AI Art generation, enabling users to take advantage of these cutting-edge technologies without any cost.",
     },
     {
       id: 4,
-      question:
-        "Q. Can you explain more about your network of Onlyfans creators?",
+      question: "Q. How does the AIPG NFT AI Gallery work?",
       answer:
-        "A. Our network consists of a diverse group of Onlyfans creators who have built a substantial following and are actively seeking opportunities to collaborate with other creators. If you're interested in leveraging this network for paid shoutouts, we can connect you with relevant creators based on your target audience and niche.",
+        "A. The NFT AI Gallery is a digital space where creators can display their AI-generated art, mint it as NFTs, and put it up for sale or auction within the AIPG marketplace. This allows for direct engagement between artists and collectors within the platform.",
     },
     {
       id: 5,
-      question:
-        "Q. What marketing platforms do you work with for paid campaigns?",
+      question: "Q. What is the AIPG coin and what are its uses?",
       answer:
-        "A. We are uniquely partnered with various marketing firms and platforms to enhance the visibility of your brand or content. Our partnerships allow us to leverage different advertising channels, including social media platforms, search engines, and other digital advertising avenues.",
+        "A. The AIPG coin is the native cryptocurrency of the AI Power Grid platform. It can be used for transactions within the platform, such as purchasing AI-generated NFT artwork and accessing premium AI services.",
     },
     {
       id: 6,
-      question: "Q. How can I track the performance of my marketing campaigns?",
+      question: "Q. How is blockchain technology utilized in AIPG?",
       answer:
-        "A. We provide detailed analytics and reporting for all our marketing campaigns. Our team will set up tracking mechanisms to monitor key performance indicators (KPIs) and provide you with regular reports. You'll have access to data on impressions, clicks, conversions, and other relevant metrics to gauge the effectiveness of the campaigns.",
+        "A. Blockchain technology is crucial to AIPG for validating and recording AI service interactions, ensuring transparency in AI model deployments, and providing a secure framework for the NFT marketplace.",
     },
     {
       id: 7,
-      question:
-        "Q. Do you offer custom marketing solutions for specific industries?",
+      question: "Q. Can I contribute my AI model to AIPG?",
       answer:
-        "A. Yes, we understand that different industries have unique marketing requirements. We tailor our marketing strategies to align with the specific needs and characteristics of your industry. Our team will work closely with you to develop a customized marketing plan that resonates with your target audience and achieves your business objectives.",
+        "A. Yes, AIPG supports and encourages open-source contributions. Developers can submit and deploy their AI models on the platform, where they can be accessed, used, and reviewed by the community.",
     },
     {
       id: 8,
-      question: "Q. What sets your marketing services apart from others?",
+      question:
+        "Q. How does AIPG ensure the originality of AI-generated artwork?",
       answer:
-        "A. Our marketing services stand out due to our deep expertise, strategic approach, and strong partnerships with industry-leading platforms. We focus on data-driven strategies, continuously optimize campaigns, and provide transparent reporting. Additionally, our network of Onlyfans creators allows us to tap into a highly engaged audience for paid shoutouts, giving your brand greater exposure.",
+        "A. AI-generated artworks are validated and timestamped on the blockchain to ensure originality. Once minted as NFTs, they are assigned unique identifiers that provide proof of authenticity and ownership.",
     },
     {
       id: 9,
-      question: "Q. Can you handle marketing campaigns of all sizes?",
+      question:
+        "Q. Can AIPG's AI services be integrated into existing projects or applications?",
       answer:
-        "A. Yes, we have experience managing marketing campaigns of various sizes, from small businesses to large enterprises. Our team is equipped to handle the complexity and scale of campaigns, ensuring that each client receives the attention and dedication required to achieve their marketing goals.",
+        "A. Yes, AIPG provides APIs that allow for seamless integration of its AI services into existing projects or applications, enabling developers to enhance their offerings with powerful AI capabilities.",
     },
     {
       id: 10,
-      question: "Q. How do I get started with your marketing services?",
+      question: "Q. What type of AI models are available on AIPG?",
       answer:
-        "A. Getting started is easy! Simply reach out to us through our contact form or give us a call. We'll discuss your marketing objectives and requirements in detail and provide you with a tailored proposal. Once you approve the proposal, we'll begin crafting and executing the marketing strategies to help your business grow.",
+        "A. AIPG aims to offer a diverse range of AI models, including but not limited to, language understanding, text generation, and AI art generation. Models are constantly updated and expanded based on open-source contributions and community feedback.",
     },
   ];
   useEffect(() => {
@@ -88,14 +86,16 @@ const page = () => {
         <div className="bg-white p-6 text-black w-full sm:h-full h-auto sm:w-[30%]">
           <h1 className="text-3xl sm:text-4xl  font-extrabold">FAQs</h1>
           <p className="my-4 text-sm font-medium">
-            Our team are best in class and responsible for maximizing account
-            goals and efficiently executing vital daily account tasks.
+            Our ecosystem thrives on open-source collaboration, fostering
+            innovation and creativity, while our marketplace and NFT AI Gallery
+            enable artists and AI enthusiasts to monetize their work and
+            contribute to the rapidly evolving AI landscape.
           </p>
           <Link
-            href="/services"
+            href="/wallet"
             className="my-4 px-6 py-2 sm:py-4 font-semibold flex flex-row space-x-2 border-b-2 border-cyan-300 max-w-[80%] hover:scale-90 duration-300 ease-in-out"
           >
-            View our Services
+            Download our Wallets
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +124,7 @@ const page = () => {
             Have a question not answered? Please{" "}
             <span>
               <Link
-                href="/contact"
+                href="#"
                 className="py-2 transition duration-150 ease-in-out px-auto hover:underline text-blue-600 hover:text-black"
               >
                 {" "}

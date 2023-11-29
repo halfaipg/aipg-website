@@ -56,16 +56,16 @@ const About = () => {
         <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div class="lg:col-span-1">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
-              What is Hivecoin ?
+              What is AI Power Grid (AIPG)?
             </h2>
             <p class="mt-2 md:mt-4 text-gray-500">
-              Hivecoin is a blockchain platform that integrates simplified smart
-              contracts. According to the Bitcoin protocol’s UTXO model to
-              develop and test, and based on Ravencoin and the Bitcoin code
-              branch to create. Hivecoin creates a simplified version of the
-              smart contract module and uses it to implement asset issue, asset
-              transaction, asset mortgage, community autonomy, master node
-              network, budget review, and DEFI
+              AI Power Grid (AIPG) is pioneering a revolutionary approach by
+              offering free access to cutting-edge Large Language Model (LLM)
+              inference and AI Art generation, validated on an immutable
+              blockchain to ensure authenticity and security. As a beacon of
+              democratization in AI, AIPG empowers developers by providing an
+              efficient platform to deploy, share, and enhance their models with
+              real-time user feedback.
             </p>
           </div>
 
@@ -190,17 +190,17 @@ const About = () => {
             <div class="space-y-6 sm:space-y-8">
               <div class="space-y-2 md:space-y-4">
                 <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-gray-200">
-                  A fork of the Ravencoin code, Hivecoin features four key
-                  changes:
+                  The AIPG coin is the native cryptocurrency of the AI Power
+                  Grid platform.
                 </h2>
                 <p class="text-gray-500">
-                  The current KAWPOW algorithm aims to overcome the problem of
-                  centralisation of mining by utilising over the counter graphic
-                  processing unit (GPU) memory and compute capabilities. This is
-                  intended to allow most consumer grade GPU hardware to mine
-                  Hivecoin. The KAWPOW algorithm was derived from ProgPOW and
-                  ethhash, with modifications, to improve the distribution of
-                  Hivecoin to everyone.
+                  Our ecosystem thrives on open-source collaboration, fostering
+                  innovation and creativity, while our marketplace and NFT AI
+                  Gallery enable artists and AI enthusiasts to monetize their
+                  work and contribute to the rapidly evolving AI landscape. With
+                  AIPG, we're not just building technology; we're nurturing a
+                  community where every participant is an integral part of
+                  shaping the future of AI.
                 </p>
               </div>
               <ul role="list" class="space-y-2 sm:space-y-4">
@@ -223,7 +223,7 @@ const About = () => {
                   </span>
 
                   <span class="text-sm sm:text-base text-gray-500">
-                    <span class="font-bold">21 billion</span> coin supply
+                    <span class="font-bold">Decentralized</span> AI services
                   </span>
                 </li>
 
@@ -246,7 +246,7 @@ const About = () => {
                   </span>
 
                   <span class="text-sm sm:text-base text-gray-500">
-                    1 minute <span class="font-bold">block time</span>
+                    NFT <span class="font-bold">Art Gallery</span>
                   </span>
                 </li>
 
@@ -269,7 +269,7 @@ const About = () => {
                   </span>
 
                   <span class="text-sm sm:text-base text-gray-500">
-                    The issuance schedule (block reward of 5,000 HVQ)
+                    Blockchain-Validated Outputs
                   </span>
                 </li>
                 <li class="flex space-x-3">
@@ -291,7 +291,7 @@ const About = () => {
                   </span>
 
                   <span class="text-sm sm:text-base text-gray-500">
-                    KAWPOW Mining algorithm
+                    Rapid Deployment and Community Feedback Loop
                   </span>
                 </li>
               </ul>

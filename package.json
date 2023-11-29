@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "npm run build && rsync --exclude=.git -azP . ubuntu@64.176.215.66:/root/site/"
   },
   "dependencies": {
     "@portabletext/react": "^3.0.11",

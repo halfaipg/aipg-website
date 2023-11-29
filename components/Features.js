@@ -8,19 +8,20 @@ const Features = () => {
         <div class="grid md:grid-cols-2 gap-12">
           <div class="lg:w-3/4">
             <h2 class="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-              Collaborative tools to design better user experience
+              AI Power Grid brings advanced and secure AI Art generation forward
             </h2>
             <p class="mt-3 text-gray-800 dark:text-gray-400">
-              We help businesses bring ideas to life in the digital world, by
-              designing and implementing the technology tools that they need to
-              win.
+              AI Power Grid (AIPG) is pioneering a revolutionary approach by
+              offering free access to cutting-edge Large Language Model (LLM)
+              inference and AI Art generation, validated on an immutable
+              blockchain to ensure authenticity and security.
             </p>
             <p class="mt-5">
               <a
                 class="inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500"
-                href="#"
+                href="/wallet"
               >
-                Contact sales to learn more
+                Download our Wallets
                 <svg
                   class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -60,12 +61,11 @@ const Features = () => {
               </span>
               <div class="ms-5 sm:ms-8">
                 <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Industry-leading documentation
+                  Revolutionary AI Access
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  Our documentation and extensive Client libraries contain
-                  everything a business needs to build a custom integration in a
-                  fraction of the time.
+                  Free and open LLMs and Stable Diffusion AI art tools on the
+                  blockchain.
                 </p>
               </div>
             </div>
@@ -90,11 +90,11 @@ const Features = () => {
               </span>
               <div class="ms-5 sm:ms-8">
                 <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Developer community support
+                  Sustainable Innovation
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  We actively contribute to open-source projects—giving back to
-                  the community through development, patches, and sponsorships.
+                  Transition from PoW to eco-friendly PoUW, blending AI utility
+                  with energy efficiency.
                 </p>
               </div>
             </div>
@@ -119,11 +119,11 @@ const Features = () => {
               </span>
               <div class="ms-5 sm:ms-8">
                 <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Simple and affordable
+                  Community-Driven Marketplace
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  From boarding passes to movie tickets, there's pretty much
-                  nothing you can't store with Preline.
+                  NFT AI Gallery for decentralized AI art creation, sharing, and
+                  monetization.
                 </p>
               </div>
             </div>

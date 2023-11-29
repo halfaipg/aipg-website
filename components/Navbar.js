@@ -118,7 +118,7 @@ const Navbar = () => {
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black dark:text-white">
+                {/* <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black dark:text-white">
                   <Link href="/wallet">
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
@@ -126,7 +126,7 @@ const Navbar = () => {
                       Wallets
                     </NavigationMenuLink>
                   </Link>
-                </NavigationMenuItem>
+                </NavigationMenuItem> */}
                 <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black dark:text-white">
                   <Link href="/blogs" target="_blank">
                     <NavigationMenuLink
@@ -227,7 +227,7 @@ const Navbar = () => {
                       <span className="font-bold tracking-wide">Blogs</span>
                     </li>
                   </Link>
-                  <Link href="pool1.aipowergrid.io" target="_blank">
+                  <Link href="https://pool1.aipowergrid.io" target="_blank">
                     <li className="p-4 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl w-full flex flex-row items-baseline space-x-3">
                       <span className="text-sm font-semibold ">05. </span>{" "}
                       <span className="font-bold tracking-wide">

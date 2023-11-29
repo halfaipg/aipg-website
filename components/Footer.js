@@ -26,7 +26,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/mining-pool"
+                    href="https://pool1.aipowergrid.io"
                   >
                     Mining Pool
                   </a>
@@ -34,7 +34,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/growth-management"
+                    href="/wallet"
                   >
                     Wallets
                   </a>

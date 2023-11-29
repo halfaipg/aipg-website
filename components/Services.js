@@ -8,7 +8,7 @@ const Services = () => {
   return (
     <div className="bg-gray-50 dark:bg-transparent">
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 md:gap-10">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-2 items-center gap-6 md:gap-10">
           <div class="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
             <div class="flex items-center gap-x-4 mb-3">
               <div class="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-blue-50 bg-blue-100 dark:border-blue-900 dark:bg-blue-800">
@@ -33,12 +33,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Build your portfolio
+                  Decentralized AI Services
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              The simplest way to keep your portfolio always up-to-date.
+              AIPG integrates decentralized AI services directly into the
+              blockchain, offering seamless access to powerful LLMs and AI art
+              generation tools.
             </p>
           </div>
 
@@ -64,12 +66,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Get freelance work
+                  Blockchain-Validated Outputs:
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              New design projects delivered to your inbox each morning.
+              Every interaction with our AI services, including LLM inferences
+              and AI-generated artworks, is validated and recorded on the
+              blockchain.
             </p>
           </div>
 
@@ -97,13 +101,13 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Sell your goods
+                  NFT AI Gallery and Marketplace
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              Get your goods in front of millions of potential customers with
-              ease.
+              AIPG introduces an exclusive NFT AI Gallery and a corresponding
+              marketplace, designed to showcase AI-generated art.
             </p>
           </div>
 
@@ -129,76 +133,15 @@ const Services = () => {
                 </svg>
               </div>
               <div class="flex-shrink-0">
-                <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Get freelance work
+                <h3 class="block text-lg font-semibold text-gray-800 dark:text-white overflow-auto">
+                  Community Feedback Loop
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              New design projects delivered to your inbox each morning.
-            </p>
-          </div>
-
-          <div class="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
-            <div class="flex items-center gap-x-4 mb-3">
-              <div class="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-blue-50 bg-blue-100 dark:border-blue-900 dark:bg-blue-800">
-                <svg
-                  class="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M16.466 7.5C15.643 4.237 13.952 2 12 2 9.239 2 7 6.477 7 12s2.239 10 5 10c.342 0 .677-.069 1-.2" />
-                  <path d="m15.194 13.707 3.814 1.86-1.86 3.814" />
-                  <path d="M19 15.57c-1.804.885-4.274 1.43-7 1.43-5.523 0-10-2.239-10-5s4.477-5 10-5c4.838 0 8.873 1.718 9.8 4" />
-                </svg>
-              </div>
-              <div class="flex-shrink-0">
-                <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Sell your goods
-                </h3>
-              </div>
-            </div>
-            <p class="text-gray-600 dark:text-gray-400">
-              Get your goods in front of millions of potential customers with
-              ease.
-            </p>
-          </div>
-
-          <div class="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
-            <div class="flex items-center gap-x-4 mb-3">
-              <div class="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-blue-50 bg-blue-100 dark:border-blue-900 dark:bg-blue-800">
-                <svg
-                  class="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z" />
-                  <rect x="3" y="14" width="7" height="7" rx="1" />
-                  <circle cx="17.5" cy="17.5" r="3.5" />
-                </svg>
-              </div>
-              <div class="flex-shrink-0">
-                <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Build your portfolio
-                </h3>
-              </div>
-            </div>
-            <p class="text-gray-600 dark:text-gray-400">
-              The simplest way to keep your portfolio always up-to-date.
+              Developers can rapidly deploy their AI models onto the AIPG
+              platform, where they are immediately accessible to the community
+              for testing and feedback.
             </p>
           </div>
         </div>

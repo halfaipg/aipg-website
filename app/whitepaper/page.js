@@ -21,8 +21,10 @@ const WhitePaper = () => {
         <div className="bg-white p-6 text-black w-full sm:h-full h-auto sm:w-[30%]">
           <h1 className="text-3xl sm:text-4xl  font-extrabold">Whitepaper</h1>
           <p className="my-4 text-sm font-medium">
-            Our team are best in class and responsible for maximizing account
-            goals and efficiently executing vital daily account tasks.
+            Our ecosystem thrives on open-source collaboration, fostering
+            innovation and creativity, while our marketplace and NFT AI Gallery
+            enable artists and AI enthusiasts to monetize their work and
+            contribute to the rapidly evolving AI landscape.
           </p>
           <Link
             href="/faqs"
@@ -56,16 +58,16 @@ const WhitePaper = () => {
         <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div class="lg:col-span-1">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
-              What is Hivecoin ?
+              What is AI Power Grid (AIPG)?
             </h2>
             <p class="mt-2 md:mt-4 text-gray-500">
-              Hivecoin is a blockchain platform that integrates simplified smart
-              contracts. According to the Bitcoin protocol’s UTXO model to
-              develop and test, and based on Ravencoin and the Bitcoin code
-              branch to create. Hivecoin creates a simplified version of the
-              smart contract module and uses it to implement asset issue, asset
-              transaction, asset mortgage, community autonomy, master node
-              network, budget review, and DEFI
+              AI Power Grid (AIPG) is pioneering a revolutionary approach by
+              offering free access to cutting-edge Large Language Model (LLM)
+              inference and AI Art generation, validated on an immutable
+              blockchain to ensure authenticity and security. As a beacon of
+              democratization in AI, AIPG empowers developers by providing an
+              efficient platform to deploy, share, and enhance their models with
+              real-time user feedback.
             </p>
           </div>
 
@@ -190,35 +192,81 @@ const WhitePaper = () => {
         </div>
         <div className="flex flex-col items-center justify-center space-y-2 py-4">
           <span className="text-3xl font-semibold">
-            Hivecoin: A Peer to Peer Electronic System Integrating Simplified
-            Smart Contracts
+            AI Power Grid (AIPG) Whitepaper: Executive Summary
           </span>
-          <span className="text-sm font-medium text-gray-600">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
             21 November 2023
           </span>
         </div>
         <div>
-          We tribute to Bitcoin and Ravencoin founders and hard-work developers
-          in these areas over the years. At the same time, we sincerely thank
-          Bitcoin and Ravencoin for their efforts and contributions in
-          establishing digital currencies and blockchain development. Appreciate
-          the valued code and research results of the predecessors, Hivecoin is
-          created by standing on the shoulders of giants. <br />
-          Abstract Hivecoin is a blockchain platform that integrates simplified
-          smart contracts. According to the Bitcoin protocol’s UTXO model to
-          develop and test, and based on Ravencoin and the Bitcoin code branch
-          to create. Hivecoin creates a simplified version of the smart contract
-          module and uses it to implement asset issuance, asset transaction,
-          asset mortgage, community autonomy, master node network, budget
-          review, and DEFI. Hivecoin is free and open-source of information.
-          Hivecoin uses a combination of Proof of Work (POW) and Proof of
-          Service (POSE); uses the KAWPOW algorithm created to resist ASC
-          miners. Open mines 45% of Hivecoin (HVQ) and distributes the other 45%
-          of HVQ to all master nodes of Hivecoin (Mortgage 1,000,000 HVQ
-          requested), and the remaining 10% is distributed to contributors in
-          Hivecoin community.
+          <span className="text-2xl font-semibold tracking-tight">
+            Introduction:
+          </span>
+          <p className="py-2">
+            AI Power Grid is a blockchain-based platform designed to democratize
+            access to advanced AI technologies. It leverages open-source LLMs
+            and Stable Diffusion for AI art to revolutionize industries and
+            empower developers, creators, and end-users.
+          </p>
         </div>
-        .........text TBA unstyled
+        <span className="text-2xl font-semibold tracking-tight">Mission:</span>
+        <p className="py-2">
+          Our mission is to make AI technology accessible and beneficial for
+          all, promoting innovation, supporting open-source ecosystems, and
+          contributing to the global AI community's growth through collaboration
+          and shared knowledge.
+        </p>
+        <span className="text-2xl font-semibold tracking-tight">
+          Core Offerings:
+        </span>
+        <p className="py-2">
+          Free LLM Inference & AI Art Generation: Users can access LLM and AI
+          art generation services at no cost, fostering an environment ripe for
+          innovation and growth without the barriers of entry typically
+          associated with such technologies.
+        </p>
+        <span className="text-2xl font-semibold tracking-tight">
+          Blockchain Validation:
+        </span>{" "}
+        <p className="py-2">
+          The platform ensures that all AI-generated content and services are
+          validated and recorded on the blockchain for transparency, trust, and
+          security.
+        </p>
+        <span className="text-2xl font-semibold tracking-tight">
+          NFT AI Gallery & Marketplace:
+        </span>{" "}
+        <p className="py-2">
+          A creative and commercial space for artists to mint, showcase, and
+          trade their AI-generated art as NFTs, utilizing the blockchain to
+          authenticate and secure transactions.
+        </p>
+        <h3>Technical Architecture:</h3>
+        <span className="text-2xl font-semibold tracking-tight">
+          Decentralized Infrastructure:
+        </span>
+        <p className="py-2">
+          {" "}
+          AIPG is built on a decentralized network that distributes AI service
+          workloads, ensuring scalability and robustness.
+        </p>
+        <span className="text-2xl font-semibold tracking-tight">
+          Blockchain Framework:
+        </span>{" "}
+        <p className="py-2">
+          Integrates a custom blockchain solution optimized for high throughput,
+          low latency, and enhanced smart contract capabilities to handle
+          complex operations.
+        </p>
+        <span className="text-2xl font-semibold tracking-tight">
+          Open-Source AI Models:
+        </span>
+        <p className="py-2">
+          {" "}
+          Utilizes the latest open-source LLMs and Stable Diffusion models,
+          ensuring that the platform's AI capabilities remain at the forefront
+          of the field.
+        </p>
       </div>
     </div>
   );

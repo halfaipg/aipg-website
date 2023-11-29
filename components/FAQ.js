@@ -32,7 +32,7 @@ const FAQ = () => {
                   class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one"
                 >
-                  Can I cancel at anytime?
+                  What is AI Power Grid (AIPG)?
                   <svg
                     class="hs-accordion-active:hidden block flex-shrink-0 w-5 h-5 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
@@ -68,9 +68,12 @@ const FAQ = () => {
                   aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one"
                 >
                   <p class="text-gray-600 dark:text-gray-400">
-                    Yes, you can cancel anytime no questions are asked while you
-                    cancel but we would highly appreciate if you will give us
-                    some feedback.
+                    AIPG is a pioneering blockchain-based platform designed to
+                    democratize access to advanced AI technologies, including
+                    Large Language Models (LLM) for natural language processing
+                    and Stable Diffusion for AI-generated art. It provides free
+                    AI services for individuals and developers, validated and
+                    secured by the blockchain.
                   </p>
                 </div>
               </div>
@@ -83,7 +86,7 @@ const FAQ = () => {
                   class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two"
                 >
-                  My team has credits. How do we use them?
+                  How does AIPG benefit developers and creators?
                   <svg
                     class="hs-accordion-active:hidden block flex-shrink-0 w-5 h-5 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
@@ -119,9 +122,11 @@ const FAQ = () => {
                   aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two"
                 >
                   <p class="text-gray-600 dark:text-gray-400">
-                    Once your team signs up for a subscription plan. This is
-                    where we sit down, grab a cup of coffee and dial in the
-                    details.
+                    AIPG allows developers to deploy and improve their AI models
+                    with community feedback rapidly. For creators, especially
+                    artists, AIPG offers AI art generation tools and a platform,
+                    the NFT AI Gallery, to mint, showcase, and sell their
+                    AI-generated artwork as NFTs.
                   </p>
                 </div>
               </div>
@@ -134,7 +139,7 @@ const FAQ = () => {
                   class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-three"
                 >
-                  How does Preline's pricing work?
+                  Is it free to use the AI services on AIPG?
                   <svg
                     class="hs-accordion-active:hidden block flex-shrink-0 w-5 h-5 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
@@ -170,8 +175,9 @@ const FAQ = () => {
                   aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three"
                 >
                   <p class="text-gray-600 dark:text-gray-400">
-                    Our subscriptions are tiered. Understanding the task at hand
-                    and ironing out the wrinkles is key.
+                    Yes, AIPG provides free access to LLM inference and AI Art
+                    generation, enabling users to take advantage of these
+                    cutting-edge technologies without any cost.
                   </p>
                 </div>
               </div>
@@ -184,7 +190,7 @@ const FAQ = () => {
                   class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-four"
                 >
-                  How secure is Preline?
+                  How does the AIPG NFT AI Gallery work?
                   <svg
                     class="hs-accordion-active:hidden block flex-shrink-0 w-5 h-5 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
@@ -220,9 +226,11 @@ const FAQ = () => {
                   aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-four"
                 >
                   <p class="text-gray-600 dark:text-gray-400">
-                    Protecting the data you trust to Preline is our first
-                    priority. This part is really crucial in keeping the project
-                    in line to completion.
+                    The NFT AI Gallery is a digital space where creators can
+                    display their AI-generated art, mint it as NFTs, and put it
+                    up for sale or auction within the AIPG marketplace. This
+                    allows for direct engagement between artists and collectors
+                    within the platform.
                   </p>
                 </div>
               </div>
