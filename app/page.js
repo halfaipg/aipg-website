@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <main className="">
       <Hero />
-      <Stats />
+      {/* </Stats /> */}
       <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-black">
         <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
-          Our Services
+          Features
         </span>
       </div>
       <Services />

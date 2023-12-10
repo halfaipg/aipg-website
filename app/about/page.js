@@ -118,11 +118,11 @@ const About = () => {
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                    Simple and affordable
+                    Decentralization and Accessibility
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                    From boarding passes to movie tickets, there's pretty much
-                    nothing you can't store with Preline.
+                    One of AIPG's core values is the democratization of access to AI. The project aims to make AI technologies widely accessible and equitable, 
+                    empowering users across different sectors to harness AI's capabilities for innovation and growth.
                   </p>
                 </div>
               </div>
@@ -147,7 +147,7 @@ const About = () => {
                     Fair launch
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                    Everyone has equal opportunity to mine or purchase HVQ since
+                    Everyone has equal opportunity to mine or purchase AIPG from
                     day one.
                   </p>
                 </div>
@@ -172,10 +172,11 @@ const About = () => {
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                    No ICO
+                    Community and Collaboration
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                    No pre-mine
+                  AIPG is dedicated to fostering an active, engaging community and establishing partnerships with entities in the open-source AI space and related industries. This collaborative approach is intended to 
+                  gather diverse insights, drive innovation, and ensure AIPG remains at the cutting edge of AI and blockchain technology integration.
                   </p>
                 </div>
               </div>
@@ -194,13 +195,16 @@ const About = () => {
                   Grid platform.
                 </h2>
                 <p class="text-gray-500">
-                  Our ecosystem thrives on open-source collaboration, fostering
+                  Our ecosystem will thrive on open-source collaboration, fostering
                   innovation and creativity, while our marketplace and NFT AI
                   Gallery enable artists and AI enthusiasts to monetize their
                   work and contribute to the rapidly evolving AI landscape. With
                   AIPG, we're not just building technology; we're nurturing a
                   community where every participant is an integral part of
-                  shaping the future of AI.
+                  shaping the future of AI. The AIPG NFT AI Gallery will
+                  allow users to create, display, and trade AI-generated art. 
+                  This feature will leverage Stable Diffusion models to craft unique and 
+                  high-quality artworks that are tokenized as NFTs on the blockchain.
                 </p>
               </div>
               <ul role="list" class="space-y-2 sm:space-y-4">
