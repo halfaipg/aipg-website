@@ -14,7 +14,7 @@ export const metadata = {
 export const revalidate = 30;
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <Providers attribute="class">
         <body className={inter.className}>
           <TopBar />
