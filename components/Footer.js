@@ -14,7 +14,7 @@ const Footer = () => {
               >
                 {/* <img src="/logo-white.png" className="scale-90" /> */}
                 <span className="text-3xl text-white font-semibold">
-                  AIPOWERGRID
+                  AI Power Grid
                 </span>
               </a>
             </div>
@@ -26,7 +26,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://pool1.aipowergrid.io"
+                    href="#"
                   >
                     Mining Pool
                   </a>

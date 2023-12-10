@@ -8,6 +8,13 @@ const Hero = () => {
   return (
     <div class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/component/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('https://preline.co/assets/svg/component/squared-bg-element-dark.svg')]">
       <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+        <div className="flex justify-center items-center mb-8">
+          <img
+            src="/aipg.png"
+            alt="aipg"
+            className="w-36 h-36 object-contain p-2"
+          />
+        </div>
         <div class="flex justify-center">
           <a
             class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
@@ -38,7 +45,7 @@ const Hero = () => {
         </div>
         <div class="mt-5 max-w-xl text-center mx-auto">
           <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
-          Empowering the architects of tomorrow with the freedom of shared AI.
+            Empowering the architects of tomorrow with the freedom of shared AI.
           </h1>
         </div>
 
