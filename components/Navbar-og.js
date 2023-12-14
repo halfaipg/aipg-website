@@ -119,7 +119,7 @@ const Navbar = () => {
                   </Link>
                 </NavigationMenuItem>
                 {/* <NavigationMenuItem className="hover:bg-gray-600 rounded-[10px] hover:bg-opacity-20 text-black dark:text-white">
-                  <Link href="/wallet">
+                  <Link href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1">
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
@@ -151,7 +151,7 @@ const Navbar = () => {
         </div>
 
         <Link
-          href="/wallet"
+          href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
           className="px-8 w-[70%] sm:w-auto py-4 bg-black rounded-lg text-white font-semibold hover:bg-blue-600  text-sm transition duration-200 ease-in-out hover:scale-105 flex flex-row items-center justify-center dark:bg-blue-600"
         >
           Wallets
@@ -215,7 +215,7 @@ const Navbar = () => {
                       </ul>
                     </motion.div>
                   </li>
-                  <Link href="/wallet">
+                  <Link href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1">
                     <li className="p-4 hover:bg-gray-500 hover:bg-opacity-25 rounded-xl w-full flex flex-row items-baseline space-x-3">
                       <span className="text-sm font-semibold ">03. </span>{" "}
                       <span className="font-bold tracking-wide">Wallets</span>

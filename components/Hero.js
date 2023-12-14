@@ -44,7 +44,7 @@ const Hero = () => {
           </a>
         </div>
         <div class="mt-5 max-w-xl text-center mx-auto">
-          <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
+          <h1 class="block font-bold text-gray-800 text-3xl md:text-4xl lg:text-5xl dark:text-gray-200">
             Empowering the architects of tomorrow with the freedom of shared AI.
           </h1>
         </div>
@@ -60,7 +60,7 @@ const Hero = () => {
         <div class="mt-8 gap-3 flex justify-center">
           <a
             class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800"
-            href="/wallet"
+            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
           >
             <svg
               class="flex-shrink-0 w-4.5 h-4.5"

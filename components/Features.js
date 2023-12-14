@@ -19,7 +19,7 @@ const Features = () => {
             <p class="mt-5">
               <a
                 class="inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500"
-                href="/wallet"
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
               >
                 Download our Wallets
                 <svg
