@@ -121,7 +121,7 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="/wallet"
+              href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
               className="px-8 sm:w-auto py-2 bg-black rounded-lg text-white font-semibold hover:bg-blue-600  text-sm transition duration-200 ease-in-out hover:scale-105 flex flex-row items-center justify-center dark:bg-blue-600"
             >
               Wallets
