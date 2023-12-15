@@ -18,10 +18,36 @@ const Hero = () => {
         <div class="flex justify-center">
           <a
             class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
-            href="https://pool1.aipowergrid.io"
+            href="https://miningpoolstats.stream/aipowergrid"
             target="_blank"
           >
             Mining Pools
+            <span class="flex items-center gap-x-1">
+              <span class="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
+                Explore
+              </span>
+              <svg
+                class="flex-shrink-0 w-4 h-4 text-blue-600"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </span>
+          </a>
+          <a
+            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400 ml-4"
+            href="https://mpool.aipowergrid.io/"
+            target="_blank"
+          >
+            Official Mining Pools
             <span class="flex items-center gap-x-1">
               <span class="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
                 Explore
