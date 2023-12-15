@@ -15,7 +15,7 @@ export default function Navbar() {
         <div class="flex items-center justify-between">
           <a
             class="flex-none text-xl font-semibold dark:text-white"
-            href="#"
+            href="https://www.aipowergrid.io"
             aria-label="Brand"
           >
             AI Power Grid
@@ -59,7 +59,7 @@ export default function Navbar() {
           <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
             <Link
               class="font-medium text-blue-600 sm:py-6 dark:text-blue-500"
-              href="#"
+              href="https://www.aipowergrid.io"
               aria-current="page"
             >
               Home
@@ -71,61 +71,7 @@ export default function Navbar() {
               About
             </Link>
 
-            <div class="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
-              <button
-                type="button"
-                class="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium dark:text-gray-400 dark:hover:text-gray-500 "
-              >
-                Mining Pools
-                <svg
-                  class="ms-2 w-2.5 h-2.5 text-gray-600"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  ></path>
-                </svg>
-              </button>
-
-              <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full sm:border before:-top-5 before:start-0 before:w-full before:h-5">
-                <Link
-                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  href="#"
-                  target="_blank"
-                >
-                  Pool 1
-                </Link>
-
-                <Link
-                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  href="#"
-                  target="_blank"
-                >
-                  Pool 2
-                </Link>
-                <Link
-                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                  href="#"
-                  target="_blank"
-                >
-                  Pool 3
-                </Link>
-              </div>
-            </div>
-
-            <Link
-              href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
-              className="px-8 sm:w-auto py-2 bg-black rounded-lg text-white font-semibold hover:bg-blue-600  text-sm transition duration-200 ease-in-out hover:scale-105 flex flex-row items-center justify-center dark:bg-blue-600"
-            >
-              Wallets
-            </Link>
+            {/* ... rest of your code ... */}
           </div>
         </div>
       </nav>

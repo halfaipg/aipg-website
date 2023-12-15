@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
 
             <div className="col-span-1">
-              <h4 className="font-semibold text-gray-100">Services</h4>
+              <h4 className="font-semibold text-gray-100">Resources</h4>
 
               <div className="mt-3 grid space-y-3">
                 <p>
@@ -51,7 +51,7 @@ const Footer = () => {
             </div>
 
             <div className="col-span-1">
-              <h4 className="font-semibold text-gray-100">Company</h4>
+              <h4 className="font-semibold text-gray-100">AI Power Grid</h4>
 
               <div className="mt-3 grid space-y-3">
                 <p>
@@ -184,3 +184,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
