@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
+// import TopBar from "@/components/TopBar";
 import "./globals.css";
-import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Providers from "@/context/Providers";
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <Providers attribute="class">
         <body className={inter.className}>
-          <TopBar />
+          {/* <TopBar /> */}
           <Navbar />
           {children}
           <Footer />
