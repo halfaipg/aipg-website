@@ -11,7 +11,7 @@ const About = () => {
     <div>
       <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start p-4 sm:py-12 sm:px-32 relative">
         <video
-          src="/video.mp4"
+          src="/aipg6.mp4"
           autoPlay
           muted
           loop
