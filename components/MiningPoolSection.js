@@ -37,7 +37,7 @@ export default function MiningPoolSection() {
           <div>
             <div>
               <h3 class="block font-bold text-gray-800 dark:text-white">
-                Pool 1
+                Official Pool
               </h3>
               <p class="text-gray-600 dark:text-gray-400">Lorem ipsum</p>
             </div>
@@ -87,7 +87,7 @@ export default function MiningPoolSection() {
           <div>
             <div>
               <h3 class="block font-bold text-gray-800 dark:text-white">
-                Pool 3
+                Cojin Pool
               </h3>
               <p class="text-gray-600 dark:text-gray-400">Lorem Ipsum</p>
             </div>
@@ -139,7 +139,7 @@ export default function MiningPoolSection() {
           <div>
             <div>
               <h3 class="block font-bold text-gray-800 dark:text-white">
-                Pool 3
+                Rplant
               </h3>
               <p class="text-gray-600 dark:text-gray-400">Lorem Isum</p>
             </div>
