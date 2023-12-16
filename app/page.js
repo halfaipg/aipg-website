@@ -30,14 +30,8 @@ export default function Home() {
         </span>
       </div>
       <Timeline />
-      <FAQ />
       {/* <BlogsSection /> */}
-      <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-black">
-        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-8">
-          Mining Pools
-        </span>
-      </div>
-      <MiningPoolSection />
+
     </main>
   );
 }

@@ -78,7 +78,34 @@ export default function Navbar() {
             >
               About
             </Link>
-
+            <Link
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              href="https://mpool.aipowergrid.io/"
+              target="_blank"
+            >
+              Mining
+            </Link>
+            <Link
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              href="https://www.aipowergrid.io/aipg_whitepaperV1.04.pdf"
+              target="_blank"
+            >
+              White Paper
+            </Link>
+            <Link
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              href="https://explorer.aipowergrid.io/"
+              target="_blank"
+            >
+              Explorer
+            </Link>
+            <Link
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
+              target="_blank"
+            >
+              Wallets
+            </Link>
             {/* ... rest of your code ... */}
           </div>
         </div>

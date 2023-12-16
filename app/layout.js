@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "AIPowergrid",
-  description: "Blockchain App",
+  description: "Empowering the architects of tomorrow with the freedom of shared AI",
 };
 export const revalidate = 30;
 export default function RootLayout({ children }) {
