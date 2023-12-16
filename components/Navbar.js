@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from 'next/image'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,13 +21,14 @@ export default function Navbar() {
         aria-label="Global"
       >
         <div class="flex items-center justify-between">
-          <a
-            class="flex-none text-xl font-semibold dark:text-white"
-            href="https://www.aipowergrid.io"
-            aria-label="Brand"
-          >
-            AI Power Grid
-          </a>
+          <div class="flex-none text-xl font-semibold dark:text-white" aria-label="Brand">
+            <Image 
+              src="/aipgweblogo.png"
+              alt="AI Power Grid Logo"
+              width={200}
+              height={120}
+            />
+          </div>
           <div class="sm:hidden">
             <button
               type="button"

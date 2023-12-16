@@ -16,28 +16,6 @@ const Features = () => {
               inference and AI Art generation, validated on an immutable
               blockchain to ensure authenticity and security.
             </p>
-            <p class="mt-5">
-              <a
-                class="inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500"
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
-              >
-                Download our Wallets
-                <svg
-                  class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </a>
-            </p>
           </div>
 
           <div class="space-y-6 lg:space-y-10">
