@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 
 const Footer = () => {
   return (
@@ -12,10 +13,12 @@ const Footer = () => {
                 href="https://www.aipowergrid.io"
                 aria-label="Brand"
               >
-                {/* <img src="/logo-white.png" className="scale-90" /> */}
-                <span className="text-3xl text-white font-semibold">
-                  AI Power Grid
-                </span>
+                <Image 
+                  src="/aipgweblogo.png" // Path to your image
+                  alt="AI Power Grid Logo" // Alt text for your image
+                  width={200} // Adjust based on your needs
+                  height={120} // Adjust based on your needs
+                />
               </a>
             </div>
 
@@ -105,4 +108,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

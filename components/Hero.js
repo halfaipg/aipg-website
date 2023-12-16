@@ -12,7 +12,7 @@ const Hero = () => {
           <img
             src="/aipg.png"
             alt="aipg"
-            className="w-36 h-36 object-contain p-2"
+            className="w-48 h-48 object-contain p-2"
           />
         </div>
         <div class="mt-5 max-w-xl text-center mx-auto">
@@ -47,9 +47,9 @@ const Hero = () => {
             Our Wallets
           </a>
         </div>
-        <div class="mt-4 flex justify-center">
+        <div class="mt-4 flex flex-col items-center justify-center">
           <a
-            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
+            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400 mb-4"
             href="https://miningpoolstats.stream/aipowergrid"
             target="_blank"
           >
@@ -75,7 +75,7 @@ const Hero = () => {
             </span>
           </a>
           <a
-            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400 ml-4"
+            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
             href="https://mpool.aipowergrid.io/"
             target="_blank"
           >
