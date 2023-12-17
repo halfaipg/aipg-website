@@ -5,14 +5,12 @@ import React, { useEffect, useState } from "react";
 
 const About = () => {
   const images = [
-    "aigp (48).png",
-    "aigp (49).png",
-    "aigp (50).png",
-    "aigp (51).png",
-    "aigp (52).png",
-    "aigp (53).png",
-    "aigp (54).png",
-    "aigp (55).png",
+    "aipg (1).png",
+    "aipg (2).png",
+    "aipg (3).png",
+    "aipg (4).png",
+    "aipg (5).png",
+    "aipg (6).png",
   ];
 
   const [randomImage, setRandomImage] = useState(null);

@@ -15,7 +15,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-900 dark:border-gray-800">
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-2 sm:py-0 dark:bg-gray-900 dark:border-gray-800">
       <nav
         class="relative max-w-7xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
         aria-label="Global"
@@ -68,7 +68,7 @@ export default function Navbar() {
         </div>
         <div
           id="navbar-collapse-with-animation"
-          class={`hs-collapse ${isOpen ? 'block' : 'hidden'} overflow-hidden transition-all duration-300 basis-full grow sm:block`}
+          class={`hs-collapse ${isOpen ? 'block' : 'hidden'} transition-all duration-300 basis-full grow sm:block`}
         >
           <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
             <Link
@@ -85,22 +85,16 @@ export default function Navbar() {
               About
             </Link>
             <div className="relative group inline-block">
-              <button className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500">
-                Mining
-              </button>
-              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 transition ease-in-out duration-150 opacity-0 group-hover:opacity-100" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <Link href="https://mpool.aipowergrid.io/" target="_blank" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                  Official Mining Pool
-                </Link>
-                <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                  Mining Pools
-                </Link>
-              </div>
+              <Link href="https://mpool.aipowergrid.io/" target="_blank">
+                <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white">
+                  Mining
+                </a>
+              </Link>
             </div>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-              href="https://www.aipowergrid.io/aipg_whitepaperV1.04.pdf"
-              target="_blank"
+              href="/aipg_whitepaperV1.04.pdf"
+              download
             >
               White Paper
             </Link>
