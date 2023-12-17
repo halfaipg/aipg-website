@@ -1,12 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const About = () => {
+  const images = [
+    "aigp (48).png",
+    "aigp (49).png",
+    "aigp (50).png",
+    "aigp (51).png",
+    "aigp (52).png",
+    "aigp (53).png",
+    "aigp (54).png",
+    "aigp (55).png",
+  ];
+
+  const [randomImage, setRandomImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
     import("preline");
+    const randomIndex = Math.floor(Math.random() * images.length);
+    setRandomImage(images[randomIndex]);
+    setIsLoading(false);
   }, []);
+
   return (
     <div>
       <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start p-4 sm:py-12 sm:px-32 relative">
@@ -18,8 +37,8 @@ const About = () => {
           playsInline
           className="absolute top-0 left-0 w-full h-full object-cover -z-10"
         />
-        <div className="bg-white p-6 text-black w-full sm:h-full h-auto sm:w-[30%]">
-          <h1 className="text-3xl sm:text-4xl  font-extrabold">About</h1>
+        <div className="bg-transparent p-6 text-white w-full sm:h-full h-auto sm:w-[30%] flex items-center justify-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold">About</h1>
         </div>
       </section>
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -276,11 +295,15 @@ const About = () => {
             </div>
           </div>
           <div>
-            <img
-              class="rounded-xl"
-              src="https://images.unsplash.com/photo-1648737963503-1a26da876aca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&h=900&q=80"
-              alt="Image Description"
-            />
+            {isLoading ? (
+              <div>Loading...</div> // replace this with your loading spinner or placeholder
+            ) : (
+              <img
+                className="rounded-xl"
+                src={`/${randomImage}`}
+                alt="Image Description"
+              />
+            )}
           </div>
         </div>
       </div>
