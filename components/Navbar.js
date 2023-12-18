@@ -2,9 +2,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
+import { useDarkMode } from 'next-dark-mode'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { darkModeActive } = useDarkMode();
+  console.log(darkModeActive); // Add this line
 
   function toggleMenu() {
     setIsOpen(!isOpen);
@@ -15,7 +18,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-2 sm:py-0 dark:bg-gray-900 dark:border-gray-800">
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-1 sm:py-0 dark:bg-gray-900 dark:border-gray-800">
       <nav
         class="relative max-w-7xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
         aria-label="Global"
@@ -25,7 +28,7 @@ export default function Navbar() {
             <Link href="/">
               <a>
                 <Image 
-                  src="/aipgweblogo.png"
+                  src={darkModeActive ? "/aipgweblogo.png" : "/aipgweblogoblack.png"}
                   alt="AI Power Grid Logo"
                   width={200}
                   height={120}
@@ -72,14 +75,14 @@ export default function Navbar() {
         >
           <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
             <Link
-              class="font-medium text-blue-600 sm:py-6 dark:text-blue-500"
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="https://www.aipowergrid.io"
               aria-current="page"
             >
               Home
             </Link>
             <Link
-              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="/about"
             >
               About
@@ -92,21 +95,21 @@ export default function Navbar() {
               </Link>
             </div>
             <Link
-              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="/aipg_whitepaperV1.04.pdf"
               download
             >
               White Paper
             </Link>
             <Link
-              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="https://explorer.aipowergrid.io/"
               target="_blank"
             >
               Explorer
             </Link>
             <Link
-              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
               target="_blank"
             >

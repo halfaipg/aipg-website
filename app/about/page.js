@@ -36,7 +36,7 @@ const About = () => {
           className="absolute top-0 left-0 w-full h-full object-cover -z-10"
         />
         <div className="bg-transparent p-6 text-white w-full sm:h-full h-auto sm:w-[30%] flex items-center justify-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold">About</h1>
+          {/* <h1 className="text-3xl sm:text-4xl font-extrabold">About</h1> */}
         </div>
       </section>
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
