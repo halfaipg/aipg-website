@@ -58,7 +58,7 @@ const WhitePaper = () => {
         <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div class="lg:col-span-1">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
-              What is AI Power Grid (AIPG)?
+              What is AI Power Grid?
             </h2>
             <p class="mt-2 md:mt-4 text-gray-500">
               AI Power Grid (AIPG) is pioneering a revolutionary approach by
@@ -94,12 +94,14 @@ const WhitePaper = () => {
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                    ASIC resistant
+                    ASIC resistant algo
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                    Uses the KAWPOW hashing algorithm to discourage the
-                    development of ASIC hardware.
-                  </p>
+                    AIPG uses the KAWPOW hashing algorithm to discourage the
+                    use of ASIC hardware. ASIC resistance is vital for ensuring that no 
+                    single participant or group can monopolize the mining process, which 
+                    aligns with AIPG's mission to democratize AI and maintain a level playing field for all.
+                    </p>
                 </div>
               </div>
               <div class="flex gap-x-5">
@@ -192,7 +194,7 @@ const WhitePaper = () => {
         </div>
         <div className="flex flex-col items-center justify-center space-y-2 py-4">
           <span className="text-3xl font-semibold">
-            AI Power Grid (AIPG) Whitepaper: Executive Summary
+            AI Power Grid Whitepaper: Executive Summary
           </span>
           <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
             21 November 2023

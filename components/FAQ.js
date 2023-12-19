@@ -32,7 +32,7 @@ const FAQ = () => {
                   class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                   aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one"
                 >
-                  What is AI Power Grid (AIPG)?
+                  What is AI Power Grid?
                   <svg
                     class="hs-accordion-active:hidden block flex-shrink-0 w-5 h-5 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"

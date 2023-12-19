@@ -47,7 +47,7 @@ const About = () => {
         <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div class="lg:col-span-1">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
-              What is AI Power Grid (AIPG)?
+              What is AI Power Grid?
             </h2>
             <p class="mt-2 md:mt-4 text-gray-500">
               AI Power Grid (AIPG) is pioneering a revolutionary approach by
@@ -56,7 +56,12 @@ const About = () => {
               blockchain to ensure authenticity and security. As a beacon of
               democratization in AI, AIPG empowers developers by providing an
               efficient platform to deploy, share, and enhance their models with
-              real-time user feedback.
+              real-time user feedback.<br/>
+
+              AIPG also aims to transform AI-generated art into tradable 
+              NFT assets and catapulting AIPG to be a key player in the NFT marketplace.
+              It will be An immersive virtual space dedicated to the exhibition of AI-generated artwork, 
+              highlighting the creative possibilities of generative AI models.
             </p>
           </div>
 
@@ -83,11 +88,13 @@ const About = () => {
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                    ASIC resistant
+                    ASIC resistant algo
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                    Uses the KAWPOW hashing algorithm to discourage the
-                    development of ASIC hardware.
+                  AIPG uses the KAWPOW hashing algorithm to discourage the
+                    use of ASIC hardware. ASIC resistance is vital for ensuring that no 
+                    single participant or group can monopolize the mining process, which 
+                    aligns with AIPG's mission to democratize AI and maintain a level playing field for all.
                   </p>
                 </div>
               </div>
@@ -135,11 +142,12 @@ const About = () => {
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                    Fair launch
+                  AI Democratization
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                    Everyone has equal opportunity to mine or purchase AIPG from
-                    day one.
+                  The platform aims to make AI accessible to all by lowering the barriers to entry. 
+                  This democratization allows contributors from various backgrounds to participate 
+                  equally in the future of AI development and application, aligning with the open-source and democratizing philosophy of AIPG.
                   </p>
                 </div>
               </div>

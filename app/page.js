@@ -9,7 +9,7 @@ import Timeline from "@/components/Timeline";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="dark">
       <Hero />
       {/* </Stats /> */}
       <div className="flex flex-1 self-center w-full justify-center items-center bg-gray-50 dark:bg-black">
@@ -31,7 +31,6 @@ export default function Home() {
       </div>
       <Timeline />
       {/* <BlogsSection /> */}
-
     </main>
   );
 }
