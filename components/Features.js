@@ -8,13 +8,10 @@ const Features = () => {
         <div class="grid md:grid-cols-2 gap-12">
           <div class="lg:w-3/4">
             <h2 class="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-              AI Power Grid brings advanced and secure AI Art generation forward
+            Empowering Blockchain with AI: Proof of Useful Work
             </h2>
             <p class="mt-3 text-gray-800 dark:text-gray-400">
-              AI Power Grid (AIPG) is pioneering a revolutionary approach by
-              offering free access to cutting-edge Large Language Model (LLM)
-              inference and AI Art generation, validated on an immutable
-              blockchain to ensure authenticity and security.
+            Proof of Useful Work (POUW) is a paradigm shift in the world of blockchain and cryptocurrency, designed to address the sustainability concerns of traditional Proof of Work (PoW) systems. Where PoW requires miners to use high amounts of computational power to mine blocks, often criticized for its intensive energy use without direct productive output, POUW redirects this computational capacity towards meaningful AI tasks. In the AIPG ecosystem, POUW incentivizes node operators to provide inference on localized large language models (LLM) and host AI art model generation via technology like Stable Diffusion. This convergence of blockchain and AI tasks not only validates transactions but also produces valuable AI services, thereby utilizing the energy consumed in a manner that contributes constructively to the community and the broader field of AI.
             </p>
           </div>
 
@@ -39,11 +36,12 @@ const Features = () => {
               </span>
               <div class="ms-5 sm:ms-8">
                 <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Revolutionary AI Access
+                  Empowering Meaningful Contributions
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  Free and open LLMs and Stable Diffusion AI art tools on the
-                  blockchain.
+                We will leverage PoUW to go beyond the usual 'mining' activities associated with cryptocurrencies. 
+                Instead of consuming colossal amounts of energy for arbitrary calculations, the AIPG network 
+                utilizes a validation mechanism that supports and rewards constructive computational tasks.
                 </p>
               </div>
             </div>
@@ -68,11 +66,13 @@ const Features = () => {
               </span>
               <div class="ms-5 sm:ms-8">
                 <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Sustainable Innovation
+                  Creating an Inclusive AI Ecosystem
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  Transition from PoW to eco-friendly PoUW, blending AI utility
-                  with energy efficiency.
+                AIPG not only positions itself as an innovator in blockchain technology but also as a contributor 
+                to the global AI landscape. By democratizing access to computational resources, we enable a vast 
+                community of researchers, developers, and enthusiasts to partake in and contribute towards cutting-edge 
+                AI development, regardless of their individual computational capacity.
                 </p>
               </div>
             </div>
@@ -97,11 +97,13 @@ const Features = () => {
               </span>
               <div class="ms-5 sm:ms-8">
                 <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Community-Driven Marketplace
+                Access to AI for everyone
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  NFT AI Gallery for decentralized AI art creation, sharing, and
-                  monetization.
+                AI Power Grid (AIPG) envisions a future where access to cutting-edge AI is free and open to all. 
+                Our platform leverages a Proof-of-Useful-Work (POUW) protocol to align blockchain security with valuable 
+                AI processes. By participating in the network, users contribute to computational tasks that advance AI technology, 
+                and in turn, they are incentivized with AIPG tokens.This model encourages a collaborative and energy-efficient approach to AI advancement
                 </p>
               </div>
             </div>

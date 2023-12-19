@@ -2,12 +2,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
-import { useDarkMode } from 'next-dark-mode'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { darkModeActive } = useDarkMode();
-  console.log(darkModeActive); // Add this line
 
   function toggleMenu() {
     setIsOpen(!isOpen);
@@ -28,7 +25,7 @@ export default function Navbar() {
             <Link href="/">
               <a>
                 <Image 
-                  src={darkModeActive ? "/aipgweblogo.png" : "/aipgweblogoblack.png"}
+                  src="/aipgweblogo.png"
                   alt="AI Power Grid Logo"
                   width={200}
                   height={120}
@@ -88,9 +85,9 @@ export default function Navbar() {
               About
             </Link>
             <div className="relative group inline-block">
-              <Link href="https://mpool.aipowergrid.io/" target="_blank">
+              <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank">
                 <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white">
-                  Mining
+                  Pools
                 </a>
               </Link>
             </div>

@@ -6,7 +6,7 @@ const Services = () => {
     import("preline");
   }, []);
   return (
-    <div className="bg-gray-50 dark:bg-transparent">
+    <div className="bg-white dark:bg-transparent">
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div class="grid sm:grid-cols-2 lg:grid-cols-2 items-center gap-6 md:gap-10">
           <div class="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
@@ -33,14 +33,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Decentralized AI Services
+                Open Source AI Models
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              AIPG integrates decentralized AI services directly into the
-              blockchain, offering seamless access to powerful LLMs and AI art
-              generation tools.
+              Central to AIPG's approach is the utilization of open source Large Language Models (LLMs) and Stable Diffusion models, 
+              providing a robust foundation for AI-powered applications in text generation and image creation. This ensures a 
+              collaborative and transparent environment where improvements and innovations can be shared and leveraged community-wide.
             </p>
           </div>
 
@@ -66,14 +66,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  Blockchain-Validated Outputs:
+                   Democratized AI
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              Every interaction with our AI services, including LLM inferences
-              and AI-generated artworks, is validated and recorded on the
-              blockchain.
+            AIPG is committed to democratizing access to AI technologies. By providing tools 
+            and resources openly, the platform empowers developers, artists, and individuals from diverse 
+            backgrounds to engage with AI without the need for extensive resources or proprietary knowledge.
             </p>
           </div>
 
@@ -101,13 +101,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                  NFT AI Gallery and Marketplace
+                Earn with AI Power Grid
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              AIPG introduces an exclusive NFT AI Gallery and a corresponding
-              marketplace, designed to showcase AI-generated art.
+            AIPG coin is a cornerstone of the ecosystem, serving as the primary medium of exchange, 
+            incentivization, and governance. It aligns the various stakeholders within the AIPG ecosystem 
+            by enabling participation, rewarding contributions, and guiding the evolution of the platform.
             </p>
           </div>
 
@@ -134,14 +135,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white overflow-auto">
-                  Community Feedback Loop
+                 Elevating NFT's with AI
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              Developers can rapidly deploy their AI models onto the AIPG
-              platform, where they are immediately accessible to the community
-              for testing and feedback.
+              While the initial hype around non-fungible tokens (NFTs) may have waned from its peak, the underlying technology 
+              remains a potent tool for certifying and monetizing digital assets. In the realm of Artificial Intelligence, 
+              particularly, NFTs continue to offer a perfect use case that can rejuvenate their relevance and utility.
             </p>
           </div>
         </div>
