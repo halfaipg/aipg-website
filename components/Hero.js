@@ -32,7 +32,7 @@ const Hero = () => {
         <div class="mt-8 gap-3 flex justify-center mb-4">
           <a
             class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800"
-            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.1"
+            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.2"
             target="_blank"
           >
             <svg
