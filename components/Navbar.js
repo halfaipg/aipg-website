@@ -23,7 +23,7 @@ export default function Navbar() {
         <div class="flex items-center justify-between">
           <div class="flex-none text-xl font-semibold dark:text-white" aria-label="Brand">
             <Link href="/">
-              <a>
+              <a onClick={() => setIsOpen(false)}>
                 <Image 
                   src="/aipgweblogo.png"
                   alt="AI Power Grid Logo"
@@ -73,20 +73,20 @@ export default function Navbar() {
           <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
-              href="https://www.aipowergrid.io"
+              href="/"
               aria-current="page"
             >
-              Home
+              <a onClick={() => setIsOpen(false)}>Home</a>
             </Link>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="/about"
             >
-              About
+              <a onClick={() => setIsOpen(false)}>About</a>
             </Link>
             <div className="relative group inline-block">
               <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank">
-                <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white">
+                <a onClick={() => setIsOpen(false)} className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white">
                   Pools
                 </a>
               </Link>
@@ -96,22 +96,46 @@ export default function Navbar() {
               href="/aipg_whitepaperV1.04.pdf"
               download
             >
-              White Paper
+              <a onClick={() => setIsOpen(false)}>White Paper</a>
             </Link>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="https://explorer.aipowergrid.io/"
               target="_blank"
             >
-              Explorer
+              <a onClick={() => setIsOpen(false)}>Explorer</a>
             </Link>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
               href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.2"
               target="_blank"
             >
-              Wallets
+              <a onClick={() => setIsOpen(false)}>Wallets</a>
             </Link>
+            <div className="relative group inline-block">
+              <button className="font-medium text-gray-500 group-hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent group-hover:border-white">
+                Exchanges
+              </button>
+              <div className="absolute left-0 mt-0 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 divide-y divide-gray-100 focus:outline-none z-50 hidden group-hover:block border-t-2 border-transparent" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <div className="py-1">
+                  <Link href="https://nonkyc.io/market/AIPG_USDT" target="_blank">
+                    <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
+                      NonKYC
+                    </a>
+                  </Link>
+                  <Link href="https://www.sevenseas.exchange/market/AIPG-USDT" target="_blank">
+                    <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
+                      Seven Seas
+                    </a>
+                  </Link>
+                  <Link href="https://xeggex.com/market/AIPG_USDT" target="_blank">
+                    <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
+                      Xeggex
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            </div>
             {/* ... rest of your code ... */}
           </div>
         </div>
