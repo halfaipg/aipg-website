@@ -1,118 +1,106 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const Wallet = () => {
+  const [os, setOs] = useState('Unknown OS');
+
   useEffect(() => {
-    import("preline");
+    const getOperatingSystem = () => {
+      const userAgent = window.navigator.userAgent;
+      let os = "Unknown OS";
+      if (userAgent.indexOf("Win") != -1) os = "Windows";
+      if (userAgent.indexOf("Mac") != -1) os = "MacOS";
+      if (userAgent.indexOf("X11") != -1) os = "UNIX";
+      if (userAgent.indexOf("Linux") != -1) os = "Linux";
+
+      return os;
+    };
+
+    setOs(getOperatingSystem());
   }, []);
+
   return (
-    <div>
-      <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start p-4 sm:py-12 sm:px-32 relative">
-        <video
-          src="/video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        />
-        <div className="bg-white p-6 text-black w-full sm:h-full h-auto sm:w-[30%]">
-          <h1 className="text-3xl sm:text-4xl  font-extrabold">Wallets</h1>
-          <p className="my-4 text-sm font-medium">
-            Our ecosystem thrives on open-source collaboration, fostering
-            innovation and creativity, while our marketplace and NFT AI Gallery
-            enable artists and AI enthusiasts to monetize their work and
-            contribute to the rapidly evolving AI landscape.
-          </p>
-          <Link
-            href="/faqs"
-            className="my-4 px-6 py-2 sm:py-4 font-semibold flex flex-row space-x-2 border-b-2 border-cyan-300 max-w-[80%] hover:scale-90 duration-300 ease-in-out"
-          >
-            View our FAQs
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="w-6 h-6 ml-2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                />
-              </svg>
-            </span>
-          </Link>
-        </div>
-      </section>
+    <div class="pb-40">
       <section className="p-8 md:p-16">
-        <div className="text-black dark:text-white text-center py-8 text-3xl font-semibold">
+        <div className="text-black dark:text-white text-center py-4 text-3xl font-semibold">
           Our Wallets
         </div>
+        <p className="text-black dark:text-white text-center py-2 text-base">
+          AIPG wallets are available for Linux, Windows, and MacOS
+        </p>
         <div className="grid grid-col-1 sm:grid-cols-3 gap-8">
-          <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          <div class="flex flex-col pt-4">
             <img
-              class="w-full h-auto rounded-t-xl p-2 dark:bg-white"
-              src="/linux-logo.png"
+              class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+              src="/Linux-Transparent.png"
               alt="mac-os"
             />
-            <div class="p-4 md:p-5">
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+            <div class="p-2 md:p-3 text-center">
+              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
                 Linux Wallet
               </h3>
-              <p class="mt-1 text-gray-500 dark:text-gray-400">
-                Download our Linux Wallet
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Download the Linux Wallet
               </p>
               <a
-                class="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="#"
+                class={`mt-2 mr-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-aarch64-linux-gnu.tar.gz"
               >
-                Download
+                Arch Linux
+              </a>
+              <a
+                class={`mt-2 mr-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-arm-linux-gnueabihf.tar.gz"
+              >
+                ARM
+              </a>
+              <a
+                class={`mt-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-x86_64-linux-gnu.tar.gz"
+              >
+                x86
               </a>
             </div>
           </div>
-          <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          <div class="flex flex-col pt-4">
             <img
-              class="w-full h-auto rounded-t-xl p-2 dark:bg-white"
-              src="/windows-logo.png"
+              class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+              src="/Windows-Transparent.png"
               alt="Image Description"
             />
-            <div class="p-4 md:p-5">
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+            <div class="p-2 md:p-3 text-center">
+              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
                 Windows Wallet
               </h3>
-              <p class="mt-1 text-gray-500 dark:text-gray-400">
-                Download our Windows wallet
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Download the Windows wallet
               </p>
               <a
-                class="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="#"
+                class={`mt-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Windows' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-win64.zip"
               >
                 Download
               </a>
             </div>
           </div>
-          <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          <div class="flex flex-col pt-4">
             <img
-              class="w-full h-auto rounded-t-xl p-2 dark:bg-white"
-              src="/mac-logo.png"
+              class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+              src="/Mac-Transparent.png"
               alt="mac logo"
             />
-            <div class="p-4 md:p-5">
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+            <div class="p-2 md:p-3 text-center">
+              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
                 MacOS Wallet
               </h3>
-              <p class="mt-1 text-gray-500 dark:text-gray-400">
-                Download our MacOS wallet
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Download the MacOS wallet
               </p>
               <a
-                class="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="#"
+                class={`mt-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'MacOS' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-osx64.tar.gz"
               >
                 Download
               </a>
