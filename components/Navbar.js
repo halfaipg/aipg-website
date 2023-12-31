@@ -85,11 +85,23 @@ export default function Navbar() {
               <a onClick={() => setIsOpen(false)}>About</a>
             </Link>
             <div className="relative group inline-block">
-              <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank">
-                <a onClick={() => setIsOpen(false)} className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white">
-                  Pools
-                </a>
-              </Link>
+              <button className="font-medium text-gray-500 group-hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent group-hover:border-white">
+                Pools
+              </button>
+              <div className="absolute left-0 mt-0 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 divide-y divide-gray-100 focus:outline-none z-50 hidden group-hover:block border-t-2 border-transparent" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <div className="py-1">
+                  <Link href="https://pool.aipowergrid.io/" target="_blank">
+                    <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
+                      Official
+                    </a>
+                  </Link>
+                  <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank">
+                    <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
+                      Public
+                    </a>
+                  </Link>
+                </div>
+              </div>
             </div>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
@@ -107,8 +119,7 @@ export default function Navbar() {
             </Link>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
-              href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.2"
-              target="_blank"
+              href="/wallet"
             >
               <a onClick={() => setIsOpen(false)}>Wallets</a>
             </Link>

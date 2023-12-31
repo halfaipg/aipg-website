@@ -8,7 +8,7 @@ import Providers from "@/context/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AIPowergrid",
+  title: "AI Power Grid",
   description: "Empowering the architects of tomorrow with the freedom of shared AI",
 };
 export const revalidate = 30;
