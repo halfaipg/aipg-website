@@ -34,6 +34,18 @@ const Hero = () => {
             class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800 w-full md:w-auto md:w-64"
             href="/wallet"
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="#ffffff"
+              version="1.1"
+              viewBox="0 0 512.001 512.001"
+              xmlSpace="preserve"
+            >
+              <path d="M459.102 274.658v-66.057c0-21.692-17.647-39.34-39.34-39.34H263.033a78.684 78.684 0 002.699-20.469c0-6.653-.839-13.112-2.404-19.285 14.402 16.775 35.739 27.433 59.531 27.433 43.268 0 78.47-35.201 78.47-78.47S366.127 0 322.858 0c-43.269 0-78.47 35.201-78.47 78.47a78.37 78.37 0 002.404 19.285c-14.402-16.775-35.739-27.433-59.531-27.433-43.268 0-78.469 35.202-78.469 78.47 0 7.005.923 13.865 2.699 20.469h-51.4c-21.692 0-39.339 17.647-39.339 39.34v264.06c0 21.692 17.647 39.339 39.339 39.339h359.671c21.692 0 39.34-17.647 39.34-39.339v-66.057c18.074-2.112 32.148-17.51 32.148-36.141v-59.662c.001-18.634-14.074-34.032-32.148-36.143z"></path>
+              <circle cx="340.154" cy="340.627" r="21.92"></circle>
+            </svg>
             Wallets
           </a>
         </div>
