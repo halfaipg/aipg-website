@@ -22,9 +22,9 @@ export default function Navbar() {
       >
         <div class="flex items-center justify-between">
           <div class="flex-none text-xl font-semibold dark:text-white" aria-label="Brand">
-            <Link href="/">
+            <Link legacyBehavior href="/">
               <a onClick={() => setIsOpen(false)}>
-                <Image 
+                <Image
                   src="/aipgweblogo.png"
                   alt="AI Power Grid Logo"
                   width={200}
@@ -95,7 +95,7 @@ export default function Navbar() {
                       Official
                     </a>
                   </Link>
-                  <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank">
+                  <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank" legacyBehavior>
                     <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
                       Public
                     </a>

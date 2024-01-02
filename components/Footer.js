@@ -13,7 +13,7 @@ const Footer = () => {
                 href="https://www.aipowergrid.io"
                 aria-label="Brand"
               >
-                <Image 
+                <Image
                   src="/aipgweblogo.png" // Path to your image
                   alt="AI Power Grid Logo" // Alt text for your image
                   width={200} // Adjust based on your needs
@@ -29,7 +29,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://mpool.aipowergrid.io/"
+                    href="https://pool.aipowergrid.io/"
                     target="_blank"
                   >
                     Mining Pool
@@ -88,17 +88,17 @@ const Footer = () => {
               </div>
             </div>
 
-            
 
-          <div className="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
-            <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-400">
-                ©AI POWER GRID | ALL RIGHTS RESERVED. {new Date().getFullYear()}
-              </p>
+
+            <div className="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
+              <div className="flex justify-between items-center">
+                <p className="text-sm text-gray-400">
+                  ©AI POWER GRID | ALL RIGHTS RESERVED. {new Date().getFullYear()}
+                </p>
               </div>
             </div>
 
-           
+
           </div>
         </div>
       </footer>
