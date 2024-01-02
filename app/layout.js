@@ -8,8 +8,9 @@ import Providers from "@/context/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI Power Grid",
-  description: "Empowering the architects of tomorrow with the freedom of shared AI",
+  title: "AI Power Grid - Democratizing Open Source Generative AI",
+  description: "'Revolutionizing the AI landscape with open access to blockchain-validated and incentivized generative AI models, fostering adoption, innovation, creativity, and community-driven growth.",
+  // description: "Empowering the architects of tomorrow with the fAreedom of shared AI",
 };
 export const revalidate = 30;
 export default function RootLayout({ children }) {

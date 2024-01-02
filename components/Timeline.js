@@ -24,11 +24,11 @@ const Timeline = () => {
             Current - Developing a PoUW model
           </h3>
           <p>
-          In the current phase following the launch of AIPG, our focus is on laying the groundwork 
-          for robust AI services within the blockchain environment. This foundational period is dedicated 
-          to solidifying the Proof of Useful Work (POUW) infrastructure, fostering the transition of GPU 
-          miners into AI node operators, and ensuring the stability and security of the network with the integration of validator nodes. 
-        </p>
+            In the current phase following the launch of AIPG, our focus is on laying the groundwork
+            for robust AI services within the blockchain environment. This foundational period is dedicated
+            to solidifying the Proof of Useful Work (POUW) infrastructure, fostering the transition of GPU
+            miners into AI node operators, and ensuring the stability and security of the network with the integration of validator nodes.
+          </p>
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
@@ -87,9 +87,9 @@ const Timeline = () => {
           </h3>
 
           <p>
-          users or developers who demand reliability, consistent uptime, and professional-grade API access, 
-          AIPG offers a paid tier. This premium offering guarantees service levels through contracts with 
-          secured and trusted nodes, catering to enterprise users and applications where high availability and predictable performance are required.
+            users or developers who demand reliability, consistent uptime, and professional-grade API access,
+            AIPG offers a paid tier. This premium offering guarantees service levels through contracts with
+            secured and trusted nodes, catering to enterprise users and applications where high availability and predictable performance are required.
           </p>
         </VerticalTimelineElement>
         <VerticalTimelineElement
@@ -105,9 +105,9 @@ const Timeline = () => {
             Q2 2025 - Interchain AI Service Protocol Layer
           </h3>
           <p>
-          The development of an interchain protocol to facilitate cross-blockchain AI services, 
-          positioning AIPG as a leader in blockchain interoperability in the AI space. This move will fully
-          solidify AIPG's position as one of the top 3 AI coins in the marketplace.
+            The development of an interchain protocol to facilitate cross-blockchain AI services,
+            positioning AIPG as a leader in blockchain interoperability in the AI space. This move will fully
+            solidify AIPG's position as one of the leading AI coins in the marketplace.
           </p>
         </VerticalTimelineElement>
       </VerticalTimeline>
