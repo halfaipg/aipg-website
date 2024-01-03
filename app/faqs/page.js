@@ -138,7 +138,7 @@ const page = () => {
           <div className="hs-accordion-group">
             {FAQ_Questions.map((items) => (
               <div
-                className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"
+                className="hs-accordion rounded-xl p-6 dark:bg-white/[.05] active"
                 id="hs-basic-with-title-and-arrow-stretched-heading-one"
                 key={items.id}
               >

@@ -1,10 +1,8 @@
 "use client";
-import { useEffect } from "react";
+import { useState } from "react";
 
 const Hero = () => {
-  useEffect(() => {
-    import("preline");
-  }, []);
+
   return (
     <div class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/component/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('https://preline.co/assets/svg/component/squared-bg-element-dark.svg')]">
       <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
@@ -29,7 +27,7 @@ const Hero = () => {
           </p>
         </div>
 
-        <div class="mt-8 gap-3 flex justify-center mb-4">
+        <div class="mt-12 flex flex-col md:flex-row gap-3 justify-center mb-4">
           <a
             class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800 w-full md:w-auto md:w-64"
             href="/wallet"
@@ -43,13 +41,11 @@ const Hero = () => {
               viewBox="0 0 512.001 512.001"
               xmlSpace="preserve"
             >
-              <path d="M459.102 274.658v-66.057c0-21.692-17.647-39.34-39.34-39.34H263.033a78.684 78.684 0 002.699-20.469c0-6.653-.839-13.112-2.404-19.285 14.402 16.775 35.739 27.433 59.531 27.433 43.268 0 78.47-35.201 78.47-78.47S366.127 0 322.858 0c-43.269 0-78.47 35.201-78.47 78.47a78.37 78.37 0 002.404 19.285c-14.402-16.775-35.739-27.433-59.531-27.433-43.268 0-78.469 35.202-78.469 78.47 0 7.005.923 13.865 2.699 20.469h-51.4c-21.692 0-39.339 17.647-39.339 39.34v264.06c0 21.692 17.647 39.339 39.339 39.339h359.671c21.692 0 39.34-17.647 39.34-39.339v-66.057c18.074-2.112 32.148-17.51 32.148-36.141v-59.662c.001-18.634-14.074-34.032-32.148-36.143z"></path>
+              <path d="M459.102 274.658v-66.057c0-21.692-17.647-39.34-39.34-39.34H263.033a78.684 78.684 0 002.699-20.469c0-6.653-.839-13.112-2.404-19.285 14.402 16.775 35.739 27.433 59.531 27.433 43.268 0 78.47-35.201 78.47-78.470S366.127 0 322.858 0c-43.269 0-78.47 35.201-78.47 78.47a78.37 78.37 0 002.404 19.285c-14.402-16.775-35.739-27.433-59.531-27.433-43.268 0-78.469 35.202-78.469 78.47 0 7.005.923 13.865 2.699 20.469h-51.4c-21.692 0-39.339 17.647-39.339 39.34v264.06c0 21.692 17.647 39.339 39.339 39.339h359.671c21.692 0 39.34-17.647 39.34-39.339v-66.057c18.074-2.112 32.148-17.51 32.148-36.141v-59.662c.001-18.634-14.074-34.032-32.148-36.143z"></path>
               <circle cx="340.154" cy="340.627" r="21.92"></circle>
             </svg>
             Wallets
           </a>
-        </div>
-        <div class="mt-4 gap-3 flex justify-center mb-4">
           <a
             class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800 w-full md:w-auto md:w-64"
             href="https://discord.gg/vZ9XrTSRYr"
@@ -69,58 +65,34 @@ const Hero = () => {
           </a>
         </div>
         <div class="mt-4 flex flex-col items-center justify-center">
-          <a
-            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400 mb-4"
-            href="https://miningpoolstats.stream/aipowergrid"
-            target="_blank"
-          >
-            Mining Pools
-            <span class="flex items-center gap-x-1">
-              <span class="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
-                Explore
+          <div class="flex flex-col md:flex-row gap-3 items-center justify-center">
+            <a
+              class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
+              href="https://pool.aipowergrid.io/"
+              target="_blank"
+            >
+              Official Mining Pool
+              <span class="flex items-center gap-x-1">
+                <span class="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
+                  Explore
+                </span>
+                <svg
+                  class="flex-shrink-0 w-4 h-4 text-blue-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
               </span>
-              <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-600"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </span>
-          </a>
-          <a
-            class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
-            href="https://pool.aipowergrid.io/"
-            target="_blank"
-          >
-            Official Mining Pool
-            <span class="flex items-center gap-x-1">
-              <span class="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
-                Explore
-              </span>
-              <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-600"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </span>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </div>

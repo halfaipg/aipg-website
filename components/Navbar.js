@@ -105,8 +105,7 @@ export default function Navbar() {
             </div>
             <Link
               class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500 pb-2 border-b-2 border-transparent hover:border-white"
-              href="/aipg_whitepaperV1.04.pdf"
-              download
+              href="/whitepaper"
             >
               <a onClick={() => setIsOpen(false)}>White Paper</a>
             </Link>

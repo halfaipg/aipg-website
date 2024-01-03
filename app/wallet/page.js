@@ -30,7 +30,7 @@ const Wallet = () => {
         <p className="text-black dark:text-white text-center py-2 text-base">
           AIPG wallets are available for Linux, Windows, and MacOS
         </p>
-        <div className="grid grid-col-1 sm:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="flex flex-col pt-4">
             <img
               class="w-48 h-48 rounded-t-xl p-2 mx-auto"
@@ -51,16 +51,31 @@ const Wallet = () => {
                 Arch Linux
               </a>
               <a
-                class={`mt-2 mr-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-arm-linux-gnueabihf.tar.gz"
-              >
-                ARM
-              </a>
-              <a
                 class={`mt-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-x86_64-linux-gnu.tar.gz"
               >
                 x86
+              </a>
+            </div>
+          </div>
+          <div class="flex flex-col pt-4">
+            <img
+              class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+              src="/RaspberryPi-Transparent.png"
+              alt="raspberry-pi"
+            />
+            <div class="p-2 md:p-3 text-center">
+              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+                Raspberry Pi Wallet
+              </h3>
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Download the Raspberry Pi Wallet
+              </p>
+              <a
+                class={`mt-2 mr-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-arm-linux-gnueabihf.tar.gz"
+              >
+                ARM
               </a>
             </div>
           </div>
@@ -101,6 +116,29 @@ const Wallet = () => {
               <a
                 class={`mt-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent ${os === 'MacOS' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-osx64.tar.gz"
+              >
+                Download
+              </a>
+            </div>
+          </div>
+          <div class="flex flex-col pt-4">
+            <img
+              class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+              src="/paperwallet.png"
+              alt="paper-wallet"
+            />
+            <div class="p-2 md:p-3 text-center">
+              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+                Paper Wallet
+              </h3>
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Download the Paper Wallet
+              </p>
+              <a
+                class="mt-2 py-1 px-1 inline-flex justify-center items-center gap-x-1 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                href="/aipg-paper-wallet_3.html"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Download
               </a>
