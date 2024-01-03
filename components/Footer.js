@@ -70,8 +70,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://www.aipowergrid.io/aipg_whitepaperV1.04.pdf"
-                    target="_blank"
+                    href="/whitepaper"
                   >
                     White Paper
                   </a>
