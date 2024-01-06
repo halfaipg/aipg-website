@@ -138,6 +138,11 @@ export default function Navbar() {
                       Seven Seas
                     </a>
                   </Link>
+                  <Link href="https://tradeogre.com/exchange/AIPG-USDT" target="_blank">
+                    <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
+                      TradeOgre
+                    </a>
+                  </Link>
                   <Link href="https://xeggex.com/market/AIPG_USDT" target="_blank">
                     <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-500 hover:text-gray-400 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-500" role="menuitem">
                       Xeggex
