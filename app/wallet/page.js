@@ -1,25 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const Wallet = () => {
-  const [os, setOs] = useState('Unknown OS');
-
-  useEffect(() => {
-    const getOperatingSystem = () => {
-      const userAgent = window.navigator.userAgent;
-      let os = "Unknown OS";
-      if (userAgent.indexOf("Win") != -1) os = "Windows";
-      if (userAgent.indexOf("Mac") != -1) os = "MacOS";
-      if (userAgent.indexOf("X11") != -1) os = "UNIX";
-      if (userAgent.indexOf("Linux") != -1) os = "Linux";
-
-      return os;
-    };
-
-    setOs(getOperatingSystem());
-  }, []);
 
   return (
     <div class="pb-40">
@@ -47,7 +31,7 @@ const Wallet = () => {
                 Download the Linux Wallet
               </p>
               <a
-                class={`mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-x86_64-linux-gnu.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -73,7 +57,7 @@ const Wallet = () => {
                 Download the Raspberry Pi Wallet
               </p>
               <a
-                class={`mt-2 mr-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent ${os === 'Linux' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-arm-linux-gnueabihf.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -99,7 +83,7 @@ const Wallet = () => {
                 Download the Windows wallet
               </p>
               <a
-                class={`mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent ${os === 'Windows' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-win64.zip"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -125,7 +109,7 @@ const Wallet = () => {
                 Download the MacOS wallet
               </p>
               <a
-                class={`mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent ${os === 'MacOS' ? 'bg-blue-600' : 'bg-black'} text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}
+                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-osx64.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
