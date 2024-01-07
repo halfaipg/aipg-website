@@ -120,7 +120,7 @@ const Wallet = () => {
             </div>
           </div>
           <div class="flex flex-col pt-4">
-            <a href="/aipg-paper-wallet_3.html">
+            <a href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet" target="_blank" rel="noopener noreferrer">
               <img
                 class="w-32 h-32 rounded-t-xl p-2 mx-auto"
                 src="/paperwallet.png"
@@ -136,7 +136,7 @@ const Wallet = () => {
               </p>
               <a
                 class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="/aipg-paper-wallet_3.html"
+                href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet"
                 target="_blank"
                 rel="noopener noreferrer"
               >
