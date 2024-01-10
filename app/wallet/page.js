@@ -8,27 +8,27 @@ const Wallet = () => {
   return (
     <div class="pb-40">
       <section className="p-8 md:p-16">
-        <div className="text-black dark:text-white text-center py-4 text-3xl font-semibold">
+        <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold">
           Our Wallets
         </div>
-        <p className="text-black dark:text-white text-center py-2 text-base">
+        <p className="text-black dark:text-white text-center py-2 text-lg">
           AIPG wallets are available for Linux, Windows, MacOS, and Raspberry Pi
         </p>
         <div className="grid md:grid-cols-5 grid-cols-1 gap-8">
           <div class="flex flex-col pt-4">
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-x86_64-linux-gnu.tar.gz">
               <img
-                class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/Linux-Transparent.png"
                 alt="mac-os"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
-              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
                 Linux Wallet
               </h3>
               <a
-                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-x86_64-linux-gnu.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -41,17 +41,17 @@ const Wallet = () => {
           <div class="flex flex-col pt-4">
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-arm-linux-gnueabihf.tar.gz">
               <img
-                class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/RaspberryPi-Transparent.png"
                 alt="raspberry-pi"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
-              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
                 Raspberry Pi Wallet
               </h3>
               <a
-                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-arm-linux-gnueabihf.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -64,17 +64,17 @@ const Wallet = () => {
           <div class="flex flex-col pt-4">
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-win64.zip">
               <img
-                class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/Windows-Transparent.png"
                 alt="Image Description"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
-              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
                 Windows Wallet
               </h3>
               <a
-                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-win64.zip"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -87,17 +87,17 @@ const Wallet = () => {
           <div class="flex flex-col pt-4">
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-osx64.tar.gz">
               <img
-                class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/Mac-Transparent.png"
                 alt="mac logo"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
-              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
                 MacOS Wallet
               </h3>
               <a
-                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.2/AI-Power-Grid-Core-1.1.2-osx64.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -110,17 +110,17 @@ const Wallet = () => {
           <div class="flex flex-col pt-4">
             <a href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet" target="_blank" rel="noopener noreferrer">
               <img
-                class="w-48 h-48 rounded-t-xl p-2 mx-auto"
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/paperwallet.png"
                 alt="paper-wallet"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
-              <h3 class="text-sm font-bold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
                 Paper Wallet
               </h3>
               <a
-                class="mt-2 py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -136,7 +136,7 @@ const Wallet = () => {
       </section>
       <div className="flex justify-center py-8">
         <a
-          className="py-2 px-4 inline-flex justify-center items-center text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases"
           target="_blank"
           rel="noopener noreferrer"
