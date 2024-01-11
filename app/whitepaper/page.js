@@ -15,7 +15,7 @@ const WhitePaper = () => {
   };
 
   const pdfImages = Array.from({ length: totalPages }, (_, i) => 
-    `/whitepaper-images/aipg_whitepaperV1.04-${i + 1}.png`
+    `/whitepaper-images/aipg_whitepaperV1.05-${i + 1}.png`
   );
 
   return (
@@ -23,12 +23,12 @@ const WhitePaper = () => {
       {/* PDF Object will be hidden on small screens */}
       <div className="hidden sm:block w-full h-full">
         <object
-          data="/aipg_whitepaperV1.04.pdf"
+          data="/whitepaper-images/aipg_whitepaperV1.05.pdf"
           type="application/pdf"
           width="100%"
           height="100%"
         >
-          <embed src="/aipg_whitepaperV1.04.pdf" type="application/pdf" />
+          <embed src="/whitepaper-images/aipg_whitepaperV1.05.pdf" type="application/pdf" />
         </object>
       </div>
       {/* Image gallery and buttons will be shown on small screens */}
@@ -56,7 +56,7 @@ const WhitePaper = () => {
         </div>
         {/* Download button */}
         <a
-          href="/aipg_whitepaperV1.04.pdf"
+          href="/whitepaper-images/aipg_whitepaperV1.05.pdf"
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
           download
         >
