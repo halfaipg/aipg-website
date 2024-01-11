@@ -23,7 +23,7 @@ const Page = () => {
       {/* Video Banner Section */}
       <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start relative">
         <img
-          src="/tokenomics-images/aipg-tokenomics.png"
+          src="/tokenomics-images/aipg_tokenomics_6.png"
           alt="Tokenomics Banner"
           className="absolute top-0 left-0 w-full h-full object-cover -z-10"
         />
