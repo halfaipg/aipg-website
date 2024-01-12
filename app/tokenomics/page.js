@@ -21,19 +21,22 @@ const Page = () => {
   return (
     <div>
       {/* Video Banner Section */}
-      {/*
-      <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start relative">
-        <img
-          src="/tokenomics-images/aipg_tokenomics_3.png"
-          alt="Tokenomics Banner"
-          className="absolute top-0 left-0 w-full h-64 object-cover -z-10"
-        />
+      <section className="w-full sm:h-96 h-22 flex flex-row items-end justify-end sm:justify-start relative pb-6 sm:pb-0">
+        <picture className="absolute top-0 left-1/2 -translate-x-1/2 w-full -z-10">
+          <source 
+            srcSet="/tokenomics-images/aipg_tokenomics_banner_mobile.png" 
+            media="(max-width: 640px)"
+          />
+          <img
+            src="/tokenomics-images/aipg_tokenomics_banner.png"
+            alt="Tokenomics Banner"
+            className="w-full h-auto sm:h-96 m-0 p-0"
+          />
+        </picture>
         <div className="bg-transparent p-6 text-white w-full sm:h-full h-auto sm:w-[30%] flex items-center justify-center">
-          {/* You can uncomment and edit this heading or add new content */}
-          {/* <h1 className="text-3xl sm:text-4xl font-extrabold">Tokenomics</h1> */}
-        {/*</div>
+          {/* Heading removed from here */}
+        </div>
       </section>
-      */}
 
       {/* Rest of the Tokenomics Page Content */}
       <div className="flex flex-col min-h-screen">
