@@ -5,12 +5,12 @@ const Hero = () => {
 
   return (
     <div class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/component/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('https://preline.co/assets/svg/component/squared-bg-element-dark.svg')]">
-      <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+      <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24 pb-10">
         <div className="flex justify-center items-center mb-8">
           <img
-            src="/aipg.png"
+            src="/aipg-main.png"
             alt="aipg"
-            className="w-48 h-48 object-contain p-2"
+            className="w-48 h-48 md:w-64 md:h-64 object-contain p-2"
           />
         </div>
         <div class="mt-5 max-w-xl text-center mx-auto">
