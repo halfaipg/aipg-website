@@ -15,7 +15,7 @@ const WhitePaper = () => {
   };
 
   const pdfImages = Array.from({ length: totalPages }, (_, i) => 
-    `/whitepaper-images/aipg_whitepaperV1.05-${i + 1}.png`
+    `/whitepaper-images/aipg_whitepaperV1.06-${i + 1}.png`
   );
 
   return (
@@ -23,7 +23,7 @@ const WhitePaper = () => {
       {/* PDF Object will be hidden on small screens */}
       <div className="hidden sm:block w-full h-full">
         <object
-          data="/whitepaper-images/aipg_whitepaperV1.05.pdf"
+          data="/whitepaper-images/aipg_whitepaperV1.06.pdf"
           type="application/pdf"
           width="100%"
           height="100%"
