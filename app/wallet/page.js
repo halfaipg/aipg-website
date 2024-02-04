@@ -19,8 +19,8 @@ const Wallet = () => {
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-x86_64-linux-gnu.tar.gz">
               <img
                 class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
-                src="/Linux-Transparent.png"
-                alt="mac-os"
+                src="/wallet-icons/280_Linux-Transparent_324x324.png"
+                alt="Linux Wallet"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
@@ -42,8 +42,8 @@ const Wallet = () => {
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-x86_64-linux-gnu.tar.gz">
               <img
                 class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
-                src="/RaspberryPi-Transparent.png"
-                alt="raspberry-pi"
+                src="/wallet-icons/279_RaspberryPi-Transparent_324x324.png"
+                alt="Raspberry Pi Wallet"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
@@ -65,8 +65,8 @@ const Wallet = () => {
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-win64-setup.exe">
               <img
                 class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
-                src="/Windows-Transparent.png"
-                alt="Image Description"
+                src="/wallet-icons/278_Windows-Transparent_324x324.png"
+                alt="Windows Wallet"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
@@ -88,8 +88,8 @@ const Wallet = () => {
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-osx.dmg">
               <img
                 class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
-                src="/Mac-Transparent.png"
-                alt="mac logo"
+                src="/wallet-icons/277_Mac-Transparent_324x324.png"
+                alt="MacOS Wallet"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
@@ -111,8 +111,8 @@ const Wallet = () => {
             <a href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet" target="_blank" rel="noopener noreferrer">
               <img
                 class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
-                src="/paperwallet.png"
-                alt="paper-wallet"
+                src="/wallet-icons/276_paperwallet_324x324.png"
+                alt="Paper Wallet"
               />
             </a>
             <div class="p-2 md:p-3 text-center">
