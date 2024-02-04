@@ -103,7 +103,7 @@ const Features = () => {
                 AI Power Grid (AIPG) envisions a future where access to cutting-edge AI is free and open to all. 
                 Our platform leverages a Proof-of-Useful-Work (POUW) protocol to align blockchain security with valuable 
                 AI processes. By participating in the network, users contribute to computational tasks that advance AI technology, 
-                and in turn, they are incentivized with AIPG tokens.This model encourages a collaborative and energy-efficient approach to AI advancement
+                and in turn, they are incentivized with AIPG tokens. This model encourages a collaborative and energy-efficient approach to AI advancement.
                 </p>
               </div>
             </div>
