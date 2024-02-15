@@ -19,10 +19,10 @@ const Page = () => {
   );
 
   return (
-    <div>
+    <div className="pt-16">
       {/* Video Banner Section */}
       <section className="w-full sm:h-96 h-22 flex flex-row items-end justify-end sm:justify-start relative pb-6 sm:pb-0">
-        <picture className="absolute top-0 left-1/2 -translate-x-1/2 w-full -z-10">
+        <picture className="absolute top-0 left-0 right-0 w-full -z-10">
           <source 
             srcSet="/tokenomics-images/aipgtokenomics_mobile.png" 
             media="(max-width: 640px)"

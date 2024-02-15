@@ -19,7 +19,7 @@ const WhitePaper = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen p-4">
       {/* PDF Object will be hidden on small screens */}
       <div className="hidden sm:block w-full h-full">
         <object
