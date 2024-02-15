@@ -6,7 +6,7 @@ import React from "react";
 const Wallet = () => {
 
   return (
-    <div class="pb-40">
+    <div class="pb-40 pt-16">
       <section className="p-8 md:p-16">
         <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold">
           Our Wallets
@@ -39,7 +39,7 @@ const Wallet = () => {
             </div>
           </div>
           <div class="flex flex-col pt-4">
-            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-x86_64-linux-gnu.tar.gz">
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-arm-linux-gnueabihf.tar.gz">
               <img
                 class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/wallet-icons/279_RaspberryPi-Transparent_324x324.png"
@@ -52,7 +52,7 @@ const Wallet = () => {
               </h3>
               <a
                 class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-x86_64-linux-gnu.tar.gz"
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-arm-linux-gnueabihf.tar.gz"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
                   <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -137,7 +137,7 @@ const Wallet = () => {
       <div className="flex justify-center py-8">
         <a
           className="py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases"
+          href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.3"
           target="_blank"
           rel="noopener noreferrer"
         >

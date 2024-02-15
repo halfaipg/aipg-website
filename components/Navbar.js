@@ -15,7 +15,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-1 sm:py-0 dark:bg-gray-900 dark:border-gray-800">
+    <header class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 text-sm py-1 sm:py-0 dark:bg-gray-900 dark:border-gray-800">
       <nav
         class="relative max-w-7xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
         aria-label="Global"

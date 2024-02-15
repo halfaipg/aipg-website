@@ -25,7 +25,7 @@ const About = () => {
   }, []);
 
   return (
-    <div>
+    <div className="pt-16">
       <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start p-4 sm:py-12 sm:px-32 relative">
         <video
           src="/videos/aipg6.mp4"
