@@ -12,9 +12,9 @@ const Wallet = () => {
           Our Wallets
         </div>
         <p className="text-black dark:text-white text-center py-2 text-lg">
-          AIPG wallets are available for Linux, Windows, MacOS, and Raspberry Pi
+          AIPG wallets are available for Linux, Windows, MacOS, Raspberry Pi, and Web
         </p>
-        <div className="grid md:grid-cols-5 grid-cols-1 gap-8">
+        <div className="grid md:grid-cols-6 grid-cols-1 gap-8">
           <div class="flex flex-col pt-4">
             <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-x86_64-linux-gnu.tar.gz">
               <img
@@ -129,6 +129,28 @@ const Wallet = () => {
                   <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 Download
+              </a>
+            </div>
+          </div>
+          <div class="flex flex-col pt-4">
+            <a href="https://webwallet.aipowergrid.io" target="_blank" rel="noopener noreferrer">
+              <img
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
+                src="/wallet-icons/281_web_wallet aipg_324x324.png"
+                alt="Web Wallet"
+              />
+            </a>
+            <div class="p-2 md:p-3 text-center">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+                Web Wallet
+              </h3>
+              <a
+                class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                href="https://webwallet.aipowergrid.io"
+                target="_blank" rel="noopener noreferrer"
+              >
+                <img src="/wallet-icons/globe.svg" class="w-4 h-4 mr-2" alt="Access" />
+                Access
               </a>
             </div>
           </div>
