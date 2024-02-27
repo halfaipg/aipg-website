@@ -1,43 +1,95 @@
 "use client";
 import React from "react";
+import "./Team.css"; // Import your CSS file here
 
-// Declare your Team component
+// Example team member data
+const teamMembers = [
+  {
+    name: "Half",
+    position: "Founder",
+    imageUrl: "", // Add image URL
+    featureText: "Brings extensive experience in blockchain and AI technologies. Provides visionary leadership, guiding the project's direction.",
+  },
+  {
+    name: "Raz",
+    position: "Operations and Communications Manager",
+    imageUrl: "", // Add image URL
+    featureText: "10 years experience. Manages public relations and community engagement. Key in narrating project's vision and building relationships.",
+  },
+  {
+    name: "Mandark",
+    position: "Blockchain Network and Infrastructure Architect",
+    imageUrl: "", // Add image URL
+    featureText: "10 Years experience. Expert in network engineering. Critical in the architecture and security of blockchain implementation.",
+  },
+  {
+    name: "Professor",
+    position: "AI Art/Stable Diffusion Engineer",
+    imageUrl: "", // Add image URL
+    featureText: "Specialized in AI-generated art, model training and fine-tuning. Leads the AI Art Gallery development.",
+  },
+  {
+    name: "Infinity",
+    position: "Backend Systems and Blockchain Infrastructure Wizard",
+    imageUrl: "", // Add image URL
+    featureText: "3.5 years experience. Based in Germany with exceptional backend systems skills. Enhances backend architecture and blockchain functionality.",
+  },
+  {
+    name: "winddude",
+    position: "AI Developer",
+    imageUrl: "", // Add image URL
+    featureText: "Focus on Python and generative models. Enjoys windsurfing and is based in Canada.",
+  },
+  {
+    name: "JoJo",
+    position: "Full Stack LLM Engineer",
+    imageUrl: "", // Add image URL
+    featureText: "4 years experience. Software Engineer with experience in machine learning and working with language models. One of my goals is bringing AIPG and the open source LLM Dev communities together.",
+  },
+  {
+    name: "Seal Clubber",
+    position: "Release Manager",
+    imageUrl: "", // Add image URL
+    featureText: "6 years experience. Blockchain and GPU proof-of-work enthusiast. Part-time coder with experience in C++, Python, openCV, and JS.",
+  },
+  {
+    name: "MrSchmiklz",
+    position: "Python/Discord bot dev.",
+    imageUrl: "", // Add image URL
+    featureText: "4 yrs experience. Connecting you to your favorite experimental repos.",
+  },
+  {
+    name: "topper",
+    position: "Sys Linux Adm / Blockchain Dev",
+    imageUrl: "", // Add image URL
+    featureText: "22 yrs experience. Electronics engineer with 22+ years of experience in hardware design, blockchain technology development, and Linux system management for cryptocurrency projects. Proven expertise in programming languages such as Python, Java, and C++. Ph. D. Electrical Machines",
+  },
+  // Add more team members here...
+];
+
 const Team = () => {
-  // Component logic and JSX go here
   return (
-    <div className="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      
-      {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12">
-        <div className="text-center">
-          <img className="rounded-full size-24 mx-auto" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Image Description" />
-          <div className="mt-2 sm:mt-4">
-            <h3 className="font-medium text-gray-800 dark:text-gray-200">
-              David Forren
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Founder / CEO
-            </p>
+    <div className="responsive-container-block container">
+      <div className="responsive-container-block">
+        {teamMembers.map((member, index) => (
+          <div key={index} className="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 card-container">
+            <div className="card">
+              <div className="team-image-wrapper">
+                <img className="team-member-image" src={member.imageUrl} />
+              </div>
+              <p className="text-blk name">
+                {member.name}
+              </p>
+              <p className="text-blk position">
+                {member.position}
+              </p>
+              <p className="text-blk feature-text">
+                {member.featureText} {/* Use featureText from the array */}
+              </p>
+            </div>
           </div>
-        </div>
-        {/* End Col */}
-        {/* Additional cols omitted for brevity */}
+        ))}
       </div>
-      {/* End Grid */}
-
-      {/* Card */}
-      <div className="mt-12 flex justify-center">
-        <div className="border border-gray-200 p-1.5 pl-5 rounded-full dark:border-gray-700">
-          <div className="flex items-center gap-x-3">
-            <span className="text-sm text-gray-500">Want to work with us?</span>
-            <a className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-gray-200 bg-white text-blue-600 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-blue-500 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
-              We are hiring
-              <svg className="flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      {/* End Card */}
     </div>
   );
 };
