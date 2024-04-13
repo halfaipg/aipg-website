@@ -40,5 +40,223 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: rgb(0,0,0);
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgb(10, 23, 46) 50%, rgba(0,0,0,1) 100%);
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.hidden-initially {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.fade-in {
+  animation: fadeInAnimation 2s;
+}
+
+@keyframes fadeInAnimation {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-30px);}
+  60% {transform: translateY(-15px);}
+}
+
+@keyframes slideAndBounce {
+  0% {
+    transform: translateY(-100vh); /* Start above the screen */
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0); /* Move to final position */
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-20px); /* Bounce up a little */
+  }
+  80% {
+    transform: translateY(0); /* Settle back down */
+  }
+  90% {
+    transform: translateY(-10px); /* Final small bounce */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.dim-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the opacity (0.5) as needed */
+  z-index: 1;
+}
+
+.dim-background {
+  position: relative;
+  z-index: 0;
+}
+
+.button-43 {
+  background-color: #20549a;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  padding: 0.75rem 1.75rem; /* Reduced top and bottom padding */
+  text-decoration: none;
+  width: auto; /* Adjusted width to auto */
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* Small black shadow */
+}
+
+.button-43:hover {
+  background-color: #265faf; /* Change color on hover */
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover for a lifting effect */
+}
+
+@media (min-width: 768px) {
+  .button-43 {
+    padding: 0.75rem 2rem; /* Adjusted padding for larger screens */
+  }
+}
+
+/* Adjust the width for screens smaller than 768px */
+@media (max-width: 768px) {
+  .button-43 {
+    width: 50%; /* Example: make the button width 50% of its container on smaller screens */
+    margin: 0 auto; /* Center the button if it's not full-width */
+  }
+}
+
+/* Adjust this CSS in your styles file */
+.banner-overlay {
+  position: relative;
+  overflow: hidden; /* Ensure the pseudo-element's gradient doesn't extend outside this container */
+}
+
+.banner-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to top, 
+    transparent, 
+    rgba(0,0,0,0.5) 25%, 
+    rgba(0,0,0,0.5) 75%, 
+    transparent
+  );
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2; /* Ensure the content is above the overlay */
+}
+.section-title {
+  text-align: center;
+  margin: 20px 0; /* Adjust spacing as needed */
+}
+
+.title {
+  position: relative;
+  display: inline-block;
+  font-size: 2xl; /* Adjust font size as needed */
+  font-weight: bold;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* Adjust position as needed */
+  width: 100%;
+  height: 2px; /* Adjust thickness as needed */
+  background-color: #000; /* Adjust color as needed */
+}
+
+.fadeInSection {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+.fadeInSection.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section-header {
+  position: relative;
+  display: inline-block; /* Ensure the container fits the content */
+  text-align: center;
+  padding-bottom: 0.25rem; /* Space between text and underline */
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; /* Move the divider down */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* Full width of the text content */
+  height: 4px; /* Thickness of the divider */
+  display: block;
+  background: linear-gradient(to right, transparent, rgb(161, 161, 161), transparent);
+}
+
+.blur-effect {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+}
+
+.metrics-gradient-background {
+  width: 93%;
+  padding: 0.05rem; /* Adjust padding to make content area narrower */
+  margin: 0.2rem; /* Adjust margin to control spacing between boxes */
+  background: rgb(0,0,0);
+  background: linear-gradient(349deg, rgba(0,0,0,1) 0%, rgba(10,23,50,1) 50%, rgba(0,0,0,1) 100%);
+  border-radius: 20px; /* Adjust this value to increase or decrease the rounding */
+}
+/* Add this class to your boxes */
+.box-shadow {
+  transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3); /* Initial white shadow */
+}
+
+.box-shadow:hover {
+  box-shadow: 0 6px 8px rgba(255, 255, 255, 0.5); /* Brighter shadow on hover */
+}
+
+@media (orientation: landscape) {
+  .button-43 {
+    padding: 0.5rem 1rem; /* Adjust padding for landscape */
+    font-size: 0.875rem; /* Adjust font size for landscape */
   }
 }

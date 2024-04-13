@@ -23,6 +23,9 @@ const AdminPage = () => {
     };
 
     fetchMarketData();
+    const intervalId = setInterval(fetchMarketData, 10000); // Fetch data every 10 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []);
 
   useEffect(() => {
@@ -40,6 +43,9 @@ const AdminPage = () => {
     };
 
     fetchSevenSeasMarketData();
+    const intervalId = setInterval(fetchSevenSeasMarketData, 10000); // Fetch data every 10 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []);
 
   useEffect(() => {
@@ -58,6 +64,9 @@ const AdminPage = () => {
     };
 
     fetchNonKYCMarketData();
+    const intervalId = setInterval(fetchNonKYCMarketData, 10000); // Fetch data every 10 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []);
 
   useEffect(() => {
@@ -76,6 +85,9 @@ const AdminPage = () => {
     };
 
     fetchTradeOgreMarketData();
+    const intervalId = setInterval(fetchTradeOgreMarketData, 10000); // Fetch data every 10 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []);
 
   return (

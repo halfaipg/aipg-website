@@ -8,7 +8,7 @@ const Wallet = () => {
   return (
     <div class="pb-40 pt-16">
       <section className="p-8 md:p-16">
-        <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold">
+        <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold section-header" style={{ display: 'flex', justifyContent: 'center' }}>
           Our Wallets
         </div>
         <p className="text-black dark:text-white text-center py-2 text-lg">
@@ -48,7 +48,7 @@ const Wallet = () => {
             </a>
             <div class="p-2 md:p-3 text-center">
               <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-                Raspberry Pi Wallet
+                ARM Wallet
               </h3>
               <a
                 class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
