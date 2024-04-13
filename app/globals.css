@@ -139,14 +139,6 @@
   }
 }
 
-/* Adjust the width for screens smaller than 768px */
-@media (max-width: 768px) {
-  .button-43 {
-    width: 50%; /* Example: make the button width 50% of its container on smaller screens */
-    margin: 0 auto; /* Center the button if it's not full-width */
-  }
-}
-
 /* Adjust this CSS in your styles file */
 .banner-overlay {
   position: relative;

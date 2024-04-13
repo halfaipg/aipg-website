@@ -8,7 +8,7 @@ const Wallet = () => {
   return (
     <div class="pb-40 pt-16">
       <section className="p-8 md:p-16">
-        <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold section-header" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold" style={{ display: 'flex', justifyContent: 'center' }}>
           Our Wallets
         </div>
         <p className="text-black dark:text-white text-center py-2 text-lg">
