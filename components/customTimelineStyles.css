@@ -1,0 +1,17 @@
+/* customTimelineStyles.css */
+.vertical-timeline::before {
+  background: rgba(66, 66, 66, 0.752); /* White color */
+  height: calc(100% - 225px);
+  margin-top: 28px;
+}
+.vertical-timeline-element-icon {
+  box-shadow: 0 0 0 2px #00008B,inset 0 2px 0 rgba(0,0,0,.08),0 3px 0 4px rgba(0,0,0,.05) !important;
+  border: none; /* If the ring is a border */
+  box-shadow: none; /* If the ring is created with box-shadow */
+
+}
+.vertical-timeline-element-icon::before,
+.vertical-timeline-element-icon::after {
+  content: none; /* If the ring is created with a pseudo-element */
+  display: none; /* Alternative way to hide pseudo-elements */
+}

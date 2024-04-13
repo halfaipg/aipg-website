@@ -70,7 +70,8 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/whitepaper"
+                    href="https://docs.aipowergrid.io/ai-power-grid-whitepaper"
+                    target="_blank"
                   >
                     White Paper
                   </a>
@@ -82,6 +83,15 @@ const Footer = () => {
                     target="_blank"
                   >
                     Discord
+                  </a>
+                </p>
+                <p>
+                  <a
+                    className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    href="https://donation.aipowergrid.io/"
+                    target="_blank"
+                  >
+                    MEXC Donation
                   </a>
                 </p>
               </div>

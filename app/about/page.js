@@ -15,6 +15,11 @@ const About = () => {
 
   const [randomImage, setRandomImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [metrics, setMetrics] = useState({
+    price: null,
+    supply: null,
+    marketCap: null,
+  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,28 +27,36 @@ const About = () => {
     const randomIndex = Math.floor(Math.random() * images.length);
     setRandomImage(images[randomIndex]);
     setIsLoading(false);
+
+    fetch("https://api.coingecko.com/api/v3/coins/ai-power-grid")
+      .then((response) => response.json())
+      .then((data) => {
+        const marketData = data.market_data;
+        setMetrics({
+          price: marketData.current_price.usd,
+          supply: marketData.total_supply,
+          marketCap: marketData.current_price.usd * marketData.total_supply,
+        });
+      })
+      .catch((error) => console.error('Error fetching metrics:', error));
   }, []);
 
-  return (
-    <div className="pt-16">
-      <section className="w-full h-96 flex flex-row items-end justify-end sm:justify-start p-4 sm:py-12 sm:px-32 relative">
-        <video
-          src="/videos/aipg6.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        />
-        <div className="bg-transparent p-6 text-white w-full sm:h-full h-auto sm:w-[30%] flex items-center justify-center">
-          {/* <h1 className="text-3xl sm:text-4xl font-extrabold">About</h1> */}
-        </div>
-      </section>
-      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        {/* <div class="aspect-w-16 aspect-h-7">
-    <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1624571409412-1f253e1ecc89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" alt="Image Description" />
-  </div> */}
+  // Helper function to format numbers without decimals
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(number);
+  };
 
+  return (
+    <div className="pt-36">
+      {/* Video Banner */}
+      <div className="overflow-hidden">
+        <video autoPlay loop muted className="w-full h-[190px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover">
+          <source src="/videos/AIPG_About_Banner.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div class="lg:col-span-1">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
@@ -67,7 +80,7 @@ const About = () => {
 
           <div class="lg:col-span-2">
             <div class="grid sm:grid-cols-2 gap-8 md:gap-12">
-              <div class="flex gap-x-5">
+            <div class="flex gap-x-5">
                 <svg
                   class="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,21 +93,17 @@ const About = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <rect width="18" height="10" x="3" y="11" rx="2" />
-                  <circle cx="12" cy="5" r="2" />
-                  <path d="M12 7v4" />
-                  <line x1="8" x2="8" y1="16" y2="16" />
-                  <line x1="16" x2="16" y1="16" y2="16" />
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                    ASIC resistant algo
+                  AI Democratization
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  AIPG uses the KAWPOW hashing algorithm to discourage the
-                    use of ASIC hardware. ASIC resistance is vital for ensuring that no 
-                    single participant or group can monopolize the mining process, which 
-                    aligns with AIPG's mission to democratize AI and maintain a level playing field for all.
+                  The platform aims to make AI accessible to all by lowering the barriers to entry. 
+                  This democratization allows contributors from various backgrounds to participate 
+                  equally in the future of AI development and application, aligning with the open-source and democratizing philosophy of AIPG.
                   </p>
                 </div>
               </div>
@@ -137,17 +146,21 @@ const About = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  <rect width="18" height="10" x="3" y="11" rx="2" />
+                  <circle cx="12" cy="5" r="2" />
+                  <path d="M12 7v4" />
+                  <line x1="8" x2="8" y1="16" y2="16" />
+                  <line x1="16" x2="16" y1="16" y2="16" />
                 </svg>
                 <div class="grow">
                   <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                  AI Democratization
+                    ASIC resistant algo
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
-                  The platform aims to make AI accessible to all by lowering the barriers to entry. 
-                  This democratization allows contributors from various backgrounds to participate 
-                  equally in the future of AI development and application, aligning with the open-source and democratizing philosophy of AIPG.
+                  AIPG uses the KAWPOW hashing algorithm to discourage the
+                    use of ASIC hardware. ASIC resistance is vital for ensuring that no 
+                    single participant or group can monopolize the mining process, and 
+                    the resulting GPU miners will come with us into the new AI network.
                   </p>
                 </div>
               </div>
@@ -175,11 +188,67 @@ const About = () => {
                   </h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-400">
                   AIPG is dedicated to fostering an active, engaging community and establishing partnerships with entities in the open-source AI space and related industries. This collaborative approach is intended to 
-                  gather diverse insights, drive innovation, and ensure AIPG remains at the cutting edge of AI and blockchain technology integration.
+                  ensure AIPG remains at the cutting edge of AI and blockchain technology integration.
                   </p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Metrics Section - Adapted with Timeline Box Styling */}
+      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <h2 className="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200 mb-8">
+          Stats
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
+          {/* Current Price Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">
+              Price
+            </h3>
+            <p>
+              ${metrics.price}
+            </p>
+          </div>
+          {/* Supply Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">
+              Supply
+            </h3>
+            <p>
+              {formatNumber(metrics.supply)} AIPG
+            </p>
+          </div>
+          {/* Market Cap Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">
+              Market Cap
+            </h3>
+            <p>
+              ${formatNumber(metrics.marketCap)}
+            </p>
+          </div>
+          {/* Launch Type Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">Launch Type</h3>
+            <p>Fair Launch</p>
+          </div>
+          {/* Launch Date Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">Launch Date</h3>
+            <p>12/10/2023</p>
+          </div>
+          {/* Network Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">Network</h3>
+            <p>UTXO + PoW</p>
+          </div>
+          {/* Max Supply Box */}
+          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
+            <h3 className="text-lg font-semibold mb-3">Max Supply</h3>
+            <p>200,000,000 AIPG</p>
           </div>
         </div>
       </div>
@@ -300,7 +369,7 @@ const About = () => {
               </ul>
             </div>
           </div>
-          <div>
+          <div class={`${isLoading ? "" : "mt-6 sm:mt-0"}`}>
             {isLoading ? (
               <div>Loading...</div> // replace this with your loading spinner or placeholder
             ) : (
@@ -318,3 +387,4 @@ const About = () => {
 };
 
 export default About;
+

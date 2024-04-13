@@ -8,6 +8,13 @@ module.exports = {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
+    screens: {
+      'sm': '1022px', // Changed back to the default 'sm' size
+      'md': '1023px', // Added 'md' breakpoint back into the project
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     container: {
       center: true,
       padding: "2rem",

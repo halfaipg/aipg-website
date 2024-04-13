@@ -64,6 +64,7 @@
     padding-right: 25px;
     padding-bottom: 30px;
     padding-left: 25px;
+    height: 500px; /* Adjust this value based on your needs */
   }
   
   .card-container {

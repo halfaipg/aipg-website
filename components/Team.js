@@ -7,62 +7,74 @@ const teamMembers = [
   {
     name: "Half",
     position: "Founder",
-    imageUrl: "", // Add image URL
-    featureText: "Brings extensive experience in blockchain and AI technologies. Provides visionary leadership, guiding the project's direction.",
+    imageUrl: "/team-photos/Half_240x240.png", 
+    featureText: "Half leverages over 20 years of experience in DevOps and IT infrastructure, and with a love for open source AI tech, he gives visionary leadership for strategic advancement.",
   },
   {
     name: "Raz",
     position: "Operations and Communications Manager",
-    imageUrl: "", // Add image URL
-    featureText: "10 years experience. Manages public relations and community engagement. Key in narrating project's vision and building relationships.",
+    imageUrl: "/team-photos/Raz_240x240.png", 
+    featureText: "Raz is a seasoned professional with vast expertise in operations, public relations, and community engagement, supported by a Master of Engineering Degree.",
   },
   {
     name: "Mandark",
-    position: "Blockchain Network and Infrastructure Architect",
-    imageUrl: "", // Add image URL
-    featureText: "10 Years experience. Expert in network engineering. Critical in the architecture and security of blockchain implementation.",
+    position: "Network/Server Infrastructure & Datacenter Architect",
+    imageUrl: "/team-photos/Mandark_240x240.png", 
+    featureText: "Mandark is a highly skilled expert in network engineering and datacenter management, playing a pivotal role in the architecture, security, and implementation of our AI systems.",
   },
   {
     name: "Professor",
     position: "AI Art/Stable Diffusion Engineer",
-    imageUrl: "", // Add image URL
-    featureText: "Specialized in AI-generated art, model training and fine-tuning. Leads the AI Art Gallery development.",
+    imageUrl: "/team-photos/Professor_240x240.png", 
+    featureText: "Professor is an expert in AI-generated art. He guides the development of the AI Art Gallery and idealizes creative strategies through model training, fine-tuning, and his unmatched expertise.",
   },
   {
     name: "Infinity",
     position: "Backend Systems and Blockchain Infrastructure Wizard",
-    imageUrl: "", // Add image URL
-    featureText: "3.5 years experience. Based in Germany with exceptional backend systems skills. Enhances backend architecture and blockchain functionality.",
+    imageUrl: "/team-photos/Infinity_240x240.png",
+    featureText: "Infinity, our lead blockchain engineer based in Germany, elevates our backend architecture and blockchain functionality with exceptional expertise.",
   },
   {
-    name: "winddude",
-    position: "AI Developer",
-    imageUrl: "", // Add image URL
-    featureText: "Focus on Python and generative models. Enjoys windsurfing and is based in Canada.",
+    name: "Winddude",
+    position: "AI Developer & Full Stack Engineer",
+    imageUrl: "/team-photos/Winddude_240x240.png",
+    featureText: "With over 20 years of full-stack engineering expertise, and a love for open-source AI tech, Winddude brings a comprehensive understanding of technology to guide our development.",
   },
   {
     name: "JoJo",
-    position: "Full Stack LLM Engineer",
-    imageUrl: "", // Add image URL
-    featureText: "4 years experience. Software Engineer with experience in machine learning and working with language models. One of my goals is bringing AIPG and the open source LLM Dev communities together.",
+    position: "AI Researcher",
+    imageUrl: "/team-photos/JoJo_240x240.png", 
+    featureText: "JoJo, with over 4 years of experience in machine learning and language models, aims to bridge AIPG with the open-source LLM Dev communities and assist in developing the future of open source AI.",
   },
   {
     name: "Seal Clubber",
     position: "Release Manager",
-    imageUrl: "", // Add image URL
-    featureText: "6 years experience. Blockchain and GPU proof-of-work enthusiast. Part-time coder with experience in C++, Python, openCV, and JS.",
+    imageUrl: "/team-photos/SealClubber_240x240.png", 
+    featureText: "With a wealth of expertise in blockchain technology, Seal Clubber leverages his extensive coding experience to drive innovation and excellence within the project.",
   },
   {
     name: "MrSchmiklz",
-    position: "Python/Discord bot dev.",
-    imageUrl: "", // Add image URL
-    featureText: "4 yrs experience. Connecting you to your favorite experimental repos.",
+    position: "AI Tech Scout & Python Developer",
+    imageUrl: "/team-photos/MrSchmiklz_240x240.png",
+    featureText: "MrSchmiklz is an expert in identifying and evaluating emerging AI technologies for potential integration into our AI network, with extensive experience in Python and Discord bot development.",
   },
   {
-    name: "topper",
-    position: "Sys Linux Adm / Blockchain Dev",
-    imageUrl: "", // Add image URL
-    featureText: "22 yrs experience. Electronics engineer with 22+ years of experience in hardware design, blockchain technology development, and Linux system management for cryptocurrency projects. Proven expertise in programming languages such as Python, Java, and C++. Ph. D. Electrical Machines",
+    name: "Topper",
+    position: "Blockchain Development Expert & Ph.D.",
+    imageUrl: "/team-photos/Topper_240x240.png",
+    featureText: "With an impressive 22 years in software engineering, Topper stands out in backend systems and blockchain development. His unmatched skills spearhead our progress, making him an invaluable pillar of our project.",
+  },
+  {
+    name: "Switchgrass",
+    position: "Discord Moderator",
+    imageUrl: "/team-photos/Switchgrass_240x240.png",
+    featureText: "As a U.S. Army Veteran and experienced Discord Admin for RavenMiner, his unique blend of experience in security and moderation assures a harmonious and secure community for our users.",
+  },
+  {
+    name: "OvErLoDe",
+    position: "Discord Moderator",
+    imageUrl: "/team-photos/OvErLoDe_240x240.png",
+    featureText: "OvErLoDe, an IT instructor with a specialism in Microelectronics, OvErLoDe brings a potent blend of knowledge and passion to bear. He is dedicated to fostering a supportive community through his tech-savvy approach.",
   },
   // Add more team members here...
 ];
