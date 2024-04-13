@@ -128,6 +128,14 @@
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* Small black shadow */
 }
 
+/* Adjust the width for screens smaller than 768px */
+@media (max-width: 768px) {
+  .button-43 {
+    width: 50%; /* Example: make the button width 50% of its container on smaller screens */
+    margin: 0 auto; /* Center the button if it's not full-width */
+  }
+}
+
 .button-43:hover {
   background-color: #265faf; /* Change color on hover */
   box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover for a lifting effect */
