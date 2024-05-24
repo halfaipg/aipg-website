@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Team from "@/components/Team";
 import Timeline from "@/components/Timeline";
+import TimelineNew from "@/components/Timeline-New"; // Import the Timeline-New component
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -12,6 +13,7 @@ export default function Home() {
   const teamRef = useRef(null);
   const servicesRef = useRef(null);
   const timelineRef = useRef(null);
+  const timelineNewRef = useRef(null);
 
   useEffect(() => {
     const generalThreshold = 0.001;
@@ -25,7 +27,7 @@ export default function Home() {
     };
 
     const handleVisibilityChange = (entries, observer) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         } else {
@@ -34,48 +36,28 @@ export default function Home() {
       });
     };
 
-    const generalObserver = new IntersectionObserver(
-      handleVisibilityChange,
-      observerOptions.general
-    );
+    const generalObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.general);
+    const teamObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.team);
+    const roadmapObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.roadmap);
 
-    const teamObserver = new IntersectionObserver(
-      handleVisibilityChange,
-      observerOptions.team
-    );
-
-    const roadmapObserver = new IntersectionObserver(
-      handleVisibilityChange,
-      observerOptions.roadmap
-    );
-
-    const refs = [heroRef, featuresRef, servicesRef];
-    refs.forEach((ref) => {
+    const refs = [heroRef, featuresRef, servicesRef, teamRef, timelineRef, timelineNewRef];
+    refs.forEach(ref => {
       if (ref.current) {
         generalObserver.observe(ref.current);
+        roadmapObserver.observe(ref.current);
       }
     });
 
-    if (teamRef.current) {
-      teamObserver.observe(teamRef.current);
-    }
-
-    if (timelineRef.current) {
-      roadmapObserver.observe(timelineRef.current);
-    }
-
     return () => {
-      refs.forEach((ref) => {
+      refs.forEach(ref => {
         if (ref.current) {
           generalObserver.unobserve(ref.current);
+          roadmapObserver.unobserve(ref.current);
         }
       });
-      if (teamRef.current) {
-        teamObserver.unobserve(teamRef.current);
-      }
-      if (timelineRef.current) {
-        roadmapObserver.unobserve(timelineRef.current);
-      }
+      generalObserver.disconnect();
+      teamObserver.disconnect();
+      roadmapObserver.disconnect();
     };
   }, []);
 
@@ -101,6 +83,10 @@ export default function Home() {
         </span>
       </div>
       <div ref={timelineRef} className="fadeInSection"><Timeline /></div>
+      <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>
+        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-0 section-header">
+        </span>
+      </div>
     </main>
   );
 }
