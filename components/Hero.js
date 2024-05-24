@@ -18,7 +18,7 @@ const Hero = () => {
       <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24 pb-10">
         <div className="flex justify-center items-center mb-8" style={{ paddingTop: '80px' }}>
           <img
-            src="/ShiteMainLogo.png"
+            src="/aipg-main.png"
             alt="aipg"
             className="w-48 h-48 md:w-64 md:h-64 object-contain p-2"
           />
