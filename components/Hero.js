@@ -37,7 +37,7 @@ const Hero = () => {
         <div class={`mt-12 flex flex-col sm:flex-row gap-3 justify-center mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
             class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
-            href="https://discord.gg/vZ9XrTSRYr"
+            href="https://discord.gg/W9D8j6HCtC"
             target="_blank"
           >
             <svg
