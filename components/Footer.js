@@ -88,10 +88,10 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://donation.aipowergrid.io/"
+                    href="/AIPG200x200.png"
                     target="_blank"
                   >
-                    MEXC Donation
+                    CMC Logo
                   </a>
                 </p>
               </div>
