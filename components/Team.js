@@ -12,13 +12,13 @@ const teamMembers = [
   },
   {
     name: "Raz <span title='United States'>🇺🇸</span>",
-    position: "Operations and Communications Manager",
+    position: "Operations Manager",
     imageUrl: "/team-photos/Raz_240x240.png", 
     featureText: "Raz is a seasoned professional with vast expertise in operations, public relations, and community engagement, supported by a Master of Engineering Degree.",
   },
   {
     name: "Mandark <span title='United States'>🇺🇸</span>",
-    position: "Network/Server Infrastructure & Datacenter Architect",
+    position: "Network/Server Infrastructure",
     imageUrl: "/team-photos/Mandark_240x240.png", 
     featureText: "Mandark is a highly skilled expert in network engineering and datacenter management, playing a pivotal role in the architecture, security, and implementation of our AI systems.",
   },
