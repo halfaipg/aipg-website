@@ -79,7 +79,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://discord.gg/vZ9XrTSRYr"
+                    href="https://discord.gg/QXzjR7HuGB"
                     target="_blank"
                   >
                     Discord
