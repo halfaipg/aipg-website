@@ -260,3 +260,11 @@ html {
     font-size: 0.875rem; /* Adjust font size for landscape */
   }
 }
+
+.feature-text {
+  color: #4B5563; /* Equivalent to text-gray-600 */
+}
+
+.dark .feature-text {
+  color: #9CA3AF; /* Equivalent to dark:text-gray-400 */
+}
