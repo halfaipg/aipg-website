@@ -39,7 +39,7 @@ const Features = () => {
                   Empowering Meaningful Contributions
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                We will leverage DePIN to go beyond the usual 'mining' activities associated with cryptocurrencies. 
+                We will leverage DePIN to go beyond the usual 'mining' activities associated with cryptocurrencies.
                 Instead of consuming colossal amounts of energy for arbitrary calculations, the AIPG network 
                 utilizes a validation mechanism that supports and rewards constructive computational tasks.
                 </p>
@@ -101,7 +101,7 @@ const Features = () => {
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
                 AI Power Grid (AIPG) envisions a future where access to cutting-edge AI is free and open to all. 
-                Our platform leverages a Decentralized Physical Infrastructure Network (DePIN) protocol to align blockchain security with valuable 
+                Our platform leverages a Decentralized Physical Infrastructure Network (DePIN) protocol to align blockchain security with valuable
                 AI processes. By participating in the network, users contribute to computational tasks that advance AI technology, 
                 and in turn, they are incentivized with AIPG tokens. This model encourages a collaborative and energy-efficient approach to AI advancement.
                 </p>
