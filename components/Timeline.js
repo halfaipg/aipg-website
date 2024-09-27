@@ -1,143 +1,105 @@
 "use client";
-import { inView } from "framer-motion";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
-import "./customTimelineStyles.css"; 
+import React from "react";
+import "./Team.css"; // Import your CSS file here
 
-const Timeline = () => {
+// Example team member data
+const teamMembers = [
+  {
+    name: "Half <span title='United States'>🇺🇸</span>",
+    position: "Founder and Core Developer",
+    imageUrl: "/team-photos/Half_240x240.png", 
+    featureText: "Half leverages over 20 years of unparalleled experience in DevOps and IT infrastructure, and with a profound love for open source AI tech, he gives visionary leadership for strategic advancement.",
+  },
+  {
+    name: "Raz <span title='United States'>🇺🇸</span>",
+    position: "Operations and Communications Manager",
+    imageUrl: "/team-photos/Raz_240x240.png", 
+    featureText: "Raz is a seasoned professional with vast expertise in operations, public relations, and community engagement, supported by a Master of Engineering Degree.",
+  },
+  {
+    name: "Mandark <span title='United States'>🇺🇸</span>",
+    position: "Network/Server Infrastructure & Datacenter Architect",
+    imageUrl: "/team-photos/Mandark_240x240.png", 
+    featureText: "Mandark is a highly skilled expert in network engineering and datacenter management, playing a pivotal role in the architecture, security, and implementation of our AI systems.",
+  },
+  {
+    name: "Professor <span title='Mexico'>🇲🇽</span>",
+    position: "AI Art/Stable Diffusion Engineer",
+    imageUrl: "/team-photos/Professor_240x240.png", 
+    featureText: "Professor is an expert in AI-generated art. He guides the development of the AI Art Gallery and idealizes creative strategies through model training, fine-tuning, and his unmatched expertise.",
+  },
+  {
+    name: "Infinity <span title='Netherlands'>🇳🇱</span>",
+    position: "Backend Systems and Blockchain",
+    imageUrl: "/team-photos/Infinity_240x240.png",
+    featureText: "Infinity, our lead blockchain engineer based in Germany, elevates our backend architecture and blockchain functionality with exceptional expertise.",
+  },
+  {
+    name: "JoJo <span title='South Africa'>🇿🇦</span>",
+    position: "Full Stack Dev and AI Researcher",
+    imageUrl: "/team-photos/JoJo_240x240.png", 
+    featureText: "JoJo, with over 4 years of experience in machine learning and language models, aims to bridge AIPG with the open-source LLM Dev communities and assist in developing the future of open source AI.",
+  },
+  {
+    name: "MrSchmiklz <span title='United States'>🇺🇸</span>",
+    position: "AI Tech Scout & Python Developer",
+    imageUrl: "/team-photos/MrSchmiklz_240x240.png",
+    featureText: "MrSchmiklz is an expert in identifying and evaluating emerging AI technologies for potential integration into our AI network, with extensive experience in Python and Discord bot development.",
+  },
+  {
+    name: "Zach <span title='United States'>🇺🇸</span>",
+    position: "Full stack developer",
+    imageUrl: "/team-photos/Zach_240x240.png",
+    featureText: "Zach is a versatile full stack developer with expertise in Next.js, front-end, back-end, and AI development, contributing to both the user experience and the technical backbone of our projects.",
+  },
+  {
+    name: "Warrior <span title='Japan'>🇯🇵</span>",
+    position: "Full stack developer",
+    imageUrl: "/team-photos/Warrior_240x240.png",
+    featureText: "Warrior is a highly skilled and dedicated full stack and front end developer hailing from Japan. He excels in problem-solving, tackling tough coding challenges, and consistently delivering innovative and high-quality solutions.",
+  },
+  {
+    name: "Urek <span title='India'>🇮🇳</span>",
+    position: "Front End Developer",
+    imageUrl: "/team-photos/Urek_240x240.png",
+    featureText: "Urek is an experienced Infrastructure Specialist with a strong background in building scalable applications and optimizing server performance. His expertise ensures our systems run smoothly.",
+  },
+  {
+    name: "Switchgrass <span title='United States'>🇺🇸</span>",
+    position: "Discord Moderator",
+    imageUrl: "/team-photos/Switchgrass_240x240.png",
+    featureText: "As a U.S. Army Veteran and experienced Discord Admin for RavenMiner, his unique blend of experience in security and moderation assures a harmonious and secure community for our users.",
+  },
+  {
+    name: "OvErLoDe <span title='United Kingdom'>🇬🇧</span>",
+    position: "Discord Moderator",
+    imageUrl: "/team-photos/OvErLoDe_240x240.png",
+    featureText: "OvErLoDe, an IT instructor with a specialism in Microelectronics, OvErLoDe brings a potent blend of knowledge and passion to bear. He is dedicated to fostering a supportive community through his tech-savvy approach.",
+  },
+  // Add more team members here...
+];
+
+const Team = () => {
   return (
-    <div class="container mx-auto w-full h-full p-8">
-      <VerticalTimeline>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          date={<span style={{ color: "#fff" }}>Dec 2023</span>}
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
-          iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }}
-          icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
-          visible={inView}
-        >
-          <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            EOY 2023 - Fair Launch and Initial Distribution
-          </h3>
-          <p style={{ color: "grey" }}>
-            AI Power Grid (AIPG) launched on December 10, 2023, with a commitment to fairness and transparency: 
-            no venture capital, no seed capital or pre-sales, and no pre-mining. This fair launch ensured an even 
-            playing field, and laid the groundwork for our future GenAI decentralized physical infrastructure network (DePIN).
-            Our mission is to democratize open-source and local generative AI, aiming to revolutionize human 
-            creativity and productivity.
-          </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          date="Q1-Q3 2024"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
-          iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
-          icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
-          visible={inView}
-        >
-          <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q1-Q3 2024 - Expansion and Development phase
-          </h3>
-          <p style={{ color: "grey" }}>
-          In 2024, AI Power Grid (AIPG) has worked tirelessly on developing the distributed AI network core, workers, and front end infrastructure. During this time, we have developed substantial enhancements to the platform's underlying architecture for efficient handling of generative AI workloads through decentralized worker nodes.
-          </p>
-          
-          <p style={{ color: "grey" }}>
-          Beta testing enabled us to gather valuable feedback and refine our platform further. This public beta testing has been pivotal in democratizing our generative AI technology, ensuring seamless operation and improved user experiences across the board.
-          </p>
-          
-          <p style={{ color: "grey" }}>
-          We’re developing state-of-the-art AI front ends, including our AI art gallery at aipg.art, showcasing stunning generative artworks, and the interactive platform at beta.aipowergrid.io, where users can chat with open-source LLMs and generate images using open-source models, all powered by our distributed beta workers </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          date="Q4 2024"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
-          iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
-          icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
-          visible={inView}
-        >
-          <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q4 2024 - Developing AI Services and AI Blockchain Integration
-          </h3>
-          <p style={{ color: "grey" }}>
-          In this key phase, AIPG accelerates its forward momentum by transitioning into a decentralized AI network powered by distributed AI workers. 
-          This evolution not only reduces environmental impact but also aligns with AIPG's vision of democratizing AI.
-          </p>
-          <p style={{ color: "grey" }}>
-          Our innovative approach allows computational resources to be efficiently utilized in delivering high-value AI services, thereby generating substantial benefits for the entire network.
-          It is during this time that AIPG will ramp up marketing efforts and incentivize developers to build L2 assets on our upcoming L1 AI enabled blockchain.
-          </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          date="Q1 2025"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
-          iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
-          icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
-          visible={inView}
-        >
-          <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q1 2025 - Grid mainnet launch and app marketplace
-          </h3>
-          <p style={{ color: "grey" }}>
-          In Q1 2025, AI Power Grid will launch it's mainnet, marking a significant milestone in our journey towards 
-          democratizing generative AI. This launch will be accompanied by the introduction of a comprehensive app marketplace, empowering developers 
-          and users alike to deploy and access a wide array of AI-powered applications seamlessly.</p> <p style={{ color: "grey" }}>The mainnet will leverage our robust decentralized 
-          network to ensure scalability, security, and efficiency in handling generative AI workloads. This pivotal launch will open up new avenues for 
-          innovation and creativity, solidifying AIPG's position at the forefront of open-source AI technology.
-          </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          date="Q2 2025"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
-          iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
-          icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
-          visible={inView}
-        >
-          <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q2 2025 - Smart Contracts, Staking, and Data Contracts
-          </h3>
-          <p style={{ color: "grey" }}>
-          Smart Contracts will automate and secure complex transactional processes, enabling seamless interaction between parties without the need for intermediaries. This paves the way for more transparent and efficient operations within our ecosystem.
-          </p>
-          <p style={{ color: "grey" }}>
-          Staking AIPG tokens will be a crucial component for running a validator node within our network. By staking, participants can contribute to the network's security and efficiency while earning rewards. This incentivizes active participation and ensures the robustness of our decentralized infrastructure.
-          </p>
-          <p style={{ color: "grey" }}>
-          Decentralized Data Contracts introduce data storage buckets hosted by nodes with associated contracts. This approach ensures that data is securely and reliably stored across the network, providing users with decentralized, trustworthy data management solutions. These innovative features highlight our commitment to advancing decentralized AI technologies and delivering top-tier services to our community.
-          </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--education"
-          date="Q3 2025"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
-          iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
-          icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
-          visible={inView}
-        >
-          <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q3 2025 - Interchain AI Service Protocol Layer
-          </h3>
-          <p style={{ color: "grey" }}>
-            The development of an interchain protocol to facilitate cross-blockchain AI services,
-            positioning AIPG as a leader in blockchain interoperability in the AI space. This move will fully
-            solidify AIPG's position as one of the leading AI coins in the marketplace.
-          </p>
-        </VerticalTimelineElement>
-      </VerticalTimeline>
+    <div className="responsive-container-block container">
+      <div className="responsive-container-block">
+        {teamMembers.map((member, index) => (
+          <div key={index} className="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 card-container">
+            <div className="card">
+              <div className="team-image-wrapper">
+                <img className="team-member-image" src={member.imageUrl} />
+              </div>
+              <div className="text-blk name" dangerouslySetInnerHTML={{ __html: member.name }} />
+              <p className="text-blk position">
+                {member.position}
+              </p>
+              <p className="feature-text" dangerouslySetInnerHTML={{ __html: member.featureText }} />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Timeline;
+export default Team; // Export your Team component
