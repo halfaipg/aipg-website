@@ -90,7 +90,7 @@ const Timeline = () => {
           <p style={{ color: "grey" }}>
           In Q1 2025, AI Power Grid will l mainnet, marking a significant milestone in our journey towards 
           democratizing generative AI. This launch will be accompanied by the introduction of a comprehensive app marketplace, empowering developers 
-          and users alike to deploy and access a wide array of AI-powered applications seamlessly. The mainnet will leverage our robust decentralized 
+          and users alike to deploy and access a wide array of AI-powered applications seamlessly.</p> <p style={{ color: "grey" }}>The mainnet will leverage our robust decentralized 
           network to ensure scalability, security, and efficiency in handling generative AI workloads. This pivotal launch will open up new avenues for 
           innovation and creativity, solidifying AIPG's position at the forefront of open-source AI technology.
           </p>
