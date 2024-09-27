@@ -33,14 +33,15 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                Open Source AI Models
+                Decentralization at our Core
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              Central to AIPG's approach is the utilization of open source Large Language Models (LLMs) and Stable Diffusion models, 
-              providing a robust foundation for AI-powered applications in text generation and image creation. This ensures a 
-              collaborative and transparent environment where improvements and innovations can be shared and leveraged community-wide.
+            AIPG stands at the forefront of the Decentralized Physical Infrastructure Networks (DePIN) movement, 
+            where our physical nodes and digital infrastructure work in harmony without central AI core. This not only 
+            enhances the resilience and availability of our AI network but also ensures that our services are secure, 
+            transparent, and resistant to censorship or manipulation.
             </p>
           </div>
 
@@ -66,14 +67,15 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                   Democratized AI
+                Incentivized AI Computation
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-            AIPG is committed to democratizing access to AI technologies. By providing tools 
-            and resources openly, the platform empowers developers, artists, and individuals from diverse 
-            backgrounds to engage with AI without the need for extensive resources or proprietary knowledge.
+            By decentralizing AI workloads, AIPG enables users to contribute their computing power to a distributed network. 
+            In return, they receive AIPG tokens, fostering an ecosystem where computational resources are efficiently utilized, 
+            and contributors are fairly rewarded. This decentralized approach lowers costs and democratizes access to AI capabilities, 
+            making high-performance AI available to all.
             </p>
           </div>
 
@@ -101,14 +103,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white">
-                Earn with AI Power Grid
+                Ultimate Data Privacy and Security
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-            AIPG coin is a cornerstone of the ecosystem, serving as the primary medium of exchange, 
-            incentivization, and governance. It aligns the various stakeholders within the AIPG ecosystem 
-            by enabling participation, rewarding contributions, and guiding the evolution of the platform.
+            Defining data privacy and security with our Decentralized Data Contracts. Validator nodes securely store copies of user data and history, 
+            ensuring decentralization and redundancy. By empowering users with control over their private keys, we ensure data ownership, integrity, and resilience against 
+            unauthorized access and breaches, providing a secure and private infrastructure for managing generative AI workloads.
             </p>
           </div>
 
@@ -135,14 +137,14 @@ const Services = () => {
               </div>
               <div class="flex-shrink-0">
                 <h3 class="block text-lg font-semibold text-gray-800 dark:text-white overflow-auto">
-                 Elevating NFT's with AI
+                 Seamless AI Integration
                 </h3>
               </div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
-              While the initial hype around non-fungible tokens (NFTs) may have waned from its peak, the underlying technology 
-              remains a potent tool for certifying and monetizing digital assets. In the realm of Artificial Intelligence, 
-              particularly, NFTs continue to offer a perfect use case that can rejuvenate their relevance and utility.
+            We envision a world where AI seamlessly integrates into everyday applications. 
+            Our platform is designed to provide developers with the tools and infrastructure 
+            needed to incorporate powerful generative AI into their projects effortlessly, driving forward AI adoption and innovation.
             </p>
           </div>
         </div>
