@@ -8,10 +8,10 @@ const Features = () => {
         <div class="grid md:grid-cols-2 gap-12">
           <div class="lg:w-3/4">
             <h2 class="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-            Empowering Blockchain with AI: Proof of Useful Work
+            Revolutionizing Blockchain with DEPIN
             </h2>
             <p class="mt-3 text-gray-800 dark:text-gray-400">
-            Proof of Useful Work (POUW) is a paradigm shift in the world of blockchain and cryptocurrency, designed to address the sustainability concerns of traditional Proof of Work (PoW) systems. Where PoW requires miners to use high amounts of computational power to mine blocks, often criticized for its intensive energy use without direct productive output, POUW redirects this computational capacity towards meaningful AI tasks. In the AIPG ecosystem, POUW incentivizes node operators to provide inference on localized large language models (LLM) and host AI art model generation via technology like Stable Diffusion. This convergence of blockchain and AI tasks not only validates transactions but also produces valuable AI services, thereby utilizing the energy consumed in a manner that contributes constructively to the community and the broader field of AI.
+            The Decentralized Physical Infrastructure Network (DEPIN) represents a groundbreaking evolution in blockchain and cryptocurrency, addressing the sustainability challenges of traditional Proof of Work (PoW) systems. Unlike PoW, which demands significant computational power for block mining and is often criticized for its high energy consumption without direct productive output, DEPIN repurposes this computational capacity for meaningful AI tasks. Within the AIPG ecosystem, DEPIN incentivizes node operators to perform inference on localized large language models (LLM) and host AI art model generation using technologies like Stable Diffusion. This integration of blockchain and AI tasks not only validates transactions but also generates valuable AI services, thereby ensuring that the energy consumed contributes positively to the community and the broader AI field.
             </p>
           </div>
 
@@ -39,7 +39,7 @@ const Features = () => {
                   Empowering Meaningful Contributions
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
-                We will leverage PoUW to go beyond the usual 'mining' activities associated with cryptocurrencies. 
+                We will leverage DEPin to go beyond the usual 'mining' activities associated with cryptocurrencies. 
                 Instead of consuming colossal amounts of energy for arbitrary calculations, the AIPG network 
                 utilizes a validation mechanism that supports and rewards constructive computational tasks.
                 </p>
@@ -101,7 +101,7 @@ const Features = () => {
                 </h3>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">
                 AI Power Grid (AIPG) envisions a future where access to cutting-edge AI is free and open to all. 
-                Our platform leverages a Proof-of-Useful-Work (POUW) protocol to align blockchain security with valuable 
+                Our platform leverages a Decentralized Physical Infrastructure Network (DEPIN) protocol to align blockchain security with valuable 
                 AI processes. By participating in the network, users contribute to computational tasks that advance AI technology, 
                 and in turn, they are incentivized with AIPG tokens. This model encourages a collaborative and energy-efficient approach to AI advancement.
                 </p>
