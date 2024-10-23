@@ -64,18 +64,6 @@ const teamMembers = [
     imageUrl: "/team-photos/Urek_240x240.png",
     featureText: "Urek is an experienced Infrastructure Specialist with a strong background in building scalable applications and optimizing server performance. His expertise ensures our systems run smoothly.",
   },
-  {
-    name: "Switchgrass <span title='United States'>🇺🇸</span>",
-    position: "Discord Moderator",
-    imageUrl: "/team-photos/Switchgrass_240x240.png",
-    featureText: "As a U.S. Army Veteran and experienced Discord Admin for RavenMiner, his unique blend of experience in security and moderation assures a harmonious and secure community for our users.",
-  },
-  {
-    name: "OvErLoDe <span title='United Kingdom'>🇬🇧</span>",
-    position: "Discord Moderator",
-    imageUrl: "/team-photos/OvErLoDe_240x240.png",
-    featureText: "OvErLoDe, an IT instructor with a specialism in Microelectronics, OvErLoDe brings a potent blend of knowledge and passion to bear. He is dedicated to fostering a supportive community through his tech-savvy approach.",
-  },
   // Add more team members here...
 ];
 
