@@ -16,7 +16,7 @@ const Wallet = () => {
         </p>
         <div className="grid md:grid-cols-6 grid-cols-1 gap-8">
           <div className="flex flex-col pt-4">
-            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-x86_64-linux-gnu.tar.gz">
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-Core-1.3.0-x64-linux.zip">
               <img
                 className="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/wallet-icons/280_Linux-Transparent_324x324.png"
@@ -29,7 +29,7 @@ const Wallet = () => {
               </h3>
               <a
                 class="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.2.0/AI-Power-Grid-1.2.0-049c7f7-x86_64-linux-gnu.tar.gz"
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-Core-1.3.0-x64-linux.zip"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 mr-2">
                   <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -39,7 +39,7 @@ const Wallet = () => {
             </div>
           </div>
           <div className="flex flex-col pt-4">
-            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.2.0/AI-Power-Grid-1.2.0-049c7f7-arm-linux-gnueabihf.tar.gz">
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-Core-1.3.0-arm-linux.zip">
               <img
                 className="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/wallet-icons/279_RaspberryPi-Transparent_324x324.png"
@@ -52,7 +52,7 @@ const Wallet = () => {
               </h3>
               <a
                 className="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.2.0/AI-Power-Grid-1.2.0-049c7f7-arm-linux-gnueabihf.tar.gz"
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-Core-1.3.0-arm-linux.zip"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 mr-2">
                   <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -62,7 +62,7 @@ const Wallet = () => {
             </div>
           </div>
           <div className="flex flex-col pt-4">
-            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.2.0/AI-Power-Grid-1.2.0-049c7f7-win64.zip">
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-1.3.0-win64-setup-unsigned.exe">
               <img
                 className="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/wallet-icons/278_Windows-Transparent_324x324.png"
@@ -75,7 +75,7 @@ const Wallet = () => {
               </h3>
               <a
                 className="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-win64-setup.exe"
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-1.3.0-win64-setup-unsigned.exe"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 mr-2">
                   <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -85,7 +85,7 @@ const Wallet = () => {
             </div>
           </div>
           <div className="flex flex-col pt-4">
-            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-osx-unsigned.dmg">
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-1.3.0-osx-unsigned.dmg">
               <img
                 className="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto"
                 src="/wallet-icons/277_Mac-Transparent_324x324.png"
@@ -98,7 +98,7 @@ const Wallet = () => {
               </h3>
               <a
                 className="mt-2 py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.1.3/AI-Power-Grid-Core-1.1.3-osx-unsigned.dmg"
+                href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.3.0/AI-Power-Grid-1.3.0-osx-unsigned.dmg"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 mr-2">
                   <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -159,7 +159,7 @@ const Wallet = () => {
       <div className="flex justify-center py-8">
         <a
           className="py-3 px-6 inline-flex justify-center items-center text-lg font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.3"
+          href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.3.0"
           target="_blank"
           rel="noopener noreferrer"
         >
