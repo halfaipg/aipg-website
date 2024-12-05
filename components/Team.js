@@ -53,12 +53,6 @@ const teamMembers = [
     featureText: "Zach is a versatile full stack developer with expertise in Next.js, front-end, back-end, and AI development, contributing to both the user experience and the technical backbone of our projects.",
   },
   {
-    name: "Warrior <span title='Japan'>🇯🇵</span>",
-    position: "Full stack developer",
-    imageUrl: "/team-photos/Warrior_240x240.png",
-    featureText: "Warrior is a highly skilled and dedicated full stack and front end developer hailing from Japan. He excels in problem-solving, tackling tough coding challenges, and consistently delivering innovative and high-quality solutions.",
-  },
-  {
     name: "Urek <span title='India'>🇮🇳</span>",
     position: "Front End Developer",
     imageUrl: "/team-photos/Urek_240x240.png",
