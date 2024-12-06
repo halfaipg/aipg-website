@@ -248,7 +248,7 @@ const About = () => {
           {/* Max Supply Box */}
           <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
             <h3 className="text-lg font-semibold mb-3">Max Supply</h3>
-            <p>200,000,000 AIPG</p>
+            <p>150M AIPG</p>
           </div>
         </div>
       </div>
