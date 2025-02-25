@@ -18,7 +18,7 @@ const teamMembers = [
   },
   {
     name: "MrSchmiklz <span title='United States'>🇺🇸</span>",
-    position: "AI Tech Scout & Python Developer",
+    position: "Full stack AI and Python Developer",
     imageUrl: "/team-photos/MrSchmiklz_240x240.png",
     featureText: "MrSchmiklz is an expert in identifying and evaluating emerging AI technologies for potential integration into our AI network, with extensive experience in Python and Discord bot development.",
   },
@@ -42,7 +42,7 @@ const teamMembers = [
   },
   {
     name: "Urek <span title='India'>🇮🇳</span>",
-    position: "Front End Developer",
+    position: "Full Stack Developer",
     imageUrl: "/team-photos/Urek_240x240.png",
     featureText: "Urek is an experienced Infrastructure Specialist with a strong background in building scalable applications and optimizing server performance. His expertise ensures our systems run smoothly.",
   },
