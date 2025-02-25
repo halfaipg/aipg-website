@@ -17,18 +17,6 @@ const teamMembers = [
     featureText: "Raz is a seasoned professional with vast expertise in operations, public relations, and community engagement, supported by a Master of Engineering Degree.",
   },
   {
-    name: "Infinity <span title='Netherlands'>🇳🇱</span>",
-    position: "Backend Systems and Blockchain",
-    imageUrl: "/team-photos/Infinity_240x240.png",
-    featureText: "Infinity, our lead blockchain engineer based in Germany, elevates our backend architecture and blockchain functionality with exceptional expertise.",
-  },
-  {
-    name: "JoJo <span title='South Africa'>🇿🇦</span>",
-    position: "Full Stack Dev and AI Researcher",
-    imageUrl: "/team-photos/JoJo_240x240.png", 
-    featureText: "JoJo, with over 4 years of experience in machine learning and language models, aims to bridge AIPG with the open-source LLM Dev communities and assist in developing the future of open source AI.",
-  },
-  {
     name: "MrSchmiklz <span title='United States'>🇺🇸</span>",
     position: "AI Tech Scout & Python Developer",
     imageUrl: "/team-photos/MrSchmiklz_240x240.png",
@@ -39,6 +27,18 @@ const teamMembers = [
     position: "Full stack developer",
     imageUrl: "/team-photos/Zach_240x240.png",
     featureText: "Zach is a versatile full stack developer with expertise in Next.js, front-end, back-end, and AI development, contributing to both the user experience and the technical backbone of our projects.",
+  },
+  {
+    name: "Infinity <span title='Netherlands'>🇳🇱</span>",
+    position: "Backend Systems and Blockchain",
+    imageUrl: "/team-photos/Infinity_240x240.png",
+    featureText: "Infinity, our lead blockchain engineer based in Germany, elevates our backend architecture and blockchain functionality with exceptional expertise.",
+  },
+  {
+    name: "JoJo <span title='South Africa'>🇿🇦</span>",
+    position: "Full Stack Dev and AI Researcher",
+    imageUrl: "/team-photos/JoJo_240x240.png", 
+    featureText: "JoJo, with over 4 years of experience in machine learning and language models, aims to bridge AIPG with the open-source LLM Dev communities and assist in developing the future of open source AI.",
   },
   {
     name: "Urek <span title='India'>🇮🇳</span>",
