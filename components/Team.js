@@ -17,18 +17,6 @@ const teamMembers = [
     featureText: "Raz is a seasoned professional with vast expertise in operations, public relations, and community engagement, supported by a Master of Engineering Degree.",
   },
   {
-    name: "Mandark <span title='United States'>🇺🇸</span>",
-    position: "Network/Server Infrastructure",
-    imageUrl: "/team-photos/Mandark_240x240.png", 
-    featureText: "Mandark is a highly skilled expert in network engineering and datacenter management, playing a pivotal role in the architecture, security, and implementation of our AI systems.",
-  },
-  {
-    name: "Professor <span title='Mexico'>🇲🇽</span>",
-    position: "AI Art/Stable Diffusion Engineer",
-    imageUrl: "/team-photos/Professor_240x240.png", 
-    featureText: "Professor is an expert in AI-generated art. He guides the development of the AI Art Gallery and idealizes creative strategies through model training, fine-tuning, and his unmatched expertise.",
-  },
-  {
     name: "Infinity <span title='Netherlands'>🇳🇱</span>",
     position: "Backend Systems and Blockchain",
     imageUrl: "/team-photos/Infinity_240x240.png",
