@@ -47,7 +47,7 @@ const About = () => {
   };
 
   return (
-    <div className="pt-36">
+    <div className="pt-10">
       {/* Video Banner */}
       <div className="overflow-hidden">
         <video autoPlay loop muted className="w-full h-[190px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover">

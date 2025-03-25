@@ -33,15 +33,12 @@ const Services = () => {
               </div>
               <div className="flex-shrink-0">
                 <h3 className="block text-lg font-semibold text-gray-800 dark:text-white">
-                Decentralization at our Core
+                Community-Driven Development
                 </h3>
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            AIPG stands at the forefront of the Decentralized Physical Infrastructure Networks (DePIN) movement, 
-            where our physical nodes and digital infrastructure work in harmony without central AI core. This not only 
-            enhances the resilience and availability of our AI network but also ensures that our services are secure, 
-            transparent, and resistant to censorship or manipulation.
+            Our development process is transparent and collaborative, with all major decisions guided by community input. We're building a global network of developers who contribute code, identify issues, suggest improvements, and shape the future direction of our technologies. This distributed approach ensures our platform truly serves the needs of the developer community.
             </p>
           </div>
 
@@ -67,15 +64,12 @@ const Services = () => {
               </div>
               <div className="flex-shrink-0">
                 <h3 className="block text-lg font-semibold text-gray-800 dark:text-white">
-                Incentivized AI Computation
+                Knowledge Sharing & Education
                 </h3>
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            By decentralizing AI workloads, AIPG enables users to contribute their computing power to a distributed network. 
-            In return, they receive AIPG tokens, fostering an ecosystem where computational resources are efficiently utilized, 
-            and contributors are fairly rewarded. This decentralized approach lowers costs and democratizes access to AI capabilities, 
-            making high-performance AI available to all.
+            We're committed to making AI knowledge accessible through comprehensive documentation, tutorials, workshops, and open research. By demystifying AI technologies and promoting learning, we're empowering developers to build their expertise and contribute meaningfully to the field. Our educational resources range from beginner-friendly guides to advanced technical discussions.
             </p>
           </div>
 
@@ -103,14 +97,12 @@ const Services = () => {
               </div>
               <div className="flex-shrink-0">
                 <h3 className="block text-lg font-semibold text-gray-800 dark:text-white">
-                Ultimate Data Privacy and Security
+                Transparent AI Architecture
                 </h3>
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            Defining data privacy and security with our Decentralized Data Contracts. Validator nodes securely store copies of user data and history, 
-            ensuring decentralization and redundancy. By empowering users with control over their private keys, we ensure data ownership, integrity, and resilience against 
-            unauthorized access and breaches, providing a secure and private infrastructure for managing generative AI workloads.
+            Unlike proprietary AI systems that operate as black boxes, our models and systems are fully transparent and auditable. This approach allows developers to understand how our AI makes decisions, identify potential biases, and build trust in the technology. We believe that transparency is essential for responsible AI development and adoption.
             </p>
           </div>
 
@@ -137,14 +129,12 @@ const Services = () => {
               </div>
               <div className="flex-shrink-0">
                 <h3 className="block text-lg font-semibold text-gray-800 dark:text-white overflow-auto">
-                 Seamless AI Integration
+                 Developer-Friendly Tools
                 </h3>
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            We envision a world where AI seamlessly integrates into everyday applications. 
-            Our platform is designed to provide developers with the tools and infrastructure 
-            needed to incorporate powerful generative AI into their projects effortlessly, driving forward AI adoption and innovation.
+            We're building a comprehensive ecosystem of developer tools, APIs, and SDKs that make it easy to integrate powerful generative AI into applications. Our tools are designed with developers in mind, emphasizing clean interfaces, extensive documentation, and practical examples to accelerate development and innovation.
             </p>
           </div>
         </div>
