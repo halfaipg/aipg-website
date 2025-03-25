@@ -15,15 +15,15 @@ export const metadata = {
 export const revalidate = 30;
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark">
-      <Providers attribute="class">
-        <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>
           {/* <TopBar /> */}
           <Navbar />
           {children}
           <Footer />
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }

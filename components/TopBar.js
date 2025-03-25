@@ -20,7 +20,7 @@ const TopBar = () => {
             FAQs <span className="px-2 text-stone-400 dark:text-black">|</span>
           </Link>
           <Link
-            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.2"
+            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.4.0"
             className="font-semibold hover:text-cyan-300 dark:text-black duration-300"
           >
             Wallet

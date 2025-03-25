@@ -14,7 +14,9 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "script-src 'self' https://aipowergrid.io 'unsafe-inline';"
+            value: process.env.NODE_ENV === 'development'
+              ? "script-src 'self' 'unsafe-eval' 'unsafe-inline';"
+              : "script-src 'self';",
           },
           {
             key: 'X-Frame-Options',
