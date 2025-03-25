@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const Hero = () => {
   const [contentVisible, setContentVisible] = useState(false);
-  const fullText = "The Freedom of Open Source AI";
+  const fullText = "The Freedom of Open Source";
 
   useEffect(() => {
     const timer = setTimeout(() => {
