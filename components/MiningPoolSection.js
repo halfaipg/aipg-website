@@ -8,24 +8,24 @@ export default function MiningPoolSection() {
     import("preline");
   }, []);
   return (
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto my-8 md:my-16">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
+    <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto my-8 md:my-16">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
         <Link
-          class="group flex gap-y-6 w-full h-full hover:bg-gray-100 rounded-lg p-5 transition-all dark:hover:bg-white/[.075] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="group flex gap-y-6 w-full h-full hover:bg-gray-100 rounded-lg p-5 transition-all dark:hover:bg-white/[.075] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           href="#"
           target="_blank"
         >
           <svg
-            class="flex-shrink-0 w-8 h-8 text-gray-800 mt-0.5 me-6 dark:text-gray-200"
+            className="flex-shrink-0 w-8 h-8 text-gray-800 mt-0.5 me-6 dark:text-gray-200"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <circle cx="13.5" cy="6.5" r=".5" />
             <circle cx="17.5" cy="10.5" r=".5" />
@@ -36,25 +36,25 @@ export default function MiningPoolSection() {
 
           <div>
             <div>
-              <h3 class="block font-bold text-gray-800 dark:text-white">
+              <h3 className="block font-bold text-gray-800 dark:text-white">
                 Official Pool
               </h3>
-              <p class="text-gray-600 dark:text-gray-400">Lorem ipsum</p>
+              <p className="text-gray-600 dark:text-gray-400">Lorem ipsum</p>
             </div>
 
-            <p class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
+            <p className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
               Visit
               <svg
-                class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
+                className="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m9 18 6-6-6-6" />
               </svg>
@@ -63,21 +63,21 @@ export default function MiningPoolSection() {
         </Link>
 
         <Link
-          class="group flex gap-y-6 w-full h-full hover:bg-gray-100 rounded-lg p-5 transition-all dark:hover:bg-white/[.075] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="group flex gap-y-6 w-full h-full hover:bg-gray-100 rounded-lg p-5 transition-all dark:hover:bg-white/[.075] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           href="#"
           target="_blank"
         >
           <svg
-            class="flex-shrink-0 w-8 h-8 text-gray-800 mt-0.5 me-6 dark:text-gray-200"
+            className="flex-shrink-0 w-8 h-8 text-gray-800 mt-0.5 me-6 dark:text-gray-200"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path d="M2 3h20" />
             <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" />
@@ -86,25 +86,25 @@ export default function MiningPoolSection() {
 
           <div>
             <div>
-              <h3 class="block font-bold text-gray-800 dark:text-white">
+              <h3 className="block font-bold text-gray-800 dark:text-white">
                 Cojin Pool
               </h3>
-              <p class="text-gray-600 dark:text-gray-400">Lorem Ipsum</p>
+              <p className="text-gray-600 dark:text-gray-400">Lorem Ipsum</p>
             </div>
 
-            <p class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
+            <p className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
               Visit
               <svg
-                class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
+                className="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m9 18 6-6-6-6" />
               </svg>
@@ -113,21 +113,21 @@ export default function MiningPoolSection() {
         </Link>
 
         <Link
-          class="group flex gap-y-6 w-full h-full hover:bg-gray-100 rounded-lg p-5 transition-all dark:hover:bg-white/[.075] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="group flex gap-y-6 w-full h-full hover:bg-gray-100 rounded-lg p-5 transition-all dark:hover:bg-white/[.075] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           href="#"
           target="_blank"
         >
           <svg
-            class="flex-shrink-0 w-8 h-8 text-gray-800 mt-0.5 me-6 dark:text-gray-200"
+            className="flex-shrink-0 w-8 h-8 text-gray-800 mt-0.5 me-6 dark:text-gray-200"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" />
             <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
@@ -138,25 +138,25 @@ export default function MiningPoolSection() {
 
           <div>
             <div>
-              <h3 class="block font-bold text-gray-800 dark:text-white">
+              <h3 className="block font-bold text-gray-800 dark:text-white">
                 Rplant
               </h3>
-              <p class="text-gray-600 dark:text-gray-400">Lorem Isum</p>
+              <p className="text-gray-600 dark:text-gray-400">Lorem Isum</p>
             </div>
 
-            <p class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
+            <p className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
               Visit
               <svg
-                class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
+                className="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m9 18 6-6-6-6" />
               </svg>

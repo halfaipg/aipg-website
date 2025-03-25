@@ -92,26 +92,10 @@ const page = () => {
             contribute to the rapidly evolving AI landscape.
           </p>
           <Link
-            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.1.2"
-            className="my-4 px-6 py-2 sm:py-4 font-semibold flex flex-row space-x-2 border-b-2 border-cyan-300 max-w-[80%] hover:scale-90 duration-300 ease-in-out"
+            href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/tag/v1.4.0"
+            className="text-blue-500 hover:text-blue-600 dark:text-white hover:underline"
           >
-            Download our Wallets
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="w-6 h-6 ml-2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                />
-              </svg>
-            </span>
+            Wallet
           </Link>
         </div>
       </section>

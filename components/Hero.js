@@ -14,8 +14,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <div class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/squared-bg-element.svg')]">
-      <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24 pb-10">
+    <div className="relative overflow-hidden pt-20 before:absolute before:top-0 before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/squared-bg-element.svg')]">
+      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24 pb-10">
         <div className="flex justify-center items-center mb-8" style={{ paddingTop: '80px' }}>
           <img
             src="/aipg-main.png"
@@ -23,25 +23,25 @@ const Hero = () => {
             className="w-48 h-48 md:w-64 md:h-64 object-contain p-2"
           />
         </div>
-        <div class={`mt-5 max-w-xl text-center mx-auto ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ minHeight: '8rem' }}>
-          <h1 class="block font-bold text-gray-800 text-2xl md:text-3xl lg:text-4xl dark:text-gray-200">
+        <div className={`mt-5 max-w-xl text-center mx-auto ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ minHeight: '8rem' }}>
+          <h1 className="block font-bold text-gray-800 text-2xl md:text-3xl lg:text-4xl dark:text-gray-200">
             {fullText}
           </h1>
-          <p class="text-lg text-gray-600 dark:text-gray-400 mt-5">
+          <p className="text-lg text-gray-600 dark:text-gray-400 mt-5">
             Revolutionizing the AI landscape with open access to
             blockchain-validated and incentivized generative AI models, fostering adoption, innovation, creativity, and
             community-driven growth.
           </p>
         </div>
 
-        <div class={`mt-12 flex flex-col sm:flex-row gap-3 justify-center mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+        <div className={`mt-12 flex flex-col sm:flex-row gap-3 justify-center mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
-            class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
             href="https://discord.gg/W9D8j6HCtC"
             target="_blank"
           >
             <svg
-              class="flex-shrink-0 w-4 h-4"
+              className="flex-shrink-0 w-4 h-4"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -53,24 +53,24 @@ const Hero = () => {
             Discord
           </a>
           <a
-            class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
             href="https://t.me/aipowergrid"
             target="_blank"
           >
             <img
               src="/telegram.svg"
               alt="Telegram"
-              class="flex-shrink-0 w-4 h-4 fill-current text-white"
+              className="flex-shrink-0 w-4 h-4 fill-current text-white"
             />
             Telegram
           </a>
           <a
-            class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
             href="https://x.com/AIPowerGrid"
             target="_blank"
           >
             <svg
-              class="flex-shrink-0 w-4 h-4"
+              className="flex-shrink-0 w-4 h-4"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -82,14 +82,14 @@ const Hero = () => {
             formerly Twitter
           </a>
         </div>
-        <div class={`mt-4 flex flex-col sm:flex-row gap-3 justify-center ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+        <div className={`mt-4 flex flex-col sm:flex-row gap-3 justify-center ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
-            class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
             href="https://www.youtube.com/@AIPowerGrid"
             target="_blank"
           >
             <svg
-              class="flex-shrink-0 w-4 h-4"
+              className="flex-shrink-0 w-4 h-4"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -99,12 +99,12 @@ const Hero = () => {
             YouTube
           </a>
           <a
-            class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
             href="https://www.instagram.com/aipowergrid"
             target="_blank"
           >
             <svg
-              class="flex-shrink-0 w-4 h-4"
+              className="flex-shrink-0 w-4 h-4"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -114,12 +114,12 @@ const Hero = () => {
             Instagram
           </a>
           <a
-            class="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
             href="https://www.reddit.com/r/AIPowerGrid/"
             target="_blank"
           >
             <svg
-              class="flex-shrink-0 w-4 h-4"
+              className="flex-shrink-0 w-4 h-4"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -129,29 +129,29 @@ const Hero = () => {
             Reddit
           </a>
         </div>
-        <div class={`mt-4 flex flex-col items-center justify-center md:pb-20 ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ paddingBottom: '25px', paddingTop: '50px' }}>
-          <div class="flex flex-col md:flex-row gap-3 items-center justify-center">
+        <div className={`mt-4 flex flex-col items-center justify-center md:pb-20 ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ paddingBottom: '25px', paddingTop: '50px' }}>
+          <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
             <a
-              class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
+              className="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
               href="https://pool.aipowergrid.io/"
               target="_blank"
             >
               Official Mining Pool
-              <span class="flex items-center gap-x-1">
-                <span class="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
+              <span className="flex items-center gap-x-1">
+                <span className="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
                   Explore
                 </span>
                 <svg
-                  class="flex-shrink-0 w-4 h-4 text-blue-600"
+                  className="flex-shrink-0 w-4 h-4 text-blue-600"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path d="m9 18 6-6-6-6" />
                 </svg>

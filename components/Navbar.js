@@ -18,60 +18,66 @@ export default function Navbar() {
   const renderMainOptions = () => (
     <>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="/"
         aria-current="page"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>Home</a>
+        Home
       </Link>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="/about"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>About</a>
+        About
       </Link>
       <button onClick={() => setShowDropdown('pools')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
         Pools
       </button>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io"
         target="_blank"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>Docs</a>
+        Docs
       </Link>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io/ai-power-grid-whitepaper"
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>Whitepaper</a>
+        Whitepaper
       </Link>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="https://explorer.aipowergrid.io/"
         target="_blank"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>Explorer</a>
+        Explorer
       </Link>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="/wallet"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>Wallets</a>
+        Wallets
       </Link>
       <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
         Exchanges
       </button>
       <Link
-        class="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io/tokenomics"
         target="_blank"
+        onClick={() => setIsOpen(false)}
       >
-        <a onClick={() => setIsOpen(false)}>Tokenomics</a>
+        Tokenomics
       </Link>
-      {/* ... rest of your code ... */}
     </>
   );
 
@@ -80,35 +86,50 @@ export default function Navbar() {
       case 'pools':
         return (
           <>
-            <Link href="https://pool.aipowergrid.io/" target="_blank">
-              <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left" role="menuitem">
-                Official
-              </a>
+            <Link 
+              href="https://pool.aipowergrid.io/" 
+              target="_blank" 
+              onClick={() => setIsOpen(false)} 
+              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+            >
+              Official
             </Link>
-            <Link href="https://miningpoolstats.stream/aipowergrid" target="_blank" legacyBehavior>
-              <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left" role="menuitem">
-                Public
-              </a>
+            <Link 
+              href="https://miningpoolstats.stream/aipowergrid" 
+              target="_blank" 
+              onClick={() => setIsOpen(false)} 
+              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+            >
+              Public
             </Link>
           </>
         );
       case 'exchanges':
         return (
           <>
-            <Link href="https://xeggex.com/market/AIPG_USDT" target="_blank">
-              <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left" role="menuitem">
-                Xeggex
-              </a>
+            <Link 
+              href="https://xeggex.com/market/AIPG_USDT" 
+              target="_blank"
+              onClick={() => setIsOpen(false)} 
+              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+            >
+              Xeggex
             </Link>
-            <Link href="https://www.coinex.com/en/exchange/aipg-usdt" target="_blank">
-              <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left" role="menuitem">
-                CoinEx
-              </a>
+            <Link 
+              href="https://www.coinex.com/en/exchange/aipg-usdt" 
+              target="_blank"
+              onClick={() => setIsOpen(false)} 
+              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+            >
+              CoinEx
             </Link>
-            <Link href="https://tradeogre.com/exchange/AIPG-USDT" target="_blank">
-              <a onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left" role="menuitem">
-                TradeOgre
-              </a>
+            <Link 
+              href="https://tradeogre.com/exchange/AIPG-USDT" 
+              target="_blank"
+              onClick={() => setIsOpen(false)} 
+              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+            >
+              TradeOgre
             </Link>
           </>
         );
@@ -118,47 +139,45 @@ export default function Navbar() {
   };
 
   return (
-    <header class="fixed top-6 left-0 right-0 z-50 w-full max-w-7xl mx-auto border border-gray-200 text-sm py-1 sm:py-0 md:py-0 dark:border-gray-800 backdrop-filter backdrop-blur-lg rounded-lg">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full mx-auto border border-gray-200 text-sm py-1 sm:py-0 md:py-0 dark:border-gray-800 backdrop-filter backdrop-blur-lg bg-black bg-opacity-70 rounded-b-lg">
       <nav
-        class="relative px-4 sm:flex md:flex sm:items-center md:items-center sm:justify-between md:justify-between sm:px-6 md:px-6 lg:px-8"
+        className="relative px-4 sm:flex md:flex sm:items-center md:items-center sm:justify-between md:justify-between sm:px-6 md:px-6 lg:px-8"
         aria-label="Global"
       >
-        <div class="flex items-center justify-between">
-          <div class="flex-none text-xl font-semibold text-white" aria-label="Brand">
-            <Link legacyBehavior href="/">
-              <a onClick={() => setIsOpen(false)}>
-                <Image
-                  src="/aipgweblogo.png"
-                  alt="AI Power Grid Logo"
-                  width={200}
-                  height={120}
-                />
-              </a>
+        <div className="flex items-center justify-between">
+          <div className="flex-none text-xl font-semibold text-white" aria-label="Brand">
+            <Link href="/" onClick={() => setIsOpen(false)}>
+              <Image
+                src="/aipgweblogo.png"
+                alt="AI Power Grid Logo"
+                width={200}
+                height={120}
+              />
             </Link>
           </div>
-          <div class="sm:hidden md:hidden">
+          <div className="sm:hidden md:hidden">
             <button
               type="button"
               onClick={toggleMenu}
-              class="hs-collapse-toggle w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-white hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              className="hs-collapse-toggle w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-white hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
               data-hs-collapse="#navbar-collapse-with-animation"
               aria-controls="navbar-collapse-with-animation"
               aria-label="Toggle navigation"
             >
               <svg
-                class="hs-collapse-open:hidden w-4 h-4"
+                className="hs-collapse-open:hidden w-4 h-4"
                 width="16"
                 height="16"
                 fill="currentColor"
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
                 />
               </svg>
               <svg
-                class="hs-collapse-open:block flex-shrink-0 hidden w-4 h-4"
+                className="hs-collapse-open:block flex-shrink-0 hidden w-4 h-4"
                 width="16"
                 height="16"
                 fill="currentColor"
@@ -171,9 +190,9 @@ export default function Navbar() {
         </div>
         <div
           id="navbar-collapse-with-animation"
-          class={`hs-collapse ${isOpen ? 'block' : 'hidden'} transition-all duration-150 basis-full grow sm:block md:block`}
+          className={`hs-collapse ${isOpen ? 'block' : 'hidden'} transition-all duration-150 basis-full grow sm:block md:block`}
         >
-          <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row md:flex-row sm:items-center md:items-center sm:justify-end md:justify-end sm:gap-y-0 md:gap-y-0 sm:gap-x-7 md:gap-x-7 sm:mt-0 md:mt-0 sm:ps-7 md:ps-7">
+          <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row md:flex-row sm:items-center md:items-center sm:justify-end md:justify-end sm:gap-y-0 md:gap-y-0 sm:gap-x-7 md:gap-x-7 sm:mt-0 md:mt-0 sm:ps-7 md:ps-7">
             {showDropdown ? (
               <>
                 <button onClick={() => setShowDropdown(null)} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">&#x2190; Back</button>

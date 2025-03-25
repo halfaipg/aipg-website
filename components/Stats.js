@@ -3,15 +3,15 @@ import React from "react";
 
 const Stats = () => {
   return (
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      <div class="grid items-center lg:grid-cols-12 gap-6 lg:gap-12">
-        <div class="lg:col-span-4">
-          <div class="lg:pe-6 xl:pe-12">
-            <p class="text-6xl font-bold leading-10 text-blue-600">
+    <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div className="grid items-center lg:grid-cols-12 gap-6 lg:gap-12">
+        <div className="lg:col-span-4">
+          <div className="lg:pe-6 xl:pe-12">
+            <p className="text-6xl font-bold leading-10 text-blue-600">
               99.97%
-              <span class="ms-1 inline-flex items-center gap-x-1 bg-gray-200 font-medium text-gray-800 text-xs leading-4 rounded-full py-0.5 px-2 dark:bg-gray-800 dark:text-gray-300">
+              <span className="ms-1 inline-flex items-center gap-x-1 bg-gray-200 font-medium text-gray-800 text-xs leading-4 rounded-full py-0.5 px-2 dark:bg-gray-800 dark:text-gray-300">
                 <svg
-                  class="flex-shrink-0 w-4 h-4"
+                  className="flex-shrink-0 w-4 h-4"
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -23,27 +23,27 @@ const Stats = () => {
                 Uptime
               </span>
             </p>
-            <p class="mt-2 sm:mt-3 text-gray-500">
+            <p className="mt-2 sm:mt-3 text-gray-500">
               AIPG takes pride in its robust infrastructure
             </p>
           </div>
         </div>
 
-        <div class="lg:col-span-8 relative lg:before:absolute lg:before:top-0 lg:before:-start-12 lg:before:w-px lg:before:h-full lg:before:bg-gray-200 lg:before:dark:bg-gray-700">
-          <div class="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-3 sm:gap-8">
+        <div className="lg:col-span-8 relative lg:before:absolute lg:before:top-0 lg:before:-start-12 lg:before:w-px lg:before:h-full lg:before:bg-gray-200 lg:before:dark:bg-gray-700">
+          <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-3 sm:gap-8">
             <div>
-              <p class="text-3xl font-semibold text-blue-600">50+</p>
-              <p class="mt-1 text-gray-500">AI Models Deployed</p>
+              <p className="text-3xl font-semibold text-blue-600">50+</p>
+              <p className="mt-1 text-gray-500">AI Models Deployed</p>
             </div>
 
             <div>
-              <p class="text-3xl font-semibold text-blue-600">10,000+ </p>
-              <p class="mt-1 text-gray-500">Artworks minted</p>
+              <p className="text-3xl font-semibold text-blue-600">10,000+ </p>
+              <p className="mt-1 text-gray-500">Artworks minted</p>
             </div>
 
             <div>
-              <p class="text-3xl font-semibold text-blue-600">100%</p>
-              <p class="mt-1 text-gray-500">Secure</p>
+              <p className="text-3xl font-semibold text-blue-600">100%</p>
+              <p className="mt-1 text-gray-500">Secure</p>
             </div>
           </div>
         </div>

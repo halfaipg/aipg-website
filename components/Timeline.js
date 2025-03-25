@@ -9,7 +9,7 @@ import "./customTimelineStyles.css";
 
 const Timeline = () => {
   return (
-    <div class="container mx-auto w-full h-full p-8">
+    <div className="container mx-auto w-full h-full p-8">
       <VerticalTimeline>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
@@ -52,7 +52,7 @@ const Timeline = () => {
           </p>
           
           <p style={{ color: "#d3d3d3" }}>
-          We’re developing state-of-the-art AI front ends, including our AI art gallery at aipg.art, showcasing stunning generative artworks, and the interactive platform at beta.aipowergrid.io, where users can chat with open-source LLMs and generate images using open-source models, all powered by our distributed beta workers </p>
+          We're developing state-of-the-art AI front ends, including our AI art gallery at aipg.art, showcasing stunning generative artworks, and the interactive platform at beta.aipowergrid.io, where users can chat with open-source LLMs and generate images using open-source models, all powered by our distributed beta workers </p>
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
