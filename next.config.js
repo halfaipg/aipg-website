@@ -15,8 +15,8 @@ const nextConfig = {
           {
             key: 'Content-Security-Policy',
             value: process.env.NODE_ENV === 'development'
-              ? "script-src 'self' 'unsafe-eval' 'unsafe-inline';"
-              : "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com;",
+              ? "script-src 'self' 'unsafe-eval' 'unsafe-inline'; media-src 'self' blob:;"
+              : "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; media-src 'self' blob:;",
           },
           {
             key: 'X-Frame-Options',
