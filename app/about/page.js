@@ -46,6 +46,11 @@ const About = () => {
     return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(number);
   };
 
+  // Helper function to format price with 4 decimal places
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(price);
+  };
+
   return (
     <div className="pt-10">
       {/* Video Banner */}
@@ -204,51 +209,95 @@ const About = () => {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
           {/* Current Price Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">
-              Price
-            </h3>
-            <p>
-              ${metrics.price}
-            </p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Price
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                ${formatPrice(metrics.price)}
+              </p>
+            </div>
           </div>
           {/* Supply Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">
-              Supply
-            </h3>
-            <p>
-              {formatNumber(metrics.supply)} AIPG
-            </p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Supply
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                {formatNumber(metrics.supply)} <span className="text-xs align-top">AIPG</span>
+              </p>
+            </div>
           </div>
           {/* Market Cap Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">
-              Market Cap
-            </h3>
-            <p>
-              ${formatNumber(metrics.marketCap)}
-            </p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Market Cap
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                ${formatNumber(metrics.marketCap)}
+              </p>
+            </div>
           </div>
           {/* Launch Type Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">Launch Type</h3>
-            <p>Fair Launch</p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Launch Type
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                Fair<br />Launch
+              </p>
+            </div>
           </div>
           {/* Launch Date Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">Launch Date</h3>
-            <p>12/10/2023</p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Launch Date
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                12/10/2023
+              </p>
+            </div>
           </div>
           {/* Network Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">Network</h3>
-            <p>UTXO + PoW</p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Network
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                UTXO +<br />PoW
+              </p>
+            </div>
           </div>
           {/* Max Supply Box */}
-          <div className="rounded-md p-6 text-center text-white metrics-gradient-background" style={{ boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)", background: "#0f172a", color: "#fff" }}>
-            <h3 className="text-lg font-semibold mb-3">Max Supply</h3>
-            <p>150M AIPG</p>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-blue-800 p-4 text-center">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Max Supply
+              </h3>
+            </div>
+            <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
+              <p className="text-xl font-mono text-white">
+                150M <span className="text-xs align-top">AIPG</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
