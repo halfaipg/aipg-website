@@ -8,10 +8,13 @@ const Features = () => {
         <div className="grid md:grid-cols-2 gap-12">
           <div className="lg:w-3/4">
             <h2 className="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-            Revolutionizing Blockchain with DePIN
+            Democratizing AI Through Open Source
             </h2>
             <p className="mt-3 text-gray-800 dark:text-gray-400">
-            The Decentralized Physical Infrastructure Network (DePIN) represents a groundbreaking evolution in blockchain and cryptocurrency, addressing the sustainability challenges of traditional Proof of Work (PoW) systems. Unlike PoW, which demands significant computational power for block mining and is often criticized for its high energy consumption without direct productive output, DePIN repurposes this computational capacity for meaningful AI tasks. Within the AIPG ecosystem, DePIN incentivizes node operators to perform inference on localized large language models (LLM) and host AI art model generation using technologies like Stable Diffusion. This integration of blockchain and AI tasks not only validates transactions but also generates valuable AI services, thereby ensuring that the energy consumed contributes positively to the community and the broader AI field.
+            AI Power Grid (AIPG) is driven by the belief that generative AI should be accessible to all developers, not just large corporations with massive resources. Our community-driven approach focuses on building transparent, ethical, and freely available AI models that respect user privacy and freedom. By combining the power of open source development with distributed computing, we're creating a future where developers can build, deploy, and improve AI systems without reliance on proprietary black-box solutions.
+            </p>
+            <p className="mt-3 text-gray-800 dark:text-gray-400">
+            We stand firm against the monopolization of AI by tech giants. As powerful models become increasingly centralized, we're building an alternative ecosystem where knowledge isn't siloed but shared. Join our movement of passionate developers working to ensure that the transformative power of generative AI remains in the hands of the many, not the few. Together, we're not just building tools—we're championing a vision where AI advancement benefits humanity through openness, transparency, and collective wisdom.
             </p>
           </div>
 
@@ -36,12 +39,10 @@ const Features = () => {
               </span>
               <div className="ms-5 sm:ms-8">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Empowering Meaningful Contributions
+                  Open Source Ethos
                 </h3>
                 <p className="mt-1 text-gray-600 dark:text-gray-400">
-                We will leverage DePIN to go beyond the usual 'mining' activities associated with cryptocurrencies.
-                Instead of consuming colossal amounts of energy for arbitrary calculations, the AIPG network 
-                utilizes a validation mechanism that supports and rewards constructive computational tasks.
+                We believe in the power of transparency and community collaboration. All our core technologies are open source, allowing developers to inspect, modify, and enhance our AI models. This approach fosters trust, accelerates innovation, and ensures that our technology evolves based on real developer needs rather than corporate interests.
                 </p>
               </div>
             </div>
@@ -66,13 +67,10 @@ const Features = () => {
               </span>
               <div className="ms-5 sm:ms-8">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Creating an Inclusive AI Ecosystem
+                  Developer-First Community
                 </h3>
                 <p className="mt-1 text-gray-600 dark:text-gray-400">
-                AIPG not only positions itself as an innovator in blockchain technology but also as a contributor 
-                to the global AI landscape. By democratizing access to computational resources, we enable a vast 
-                community of researchers, developers, and enthusiasts to partake in and contribute towards cutting-edge 
-                AI development, regardless of their individual computational capacity.
+                Our community consists of passionate developers, researchers, and AI enthusiasts committed to democratizing generative AI. We provide comprehensive documentation, development tools, and support channels to ensure that developers of all skill levels can contribute to and benefit from our ecosystem. Your voice matters in shaping the future of open source AI.
                 </p>
               </div>
             </div>
@@ -97,13 +95,10 @@ const Features = () => {
               </span>
               <div className="ms-5 sm:ms-8">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                Access to AI for everyone
+                Ethical AI Development
                 </h3>
                 <p className="mt-1 text-gray-600 dark:text-gray-400">
-                AI Power Grid (AIPG) envisions a future where access to cutting-edge AI is free and open to all. 
-                Our platform leverages a Decentralized Physical Infrastructure Network (DePIN) protocol to align blockchain security with valuable
-                AI processes. By participating in the network, users contribute to computational tasks that advance AI technology, 
-                and in turn, they are incentivized with AIPG tokens. This model encourages a collaborative and energy-efficient approach to AI advancement.
+                We're committed to developing AI technologies that are not only powerful but also ethical and responsible. Our transparent development process enables ongoing discussions about data privacy, bias mitigation, and responsible AI deployment. By joining AIPG, you become part of a movement that values the ethical implications of AI as much as its technical capabilities.
                 </p>
               </div>
             </div>

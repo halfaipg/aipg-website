@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const Hero = () => {
   const [contentVisible, setContentVisible] = useState(false);
-  const fullText = "Empowering the architects of tomorrow with the freedom of open source generative AI";
+  const fullText = "The Freedom of Open Source AI";
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,13 +14,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden pt-20 before:absolute before:top-0 before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/squared-bg-element.svg')]">
-      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24 pb-10">
-        <div className="flex justify-center items-center mb-8" style={{ paddingTop: '80px' }}>
+    <div className="relative overflow-hidden pt-5 before:absolute before:top-0 before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/squared-bg-element.svg')]">
+      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-3 md:pt-6 pb-8">
+        <div className="flex justify-center items-center mb-4">
           <img
             src="/aipg-main.png"
             alt="aipg"
-            className="w-48 h-48 md:w-64 md:h-64 object-contain p-2"
+            className="w-40 h-40 md:w-56 md:h-56 object-contain p-1"
           />
         </div>
         <div className={`mt-5 max-w-xl text-center mx-auto ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ minHeight: '8rem' }}>
@@ -28,9 +28,7 @@ const Hero = () => {
             {fullText}
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 mt-5">
-            Revolutionizing the AI landscape with open access to
-            blockchain-validated and incentivized generative AI models, fostering adoption, innovation, creativity, and
-            community-driven growth.
+            Democratizing access to generative AI through open source collaboration. Join us in creating a more transparent, accessible, and community-driven AI ecosystem where knowledge is shared freely and innovation thrives without barriers.
           </p>
         </div>
 
@@ -129,17 +127,17 @@ const Hero = () => {
             Reddit
           </a>
         </div>
-        <div className={`mt-4 flex flex-col items-center justify-center md:pb-20 ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ paddingBottom: '25px', paddingTop: '50px' }}>
+        <div className={`mt-4 flex flex-col items-center justify-center md:pb-10 ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ paddingBottom: '15px', paddingTop: '25px' }}>
           <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
             <a
               className="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-400"
-              href="https://pool.aipowergrid.io/"
+              href="https://github.com/aipowergrid"
               target="_blank"
             >
-              Official Mining Pool
+              Explore Our Code
               <span className="flex items-center gap-x-1">
                 <span className="border-s border-gray-200 text-blue-600 ps-2 dark:text-blue-500">
-                  Explore
+                  GitHub
                 </span>
                 <svg
                   className="flex-shrink-0 w-4 h-4 text-blue-600"
