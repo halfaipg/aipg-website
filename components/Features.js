@@ -8,13 +8,13 @@ const Features = () => {
         <div className="grid md:grid-cols-2 gap-12">
           <div className="lg:w-3/4">
             <h2 className="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-            Democratizing AI Through Open Source
+            Open Source, Open Doors
             </h2>
             <p className="mt-3 text-gray-800 dark:text-gray-400">
-            AI Power Grid (AIPG) is driven by the belief that generative AI should be accessible to all developers, not just large corporations with massive resources. Our community-driven approach focuses on building transparent, ethical, and freely available AI models that respect user privacy and freedom. By combining the power of open source development with distributed computing, we're creating a future where developers can build, deploy, and improve AI systems without reliance on proprietary black-box solutions.
+            All code, models, and workflows live in the open, killing vendor lock-in and accelerating innovation. When AI development happens in the light, the entire community benefits from shared knowledge, collaborative debugging, and collective wisdom. No black boxes, no corporate secrets—just transparent technology that anyone can inspect, improve, and build upon.
             </p>
             <p className="mt-3 text-gray-800 dark:text-gray-400">
-            We stand firm against the monopolization of AI by tech giants. As powerful models become increasingly centralized, we're building an alternative ecosystem where knowledge isn't siloed but shared. Join our movement of passionate developers working to ensure that the transformative power of generative AI remains in the hands of the many, not the few. Together, we're not just building tools—we're championing a vision where AI advancement benefits humanity through openness, transparency, and collective wisdom.
+            This radical transparency doesn't just build trust—it unleashes innovation. Developers can see exactly how models make decisions, identify potential improvements, and contribute meaningful enhancements. Together, we're not just using AI tools; we're collectively building the future of artificial intelligence through open collaboration and shared expertise.
             </p>
           </div>
 
@@ -39,10 +39,10 @@ const Features = () => {
               </span>
               <div className="ms-5 sm:ms-8">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Open Source Ethos
+                  No Vendor Lock-In
                 </h3>
                 <p className="mt-1 text-gray-600 dark:text-gray-400">
-                We believe in the power of transparency and community collaboration. All our core technologies are open source, allowing developers to inspect, modify, and enhance our AI models. This approach fosters trust, accelerates innovation, and ensures that our technology evolves based on real developer needs rather than corporate interests.
+                Complete transparency in our models and infrastructure means you're never locked into proprietary systems. Inspect our code, run your own instances, and maintain full control over your AI workflows without depending on corporate gatekeepers.
                 </p>
               </div>
             </div>
@@ -67,10 +67,10 @@ const Features = () => {
               </span>
               <div className="ms-5 sm:ms-8">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Developer-First Community
+                  Accelerated Innovation
                 </h3>
                 <p className="mt-1 text-gray-600 dark:text-gray-400">
-                Our community consists of passionate developers, researchers, and AI enthusiasts committed to democratizing generative AI. We provide comprehensive documentation, development tools, and support channels to ensure that developers of all skill levels can contribute to and benefit from our ecosystem. Your voice matters in shaping the future of open source AI.
+                Open source development creates a multiplier effect where every contribution benefits the entire ecosystem. Bug fixes, performance improvements, and feature enhancements spread instantly across the network, accelerating progress for everyone.
                 </p>
               </div>
             </div>
@@ -95,10 +95,10 @@ const Features = () => {
               </span>
               <div className="ms-5 sm:ms-8">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                Ethical AI Development
+                Collective Ownership
                 </h3>
                 <p className="mt-1 text-gray-600 dark:text-gray-400">
-                We're committed to developing AI technologies that are not only powerful but also ethical and responsible. Our transparent development process enables ongoing discussions about data privacy, bias mitigation, and responsible AI deployment. By joining AIPG, you become part of a movement that values the ethical implications of AI as much as its technical capabilities.
+                The AI commons belongs to everyone who contributes. Unlike proprietary systems controlled by a few, our open development model ensures that the community collectively owns and shapes the future of AI technology.
                 </p>
               </div>
             </div>

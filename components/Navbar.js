@@ -152,6 +152,8 @@ export default function Navbar() {
                 alt="AI Power Grid Logo"
                 width={200}
                 height={120}
+                priority
+                style={{ height: 'auto' }}
               />
             </Link>
           </div>
