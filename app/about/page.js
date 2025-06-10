@@ -68,8 +68,9 @@ const About = () => {
               A New Kind of Power Grid
             </h2>
             <p className="mt-2 md:mt-4 text-gray-500">
-              Electricity changed the industrial world—an open AI grid can change the digital one. AI Power Grid (AIPG) transforms idle GPUs into a permissionless, censorship-resistant AI utility that lights up open-source creativity everywhere.<br/>
-
+              Electricity changed the industrial world—an open AI grid can change the digital one. AI Power Grid (AIPG) transforms idle GPUs into a permissionless, censorship-resistant AI utility that lights up open-source creativity everywhere.
+            </p>
+            <p className="mt-4 text-gray-500">
               By turning community hardware into a distributed AI infrastructure, AIPG breaks down the walls that big tech has built around frontier models. Instead of renting AI from corporate landlords, developers tap directly into a people-powered network where GPU owners earn tokens for providing real inference work—no wasteful hashing, only useful AI.
             </p>
           </div>
