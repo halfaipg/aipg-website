@@ -65,21 +65,12 @@ const About = () => {
         <div className="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div className="lg:col-span-1">
             <h2 className="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
-              What is AI Power Grid?
+              A New Kind of Power Grid
             </h2>
             <p className="mt-2 md:mt-4 text-gray-500">
-              AI Power Grid (AIPG) is pioneering a revolutionary approach by
-              offering free access to cutting-edge Large Language Model (LLM)
-              inference and AI Art generation, validated on an immutable
-              blockchain to ensure authenticity and security. As a beacon of
-              democratization in AI, AIPG empowers developers by providing an
-              efficient platform to deploy, share, and enhance their models with
-              real-time user feedback.<br/>
+              Electricity changed the industrial world—an open AI grid can change the digital one. AI Power Grid (AIPG) transforms idle GPUs into a permissionless, censorship-resistant AI utility that lights up open-source creativity everywhere.<br/>
 
-              AIPG also aims to transform AI-generated art into tradable 
-              NFT assets and catapulting AIPG to be a key player in the NFT marketplace.
-              It will be An immersive virtual space dedicated to the exhibition of AI-generated artwork, 
-              highlighting the creative possibilities of generative AI models.
+              By turning community hardware into a distributed AI infrastructure, AIPG breaks down the walls that big tech has built around frontier models. Instead of renting AI from corporate landlords, developers tap directly into a people-powered network where GPU owners earn tokens for providing real inference work—no wasteful hashing, only useful AI.
             </p>
           </div>
 
@@ -98,17 +89,66 @@ const About = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                  <path d="M2 12l10 5"/>
+                </svg>
+                <div className="grow">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  Global Access Without Permission
+                  </h3>
+                  <p className="mt-1 text-gray-600 dark:text-gray-400">
+                  Creators worldwide tap into high-end AI capabilities without asking permission from corporate gatekeepers. Whether you're building in Buenos Aires or Bangalore, AIPG provides the same frontier model access that was previously reserved for big tech companies.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-x-5">
+                <svg
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+                <div className="grow">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                    People-Powered Economics
+                  </h3>
+                  <p className="mt-1 text-gray-600 dark:text-gray-400">
+                    Token rewards create entirely new income streams for GPU owners and AI contributors. Instead of wasteful cryptocurrency mining, community members earn meaningful rewards by providing actual AI inference services that people need and use.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-x-5">
+                <svg
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
                   <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
                 </svg>
                 <div className="grow">
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                  AI Democratization
+                    Open Source, Open Doors
                   </h3>
                   <p className="mt-1 text-gray-600 dark:text-gray-400">
-                  The platform aims to make AI accessible to all by lowering the barriers to entry. 
-                  This democratization allows contributors from various backgrounds to participate 
-                  equally in the future of AI development and application, aligning with the open-source and democratizing philosophy of AIPG.
+                  All code, models, and workflows live in the open, killing vendor lock-in and accelerating innovation. Complete transparency means you're never locked into proprietary systems—inspect our code, run your own instances, and maintain full control.
                   </p>
                 </div>
               </div>
@@ -125,75 +165,22 @@ const About = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M7 10v12" />
-                  <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
+                  <path d="M12 3V2"/>
+                  <path d="M12 22v-1"/>
+                  <path d="M17 7l1-1"/>
+                  <path d="M6 18l1-1"/>
+                  <path d="M7 6L6 5"/>
+                  <path d="M18 17l1 1"/>
+                  <path d="M22 12h-1"/>
+                  <path d="M3 12H2"/>
+                  <circle cx="12" cy="12" r="5"/>
                 </svg>
                 <div className="grow">
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    Decentralization and Accessibility
+                    Environmental Sustainability
                   </h3>
                   <p className="mt-1 text-gray-600 dark:text-gray-400">
-                    One of AIPG's core values is the democratization of access to AI. The project aims to make AI technologies widely accessible and equitable, 
-                    empowering users across different sectors to harness AI's capabilities for innovation and growth.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-x-5">
-                <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect width="18" height="10" x="3" y="11" rx="2" />
-                  <circle cx="12" cy="5" r="2" />
-                  <path d="M12 7v4" />
-                  <line x1="8" x2="8" y1="16" y2="16" />
-                  <line x1="16" x2="16" y1="16" y2="16" />
-                </svg>
-                <div className="grow">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    ASIC resistant algo
-                  </h3>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
-                  AIPG uses the KAWPOW hashing algorithm to discourage the
-                    use of ASIC hardware. ASIC resistance is vital for ensuring that no 
-                    single participant or group can monopolize the mining process, and 
-                    the resulting GPU miners will come with us into the new AI network.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-x-5">
-                <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-                <div className="grow">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    Community and Collaboration
-                  </h3>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
-                  AIPG is dedicated to fostering an active, engaging community and establishing partnerships with entities in the open-source AI space and related industries. This collaborative approach is intended to 
-                  ensure AIPG remains at the cutting edge of AI and blockchain technology integration.
+                  Repurposed hardware slashes proof-of-work waste by channeling computational power into useful AI inference instead of arbitrary hash calculations. Every GPU cycle serves actual human creativity and productivity rather than burning energy for digital scarcity.
                   </p>
                 </div>
               </div>
@@ -308,20 +295,10 @@ const About = () => {
             <div className="space-y-6 sm:space-y-8">
               <div className="space-y-2 md:space-y-4">
                 <h2 className="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-gray-200">
-                  The AIPG coin is the native cryptocurrency of the AI Power
-                  Grid platform.
+                  The Community-Powered AI Network
                 </h2>
                 <p className="text-gray-500">
-                  Our ecosystem will thrive on open-source collaboration, fostering
-                  innovation and creativity, while our marketplace and NFT AI
-                  Gallery enable artists and AI enthusiasts to monetize their
-                  work and contribute to the rapidly evolving AI landscape. With
-                  AIPG, we're not just building technology; we're nurturing a
-                  community where every participant is an integral part of
-                  shaping the future of AI. The AIPG NFT AI Gallery will
-                  allow users to create, display, and trade AI-generated art. 
-                  This feature will leverage Stable Diffusion models to craft unique and 
-                  high-quality artworks that are tokenized as NFTs on the blockchain.
+                  AIPG transforms the relationship between compute and AI by creating a permissionless network where GPU owners contribute idle hardware to run state-of-the-art models. Our smart routing engine matches every prompt to the optimal worker node, while AIPG tokens flow to contributors based on actual inference work performed—no wasteful hashing, only useful AI that serves real human creativity and productivity.
                 </p>
               </div>
               <ul role="list" className="space-y-2 sm:space-y-4">
@@ -344,7 +321,7 @@ const About = () => {
                   </span>
 
                   <span className="text-sm sm:text-base text-gray-500">
-                    <span className="font-bold">Decentralized</span> AI services
+                    <span className="font-bold">Distributed Worker Network</span> - Community GPUs running real AI inference
                   </span>
                 </li>
 
@@ -367,7 +344,7 @@ const About = () => {
                   </span>
 
                   <span className="text-sm sm:text-base text-gray-500">
-                    NFT <span className="font-bold">Art Gallery</span>
+                    <span className="font-bold">Smart Routing Engine</span> - Optimal prompt matching to best worker nodes
                   </span>
                 </li>
 
@@ -390,7 +367,7 @@ const About = () => {
                   </span>
 
                   <span className="text-sm sm:text-base text-gray-500">
-                    Blockchain-Validated Outputs
+                    <span className="font-bold">Token Incentives</span> - Contributors earn rewards for useful computation
                   </span>
                 </li>
                 <li className="flex space-x-3">
@@ -412,7 +389,7 @@ const About = () => {
                   </span>
 
                   <span className="text-sm sm:text-base text-gray-500">
-                    Rapid Deployment and Community Feedback Loop
+                    <span className="font-bold">Open Source Transparency</span> - All code and models publicly auditable
                   </span>
                 </li>
               </ul>

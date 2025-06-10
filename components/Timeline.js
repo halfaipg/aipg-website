@@ -13,7 +13,7 @@ const Timeline = () => {
       <VerticalTimeline>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date={<span style={{ color: "#fff" }}>Dec 2023</span>}
+          date={<span style={{ color: "#fff" }}>Launched Dec 2023</span>}
           contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
           contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }}
@@ -33,7 +33,7 @@ const Timeline = () => {
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date="Q1-Q3 2024"
+          date="Q1-Q4 2024"
           contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
           contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
@@ -41,7 +41,7 @@ const Timeline = () => {
           visible={inView}
         >
           <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q1-Q3 2024 - Expansion and Development phase
+            Q1-Q4 2024 - Expansion and Development phase
           </h3>
           <p style={{ color: "#d3d3d3" }}>
           In 2024, AI Power Grid (AIPG) has worked tirelessly on developing the distributed AI network core, workers, and front end infrastructure. During this time, we have developed substantial enhancements to the platform's underlying architecture for efficient handling of generative AI workloads through decentralized worker nodes.
@@ -56,7 +56,7 @@ const Timeline = () => {
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date="Q4 2024"
+          date="Q1-Q2 2025"
           contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
           contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
@@ -64,7 +64,7 @@ const Timeline = () => {
           visible={inView}
         >
           <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q4 2024 - Developing AI Services and AI Blockchain Integration
+            Q2 2025 - Developing AI Services and AI Blockchain Integration
           </h3>
           <p style={{ color: "#d3d3d3" }}>
           In this key phase, AIPG accelerates its forward momentum by transitioning into a decentralized AI network powered by distributed AI workers. 
@@ -77,7 +77,7 @@ const Timeline = () => {
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date="Q1 2025"
+          date="Q3 2025"
           contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
           contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
@@ -85,7 +85,7 @@ const Timeline = () => {
           visible={inView}
         >
           <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q1 2025 - Grid mainnet launch and app marketplace
+            Q3 2025 - Grid mainnet launch and app marketplace
           </h3>
           <p style={{ color: "#d3d3d3" }}>
           In Q1 2025, AI Power Grid will l mainnet, marking a significant milestone in our journey towards 
@@ -97,7 +97,7 @@ const Timeline = () => {
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date="Q2 2025"
+          date="Q4 2025"
           contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
           contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
@@ -105,7 +105,7 @@ const Timeline = () => {
           visible={inView}
         >
           <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q2 2025 - Smart Contracts, Staking, and Data Contracts
+            Q4 2025 - Smart Contracts, Staking, and Data Contracts
           </h3>
           <p style={{ color: "#d3d3d3" }}>
           Smart Contracts will automate and secure complex transactional processes, enabling seamless interaction between parties without the need for intermediaries. This paves the way for more transparent and efficient operations within our ecosystem.
@@ -119,7 +119,7 @@ const Timeline = () => {
         </VerticalTimelineElement>
         <VerticalTimelineElement
           className="vertical-timeline-element--education"
-          date="Q3 2025"
+          date="Q1 2026"
           contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
           contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
@@ -127,7 +127,7 @@ const Timeline = () => {
           visible={inView}
         >
           <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q3 2025 - Interchain AI Service Protocol Layer
+            Q1 2026 - Interchain AI Service Protocol Layer
           </h3>
           <p style={{ color: "#d3d3d3" }}>
             The development of an interchain protocol to facilitate cross-blockchain AI services,
