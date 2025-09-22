@@ -16,16 +16,21 @@ const Infrastructure = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
           <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
-            <div className="flex justify-center items-center w-12 h-12 bg-blue-600 rounded-lg mb-4">
-              <svg className="flex-shrink-0 w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="3"/>
-                <circle cx="6" cy="6" r="3"/>
-                <circle cx="18" cy="6" r="3"/>
-                <circle cx="6" cy="18" r="3"/>
-                <circle cx="18" cy="18" r="3"/>
-                <path d="M9 9L15 15"/>
-                <path d="M9 15L15 9"/>
-                <path d="M12 9V15"/>
+            <div className="flex justify-center items-center w-12 h-12 mb-4">
+              <svg className="flex-shrink-0 w-8 h-8 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="6" cy="6" r="2"/>
+                <circle cx="18" cy="6" r="2"/>
+                <circle cx="6" cy="18" r="2"/>
+                <circle cx="18" cy="18" r="2"/>
+                <path d="M8.5 8.5L15.5 15.5"/>
+                <path d="M8.5 15.5L15.5 8.5"/>
+                <path d="M12 10V14"/>
+                <path d="M10 12h4"/>
+                <circle cx="3" cy="12" r="1"/>
+                <circle cx="21" cy="12" r="1"/>
+                <circle cx="12" cy="3" r="1"/>
+                <circle cx="12" cy="21" r="1"/>
               </svg>
             </div>
             <h3 className="text-lg font-bold text-gray-800 dark:text-white">
@@ -37,14 +42,12 @@ const Infrastructure = () => {
           </div>
 
           <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
-            <div className="flex justify-center items-center w-12 h-12 bg-green-600 rounded-lg mb-4">
-              <svg className="flex-shrink-0 w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
-                <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-                <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
-                <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-                <path d="M8 12L16 12"/>
-                <path d="M12 8L16 12L12 16"/>
+            <div className="flex justify-center items-center w-12 h-12 mb-4">
+              <svg className="flex-shrink-0 w-8 h-8 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <path d="M8 12l2 2 4-4"/>
+                <circle cx="12" cy="12" r="8"/>
+                <path d="M9 12l2 2 4-4"/>
               </svg>
             </div>
             <h3 className="text-lg font-bold text-gray-800 dark:text-white">
@@ -56,16 +59,19 @@ const Infrastructure = () => {
           </div>
 
           <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
-            <div className="flex justify-center items-center w-12 h-12 bg-blue-600 rounded-lg mb-4">
-              <svg className="flex-shrink-0 w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="8" cy="8" r="6"/>
-                <path d="M18.09 10.37A6 6 0 1 1 10.37 18.09"/>
-                <path d="M7 6h.01"/>
-                <path d="M10 9h.01"/>
-                <path d="M13 12h.01"/>
-                <path d="M16 15h.01"/>
-                <circle cx="19" cy="19" r="2"/>
-                <path d="M20.2 20.2L22 22"/>
+            <div className="flex justify-center items-center w-12 h-12 mb-4">
+              <svg className="flex-shrink-0 w-8 h-8 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="8"/>
+                <path d="M12 2v20"/>
+                <path d="M2 12h20"/>
+                <path d="M7.5 7.5l9 9"/>
+                <path d="M16.5 7.5l-9 9"/>
+                <circle cx="8" cy="8" r="1.5"/>
+                <circle cx="16" cy="8" r="1.5"/>
+                <circle cx="8" cy="16" r="1.5"/>
+                <circle cx="16" cy="16" r="1.5"/>
+                <path d="M10 6l4 12"/>
+                <path d="M6 10l12 4"/>
               </svg>
             </div>
             <h3 className="text-lg font-bold text-gray-800 dark:text-white">

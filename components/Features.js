@@ -20,21 +20,24 @@ const Features = () => {
 
           <div className="space-y-6 lg:space-y-10">
             <div className="flex">
-              <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+              <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px]">
                 <svg
-                  className="flex-shrink-0 w-5 h-5"
+                  className="flex-shrink-0 w-6 h-6 text-gray-700 dark:text-gray-300"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M7 8h10"/>
+                  <path d="M7 12h8"/>
+                  <path d="M7 16h6"/>
+                  <circle cx="12" cy="2" r="1"/>
+                  <path d="M12 3v1"/>
+                  <path d="M9 20l3 2 3-2"/>
                 </svg>
               </span>
               <div className="ms-5 sm:ms-8">
@@ -48,21 +51,22 @@ const Features = () => {
             </div>
 
             <div className="flex">
-              <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+              <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px]">
                 <svg
-                  className="flex-shrink-0 w-5 h-5"
+                  className="flex-shrink-0 w-6 h-6 text-gray-700 dark:text-gray-300"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" />
-                  <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  <circle cx="12" cy="12" r="2"/>
+                  <path d="M8 12l2 2 4-4"/>
+                  <path d="M12 8v8"/>
+                  <path d="M8 12h8"/>
                 </svg>
               </span>
               <div className="ms-5 sm:ms-8">
@@ -76,21 +80,25 @@ const Features = () => {
             </div>
 
             <div className="flex">
-              <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+              <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px]">
                 <svg
-                  className="flex-shrink-0 w-5 h-5"
+                  className="flex-shrink-0 w-6 h-6 text-gray-700 dark:text-gray-300"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M7 10v12" />
-                  <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
+                  <circle cx="12" cy="12" r="8"/>
+                  <path d="M8 12l2 2 4-4"/>
+                  <circle cx="5" cy="12" r="1"/>
+                  <circle cx="19" cy="12" r="1"/>
+                  <circle cx="12" cy="5" r="1"/>
+                  <circle cx="12" cy="19" r="1"/>
+                  <path d="M7.5 7.5l9 9"/>
+                  <path d="M16.5 7.5l-9 9"/>
                 </svg>
               </span>
               <div className="ms-5 sm:ms-8">
