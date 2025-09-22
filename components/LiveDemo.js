@@ -4,8 +4,8 @@ import React from "react";
 const LiveDemo = () => {
   return (
     <div className="bg-slate-50 dark:bg-slate-800/50">
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+      <div className="max-w-[85rem] px-4 pt-6 pb-5 sm:px-6 lg:px-8 lg:pt-10 lg:pb-8 mx-auto">
+        <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold md:text-4xl md:leading-tight dark:text-white">
             Experience the Grid in Action
           </h2>
