@@ -32,9 +32,9 @@ export default function Navbar() {
       >
         About
       </Link>
-      <button onClick={() => setShowDropdown('pools')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
+      {/* <button onClick={() => setShowDropdown('pools')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
         Pools
-      </button>
+      </button> */}
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io"
@@ -67,9 +67,9 @@ export default function Navbar() {
       >
         Wallets
       </Link>
-      <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
+      {/* <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
         Exchanges
-      </button>
+      </button> */}
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io/tokenomics"
@@ -83,56 +83,56 @@ export default function Navbar() {
 
   const renderDropdownOptions = (dropdown) => {
     switch (dropdown) {
-      case 'pools':
-        return (
-          <>
-            <Link 
-              href="https://pool.aipowergrid.io/" 
-              target="_blank" 
-              onClick={() => setIsOpen(false)} 
-              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-            >
-              Official
-            </Link>
-            <Link 
-              href="https://miningpoolstats.stream/aipowergrid" 
-              target="_blank" 
-              onClick={() => setIsOpen(false)} 
-              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-            >
-              Public
-            </Link>
-          </>
-        );
-      case 'exchanges':
-        return (
-          <>
-            <Link 
-              href="https://xeggex.com/market/AIPG_USDT" 
-              target="_blank"
-              onClick={() => setIsOpen(false)} 
-              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-            >
-              Xeggex
-            </Link>
-            <Link 
-              href="https://www.coinex.com/en/exchange/aipg-usdt" 
-              target="_blank"
-              onClick={() => setIsOpen(false)} 
-              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-            >
-              CoinEx
-            </Link>
-            <Link 
-              href="https://tradeogre.com/exchange/AIPG-USDT" 
-              target="_blank"
-              onClick={() => setIsOpen(false)} 
-              className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-            >
-              TradeOgre
-            </Link>
-          </>
-        );
+      // case 'pools':
+      //   return (
+      //     <>
+      //       <Link 
+      //         href="https://pool.aipowergrid.io/" 
+      //         target="_blank" 
+      //         onClick={() => setIsOpen(false)} 
+      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+      //       >
+      //         Official
+      //       </Link>
+      //       <Link 
+      //         href="https://miningpoolstats.stream/aipowergrid" 
+      //         target="_blank" 
+      //         onClick={() => setIsOpen(false)} 
+      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+      //       >
+      //         Public
+      //       </Link>
+      //     </>
+      //   );
+      // case 'exchanges':
+      //   return (
+      //     <>
+      //       <Link 
+      //         href="https://xeggex.com/market/AIPG_USDT" 
+      //         target="_blank"
+      //         onClick={() => setIsOpen(false)} 
+      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+      //       >
+      //         Xeggex
+      //       </Link>
+      //       <Link 
+      //         href="https://www.coinex.com/en/exchange/aipg-usdt" 
+      //         target="_blank"
+      //         onClick={() => setIsOpen(false)} 
+      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+      //       >
+      //         CoinEx
+      //       </Link>
+      //       <Link 
+      //         href="https://tradeogre.com/exchange/AIPG-USDT" 
+      //         target="_blank"
+      //         onClick={() => setIsOpen(false)} 
+      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
+      //       >
+      //         TradeOgre
+      //       </Link>
+      //     </>
+      //   );
       default:
         return null;
     }
@@ -146,10 +146,18 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between">
           <div className="flex-none text-xl font-semibold text-white" aria-label="Brand">
-            <Link href="/" onClick={() => setIsOpen(false)}>
+            <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+              <Image
+                src="/AIPGsmwhite.png"
+                alt="AI Power Grid Logo"
+                width={40}
+                height={24}
+                priority
+                style={{ height: 'auto' }}
+              />
               <Image
                 src="/aipgweblogo.png"
-                alt="AI Power Grid Logo"
+                alt="AI Power Grid"
                 width={200}
                 height={120}
                 priority
