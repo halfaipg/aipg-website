@@ -55,7 +55,7 @@ const About = () => {
   };
 
   return (
-    <div className="pt-0">
+    <div className="pt-0 bg-black min-h-screen">
       {/* Video Banner */}
       <div className="overflow-hidden">
         <video autoPlay loop muted className="w-full h-[190px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover">
@@ -67,13 +67,13 @@ const About = () => {
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div className="lg:col-span-1">
-            <h2 className="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200">
+            <h2 className="font-bold text-2xl md:text-3xl text-white">
               A New Kind of Power Grid
             </h2>
-            <p className="mt-2 md:mt-4 text-gray-500">
+            <p className="mt-2 md:mt-4 text-gray-300">
               Electricity changed the industrial world—an open AI grid can change the digital one. AI Power Grid (AIPG) transforms idle GPUs into a permissionless, censorship-resistant AI utility that lights up open-source creativity everywhere.
             </p>
-            <p className="mt-4 text-gray-500">
+            <p className="mt-4 text-gray-300">
               By turning community hardware into a distributed AI infrastructure, AIPG breaks down the walls that big tech has built around frontier models. Instead of renting AI from corporate landlords, developers tap directly into a people-powered network where GPU owners earn tokens for providing real inference work—no wasteful hashing, only useful AI.
             </p>
           </div>
@@ -82,33 +82,7 @@ const About = () => {
             <div className="grid sm:grid-cols-2 gap-8 md:gap-12">
             <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M2 17l10 5 10-5"/>
-                  <path d="M2 12l10 5"/>
-                </svg>
-                <div className="grow">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                  Global Access Without Permission
-                  </h3>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
-                  Creators worldwide tap into high-end AI capabilities without asking permission from corporate gatekeepers. Whether you're building in Buenos Aires or Bangalore, AIPG provides the same frontier model access that was previously reserved for big tech companies.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-x-5">
-                <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -120,20 +94,48 @@ const About = () => {
                   strokeLinejoin="round"
                 >
                   <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 6v6l4 2"/>
+                  <path d="M8 12h8"/>
+                  <path d="M12 8v8"/>
                 </svg>
                 <div className="grow">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  <h3 className="text-lg font-semibold text-white">
+                  Global Access Without Permission
+                  </h3>
+                  <p className="mt-1 text-gray-300">
+                  Creators worldwide tap into high-end AI capabilities without asking permission from corporate gatekeepers. Whether you're building in Buenos Aires or Bangalore, AIPG provides the same frontier model access that was previously reserved for big tech companies.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-x-5">
+                <svg
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="9" cy="21" r="1"/>
+                  <circle cx="20" cy="21" r="1"/>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  <path d="M12 2L8 6l4 4 4-4-4-4z"/>
+                </svg>
+                <div className="grow">
+                  <h3 className="text-lg font-semibold text-white">
                     People-Powered Economics
                   </h3>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
+                  <p className="mt-1 text-gray-300">
                     Token rewards create entirely new income streams for GPU owners and AI contributors. Instead of wasteful cryptocurrency mining, community members earn meaningful rewards by providing actual AI inference services that people need and use.
                   </p>
                 </div>
               </div>
               <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -144,21 +146,29 @@ const About = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M9 9h6v6H9z"/>
+                  <path d="M9 1v4"/>
+                  <path d="M15 1v4"/>
+                  <path d="M9 19v4"/>
+                  <path d="M15 19v4"/>
+                  <path d="M1 9h4"/>
+                  <path d="M1 15h4"/>
+                  <path d="M19 9h4"/>
+                  <path d="M19 15h4"/>
                 </svg>
                 <div className="grow">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  <h3 className="text-lg font-semibold text-white">
                     Open Source, Open Doors
                   </h3>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
+                  <p className="mt-1 text-gray-300">
                   All code, models, and workflows live in the open, killing vendor lock-in and accelerating innovation. Complete transparency means you're never locked into proprietary systems—inspect our code, run your own instances, and maintain full control.
                   </p>
                 </div>
               </div>
               <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -169,21 +179,13 @@ const About = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M12 3V2"/>
-                  <path d="M12 22v-1"/>
-                  <path d="M17 7l1-1"/>
-                  <path d="M6 18l1-1"/>
-                  <path d="M7 6L6 5"/>
-                  <path d="M18 17l1 1"/>
-                  <path d="M22 12h-1"/>
-                  <path d="M3 12H2"/>
-                  <circle cx="12" cy="12" r="5"/>
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                 </svg>
                 <div className="grow">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    Environmental Sustainability
+                  <h3 className="text-lg font-semibold text-white">
+                    Sustainability
                   </h3>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
+                  <p className="mt-1 text-gray-300">
                   Repurposed hardware slashes proof-of-work waste by channeling computational power into useful AI inference instead of arbitrary hash calculations. Every GPU cycle serves actual human creativity and productivity rather than burning energy for digital scarcity.
                   </p>
                 </div>
@@ -298,103 +300,55 @@ const About = () => {
           <div className="mt-5 sm:mt-10 lg:mt-0">
             <div className="space-y-6 sm:space-y-8">
               <div className="space-y-2 md:space-y-4">
-                <h2 className="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-gray-200">
+                <h2 className="font-bold text-3xl lg:text-4xl text-white">
                   The Community-Powered AI Network
                 </h2>
-                <p className="text-gray-500">
+                <p className="text-gray-300">
                   AIPG transforms the relationship between compute and AI by creating a permissionless network where GPU owners contribute idle hardware to run state-of-the-art models. Our smart routing engine matches every prompt to the optimal worker node, while AIPG tokens flow to contributors based on actual inference work performed—no wasteful hashing, only useful AI that serves real human creativity and productivity.
                 </p>
               </div>
               <ul role="list" className="space-y-2 sm:space-y-4">
-                <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
-                    <svg
-                      className="flex-shrink-0 h-3.5 w-3.5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
+                <li>
+                  <div className="flex items-start gap-x-2">
+                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="2 4 20 16">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                     </svg>
-                  </span>
-
-                  <span className="text-sm sm:text-base text-gray-500">
-                    <span className="font-bold">Distributed Worker Network</span> - Community GPUs running real AI inference
-                  </span>
+                    <span className="text-sm sm:text-base text-gray-300">
+                      <span className="font-bold text-white">Distributed Worker Network</span> - Community GPUs running real AI inference
+                    </span>
+                  </div>
                 </li>
 
-                <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
-                    <svg
-                      className="flex-shrink-0 h-3.5 w-3.5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
+                <li>
+                  <div className="flex items-start gap-x-2">
+                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="2 2 20 20">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
-                  </span>
-
-                  <span className="text-sm sm:text-base text-gray-500">
-                    <span className="font-bold">Smart Routing Engine</span> - Optimal prompt matching to best worker nodes
-                  </span>
+                    <span className="text-sm sm:text-base text-gray-300">
+                      <span className="font-bold text-white">Smart Routing Engine</span> - Optimal prompt matching to best worker nodes
+                    </span>
+                  </div>
                 </li>
 
-                <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
-                    <svg
-                      className="flex-shrink-0 h-3.5 w-3.5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
+                <li>
+                  <div className="flex items-start gap-x-2">
+                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="4 6 16 12">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
                     </svg>
-                  </span>
-
-                  <span className="text-sm sm:text-base text-gray-500">
-                    <span className="font-bold">Token Incentives</span> - Contributors earn rewards for useful computation
-                  </span>
+                    <span className="text-sm sm:text-base text-gray-300">
+                      <span className="font-bold text-white">Token Incentives</span> - Contributors earn rewards for useful computation
+                    </span>
+                  </div>
                 </li>
-                <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
-                    <svg
-                      className="flex-shrink-0 h-3.5 w-3.5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
+                <li>
+                  <div className="flex items-start gap-x-2">
+                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="1 3 22 18">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                     </svg>
-                  </span>
-
-                  <span className="text-sm sm:text-base text-gray-500">
-                    <span className="font-bold">Open Source Transparency</span> - All code and models publicly auditable
-                  </span>
+                    <span className="text-sm sm:text-base text-gray-300">
+                      <span className="font-bold text-white">Open Source Transparency</span> - All code and models publicly auditable
+                    </span>
+                  </div>
                 </li>
               </ul>
             </div>
