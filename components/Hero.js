@@ -14,7 +14,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden pt-5 before:absolute before:top-16 before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-center before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/squared-bg-element.svg')]">
+    <div className="relative overflow-hidden pt-5 before:absolute before:top-[89px] before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-center before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-[calc(50%+5px)] dark:before:bg-[url('/squared-bg-element.svg')]">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-3 md:pt-6 pb-8">
         <div className="flex justify-center items-center mb-4">
           <img
