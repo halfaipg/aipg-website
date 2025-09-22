@@ -85,8 +85,6 @@
   font-size: 18px;
   font-weight: 800;
   color: #f8991d;
-  text-shadow: 0 0 30px rgba(248, 153, 29, 0.5), 0 0 60px rgba(248, 153, 29, 0.3);
-  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .position {
