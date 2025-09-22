@@ -428,7 +428,7 @@ const About = () => {
           {/* Chat Interface */}
           <div>
             <div 
-              className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+              className="aspect-video bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => setIsModalOpen(true)}
             >
               <img 
@@ -463,7 +463,7 @@ const About = () => {
           {/* Art Gallery */}
           <div>
             <div 
-              className="aspect-video bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+              className="aspect-video bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => setIsArtModalOpen(true)}
             >
               <img 
@@ -477,7 +477,7 @@ const About = () => {
                 href="https://aipg.art"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-x-2 bg-purple-600 text-white text-sm font-medium rounded-full px-6 py-3 hover:bg-purple-700 transition-colors"
+                className="inline-flex items-center gap-x-2 bg-blue-600 text-white text-sm font-medium rounded-full px-6 py-3 hover:bg-blue-700 transition-colors"
               >
                 Try Art Generator
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
