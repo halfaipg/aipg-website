@@ -14,8 +14,8 @@ const Timeline = () => {
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
           date={<span style={{ color: "#fff" }}>Launched Dec 2023</span>}
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
+          contentStyle={{ background: "#4B5563", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
+          contentArrowStyle={{ borderRight: "7px solid  #4B5563" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }}
           icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
           visible={inView}
@@ -34,8 +34,8 @@ const Timeline = () => {
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
           date="Q1-Q4 2024"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
+          contentStyle={{ background: "#4B5563", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
+          contentArrowStyle={{ borderRight: "7px solid  #4B5563" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
           icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
           visible={inView}
@@ -57,8 +57,8 @@ const Timeline = () => {
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
           date="Q1-Q2 2025"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
+          contentStyle={{ background: "#4B5563", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
+          contentArrowStyle={{ borderRight: "7px solid  #4B5563" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
           icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
           visible={inView}
@@ -78,8 +78,8 @@ const Timeline = () => {
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
           date="Q3 2025"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
+          contentStyle={{ background: "#4B5563", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
+          contentArrowStyle={{ borderRight: "7px solid  #4B5563" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
           icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
           visible={inView}
@@ -98,8 +98,8 @@ const Timeline = () => {
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
           date="Q4 2025"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
+          contentStyle={{ background: "#4B5563", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
+          contentArrowStyle={{ borderRight: "7px solid  #4B5563" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
           icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
           visible={inView}
@@ -120,8 +120,8 @@ const Timeline = () => {
         <VerticalTimelineElement
           className="vertical-timeline-element--education"
           date="Q1 2026"
-          contentStyle={{ background: "#0f172a", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
-          contentArrowStyle={{ borderRight: "7px solid  #0f172a" }}
+          contentStyle={{ background: "#4B5563", color: "#fff", boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.5)" }}
+          contentArrowStyle={{ borderRight: "7px solid  #4B5563" }}
           iconStyle={{ background: "#ADD8E6", color: "#1E40AF" }} // Changed to light blue
           icon={<img src="/aipg logo V3 All White_232x240.png" alt="AIPG Logo" style={{ width: '100%', height: 'auto' }} />}
           visible={inView}

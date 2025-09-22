@@ -6,10 +6,10 @@ const Services = () => {
     import("preline");
   }, []);
   return (
-    <div className="bg-white dark:bg-transparent">
+    <div className="bg-black">
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid sm:grid-cols-1 lg:grid-cols-3 items-center gap-6 md:gap-10">
-          <div className="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
+          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-5">
             <div className="flex items-center gap-x-4 mb-3">
               <div className="inline-flex justify-center items-center w-[62px] h-[62px]">
                 <svg
@@ -52,7 +52,7 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
+          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-5">
             <div className="flex items-center gap-x-4 mb-3">
               <div className="inline-flex justify-center items-center w-[62px] h-[62px]">
                 <svg
@@ -86,7 +86,7 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="w-full h-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900">
+          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-5">
             <div className="flex items-center gap-x-4 mb-3">
               <div className="inline-flex justify-center items-center w-[62px] h-[62px]">
                 <svg

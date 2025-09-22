@@ -146,24 +146,24 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between">
           <div className="flex-none text-xl font-semibold text-white" aria-label="Brand">
-            <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
-              <Image
-                src="/AIPGsmwhite.png"
-                alt="AI Power Grid Logo"
-                width={40}
-                height={24}
-                priority
-                style={{ height: 'auto' }}
-              />
-              <Image
-                src="/aipgweblogo.png"
-                alt="AI Power Grid"
-                width={200}
-                height={120}
-                priority
-                style={{ height: 'auto' }}
-              />
-            </Link>
+        <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+          <Image
+            src="/AIPGsimplelogo.png"
+            alt="AI Power Grid Logo"
+            width={40}
+            height={24}
+            priority
+            style={{ height: 'auto' }}
+          />
+          <Image
+            src="/aipgweblogo.png"
+            alt="AI Power Grid"
+            width={200}
+            height={120}
+            priority
+            style={{ height: 'auto' }}
+          />
+        </Link>
           </div>
           <div className="sm:hidden md:hidden">
             <button

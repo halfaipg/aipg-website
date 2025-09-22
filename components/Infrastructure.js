@@ -15,7 +15,7 @@ const Infrastructure = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
-          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
+          <div style={{backgroundColor: '#1F1F1F'}} className="border border-gray-700 rounded-3xl shadow-sm p-8 md:p-9">
             <div className="flex justify-center items-center w-12 h-12 mb-4">
               <svg className="flex-shrink-0 w-8 h-8 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="2"/>
@@ -41,7 +41,7 @@ const Infrastructure = () => {
             </p>
           </div>
 
-          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
+          <div style={{backgroundColor: '#1F1F1F'}} className="border border-gray-700 rounded-3xl shadow-sm p-8 md:p-9">
             <div className="flex justify-center items-center w-12 h-12 mb-4">
               <svg className="flex-shrink-0 w-8 h-8 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -58,7 +58,7 @@ const Infrastructure = () => {
             </p>
           </div>
 
-          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
+          <div style={{backgroundColor: '#1F1F1F'}} className="border border-gray-700 rounded-3xl shadow-sm p-8 md:p-9">
             <div className="flex justify-center items-center w-12 h-12 mb-4">
               <svg className="flex-shrink-0 w-8 h-8 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="8"/>

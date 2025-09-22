@@ -82,7 +82,7 @@ const About = () => {
             <div className="grid sm:grid-cols-2 gap-8 md:gap-12">
             <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -108,7 +108,7 @@ const About = () => {
               </div>
               <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -133,7 +133,7 @@ const About = () => {
               </div>
               <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -158,7 +158,7 @@ const About = () => {
               </div>
               <div className="flex gap-x-5">
                 <svg
-                  className="flex-shrink-0 mt-1 w-6 h-6 text-blue-600 dark:text-blue-500"
+                  className="flex-shrink-0 mt-1 w-6 h-6 text-gray-500 dark:text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -201,7 +201,7 @@ const About = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
           {/* Current Price Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Price
               </h3>
@@ -214,7 +214,7 @@ const About = () => {
           </div>
           {/* Supply Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Supply
               </h3>
@@ -227,7 +227,7 @@ const About = () => {
           </div>
           {/* Market Cap Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Market Cap
               </h3>
@@ -240,7 +240,7 @@ const About = () => {
           </div>
           {/* Launch Type Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Launch Type
               </h3>
@@ -253,7 +253,7 @@ const About = () => {
           </div>
           {/* Launch Date Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Launch Date
               </h3>
@@ -266,7 +266,7 @@ const About = () => {
           </div>
           {/* Network Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Network
               </h3>
@@ -279,7 +279,7 @@ const About = () => {
           </div>
           {/* Max Supply Box */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-blue-800 p-4 text-center">
+            <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Max Supply
               </h3>
@@ -307,7 +307,7 @@ const About = () => {
               </div>
               <ul role="list" className="space-y-2 sm:space-y-4">
                 <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
                     <svg
                       className="flex-shrink-0 h-3.5 w-3.5"
                       xmlns="http://www.w3.org/2000/svg"
@@ -330,7 +330,7 @@ const About = () => {
                 </li>
 
                 <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
                     <svg
                       className="flex-shrink-0 h-3.5 w-3.5"
                       xmlns="http://www.w3.org/2000/svg"
@@ -353,7 +353,7 @@ const About = () => {
                 </li>
 
                 <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
                     <svg
                       className="flex-shrink-0 h-3.5 w-3.5"
                       xmlns="http://www.w3.org/2000/svg"
@@ -375,7 +375,7 @@ const About = () => {
                   </span>
                 </li>
                 <li className="flex space-x-3">
-                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                  <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800/30 dark:text-gray-400">
                     <svg
                       className="flex-shrink-0 h-3.5 w-3.5"
                       xmlns="http://www.w3.org/2000/svg"
@@ -428,7 +428,7 @@ const About = () => {
           {/* Chat Interface */}
           <div>
             <div 
-              className="aspect-video bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+              className="aspect-video bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => setIsModalOpen(true)}
             >
               <img 
@@ -442,7 +442,7 @@ const About = () => {
                 href="https://chat.aipowergrid.io"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-x-2 bg-blue-600 text-white text-sm font-medium rounded-full px-6 py-3 hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-x-2 bg-gray-600 text-white text-sm font-medium rounded-full px-6 py-3 hover:bg-gray-700 transition-colors"
               >
                 Try Chat Demo
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -463,7 +463,7 @@ const About = () => {
           {/* Art Gallery */}
           <div>
             <div 
-              className="aspect-video bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+              className="aspect-video bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => setIsArtModalOpen(true)}
             >
               <img 
@@ -477,7 +477,7 @@ const About = () => {
                 href="https://aipg.art"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-x-2 bg-blue-600 text-white text-sm font-medium rounded-full px-6 py-3 hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-x-2 bg-gray-600 text-white text-sm font-medium rounded-full px-6 py-3 hover:bg-gray-700 transition-colors"
               >
                 Try Art Generator
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -523,7 +523,7 @@ const About = () => {
                 href="https://github.com/AIPowerGrid/grid-discord-image-bot"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-x-1 text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                className="inline-flex items-center gap-x-1 text-xs text-gray-500 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
               >
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -539,7 +539,7 @@ const About = () => {
                 href="https://github.com/AIPowerGrid/grid-discord-news-bot"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-x-1 text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                className="inline-flex items-center gap-x-1 text-xs text-gray-500 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
               >
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -555,7 +555,7 @@ const About = () => {
                 href="https://github.com/AIPowerGrid/grid-discord-rag-bot"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-x-1 text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                className="inline-flex items-center gap-x-1 text-xs text-gray-500 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
               >
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
