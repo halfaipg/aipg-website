@@ -147,6 +147,26 @@
   }
 }
 
+/* Fixed-size variant to prevent responsive width/padding changes */
+.button-43--fixed {
+  width: auto !important;
+  padding: 0.75rem 1.75rem !important;
+  font-size: 16px !important;
+}
+
+@media (max-width: 768px) {
+  .button-43--fixed {
+    width: auto !important;
+  }
+}
+
+@media (orientation: landscape) {
+  .button-43--fixed {
+    padding: 0.75rem 1.75rem !important;
+    font-size: 16px !important;
+  }
+}
+
 /* Adjust this CSS in your styles file */
 .banner-overlay {
   position: relative;
