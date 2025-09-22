@@ -7,7 +7,7 @@ const Stats = () => {
       <div className="grid items-center lg:grid-cols-12 gap-6 lg:gap-12">
         <div className="lg:col-span-4">
           <div className="lg:pe-6 xl:pe-12">
-            <p className="text-6xl font-bold leading-10 text-blue-600">
+            <p className="text-6xl font-bold leading-10 text-gray-500">
               99.97%
               <span className="ms-1 inline-flex items-center gap-x-1 bg-gray-200 font-medium text-gray-800 text-xs leading-4 rounded-full py-0.5 px-2 dark:bg-gray-800 dark:text-gray-300">
                 <svg
@@ -32,17 +32,17 @@ const Stats = () => {
         <div className="lg:col-span-8 relative lg:before:absolute lg:before:top-0 lg:before:-start-12 lg:before:w-px lg:before:h-full lg:before:bg-gray-200 lg:before:dark:bg-gray-700">
           <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-3 sm:gap-8">
             <div>
-              <p className="text-3xl font-semibold text-blue-600">50+</p>
+              <p className="text-3xl font-semibold text-gray-500">50+</p>
               <p className="mt-1 text-gray-500">AI Models Deployed</p>
             </div>
 
             <div>
-              <p className="text-3xl font-semibold text-blue-600">10,000+ </p>
+              <p className="text-3xl font-semibold text-gray-500">10,000+ </p>
               <p className="mt-1 text-gray-500">Artworks minted</p>
             </div>
 
             <div>
-              <p className="text-3xl font-semibold text-blue-600">100%</p>
+              <p className="text-3xl font-semibold text-gray-500">100%</p>
               <p className="mt-1 text-gray-500">Secure</p>
             </div>
           </div>
