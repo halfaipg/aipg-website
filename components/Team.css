@@ -56,10 +56,12 @@
 
 .card {
   text-align: center;
-  box-shadow: rgba(17,24,39,255) 0px 4px 20px 7px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 1.5rem;
+  background-color: #1F1F1F;
   padding-top: 30px;
   padding-right: 25px;
   padding-bottom: 30px;
@@ -82,6 +84,9 @@
   margin-left: 0px;
   font-size: 18px;
   font-weight: 800;
+  color: #f8991d;
+  text-shadow: 0 0 30px rgba(248, 153, 29, 0.5), 0 0 60px rgba(248, 153, 29, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .position {

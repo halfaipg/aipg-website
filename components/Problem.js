@@ -19,7 +19,7 @@ const Problem = () => {
           </div>
 
           <div className="space-y-6 lg:space-y-8">
-            <div className="bg-white rounded-3xl p-6 px-8 shadow-sm">
+            <div style={{backgroundColor: '#F5F5F5'}} className="rounded-3xl p-6 px-8 shadow-sm">
               <div className="flex items-center gap-x-4 mb-4">
                 <div className="inline-flex justify-center items-center w-[46px] h-[46px]">
                   <svg className="flex-shrink-0 w-6 h-6 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -42,7 +42,7 @@ const Problem = () => {
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl p-6 px-8 shadow-sm">
+            <div style={{backgroundColor: '#F5F5F5'}} className="rounded-3xl p-6 px-8 shadow-sm">
               <div className="flex items-center gap-x-4 mb-4">
                 <div className="inline-flex justify-center items-center w-[46px] h-[46px]">
                   <svg className="flex-shrink-0 w-6 h-6 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -66,7 +66,7 @@ const Problem = () => {
                 </h3>
               </div>
               <p className="text-gray-700">
-                AIPG creates a permissionless network where GPU owners earn tokens for useful AI inference, keeping frontier AI power in the hands of the community.
+                AIPG creates a permissionless, decentralized network where GPU owners earn tokens for providing useful AI inference compute, democratizing access and keeping frontier AI power directly in the hands of the global community.
               </p>
             </div>
           </div>
