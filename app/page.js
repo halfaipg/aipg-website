@@ -74,22 +74,28 @@ export default function Home() {
       <div ref={infrastructureRef} className="fadeInSection"><Infrastructure /></div>
       <div ref={liveDemoRef} className="fadeInSection"><LiveDemo /></div>
       <div ref={featuresRef} className="fadeInSection"><Features /></div>
-      <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>
-        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-0 section-header">
-          Positive-Sum Impact
-        </span>
+      <div className="w-full py-8 md:py-12">
+        <div className="flex justify-center items-center">
+          <span className="text-2xl sm:text-4xl font-semibold text-white">
+            Positive-Sum Impact
+          </span>
+        </div>
       </div>
       <div ref={servicesRef} className="fadeInSection"><Services /></div>
-      <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>
-        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-0 section-header">
-          The Team
-        </span>
+      <div className="w-full py-8 md:py-12">
+        <div className="flex justify-center items-center">
+          <span className="text-2xl sm:text-4xl font-semibold text-white">
+            The Team
+          </span>
+        </div>
       </div>
       <div ref={teamRef} className="fadeInSection"><Team /></div>
-      <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>
-        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-0 section-header">
-          Roadmap
-        </span>
+      <div className="w-full py-8 md:py-12">
+        <div className="flex justify-center items-center">
+          <span className="text-2xl sm:text-4xl font-semibold text-white">
+            Roadmap
+          </span>
+        </div>
       </div>
       <div ref={timelineRef} className="fadeInSection"><Timeline /></div>
       <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>

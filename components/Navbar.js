@@ -18,7 +18,7 @@ export default function Navbar() {
   const renderMainOptions = () => (
     <>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="/"
         aria-current="page"
         onClick={() => setIsOpen(false)}
@@ -26,7 +26,7 @@ export default function Navbar() {
         Home
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="/about"
         onClick={() => setIsOpen(false)}
       >
@@ -36,7 +36,7 @@ export default function Navbar() {
         Pools
       </button> */}
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io"
         target="_blank"
         onClick={() => setIsOpen(false)}
@@ -44,7 +44,7 @@ export default function Navbar() {
         Docs
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io/ai-power-grid-whitepaper"
         target="_blank"
         rel="noopener noreferrer"
@@ -53,7 +53,7 @@ export default function Navbar() {
         Whitepaper
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="https://explorer.aipowergrid.io/"
         target="_blank"
         onClick={() => setIsOpen(false)}
@@ -61,7 +61,7 @@ export default function Navbar() {
         Explorer
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="/wallet"
         onClick={() => setIsOpen(false)}
       >
@@ -71,7 +71,7 @@ export default function Navbar() {
         Exchanges
       </button> */}
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io/tokenomics"
         target="_blank"
         onClick={() => setIsOpen(false)}
@@ -139,7 +139,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 w-full mx-auto border border-gray-200 text-sm py-1 sm:py-0 md:py-0 dark:border-gray-800 backdrop-filter backdrop-blur-lg bg-black bg-opacity-70 rounded-b-lg">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full mx-auto text-sm py-1 sm:py-0 md:py-0 backdrop-filter backdrop-blur-lg bg-black bg-opacity-70 rounded-b-lg">
       <nav
         className="relative px-4 sm:flex md:flex sm:items-center md:items-center sm:justify-between md:justify-between sm:px-6 md:px-6 lg:px-8"
         aria-label="Global"
