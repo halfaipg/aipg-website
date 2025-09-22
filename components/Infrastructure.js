@@ -56,7 +56,7 @@ const Infrastructure = () => {
           </div>
 
           <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 md:p-9 dark:bg-slate-900 dark:border-gray-700">
-            <div className="flex justify-center items-center w-12 h-12 bg-purple-600 rounded-lg mb-4">
+            <div className="flex justify-center items-center w-12 h-12 bg-blue-600 rounded-lg mb-4">
               <svg className="flex-shrink-0 w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="8" cy="8" r="6"/>
                 <path d="M18.09 10.37A6 6 0 1 1 10.37 18.09"/>

@@ -110,10 +110,10 @@
 }
 
 .button-43 {
-  background-color: #20549a;
+  background-color: #FF9900;
   border-radius: .5rem;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #000000;
   display: flex;
   font-size: 16px;
   justify-content: center;
@@ -137,7 +137,7 @@
 }
 
 .button-43:hover {
-  background-color: #265faf; /* Change color on hover */
+  background-color: #E6850E; /* Darker orange on hover */
   box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover for a lifting effect */
 }
 
