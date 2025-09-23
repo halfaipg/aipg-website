@@ -7,13 +7,17 @@ const Wallet = () => {
 
   return (
     <div className="pb-40 pt-10">
-      <section className="p-8 md:p-16">
-        <div className="text-black dark:text-white text-center py-4 text-4xl font-semibold" style={{ display: 'flex', justifyContent: 'center' }}>
-          Our Wallets
+      <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
+        <div className="text-center">
+          <h1 className="text-2xl sm:text-4xl font-semibold text-white mb-2">
+            Our Wallets
+          </h1>
+          <p className="text-gray-300 text-lg">
+            AIPG wallets are available for Linux, Windows, MacOS, Raspberry Pi, and Web
+          </p>
         </div>
-        <p className="text-black dark:text-white text-center py-2 text-lg mb-[65px]">
-          AIPG wallets are available for Linux, Windows, MacOS, Raspberry Pi, and Web
-        </p>
+      </div>
+      <section className="p-8 md:p-16">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-12 md:gap-[89px]">
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
