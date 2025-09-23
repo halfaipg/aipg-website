@@ -41,7 +41,7 @@ const Hero = () => {
 
         <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 min-w-[160px] max-w-[160px]"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://discord.gg/W9D8j6HCtC"
             target="_blank"
           >
@@ -94,7 +94,7 @@ const Hero = () => {
         </div>
         <div className={`mt-4 flex flex-wrap justify-center gap-3 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 min-w-[160px] max-w-[160px]"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://www.youtube.com/@AIPowerGrid"
             target="_blank"
           >
