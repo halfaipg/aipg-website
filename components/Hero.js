@@ -168,6 +168,55 @@ const Hero = () => {
             GitHub
           </a>
         </div>
+        
+        {/* Base Announcement */}
+        <div className={`mt-8 flex justify-center ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 flex items-center gap-x-2">
+            <span className="text-white font-medium text-sm">AI Power Grid is moving to</span>
+            <a 
+              href="https://www.base.org/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-x-1 hover:opacity-80 transition-opacity"
+            >
+              <svg 
+                className="w-3 h-3" 
+                viewBox="0 0 1280 1280"
+                fill="none"
+              >
+                <path 
+                  fill="#1652F0" 
+                  d="M0,101.12c0-34.64,0-51.95,6.53-65.28,6.25-12.76,16.56-23.07,29.32-29.32C49.17,0,66.48,0,101.12,0h1077.76c34.63,0,51.96,0,65.28,6.53,12.75,6.25,23.06,16.56,29.32,29.32,6.52,13.32,6.52,30.64,6.52,65.28v1077.76c0,34.63,0,51.96-6.52,65.28-6.26,12.75-16.57,23.06-29.32,29.32-13.32,6.52-30.65,6.52-65.28,6.52H101.12c-34.64,0-51.95,0-65.28-6.52-12.76-6.26-23.07-16.57-29.32-29.32-6.53-13.32-6.53-30.65-6.53-65.28V101.12Z"
+                />
+              </svg>
+              <span className="text-white font-semibold text-sm">base!</span>
+            </a>
+          </div>
+        </div>
+        
+        {/* Contract Address */}
+        <div className={`mt-4 flex justify-center ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 flex items-center gap-x-2">
+            <svg 
+              className="w-3 h-3" 
+              viewBox="0 0 1280 1280"
+              fill="none"
+            >
+              <path 
+                fill="#1652F0" 
+                d="M0,101.12c0-34.64,0-51.95,6.53-65.28,6.25-12.76,16.56-23.07,29.32-29.32C49.17,0,66.48,0,101.12,0h1077.76c34.63,0,51.96,0,65.28,6.53,12.75,6.25,23.06,16.56,29.32,29.32,6.52,13.32,6.52,30.64,6.52,65.28v1077.76c0,34.63,0,51.96-6.52,65.28-6.26,12.75-16.57,23.06-29.32,29.32-13.32,6.52-30.65,6.52-65.28,6.52H101.12c-34.64,0-51.95,0-65.28-6.52-12.76-6.26-23.07-16.57-29.32-29.32-6.53-13.32-6.53-30.65-6.53-65.28V101.12Z"
+              />
+            </svg>
+            <a 
+              href="https://basescan.org/address/0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white font-medium text-sm hover:opacity-80 transition-opacity"
+            >
+              0xa1c0deCaFE...54608
+            </a>
+          </div>
+        </div>
       </div>
       <div className="pb-16 md:pb-20 lg:pb-24"></div>
     </div>

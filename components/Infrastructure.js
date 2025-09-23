@@ -17,7 +17,7 @@ const Infrastructure = () => {
         <div className="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
           <div className="mt-2 sm:mt-3 lg:mt-0">
             <img
-              className="rounded-3xl w-full scale-[1.3]"
+              className="rounded-3xl w-full scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-[1.3]"
               src="/AIPG_grid.png"
               alt="AIPG Grid Infrastructure"
             />
