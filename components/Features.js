@@ -6,7 +6,7 @@ const Features = () => {
     <div>
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid md:grid-cols-2 gap-12">
-          <div className="lg:w-3/4 pl-6 md:pl-8 lg:pl-12">
+          <div className="lg:w-3/4 px-4 sm:px-6 md:pl-8 md:pr-4 lg:pl-12 lg:pr-0">
             <h2 className="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
             Open Source, Open Doors
             </h2>
@@ -18,7 +18,7 @@ const Features = () => {
             </p>
           </div>
 
-          <div className="space-y-6 lg:space-y-10">
+          <div className="space-y-6 lg:space-y-10 px-4 sm:px-6 md:px-0">
             <div>
               <div className="flex items-center gap-x-2 mb-2">
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
