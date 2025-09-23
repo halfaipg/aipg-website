@@ -15,7 +15,7 @@ const Infrastructure = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
-          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-8 md:p-9">
+          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-12">
             <div className="flex gap-x-4">
               <svg className="flex-shrink-0 w-6 h-6 mt-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="2"/>
@@ -37,7 +37,7 @@ const Infrastructure = () => {
             </div>
           </div>
 
-          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-8 md:p-9">
+          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-12">
             <div className="flex gap-x-4">
               <svg className="flex-shrink-0 w-6 h-6 mt-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -55,7 +55,7 @@ const Infrastructure = () => {
             </div>
           </div>
 
-          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-8 md:p-9">
+          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-12">
             <div className="flex gap-x-4">
               <svg className="flex-shrink-0 w-6 h-6 mt-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="8"/>

@@ -39,9 +39,9 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className={`mt-12 flex flex-col sm:flex-row gap-3 justify-center mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+        <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 min-w-[160px] max-w-[160px]"
             href="https://discord.gg/W9D8j6HCtC"
             target="_blank"
           >
@@ -58,7 +58,7 @@ const Hero = () => {
             Discord
           </a>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://t.me/aipowergrid"
             target="_blank"
           >
@@ -75,7 +75,7 @@ const Hero = () => {
             Telegram
           </a>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://x.com/AIPowerGrid"
             target="_blank"
           >
@@ -92,9 +92,9 @@ const Hero = () => {
             Twitter
           </a>
         </div>
-        <div className={`mt-4 flex flex-col sm:flex-row gap-3 justify-center ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+        <div className={`mt-4 flex flex-wrap justify-center gap-3 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 min-w-[160px] max-w-[160px]"
             href="https://www.youtube.com/@AIPowerGrid"
             target="_blank"
           >
@@ -111,7 +111,7 @@ const Hero = () => {
             YouTube
           </a>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://www.instagram.com/aipowergrid"
             target="_blank"
           >
@@ -130,7 +130,7 @@ const Hero = () => {
             Instagram
           </a>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://www.reddit.com/r/AIPowerGrid/"
             target="_blank"
           >
@@ -151,7 +151,7 @@ const Hero = () => {
             Reddit
           </a>
           <a
-            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-auto w-1/2"
+            className="button-43 inline-flex justify-center items-center gap-x-3 text-center text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 w-[160px]"
             href="https://github.com/aipowergrid"
             target="_blank"
           >

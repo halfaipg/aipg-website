@@ -76,8 +76,8 @@ const About = () => {
         </div>
       </div>
 
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
+      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto pb-20">
+        <div className="mt-0 grid lg:grid-cols-3 gap-8 lg:gap-12">
           <div className="lg:col-span-1">
             <h2 className="font-bold text-2xl md:text-3xl text-white">
               A New Kind of Power Grid
@@ -224,7 +224,7 @@ const About = () => {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
           {/* Current Price Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Price
@@ -237,7 +237,7 @@ const About = () => {
             </div>
           </div>
           {/* Supply Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Supply
@@ -250,7 +250,7 @@ const About = () => {
             </div>
           </div>
           {/* Market Cap Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Market Cap
@@ -263,7 +263,7 @@ const About = () => {
             </div>
           </div>
           {/* Launch Type Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Launch Type
@@ -276,7 +276,7 @@ const About = () => {
             </div>
           </div>
           {/* Launch Date Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Launch Date
@@ -289,7 +289,7 @@ const About = () => {
             </div>
           </div>
           {/* Network Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Network
@@ -302,7 +302,7 @@ const About = () => {
             </div>
           </div>
           {/* Max Supply Box */}
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-3xl overflow-hidden shadow-lg">
             <div className="bg-gray-800 p-4 text-center">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                 Max Supply
@@ -380,7 +380,7 @@ const About = () => {
               <div>Loading...</div> // replace this with your loading spinner or placeholder
             ) : (
               <img
-                className="rounded-xl"
+                className="rounded-3xl"
                 src={`/${randomImage}`}
                 alt="Image Description"
               />
@@ -390,12 +390,12 @@ const About = () => {
       </div>
 
       {/* Interactive Demos Section */}
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto bg-slate-50 dark:bg-slate-800/50">
+      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto" style={{backgroundColor: '#1F1F1F'}}>
         <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-          <h2 className="text-3xl font-bold md:text-4xl md:leading-tight dark:text-white">
+          <h2 className="text-3xl font-bold md:text-4xl md:leading-tight text-white">
             Experience the Grid in Action
           </h2>
-          <p className="mt-1 text-gray-600 dark:text-gray-400">
+          <p className="mt-1 text-gray-300">
             Test our distributed worker network with powerful, developer-friendly frontends that showcase the full capabilities of the AIPG ecosystem.
           </p>
         </div>
@@ -404,13 +404,13 @@ const About = () => {
           {/* Chat Interface */}
           <div>
             <div 
-              className="aspect-video bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+              className="aspect-video bg-gradient-to-br from-gray-600 to-gray-800 rounded-3xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => setIsModalOpen(true)}
             >
               <img 
                 src="/chat-ss.png" 
                 alt="Chat Interface Screenshot" 
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-cover rounded-3xl"
               />
             </div>
             <div className="text-center mb-4">
@@ -427,10 +427,10 @@ const About = () => {
               </a>
             </div>
             <div className="space-y-2">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-300">
                 <strong>Four Versatile Modes:</strong> Story Mode for creative fiction, Adventure Mode for interactive fiction, Chat Mode for AI personas, and Instruct Mode for ChatGPT-style responses.
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-300">
                 <strong>Full Features:</strong> Model selection, worker management, export/share stories, text-to-speech, memory support, and advanced sampling configurations.
               </p>
             </div>
@@ -439,13 +439,13 @@ const About = () => {
           {/* Art Gallery */}
           <div>
             <div 
-              className="aspect-video bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+              className="aspect-video bg-gradient-to-br from-gray-600 to-gray-800 rounded-3xl flex items-center justify-center mb-6 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => setIsArtModalOpen(true)}
             >
               <img 
                 src="/art-ss.png" 
                 alt="Art Gallery Screenshot" 
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-cover rounded-3xl"
               />
             </div>
             <div className="text-center mb-4">
@@ -462,10 +462,10 @@ const About = () => {
               </a>
             </div>
             <div className="space-y-2">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-300">
                 <strong>Advanced Features:</strong> Text2img, img2img, and inpainting capabilities powered by Grid workers running Stable Diffusion models.
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-300">
                 <strong>Coming Soon:</strong> NFT minting with deterministic metadata—mint the actual AI generation parameters instead of just links to images!
               </p>
             </div>
@@ -473,7 +473,7 @@ const About = () => {
         </div>
 
         {/* Discord Integration */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl p-6 lg:p-8">
+        <div className="rounded-3xl p-6 lg:p-8" style={{backgroundColor: '#2A2A2A'}}>
           <div className="flex flex-col items-center text-center gap-4 mb-4">
             <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center">
               <svg className="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
@@ -481,20 +481,20 @@ const About = () => {
               </svg>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+              <h3 className="text-xl font-semibold text-white">
                 Discord Grid Bots
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-300">
                 Experience AIPG workers directly in our community Discord
               </p>
             </div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+            <div className="text-center p-4 rounded-3xl" style={{backgroundColor: '#1F1F1F'}}>
               <div className="text-2xl mb-2">🖼️</div>
-              <h4 className="font-semibold text-gray-800 dark:text-white">Image Gen Bot</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Generate images directly in Discord</p>
+              <h4 className="font-semibold text-white">Image Gen Bot</h4>
+              <p className="text-sm text-gray-300 mb-3">Generate images directly in Discord</p>
               <a
                 href="https://github.com/AIPowerGrid/grid-discord-image-bot"
                 target="_blank"
@@ -507,10 +507,10 @@ const About = () => {
                 View Code
               </a>
             </div>
-            <div className="text-center p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+            <div className="text-center p-4 rounded-3xl" style={{backgroundColor: '#1F1F1F'}}>
               <div className="text-2xl mb-2">📰</div>
-              <h4 className="font-semibold text-gray-800 dark:text-white">AI News Bot</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Latest AI developments and updates</p>
+              <h4 className="font-semibold text-white">AI News Bot</h4>
+              <p className="text-sm text-gray-300 mb-3">Latest AI developments and updates</p>
               <a
                 href="https://github.com/AIPowerGrid/grid-discord-news-bot"
                 target="_blank"
@@ -523,10 +523,10 @@ const About = () => {
                 View Code
               </a>
             </div>
-            <div className="text-center p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+            <div className="text-center p-4 rounded-3xl" style={{backgroundColor: '#1F1F1F'}}>
               <div className="text-2xl mb-2">🧠</div>
-              <h4 className="font-semibold text-gray-800 dark:text-white">AI Knowledge Bot</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Answer questions about AI and tech</p>
+              <h4 className="font-semibold text-white">AI Knowledge Bot</h4>
+              <p className="text-sm text-gray-300 mb-3">Answer questions about AI and tech</p>
               <a
                 href="https://github.com/AIPowerGrid/grid-discord-rag-bot"
                 target="_blank"
@@ -562,7 +562,7 @@ const About = () => {
         <img 
           src="/chat-ss.png" 
           alt="Chat Interface Screenshot Full Resolution" 
-          className="max-w-full max-h-[90vh] object-contain rounded-lg"
+          className="max-w-full max-h-[90vh] object-contain rounded-3xl"
         />
       </Modal>
 
@@ -570,7 +570,7 @@ const About = () => {
         <img 
           src="/art-ss.png" 
           alt="Art Gallery Screenshot Full Resolution" 
-          className="max-w-full max-h-[90vh] object-contain rounded-lg"
+          className="max-w-full max-h-[90vh] object-contain rounded-3xl"
         />
       </Modal>
 

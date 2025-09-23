@@ -9,7 +9,7 @@ const Services = () => {
     <div className="bg-black">
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid sm:grid-cols-1 lg:grid-cols-3 items-center gap-6 md:gap-10">
-          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-5">
+          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-12">
             <div className="flex items-center gap-x-2 mb-2">
               <svg
                 className="w-5 h-5 text-gray-400"
@@ -28,7 +28,7 @@ const Services = () => {
             </p>
           </div>
 
-          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-5">
+          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-12">
             <div className="flex items-center gap-x-2 mb-2">
               <svg
                 className="w-5 h-5 text-gray-400"
@@ -47,7 +47,7 @@ const Services = () => {
             </p>
           </div>
 
-          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-5">
+          <div style={{backgroundColor: '#1F1F1F'}} className="w-full h-full shadow-lg rounded-3xl p-12">
             <div className="flex items-center gap-x-2 mb-2">
               <svg
                 className="w-5 h-5 text-gray-400"
