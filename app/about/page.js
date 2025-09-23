@@ -57,11 +57,22 @@ const About = () => {
   return (
     <div className="pt-0 bg-black min-h-screen">
       {/* Video Banner */}
-      <div className="overflow-hidden">
+      {/* <div className="overflow-hidden">
         <video autoPlay loop muted className="w-full h-[190px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover">
           <source src="/videos/AIPG_About_Banner.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+      </div> */}
+
+      <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
+        <div className="text-center">
+          <h1 className="text-2xl sm:text-4xl font-semibold text-white mb-2">
+            About AI Power Grid
+          </h1>
+          <p className="text-gray-300 text-lg">
+            Discover the future of decentralized AI infrastructure and how we're building a community-powered network
+          </p>
+        </div>
       </div>
 
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
