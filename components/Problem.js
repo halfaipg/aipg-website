@@ -19,7 +19,7 @@ const Problem = () => {
           </div>
 
           <div className="space-y-6 lg:space-y-8">
-            <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl p-6 px-8 shadow-sm">
+            <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl p-12 shadow-sm">
               <div className="flex items-center gap-x-4 mb-4">
                 <div className="inline-flex justify-center items-center w-[46px] h-[46px]">
                   <svg className="flex-shrink-0 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -42,7 +42,7 @@ const Problem = () => {
               </p>
             </div>
 
-            <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl p-6 px-8 shadow-sm">
+            <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl p-12 shadow-sm">
               <div className="flex items-center gap-x-4 mb-4">
                 <div className="inline-flex justify-center items-center w-[46px] h-[46px]">
                   <svg className="flex-shrink-0 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

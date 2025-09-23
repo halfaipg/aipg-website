@@ -1,14 +1,72 @@
 /* customTimelineStyles.css */
-.vertical-timeline::before {
-  background: rgba(66, 66, 66, 0.752); /* White color */
-  height: calc(100% - 225px);
-  margin-top: 28px;
+/* DESTROY THE LINE ON MOBILE WITH EXTREME PREJUDICE */
+@media only screen and (max-width: 1169px) {
+  .vertical-timeline.vertical-timeline--animate::before,
+  .vertical-timeline.vertical-timeline--two-columns::before,
+  .vertical-timeline.vertical-timeline--one-column-right::before,
+  .vertical-timeline::before,
+  .vertical-timeline-element::before {
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: none !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    border: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+}
+
+/* Only show line on desktop */
+@media only screen and (min-width: 1170px) {
+  .vertical-timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: calc(100% - 225px);
+    width: 4px;
+    background: rgba(66, 66, 66, 0.752);
+    margin-top: 28px;
+  }
+}
+
+/* Hide vertical line on small screens */
+@media (max-width: 768px) {
+  .vertical-timeline::before,
+  .vertical-timeline::after {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    background: none !important;
+  }
+  
+  .vertical-timeline {
+    background: none !important;
+  }
+  
+  /* Target the timeline line more specifically */
+  .vertical-timeline-element::before,
+  .vertical-timeline-element::after {
+    display: none !important;
+  }
+  
+  /* Alternative approach - hide the entire timeline line */
+  .vertical-timeline .vertical-timeline-element {
+    position: relative;
+  }
+  
+  .vertical-timeline .vertical-timeline-element::before {
+    display: none !important;
+  }
 }
 .vertical-timeline-element-icon {
-  box-shadow: 0 0 0 2px #00008B,inset 0 2px 0 rgba(0,0,0,.08),0 3px 0 4px rgba(0,0,0,.05) !important;
-  border: none; /* If the ring is a border */
-  box-shadow: none; /* If the ring is created with box-shadow */
-
+  box-shadow: none !important;
+  border: none !important;
 }
 .vertical-timeline-element-icon::before,
 .vertical-timeline-element-icon::after {
