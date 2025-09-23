@@ -8,9 +8,31 @@ import Providers from "@/context/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI Power Grid - Democratizing Open Source Generative AI",
-  description: "'Revolutionizing the AI landscape with open access to blockchain-validated and incentivized generative AI models, fostering adoption, innovation, creativity, and community-driven growth.",
-  // description: "Empowering the architects of tomorrow with the fAreedom of shared AI",
+  title: "AI Power Grid - Decentralized AI Infrastructure Network",
+  description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+  openGraph: {
+    title: "AI Power Grid - Decentralized AI Infrastructure Network",
+    description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+    url: "https://aipowergrid.io",
+    siteName: "AI Power Grid",
+    images: [
+      {
+        url: "/AIPGsimplelogo.png",
+        width: 200,
+        height: 200,
+        alt: "AI Power Grid Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Power Grid - Decentralized AI Infrastructure Network",
+    description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+    images: ["/AIPGsimplelogo.png"],
+    creator: "@AIPowerGrid",
+  },
 };
 export const revalidate = 30;
 export default function RootLayout({ children }) {
