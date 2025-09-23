@@ -207,6 +207,16 @@ const About = () => {
         </div>
       </div>
 
+      {/* Team Section */}
+      <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
+        <div className="flex justify-center items-center">
+          <span className="text-2xl sm:text-4xl font-semibold text-white">
+            The Team
+          </span>
+        </div>
+      </div>
+      <Team />
+
       {/* Metrics Section - Adapted with Timeline Box Styling */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <h2 className="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200 mb-8 text-center">
@@ -564,15 +574,6 @@ const About = () => {
         />
       </Modal>
 
-      {/* Team Section */}
-      <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
-        <div className="flex justify-center items-center">
-          <span className="text-2xl sm:text-4xl font-semibold text-white">
-            The Team
-          </span>
-        </div>
-      </div>
-      <Team />
     </div>
   );
 };

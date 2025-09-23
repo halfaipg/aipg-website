@@ -19,10 +19,10 @@ const Problem = () => {
           </div>
 
           <div className="space-y-6 lg:space-y-8">
-            <div style={{backgroundColor: '#F5F5F5'}} className="rounded-3xl p-6 px-8 shadow-sm">
+            <div style={{backgroundColor: '#4B5563'}} className="rounded-3xl p-6 px-8 shadow-sm">
               <div className="flex items-center gap-x-4 mb-4">
                 <div className="inline-flex justify-center items-center w-[46px] h-[46px]">
-                  <svg className="flex-shrink-0 w-6 h-6 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="flex-shrink-0 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="8" width="20" height="10" rx="2"/>
                     <path d="M8 8V6a4 4 0 0 1 8 0v2"/>
                     <path d="M12 13v3"/>
@@ -33,19 +33,19 @@ const Problem = () => {
                     <path d="M17 10v8"/>
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-black">
+                <h3 className="text-lg font-semibold text-white">
                   Corporate Gatekeepers
                 </h3>
               </div>
-              <p className="text-gray-700">
+              <p className="text-gray-300">
                 Frontier models locked behind expensive APIs, controlled by a handful of tech giants who decide who gets access and at what price. This creates artificial scarcity around powerful AI capabilities.
               </p>
             </div>
 
-            <div style={{backgroundColor: '#F5F5F5'}} className="rounded-3xl p-6 px-8 shadow-sm">
+            <div style={{backgroundColor: '#4B5563'}} className="rounded-3xl p-6 px-8 shadow-sm">
               <div className="flex items-center gap-x-4 mb-4">
                 <div className="inline-flex justify-center items-center w-[46px] h-[46px]">
-                  <svg className="flex-shrink-0 w-6 h-6 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="flex-shrink-0 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="3"/>
                     <circle cx="5" cy="12" r="1"/>
                     <circle cx="19" cy="12" r="1"/>
@@ -61,11 +61,11 @@ const Problem = () => {
                     <circle cx="16" cy="16" r="0.5"/>
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-black">
+                <h3 className="text-lg font-semibold text-white">
                   Community-Powered Alternative
                 </h3>
               </div>
-              <p className="text-gray-700">
+              <p className="text-gray-300">
                 AIPG creates a permissionless, decentralized network where GPU owners earn tokens for providing useful AI inference compute, democratizing access and keeping frontier AI power directly in the hands of the global community.
               </p>
             </div>
