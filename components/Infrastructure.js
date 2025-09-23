@@ -14,8 +14,17 @@ const Infrastructure = () => {
           </p>
         </div>
 
-        <div className="space-y-6 lg:space-y-10 max-w-4xl mx-auto">
-          <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-12 text-center">
+        <div className="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
+          <div className="mt-2 sm:mt-3 lg:mt-0">
+            <img
+              className="rounded-3xl w-full scale-[1.3]"
+              src="/AIPG_grid.png"
+              alt="AIPG Grid Infrastructure"
+            />
+          </div>
+          
+          <div className="space-y-6 lg:space-y-10">
+            <div style={{backgroundColor: '#1F1F1F'}} className="rounded-3xl shadow-sm p-12 text-center">
             <div className="flex items-center justify-center gap-x-2 mb-2">
               <svg className="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="2"/>
@@ -31,7 +40,7 @@ const Infrastructure = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Our global community of GPU contributors forms the backbone of AIPG's decentralized infrastructure. From gaming rigs to enterprise servers, any compatible hardware can join the network and earn tokens by running cutting-edge AI models. This distributed approach ensures resilience, reduces costs, and democratizes access to powerful AI capabilities while creating a sustainable economy for compute providers.
+              Transform your idle GPU into a powerful AI node. Join thousands of contributors earning tokens by running cutting-edge models—from gaming rigs to data centers, every machine strengthens our decentralized network.
             </p>
           </div>
 
@@ -47,7 +56,7 @@ const Infrastructure = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Advanced algorithms automatically route AI requests to the most suitable worker nodes in real-time. Our intelligent system considers factors like model compatibility, current workload, geographical proximity, and historical performance to ensure optimal response times. This dynamic load balancing maximizes network efficiency while providing users with consistent, high-quality AI generation experiences across all supported models and use cases.
+              Intelligent algorithms instantly match your AI requests to the perfect worker node. Our smart routing considers model type, current load, and performance metrics to deliver lightning-fast results every time.
             </p>
           </div>
 
@@ -63,9 +72,10 @@ const Infrastructure = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              AIPG tokens create a fair and transparent reward system that directly compensates contributors for valuable work. Unlike traditional cryptocurrency mining that wastes energy on meaningless calculations, every AIPG token earned represents actual AI inference completed for real users. This creates a virtuous cycle where the network grows stronger as more people participate, while contributors earn meaningful rewards for powering the future of decentralized artificial intelligence.
+              Earn meaningful rewards for powering real AI workloads. No wasteful mining—every AIPG token represents actual value created through AI inference that serves real users and builds the future of decentralized intelligence.
             </p>
           </div>
+        </div>
         </div>
       </div>
     </div>
