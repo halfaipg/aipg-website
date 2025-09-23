@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Modal from "@/components/Modal";
+import Team from "@/components/Team";
 
 const About = () => {
   const images = [
@@ -562,6 +563,16 @@ const About = () => {
           className="max-w-full max-h-[90vh] object-contain rounded-lg"
         />
       </Modal>
+
+      {/* Team Section */}
+      <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
+        <div className="flex justify-center items-center">
+          <span className="text-2xl sm:text-4xl font-semibold text-white">
+            The Team
+          </span>
+        </div>
+      </div>
+      <Team />
     </div>
   );
 };

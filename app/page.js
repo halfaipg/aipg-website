@@ -6,7 +6,6 @@ import Problem from "@/components/Problem";
 import Infrastructure from "@/components/Infrastructure";
 import LiveDemo from "@/components/LiveDemo";
 import Services from "@/components/Services";
-import Team from "@/components/Team";
 import Timeline from "@/components/Timeline";
 import TimelineNew from "@/components/Timeline-New"; // Import the Timeline-New component
 
@@ -16,7 +15,6 @@ export default function Home() {
   const infrastructureRef = useRef(null);
   const liveDemoRef = useRef(null);
   const featuresRef = useRef(null);
-  const teamRef = useRef(null);
   const servicesRef = useRef(null);
   const timelineRef = useRef(null);
   const timelineNewRef = useRef(null);
@@ -46,7 +44,7 @@ export default function Home() {
     const teamObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.team);
     const roadmapObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.roadmap);
 
-    const refs = [heroRef, problemRef, infrastructureRef, liveDemoRef, featuresRef, servicesRef, teamRef, timelineRef, timelineNewRef];
+    const refs = [heroRef, problemRef, infrastructureRef, liveDemoRef, featuresRef, servicesRef, timelineRef, timelineNewRef];
     refs.forEach(ref => {
       if (ref.current) {
         generalObserver.observe(ref.current);
@@ -82,14 +80,6 @@ export default function Home() {
         </div>
       </div>
       <div ref={servicesRef} className="fadeInSection"><Services /></div>
-      <div className="w-full py-8 md:py-12">
-        <div className="flex justify-center items-center">
-          <span className="text-2xl sm:text-4xl font-semibold text-white">
-            The Team
-          </span>
-        </div>
-      </div>
-      <div ref={teamRef} className="fadeInSection"><Team /></div>
       <div className="w-full py-8 md:py-12">
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
