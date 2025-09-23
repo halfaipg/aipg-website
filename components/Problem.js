@@ -37,7 +37,7 @@ const Problem = () => {
                   Corporate Gatekeepers
                 </h3>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 ml-4">
                 Frontier models locked behind expensive APIs, controlled by a handful of tech giants who decide who gets access and at what price. This creates artificial scarcity around powerful AI capabilities.
               </p>
             </div>
@@ -65,7 +65,7 @@ const Problem = () => {
                   Community-Powered Alternative
                 </h3>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 ml-4">
                 AIPG creates a permissionless, decentralized network where GPU owners earn tokens for providing useful AI inference compute, democratizing access and keeping frontier AI power directly in the hands of the global community.
               </p>
             </div>
