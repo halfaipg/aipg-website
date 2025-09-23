@@ -329,50 +329,63 @@ const About = () => {
                   AIPG transforms the relationship between compute and AI by creating a permissionless network where GPU owners contribute idle hardware to run state-of-the-art models. Our smart routing engine matches every prompt to the optimal worker node, while AIPG tokens flow to contributors based on actual inference work performed—no wasteful hashing, only useful AI that serves real human creativity and productivity.
                 </p>
               </div>
-              <ul role="list" className="space-y-2 sm:space-y-4">
-                <li>
-                  <div className="flex items-start gap-x-2">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="2 4 20 16">
+              <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+                <div className="h-full">
+                  <div className="flex items-center gap-x-2 mb-2">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                     </svg>
-                    <span className="text-sm sm:text-base text-gray-300">
-                      <span className="font-bold text-white">Distributed Worker Network</span> - Community GPUs running real AI inference
-                    </span>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Distributed Worker Network
+                    </h3>
                   </div>
-                </li>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Community GPUs running real AI inference
+                  </p>
+                </div>
 
-                <li>
-                  <div className="flex items-start gap-x-2">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="2 2 20 20">
+                <div className="h-full">
+                  <div className="flex items-center gap-x-2 mb-2">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
-                    <span className="text-sm sm:text-base text-gray-300">
-                      <span className="font-bold text-white">Smart Routing Engine</span> - Optimal prompt matching to best worker nodes
-                    </span>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Smart Routing Engine
+                    </h3>
                   </div>
-                </li>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Optimal prompt matching to best worker nodes
+                  </p>
+                </div>
 
-                <li>
-                  <div className="flex items-start gap-x-2">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="4 6 16 12">
+                <div className="h-full">
+                  <div className="flex items-center gap-x-2 mb-2">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
                     </svg>
-                    <span className="text-sm sm:text-base text-gray-300">
-                      <span className="font-bold text-white">Token Incentives</span> - Contributors earn rewards for useful computation
-                    </span>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Token Incentives
+                    </h3>
                   </div>
-                </li>
-                <li>
-                  <div className="flex items-start gap-x-2">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="1 3 22 18">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Contributors earn rewards for useful computation
+                  </p>
+                </div>
+
+                <div className="h-full">
+                  <div className="flex items-center gap-x-2 mb-2">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                     </svg>
-                    <span className="text-sm sm:text-base text-gray-300">
-                      <span className="font-bold text-white">Open Source Transparency</span> - All code and models publicly auditable
-                    </span>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Open Source Transparency
+                    </h3>
                   </div>
-                </li>
-              </ul>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    All code and models publicly auditable
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
           <div className={`${isLoading ? "" : "mt-6 sm:mt-0"}`}>

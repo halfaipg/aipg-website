@@ -143,6 +143,12 @@
     width: 50%; /* Example: make the button width 50% of its container on smaller screens */
     margin: 0 auto; /* Center the button if it's not full-width */
   }
+  
+  /* Override for social buttons to maintain fixed width */
+  .button-43.w-\\[160px\\] {
+    width: 160px !important;
+    margin: 0;
+  }
 }
 
 .button-43:hover {
