@@ -25,7 +25,9 @@ const Hero = () => {
         </div>
         <div className={`mt-5 max-w-4xl text-center mx-auto ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ minHeight: '8rem' }}>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight">
-            <span className="text-white">A New Kind of </span>
+            <span className="text-white">A New Kind of</span>
+            <br className="sm:hidden" />
+            <span className="text-white hidden sm:inline"> </span>
             <span style={{
                     color: '#f8991d',
                     textShadow: '0 0 30px rgba(248, 153, 29, 0.5), 0 0 60px rgba(248, 153, 29, 0.3)',
