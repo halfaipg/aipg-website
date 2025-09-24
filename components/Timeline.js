@@ -70,7 +70,7 @@ const Timeline = () => {
               backgroundColor: "#000000"
             }}>
               <img 
-                src="http://localhost:3005/_next/image?url=%2FAIPGsimplelogo.png&w=96&q=75" 
+                src="/AIPGsimplelogo.png" 
                 alt="AIPG Logo" 
                 style={{ 
                   width: '95%', 
@@ -127,7 +127,7 @@ const Timeline = () => {
               backgroundColor: "#000000"
             }}>
               <img 
-                src="http://localhost:3005/_next/image?url=%2FAIPGsimplelogo.png&w=96&q=75" 
+                src="/AIPGsimplelogo.png" 
                 alt="AIPG Logo" 
                 style={{ 
                   width: '95%', 
@@ -187,7 +187,7 @@ const Timeline = () => {
               backgroundColor: "#000000"
             }}>
               <img 
-                src="http://localhost:3005/_next/image?url=%2FAIPGsimplelogo.png&w=96&q=75" 
+                src="/AIPGsimplelogo.png" 
                 alt="AIPG Logo" 
                 style={{ 
                   width: '95%', 
@@ -245,7 +245,7 @@ const Timeline = () => {
               backgroundColor: "#000000"
             }}>
               <img 
-                src="http://localhost:3005/_next/image?url=%2FAIPGsimplelogo.png&w=96&q=75" 
+                src="/AIPGsimplelogo.png" 
                 alt="AIPG Logo" 
                 style={{ 
                   width: '95%', 
@@ -302,7 +302,7 @@ const Timeline = () => {
               backgroundColor: "#000000"
             }}>
               <img 
-                src="http://localhost:3005/_next/image?url=%2FAIPGsimplelogo.png&w=96&q=75" 
+                src="/AIPGsimplelogo.png" 
                 alt="AIPG Logo" 
                 style={{ 
                   width: '95%', 
@@ -361,7 +361,7 @@ const Timeline = () => {
               backgroundColor: "#000000"
             }}>
               <img 
-                src="http://localhost:3005/_next/image?url=%2FAIPGsimplelogo.png&w=96&q=75" 
+                src="/AIPGsimplelogo.png" 
                 alt="AIPG Logo" 
                 style={{ 
                   width: '95%', 
