@@ -10,6 +10,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "AI Power Grid - Decentralized AI Infrastructure Network",
   description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+  icons: {
+    icon: '/favicon-96x96.png',
+    apple: '/favicon-96x96.png',
+  },
   openGraph: {
     title: "AI Power Grid - Decentralized AI Infrastructure Network",
     description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
