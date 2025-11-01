@@ -187,6 +187,14 @@ export function useStaking() {
         setNeedsApproval(false);
       } catch (error) {
         setIsLoading(false);
+        // Check if user cancelled
+        if (error.message?.includes('User rejected') || 
+            error.message?.includes('denied') || 
+            error.message?.includes('User denied') ||
+            error.code === 4001 ||
+            error.code === 'ACTION_REJECTED') {
+          throw new Error('Transaction cancelled');
+        }
         throw new Error('Approval rejected or failed');
       }
     }
@@ -205,6 +213,14 @@ export function useStaking() {
       await fetchStakingData();
     } catch (error) {
       console.error('Stake error:', error);
+      // Check if user cancelled
+      if (error.message?.includes('User rejected') || 
+          error.message?.includes('denied') || 
+          error.message?.includes('User denied') ||
+          error.code === 4001 ||
+          error.code === 'ACTION_REJECTED') {
+        throw new Error('Transaction cancelled');
+      }
       throw error;
     } finally {
       setIsLoading(false);
@@ -231,6 +247,14 @@ export function useStaking() {
       await fetchStakingData();
     } catch (error) {
       console.error('Unstake error:', error);
+      // Check if user cancelled
+      if (error.message?.includes('User rejected') || 
+          error.message?.includes('denied') || 
+          error.message?.includes('User denied') ||
+          error.code === 4001 ||
+          error.code === 'ACTION_REJECTED') {
+        throw new Error('Transaction cancelled');
+      }
       throw error;
     } finally {
       setIsLoading(false);
@@ -255,6 +279,14 @@ export function useStaking() {
       await fetchStakingData();
     } catch (error) {
       console.error('Claim error:', error);
+      // Check if user cancelled
+      if (error.message?.includes('User rejected') || 
+          error.message?.includes('denied') || 
+          error.message?.includes('User denied') ||
+          error.code === 4001 ||
+          error.code === 'ACTION_REJECTED') {
+        throw new Error('Transaction cancelled');
+      }
       throw error;
     } finally {
       setIsLoading(false);
