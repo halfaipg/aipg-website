@@ -24,15 +24,38 @@ export function useStaking() {
 
   // Fetch staking data
   const fetchStakingData = async () => {
-    if (!address || !publicClient) {
-      console.log('⚠️ No address or publicClient:', { address, publicClient: !!publicClient });
+    if (!publicClient) {
+      console.log('⚠️ No publicClient');
       return;
     }
 
-    console.log('🔄 Fetching staking data for:', address);
+    console.log('🔄 Fetching staking data for:', address || 'no wallet');
 
     try {
-      const [tokenBalance, stakedBalance, pendingRewards, totalStaked, allowance, rewardRate, rewardsDuration] = await Promise.all([
+      // Always fetch global data
+      const globalDataPromises = [
+        publicClient.readContract({
+          address: STAKING_VAULT_ADDRESS,
+          abi: STAKING_VAULT_ABI,
+          functionName: 'totalSupply',
+          args: []
+        }),
+        publicClient.readContract({
+          address: STAKING_VAULT_ADDRESS,
+          abi: STAKING_VAULT_ABI,
+          functionName: 'rewardRate',
+          args: []
+        }),
+        publicClient.readContract({
+          address: STAKING_VAULT_ADDRESS,
+          abi: STAKING_VAULT_ABI,
+          functionName: 'rewardsDuration',
+          args: []
+        })
+      ];
+
+      // Only fetch user-specific data if wallet is connected
+      const userDataPromises = address ? [
         publicClient.readContract({
           address: AIPG_TOKEN_ADDRESS,
           abi: ERC20_ABI,
@@ -52,30 +75,19 @@ export function useStaking() {
           args: [address]
         }),
         publicClient.readContract({
-          address: STAKING_VAULT_ADDRESS,
-          abi: STAKING_VAULT_ABI,
-          functionName: 'totalSupply',
-          args: []
-        }),
-        publicClient.readContract({
           address: AIPG_TOKEN_ADDRESS,
           abi: ERC20_ABI,
           functionName: 'allowance',
           args: [address, STAKING_VAULT_ADDRESS]
-        }),
-        publicClient.readContract({
-          address: STAKING_VAULT_ADDRESS,
-          abi: STAKING_VAULT_ABI,
-          functionName: 'rewardRate',
-          args: []
-        }),
-        publicClient.readContract({
-          address: STAKING_VAULT_ADDRESS,
-          abi: STAKING_VAULT_ABI,
-          functionName: 'rewardsDuration',
-          args: []
         })
+      ] : [];
+
+      const [totalStaked, rewardRate, rewardsDuration, ...userData] = await Promise.all([
+        ...globalDataPromises,
+        ...userDataPromises
       ]);
+
+      const [tokenBalance, stakedBalance, pendingRewards, allowance] = address ? userData : [0n, 0n, 0n, 0n];
 
       // Calculate APY
       let apy = 0;
@@ -90,7 +102,13 @@ export function useStaking() {
         pendingRewards: pendingRewards.toString(),
         totalStaked: totalStaked.toString(),
         rewardRate: rewardRate.toString(),
-        apy: apy.toFixed(2) + '%'
+        apy: apy.toFixed(2) + '%',
+        hasWallet: !!address
+      });
+
+      console.log('📊 Global stats:', {
+        totalStaked: totalStaked.toString(),
+        apy: apy
       });
 
       setStakingData({
