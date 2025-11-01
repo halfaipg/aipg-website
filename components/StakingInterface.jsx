@@ -232,8 +232,8 @@ export function StakingInterface() {
 
       {/* Main Interface */}
       <div className="bg-gray-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex gap-4">
+        <div className="flex flex-col items-center mb-6">
+          <div className="flex gap-4 mb-4">
             <button
               onClick={() => setActiveTab('stake')}
               className={`px-6 py-2 rounded-xl font-semibold transition-all ${
