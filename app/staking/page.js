@@ -18,9 +18,9 @@ export default function StakingPage() {
       {/* Info Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Buy AIPG CTA */}
-        <div className="mb-8 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-            <div className="md:text-left text-center">
+        <div className="mb-8 max-w-md mx-auto bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6">
+          <div className="flex flex-col items-center text-center gap-4">
+            <div>
               <h3 className="text-xl font-bold text-white mb-1">Need AIPG to stake?</h3>
               <p className="text-gray-400">Buy AIPG on Uniswap and start earning rewards</p>
             </div>
