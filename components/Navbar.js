@@ -67,6 +67,13 @@ export default function Navbar() {
       >
         Wallets
       </Link>
+      <Link
+        className="font-medium text-orange-400 hover:text-orange-300 sm:py-6 md:py-6 pb-2 dark:hover:text-orange-300 text-center sm:text-left"
+        href="/staking"
+        onClick={() => setIsOpen(false)}
+      >
+        Stake
+      </Link>
       {/* <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
         Exchanges
       </button> */}
