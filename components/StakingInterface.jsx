@@ -262,7 +262,7 @@ export function StakingInterface() {
         {activeTab === 'stake' ? (
           <div className="space-y-6">
             <div>
-              <label className="block text-gray-400 text-sm mb-2">Amount to Stake</label>
+              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Stake</label>
               <div className="relative">
                 <input
                   type="number"
@@ -270,7 +270,7 @@ export function StakingInterface() {
                   onChange={(e) => setStakeAmount(e.target.value)}
                   placeholder="100 minimum"
                   min="100"
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500 text-center md:text-left"
                 />
                 <button
                   onClick={() => setStakeAmount(stakingData.tokenBalance ? formatEther(stakingData.tokenBalance) : '0')}
@@ -279,10 +279,10 @@ export function StakingInterface() {
                   MAX
                 </button>
               </div>
-              <div className="text-gray-500 text-sm mt-1">
+              <div className="text-gray-500 text-sm mt-1 text-center md:text-left">
                 Available: {stakingData.tokenBalance ? parseFloat(formatEther(stakingData.tokenBalance)).toLocaleString() : '0'} AIPG
               </div>
-              <div className="text-yellow-500 text-sm mt-1">
+              <div className="text-yellow-500 text-sm mt-1 text-center md:text-left">
                 ⚠️ Minimum: 100 AIPG
               </div>
             </div>
@@ -298,14 +298,14 @@ export function StakingInterface() {
         ) : (
           <div className="space-y-6">
             <div>
-              <label className="block text-gray-400 text-sm mb-2">Amount to Unstake</label>
+              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Unstake</label>
               <div className="relative">
                 <input
                   type="number"
                   value={unstakeAmount}
                   onChange={(e) => setUnstakeAmount(e.target.value)}
                   placeholder="0.0"
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500 text-center md:text-left"
                 />
                 <button
                   onClick={() => setUnstakeAmount(stakingData.stakedBalance ? formatEther(stakingData.stakedBalance) : '0')}
@@ -314,7 +314,7 @@ export function StakingInterface() {
                   MAX
                 </button>
               </div>
-              <div className="text-gray-500 text-sm mt-1">
+              <div className="text-gray-500 text-sm mt-1 text-center md:text-left">
                 Staked: {stakingData.stakedBalance ? parseFloat(formatEther(stakingData.stakedBalance)).toLocaleString() : '0'} AIPG
               </div>
             </div>
