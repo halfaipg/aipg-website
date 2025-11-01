@@ -189,14 +189,14 @@ export function StakingInterface() {
       {isConnected && (
         <>
       <div className="grid md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500">
+        <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
           <div className="text-gray-400 text-sm mb-1">Current APY</div>
           <div className="text-3xl font-bold text-cyan-400">
             {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500">
+        <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
           <div className="text-gray-400 text-sm mb-1">Your Staked</div>
           <div className="text-3xl font-bold text-purple-400">
             {stakingData.stakedBalance !== undefined
@@ -207,7 +207,7 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 transition-all duration-500">
+        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
           <div className="text-gray-400 text-sm mb-1">Pending Rewards</div>
           <div className="text-3xl font-bold text-green-400">
             {stakingData.pendingRewards !== undefined
@@ -218,7 +218,7 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500">
+        <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
           <div className="text-gray-400 text-sm mb-1">Wallet Balance</div>
           <div className="text-3xl font-bold text-orange-400">
             {stakingData.tokenBalance !== undefined
