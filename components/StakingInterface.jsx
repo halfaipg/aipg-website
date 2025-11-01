@@ -65,6 +65,12 @@ export function StakingInterface() {
     } catch (error) {
       setIsTransacting(false);
       console.error('Stake error:', error);
+      
+      // Don't show alert for user cancellations
+      if (error.message === 'Transaction cancelled') {
+        return;
+      }
+      
       if (error.message === 'Approval needed') {
         alert('Please approve the transaction in your wallet first, then try staking again.');
       } else {
@@ -87,10 +93,13 @@ export function StakingInterface() {
       setIsTransacting(false);
       console.error('Unstake error:', error);
       
+      // Don't show alert for user cancellations
+      if (error.message === 'Transaction cancelled') {
+        return;
+      }
+      
       // User-friendly error messages
-      if (error.message?.includes('User rejected') || error.message?.includes('denied')) {
-        alert('Transaction cancelled');
-      } else if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
+      if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
         alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
       } else {
         alert(`Error: ${error.message || 'Transaction failed'}`);
@@ -109,10 +118,13 @@ export function StakingInterface() {
       setIsTransacting(false);
       console.error('Claim error:', error);
       
+      // Don't show alert for user cancellations
+      if (error.message === 'Transaction cancelled') {
+        return;
+      }
+      
       // User-friendly error messages
-      if (error.message?.includes('User rejected') || error.message?.includes('denied')) {
-        alert('Transaction cancelled');
-      } else if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
+      if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
         alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
       } else {
         alert(`Error: ${error.message || 'Transaction failed'}`);
@@ -124,8 +136,8 @@ export function StakingInterface() {
     <div className="max-w-4xl mx-auto relative">
       {/* Loading Overlay */}
       {isTransacting && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-          <div className="bg-gray-800 border border-cyan-500 rounded-2xl p-8 text-center animate-pulse">
+        <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center">
+          <div className="bg-gray-800 border border-cyan-500/50 rounded-2xl p-8 text-center shadow-2xl">
             <div className="text-6xl mb-4">⏳</div>
             <h3 className="text-2xl font-bold text-white mb-2">Processing Transaction</h3>
             <p className="text-gray-400">Please wait while your balances update...</p>
@@ -140,14 +152,14 @@ export function StakingInterface() {
 
       {/* Global Stats - Always Visible */}
       <div className="grid md:grid-cols-2 gap-4 mb-6">
-        <div className={`bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
+        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Global APY</div>
           <div className="text-4xl font-bold text-orange-400">
             {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
           </div>
         </div>
 
-        <div className={`bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 text-center transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
+        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 text-center transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Total Value Staked</div>
           <div className="text-4xl font-bold text-green-400">
             {stakingData.totalStaked !== undefined
@@ -177,14 +189,14 @@ export function StakingInterface() {
       {isConnected && (
         <>
       <div className="grid md:grid-cols-4 gap-4 mb-8">
-        <div className={`bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
+        <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Current APY</div>
           <div className="text-3xl font-bold text-cyan-400">
             {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
           </div>
         </div>
 
-        <div className={`bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
+        <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Your Staked</div>
           <div className="text-3xl font-bold text-purple-400">
             {stakingData.stakedBalance !== undefined
@@ -195,7 +207,7 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className={`bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
+        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Pending Rewards</div>
           <div className="text-3xl font-bold text-green-400">
             {stakingData.pendingRewards !== undefined
@@ -206,7 +218,7 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className={`bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
+        <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Wallet Balance</div>
           <div className="text-3xl font-bold text-orange-400">
             {stakingData.tokenBalance !== undefined
