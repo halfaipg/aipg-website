@@ -17,6 +17,15 @@ function formatBalance(value) {
   return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
 }
 
+function formatAPY(apy) {
+  if (apy >= 1000000) {
+    return (apy / 1000000).toFixed(2) + 'M%';
+  } else if (apy >= 1000) {
+    return (apy / 1000).toFixed(2) + 'K%';
+  }
+  return apy.toFixed(2) + '%';
+}
+
 export function StakingInterface() {
   const { address, isConnected } = useAccount();
   const {
@@ -83,6 +92,15 @@ export function StakingInterface() {
       setUnstakeAmount('');
     } catch (error) {
       console.error('Unstake error:', error);
+      
+      // User-friendly error messages
+      if (error.message?.includes('User rejected') || error.message?.includes('denied')) {
+        alert('Transaction cancelled');
+      } else if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
+        alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
+      } else {
+        alert(`Error: ${error.message || 'Transaction failed'}`);
+      }
     }
   };
 
@@ -91,6 +109,15 @@ export function StakingInterface() {
       await claimRewards();
     } catch (error) {
       console.error('Claim error:', error);
+      
+      // User-friendly error messages
+      if (error.message?.includes('User rejected') || error.message?.includes('denied')) {
+        alert('Transaction cancelled');
+      } else if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
+        alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
+      } else {
+        alert(`Error: ${error.message || 'Transaction failed'}`);
+      }
     }
   };
 
@@ -101,7 +128,7 @@ export function StakingInterface() {
         <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6">
           <div className="text-gray-400 text-sm mb-1">Current APY</div>
           <div className="text-3xl font-bold text-cyan-400">
-            {stakingData.apy ? `${stakingData.apy.toFixed(1)}%` : '--'}
+            {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
           </div>
         </div>
 
