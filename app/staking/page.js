@@ -87,39 +87,39 @@ export default function StakingPage() {
         </div>
 
         {/* How It Works */}
-        <div className="mt-8 bg-gray-800/30 backdrop-blur-sm border border-cyan-500/10 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">How It Works</h2>
+        <div className="mt-8 max-w-5xl mx-auto bg-gray-800/30 backdrop-blur-sm border border-cyan-500/10 rounded-2xl p-6">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">How It Works</h2>
           
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="bg-cyan-500/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="grid md:grid-cols-4 gap-4">
+            <div className="bg-gray-900/30 rounded-xl p-4 text-center">
+              <div className="bg-cyan-500/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-500/30">
                 <span className="text-cyan-400 font-bold text-xl">1</span>
               </div>
-              <h4 className="text-white font-semibold mb-2">Connect Wallet</h4>
+              <h4 className="text-white font-semibold mb-2 text-base">Connect Wallet</h4>
               <p className="text-gray-400 text-sm">Connect your wallet using RainbowKit</p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-cyan-500/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-gray-900/30 rounded-xl p-4 text-center">
+              <div className="bg-cyan-500/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-500/30">
                 <span className="text-cyan-400 font-bold text-xl">2</span>
               </div>
-              <h4 className="text-white font-semibold mb-2">Stake AIPG</h4>
+              <h4 className="text-white font-semibold mb-2 text-base">Stake AIPG</h4>
               <p className="text-gray-400 text-sm">Enter amount and approve transaction (100 min)</p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-cyan-500/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-gray-900/30 rounded-xl p-4 text-center">
+              <div className="bg-cyan-500/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-500/30">
                 <span className="text-cyan-400 font-bold text-xl">3</span>
               </div>
-              <h4 className="text-white font-semibold mb-2">Earn Rewards</h4>
+              <h4 className="text-white font-semibold mb-2 text-base">Earn Rewards</h4>
               <p className="text-gray-400 text-sm">Watch your rewards grow every second</p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-cyan-500/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-gray-900/30 rounded-xl p-4 text-center">
+              <div className="bg-cyan-500/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-500/30">
                 <span className="text-cyan-400 font-bold text-xl">4</span>
               </div>
-              <h4 className="text-white font-semibold mb-2">Claim Anytime</h4>
+              <h4 className="text-white font-semibold mb-2 text-base">Claim Anytime</h4>
               <p className="text-gray-400 text-sm">No lockup period - unstake whenever you want</p>
             </div>
           </div>
