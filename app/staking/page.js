@@ -5,21 +5,11 @@ import { StakingInterface } from '@/components/StakingInterface';
 export default function StakingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
-      {/* Hero Section */}
+      {/* Staking Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/Background/image_1.png')] opacity-10 bg-cover bg-center" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="text-white">Stake</span>{' '}
-              <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">AIPG</span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Earn rewards by staking your AIPG tokens. No lockup period, claim anytime.
-            </p>
-          </div>
-
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
           {/* Staking Interface */}
           <StakingInterface />
         </div>
