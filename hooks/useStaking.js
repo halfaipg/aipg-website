@@ -25,11 +25,8 @@ export function useStaking() {
   // Fetch staking data
   const fetchStakingData = async () => {
     if (!publicClient) {
-      console.log('⚠️ No publicClient');
       return;
     }
-
-    console.log('🔄 Fetching staking data for:', address || 'no wallet');
 
     try {
       // Always fetch global data
@@ -95,21 +92,6 @@ export function useStaking() {
         const annualRewards = rewardRate * 31536000n; // seconds in a year
         apy = (Number(annualRewards) / Number(totalStaked)) * 100;
       }
-
-      console.log('✅ Staking data fetched:', {
-        tokenBalance: tokenBalance.toString(),
-        stakedBalance: stakedBalance.toString(),
-        pendingRewards: pendingRewards.toString(),
-        totalStaked: totalStaked.toString(),
-        rewardRate: rewardRate.toString(),
-        apy: apy.toFixed(2) + '%',
-        hasWallet: !!address
-      });
-
-      console.log('📊 Global stats:', {
-        totalStaked: totalStaked.toString(),
-        apy: apy
-      });
 
       setStakingData({
         tokenBalance,
