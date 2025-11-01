@@ -126,28 +126,28 @@ export default function StakingPage() {
         </div>
 
         {/* FAQ */}
-        <div className="mt-8 bg-gray-800/30 backdrop-blur-sm border border-cyan-500/10 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
+        <div className="mt-8 max-w-4xl mx-auto bg-gray-800/30 backdrop-blur-sm border border-cyan-500/10 rounded-2xl p-6">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h2>
           
-          <div className="space-y-6 max-w-3xl mx-auto">
-            <div>
+          <div className="space-y-5">
+            <div className="bg-gray-900/30 rounded-xl p-4">
               <h4 className="text-lg font-semibold text-white mb-2">How are rewards calculated?</h4>
-              <p className="text-gray-400">Rewards accrue every second based on your share of the total staked pool. The more AIPG staked globally, the more stable the APY becomes.</p>
+              <p className="text-gray-400 text-sm">Rewards accrue every second based on your share of the total staked pool. The more AIPG staked globally, the more stable the APY becomes.</p>
             </div>
 
-            <div>
+            <div className="bg-gray-900/30 rounded-xl p-4">
               <h4 className="text-lg font-semibold text-white mb-2">Is there a minimum stake?</h4>
-              <p className="text-gray-400">Yes, the minimum stake is 100 AIPG to prevent spam and ensure meaningful participation.</p>
+              <p className="text-gray-400 text-sm">Yes, the minimum stake is 100 AIPG to prevent spam and ensure meaningful participation.</p>
             </div>
 
-            <div>
+            <div className="bg-gray-900/30 rounded-xl p-4">
               <h4 className="text-lg font-semibold text-white mb-2">Can I lose my staked tokens?</h4>
-              <p className="text-gray-400">No. Your staked AIPG is always yours and can be withdrawn at any time. The contract is non-custodial and verified on BaseScan.</p>
+              <p className="text-gray-400 text-sm">No. Your staked AIPG is always yours and can be withdrawn at any time. The contract is non-custodial and verified on BaseScan.</p>
             </div>
 
-            <div>
+            <div className="bg-gray-900/30 rounded-xl p-4">
               <h4 className="text-lg font-semibold text-white mb-2">How often should I claim rewards?</h4>
-              <p className="text-gray-400">You can claim anytime! Rewards continue accruing whether you claim daily, weekly, or let them accumulate. Gas fees are the only consideration.</p>
+              <p className="text-gray-400 text-sm">You can claim anytime! Rewards continue accruing whether you claim daily, weekly, or let them accumulate. Gas fees are the only consideration.</p>
             </div>
           </div>
         </div>
