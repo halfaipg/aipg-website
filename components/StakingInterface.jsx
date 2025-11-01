@@ -41,6 +41,7 @@ export function StakingInterface() {
   const [stakeAmount, setStakeAmount] = useState('');
   const [unstakeAmount, setUnstakeAmount] = useState('');
   const [activeTab, setActiveTab] = useState('stake');
+  const [isTransacting, setIsTransacting] = useState(false);
 
   const handleStake = async () => {
     if (!stakeAmount || parseFloat(stakeAmount) <= 0) return;
@@ -52,12 +53,17 @@ export function StakingInterface() {
     }
     
     try {
+      setIsTransacting(true);
       if (needsApproval) {
         await approveToken(stakeAmount);
       }
       await stake(stakeAmount);
       setStakeAmount('');
+      
+      // Keep loading state for 5 seconds to show animation
+      setTimeout(() => setIsTransacting(false), 5000);
     } catch (error) {
+      setIsTransacting(false);
       console.error('Stake error:', error);
       if (error.message === 'Approval needed') {
         alert('Please approve the transaction in your wallet first, then try staking again.');
@@ -71,9 +77,14 @@ export function StakingInterface() {
     if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return;
     
     try {
+      setIsTransacting(true);
       await unstake(unstakeAmount);
       setUnstakeAmount('');
+      
+      // Keep loading state for 5 seconds to show animation
+      setTimeout(() => setIsTransacting(false), 5000);
     } catch (error) {
+      setIsTransacting(false);
       console.error('Unstake error:', error);
       
       // User-friendly error messages
@@ -89,8 +100,13 @@ export function StakingInterface() {
 
   const handleClaim = async () => {
     try {
+      setIsTransacting(true);
       await claimRewards();
+      
+      // Keep loading state for 5 seconds to show animation
+      setTimeout(() => setIsTransacting(false), 5000);
     } catch (error) {
+      setIsTransacting(false);
       console.error('Claim error:', error);
       
       // User-friendly error messages
@@ -105,17 +121,33 @@ export function StakingInterface() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto relative">
+      {/* Loading Overlay */}
+      {isTransacting && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-gray-800 border border-cyan-500 rounded-2xl p-8 text-center animate-pulse">
+            <div className="text-6xl mb-4">⏳</div>
+            <h3 className="text-2xl font-bold text-white mb-2">Processing Transaction</h3>
+            <p className="text-gray-400">Please wait while your balances update...</p>
+            <div className="mt-4 flex justify-center gap-2">
+              <div className="w-3 h-3 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-3 h-3 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-3 h-3 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Global Stats - Always Visible */}
       <div className="grid md:grid-cols-2 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-xl p-6 text-center">
+        <div className={`bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
           <div className="text-gray-400 text-sm mb-1">Global APY</div>
           <div className="text-4xl font-bold text-orange-400">
             {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 text-center">
+        <div className={`bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 text-center transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
           <div className="text-gray-400 text-sm mb-1">Total Value Staked</div>
           <div className="text-4xl font-bold text-green-400">
             {stakingData.totalStaked !== undefined
@@ -145,14 +177,14 @@ export function StakingInterface() {
       {isConnected && (
         <>
       <div className="grid md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6">
+        <div className={`bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
           <div className="text-gray-400 text-sm mb-1">Current APY</div>
           <div className="text-3xl font-bold text-cyan-400">
             {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
+        <div className={`bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
           <div className="text-gray-400 text-sm mb-1">Your Staked</div>
           <div className="text-3xl font-bold text-purple-400">
             {stakingData.stakedBalance !== undefined
@@ -163,7 +195,7 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-xl p-6">
+        <div className={`bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
           <div className="text-gray-400 text-sm mb-1">Pending Rewards</div>
           <div className="text-3xl font-bold text-green-400">
             {stakingData.pendingRewards !== undefined
@@ -174,7 +206,7 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-xl p-6">
+        <div className={`bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500 ${isTransacting ? 'animate-pulse' : ''}`}>
           <div className="text-gray-400 text-sm mb-1">Wallet Balance</div>
           <div className="text-3xl font-bold text-orange-400">
             {stakingData.tokenBalance !== undefined
@@ -192,9 +224,9 @@ export function StakingInterface() {
           <div className="flex gap-4">
             <button
               onClick={() => setActiveTab('stake')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-6 py-2 rounded-xl font-semibold transition-all ${
                 activeTab === 'stake'
-                  ? 'bg-cyan-500 text-white'
+                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
                   : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700'
               }`}
             >
@@ -202,9 +234,9 @@ export function StakingInterface() {
             </button>
             <button
               onClick={() => setActiveTab('unstake')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-6 py-2 rounded-xl font-semibold transition-all ${
                 activeTab === 'unstake'
-                  ? 'bg-cyan-500 text-white'
+                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
                   : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700'
               }`}
             >
@@ -230,7 +262,7 @@ export function StakingInterface() {
                 />
                 <button
                   onClick={() => setStakeAmount(stakingData.tokenBalance ? formatEther(stakingData.tokenBalance) : '0')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 px-3 py-1 rounded text-sm font-semibold"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 px-3 py-1 rounded-lg text-sm font-semibold transition-all"
                 >
                   MAX
                 </button>
@@ -246,7 +278,7 @@ export function StakingInterface() {
             <button
               onClick={handleStake}
               disabled={isLoading || !stakeAmount || parseFloat(stakeAmount) <= 0}
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-lg transition-all disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-cyan-500/50"
             >
               {isLoading ? 'Processing...' : needsApproval ? 'Approve & Stake' : 'Stake AIPG'}
             </button>
@@ -265,7 +297,7 @@ export function StakingInterface() {
                 />
                 <button
                   onClick={() => setUnstakeAmount(stakingData.stakedBalance ? formatEther(stakingData.stakedBalance) : '0')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 px-3 py-1 rounded text-sm font-semibold"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 px-3 py-1 rounded-lg text-sm font-semibold transition-all"
                 >
                   MAX
                 </button>
@@ -278,7 +310,7 @@ export function StakingInterface() {
             <button
               onClick={handleUnstake}
               disabled={isLoading || !unstakeAmount || parseFloat(unstakeAmount) <= 0}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-lg transition-all disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
             >
               {isLoading ? 'Processing...' : 'Unstake AIPG'}
             </button>
@@ -300,7 +332,7 @@ export function StakingInterface() {
             <button
               onClick={handleClaim}
               disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-lg transition-all disabled:cursor-not-allowed"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
             >
               {isLoading ? 'Processing...' : 'Claim Rewards'}
             </button>
@@ -308,15 +340,6 @@ export function StakingInterface() {
         </div>
       </div>
 
-      {/* Total Staked Info */}
-      <div className="mt-6 text-center text-gray-400 text-sm">
-        <div>Total Staked in Pool: {stakingData.totalStaked ? parseFloat(formatEther(stakingData.totalStaked)).toLocaleString() : '0'} AIPG</div>
-        {stakingData.stakedBalance && stakingData.totalStaked && stakingData.totalStaked > 0n && (
-          <div className="mt-1">
-            Your Share: {((Number(stakingData.stakedBalance) / Number(stakingData.totalStaked)) * 100).toFixed(4)}%
-          </div>
-        )}
-      </div>
       </>
       )}
     </div>
