@@ -42,23 +42,6 @@ export function StakingInterface() {
   const [unstakeAmount, setUnstakeAmount] = useState('');
   const [activeTab, setActiveTab] = useState('stake');
 
-  if (!isConnected) {
-    return (
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-12 text-center">
-          <div className="text-6xl mb-6">🔐</div>
-          <h3 className="text-2xl font-bold text-white mb-4">Connect Your Wallet</h3>
-          <p className="text-gray-400 mb-8">
-            Connect your wallet to start staking AIPG and earning rewards
-          </p>
-          <div className="flex justify-center">
-            <ConnectButton />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const handleStake = async () => {
     if (!stakeAmount || parseFloat(stakeAmount) <= 0) return;
     
@@ -123,7 +106,44 @@ export function StakingInterface() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Stats Dashboard */}
+      {/* Global Stats - Always Visible */}
+      <div className="grid md:grid-cols-2 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-xl p-6 text-center">
+          <div className="text-gray-400 text-sm mb-1">Global APY</div>
+          <div className="text-4xl font-bold text-orange-400">
+            {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 text-center">
+          <div className="text-gray-400 text-sm mb-1">Total Value Staked</div>
+          <div className="text-4xl font-bold text-green-400">
+            {stakingData.totalStaked !== undefined
+              ? formatBalance(parseFloat(formatEther(stakingData.totalStaked)))
+              : '--'
+            }
+          </div>
+          <div className="text-gray-500 text-xs">AIPG</div>
+        </div>
+      </div>
+
+      {/* Connect Wallet Prompt */}
+      {!isConnected && (
+        <div className="bg-gray-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 text-center">
+          <div className="text-5xl mb-4">🔐</div>
+          <h3 className="text-xl font-bold text-white mb-3">Connect Your Wallet</h3>
+          <p className="text-gray-400 mb-6">
+            Connect your wallet to start staking AIPG and earning rewards
+          </p>
+          <div className="flex justify-center">
+            <ConnectButton />
+          </div>
+        </div>
+      )}
+
+      {/* User Stats Dashboard - Only when connected */}
+      {isConnected && (
+        <>
       <div className="grid md:grid-cols-4 gap-4 mb-8">
         <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6">
           <div className="text-gray-400 text-sm mb-1">Current APY</div>
@@ -297,6 +317,8 @@ export function StakingInterface() {
           </div>
         )}
       </div>
+      </>
+      )}
     </div>
   );
 }
