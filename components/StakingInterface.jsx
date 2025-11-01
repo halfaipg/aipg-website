@@ -331,10 +331,10 @@ export function StakingInterface() {
 
         {/* Claim Rewards Section */}
         <div className="mt-8 pt-8 border-t border-gray-700">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col items-center text-center gap-4">
             <div>
-              <div className="text-gray-400 text-sm">Claimable Rewards</div>
-              <div className="text-2xl font-bold text-green-400">
+              <div className="text-gray-400 text-sm mb-2">Claimable Rewards</div>
+              <div className="text-3xl font-bold text-green-400">
                 {stakingData.pendingRewards 
                   ? parseFloat(formatEther(stakingData.pendingRewards)).toLocaleString(undefined, { maximumFractionDigits: 6 })
                   : '0'
