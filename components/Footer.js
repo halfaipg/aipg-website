@@ -38,14 +38,6 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="/wallet"
-                  >
-                    Wallets
-                  </a>
-                </p>
-                <p>
-                  <a
-                    className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
                     href="https://basescan.org/token/0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608"
                     target="_blank"
                   >
