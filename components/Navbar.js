@@ -54,7 +54,7 @@ export default function Navbar() {
       </Link>
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
-        href="https://blockbook.aipowergrid.io"
+        href="https://basescan.org/token/0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608"
         target="_blank"
         onClick={() => setIsOpen(false)}
       >
