@@ -132,6 +132,40 @@ export function StakingInterface() {
     }
   };
 
+  const handleCompound = async () => {
+    try {
+      setIsTransacting(true);
+      
+      // First claim the rewards
+      await claimRewards();
+      
+      // Wait a moment for the claim to process
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Then stake the rewards amount
+      const rewardsAmount = formatEther(stakingData.pendingRewards);
+      await stake(rewardsAmount);
+      
+      // Keep loading state for 5 seconds to show animation
+      setTimeout(() => setIsTransacting(false), 5000);
+    } catch (error) {
+      setIsTransacting(false);
+      console.error('Compound error:', error);
+      
+      // Don't show alert for user cancellations
+      if (error.message === 'Transaction cancelled') {
+        return;
+      }
+      
+      // User-friendly error messages
+      if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
+        alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
+      } else {
+        alert(`Error: ${error.message || 'Transaction failed'}`);
+      }
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto relative">
       {/* Loading Overlay */}
@@ -262,7 +296,11 @@ export function StakingInterface() {
         {activeTab === 'stake' ? (
           <div className="space-y-6">
             <div>
-              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Stake</label>
+              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">
+                Amount to Stake {stakingData.stakedBalance && stakingData.stakedBalance > 0n && (
+                  <span className="text-cyan-400">(Add to your existing stake)</span>
+                )}
+              </label>
               <div className="relative">
                 <input
                   type="number"
@@ -341,13 +379,25 @@ export function StakingInterface() {
                 } AIPG
               </div>
             </div>
-            <button
-              onClick={handleClaim}
-              disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
-            >
-              {isLoading ? 'Processing...' : 'Claim Rewards'}
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <button
+                onClick={handleClaim}
+                disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
+                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
+              >
+                {isLoading ? 'Processing...' : 'Claim Rewards'}
+              </button>
+              <button
+                onClick={handleCompound}
+                disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-cyan-500/50"
+              >
+                {isLoading ? 'Processing...' : '🔄 Compound'}
+              </button>
+            </div>
+            <p className="text-gray-500 text-xs mt-1">
+              Compound = Claim rewards + Add to stake (2 transactions)
+            </p>
           </div>
         </div>
       </div>
