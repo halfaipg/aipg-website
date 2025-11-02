@@ -11,7 +11,10 @@ export const metadata = {
   title: "AI Power Grid - Decentralized AI Infrastructure Network",
   description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
   icons: {
-    icon: '/favicon-96x96.png',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' }
+    ],
     apple: '/favicon-96x96.png',
   },
   openGraph: {
