@@ -46,7 +46,7 @@ const Footer = () => {
                 <p>
                   <a
                     className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://explorer.aipowergrid.io/"
+                    href="https://blockbook.aipowergrid.io"
                     target="_blank"
                   >
                     Explorer

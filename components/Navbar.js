@@ -54,7 +54,7 @@ export default function Navbar() {
       </Link>
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
-        href="https://explorer.aipowergrid.io/"
+        href="https://blockbook.aipowergrid.io"
         target="_blank"
         onClick={() => setIsOpen(false)}
       >
@@ -72,7 +72,7 @@ export default function Navbar() {
         href="/staking"
         onClick={() => setIsOpen(false)}
       >
-        Stake
+        Earn
       </Link>
       {/* <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
         Exchanges
