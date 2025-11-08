@@ -155,10 +155,10 @@ export default function StrategicReservePage() {
             </div>
           </div>
 
-          {/* Key Features - Modern Grid */}
+          {/* Technical Overview - Modern Grid */}
           <div className="mb-20">
             <h2 className="text-4xl font-bold text-white mb-12 text-center">
-              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Key Features</span>
+              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Technical Overview</span>
             </h2>
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-yellow-500/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition duration-500"></div>
