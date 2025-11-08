@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: require('path').join(__dirname),
   images: {
     domains: [],
+  },
+  transpilePackages: [],
+  webpack: (config) => {
+    // Exclude preline TypeScript files from processing
+    config.module.rules.push({
+      test: /node_modules\/preline\/.*\.ts$/,
+      use: 'ignore-loader',
+    });
+    return config;
   },
   async headers() {
     return [
