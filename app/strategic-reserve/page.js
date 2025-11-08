@@ -68,7 +68,7 @@ export default function StrategicReservePage() {
                     </h3>
                   </div>
                   <p className="text-gray-300 leading-relaxed text-lg">
-                    Our machine learning model continuously analyzes Bitcoin's price and trading volume patterns — <strong className="text-white font-semibold">price and volume data only</strong>, with no sentiment analysis or news feeds. It looks for long-horizon directional shifts and makes predictions about future price movements, focusing on long-term trends rather than short-term volatility. The model is trained on historical market data and adapts to changing market conditions while maintaining a disciplined, systematic approach to risk management.
+                    Our machine learning model continuously analyzes Bitcoin's price and trading volume patterns, with no sentiment analysis or news feeds. It looks for long-horizon directional shifts and makes predictions about future price movements, focusing on long-term trends rather than short-term volatility. The model is trained on historical market data and adapts to changing market conditions while maintaining a disciplined, systematic approach to risk management.
                   </p>
                 </div>
               </div>
