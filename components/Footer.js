@@ -3,8 +3,7 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col">
-      <footer className="bg-black sm:p-0 p-4">
+    <footer className="bg-black sm:p-0 p-4">
         <div className="max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             <div className="col-span-full lg:col-span-1">
@@ -102,7 +101,6 @@ const Footer = () => {
 
           </div>
         </div>
-      </footer>
     </footer>
   );
 };
