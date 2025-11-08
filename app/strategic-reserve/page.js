@@ -136,10 +136,7 @@ export default function StrategicReservePage() {
                     </div>
                   </div>
                 </div>
-                <p className="text-center text-gray-400 text-sm mt-6 mb-4">
-                  Policy limits enforced on-chain: Utilization ≤ 50% • Leverage ≤ 4x • BTC markets only
-                </p>
-                <div className="text-center">
+                <div className="text-center mt-6">
                   <p className="inline-block bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-orange-500/20 rounded-xl px-6 py-3 text-gray-300 text-sm">
                     Controls at a glance: Utilization cap 50% (current 1%) • Leverage cap 4x • Smart‑contract execution • Full on‑chain transparency
                   </p>
