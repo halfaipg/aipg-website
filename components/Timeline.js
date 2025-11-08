@@ -199,7 +199,7 @@ const Timeline = () => {
           visible={inView}
         >
           <h3 className="vertical-timeline-element-title" style={{ color: "#fff" }}>
-            Q2 2025 - Developing AI Services and AI Blockchain Integration
+            Q1-Q2 2025 - Developing AI Services and AI Blockchain Integration
           </h3>
           <p style={{ color: "#d3d3d3" }}>
           In this key phase, AIPG accelerates its forward momentum by transitioning into a decentralized AI network powered by distributed AI workers. 
