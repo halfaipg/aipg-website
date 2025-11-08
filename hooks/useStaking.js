@@ -86,11 +86,11 @@ export function useStaking() {
 
       const [tokenBalance, stakedBalance, pendingRewards, allowance] = address ? userData : [0n, 0n, 0n, 0n];
 
-      // Calculate APY
-      let apy = 0;
+      // Calculate Weekly Percentage Yield (WPY)
+      let wpy = 0;
       if (totalStaked > 0n && rewardRate > 0n) {
-        const annualRewards = rewardRate * 31536000n; // seconds in a year
-        apy = (Number(annualRewards) / Number(totalStaked)) * 100;
+        const weeklyRewards = rewardRate * 604800n; // seconds in a week (7 * 24 * 60 * 60)
+        wpy = (Number(weeklyRewards) / Number(totalStaked)) * 100;
       }
 
       setStakingData({
@@ -98,7 +98,7 @@ export function useStaking() {
         stakedBalance,
         pendingRewards,
         totalStaked,
-        apy,
+        apy: wpy, // Keep apy key for backward compatibility but store weekly yield
         allowance
       });
     } catch (error) {

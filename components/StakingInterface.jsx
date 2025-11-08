@@ -17,6 +17,15 @@ function formatBalance(value) {
   return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
 }
 
+function formatWPY(wpy) {
+  if (wpy >= 1000000) {
+    return (wpy / 1000000).toFixed(2) + 'M%';
+  } else if (wpy >= 1000) {
+    return (wpy / 1000).toFixed(2) + 'K%';
+  }
+  return wpy.toFixed(2) + '%';
+}
+
 function formatAPY(apy) {
   if (apy >= 1000000) {
     return (apy / 1000000).toFixed(2) + 'M%';
@@ -185,13 +194,15 @@ export function StakingInterface() {
       )}
 
       {/* Global Stats - Always Visible */}
-      <div className="grid md:grid-cols-2 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center transition-all duration-500">
-          <div className="text-gray-400 text-sm mb-1">Global APY</div>
-          <div className="text-4xl font-bold text-orange-400">
-            {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
+      <div className={`grid ${!isConnected ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-4 mb-6`}>
+        {!isConnected && (
+          <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center transition-all duration-500">
+            <div className="text-gray-400 text-sm mb-1">Global Weekly Yield</div>
+            <div className="text-4xl font-bold text-orange-400">
+              {stakingData.apy ? formatWPY(stakingData.apy) : '--'}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 text-center transition-all duration-500">
           <div className="text-gray-400 text-sm mb-1">Total Value Staked</div>
@@ -224,9 +235,9 @@ export function StakingInterface() {
         <>
       <div className="grid md:grid-cols-4 gap-4 mb-8">
         <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
-          <div className="text-gray-400 text-sm mb-1">Current APY</div>
+          <div className="text-gray-400 text-sm mb-1">Weekly Yield</div>
           <div className="text-3xl font-bold text-cyan-400">
-            {stakingData.apy ? formatAPY(stakingData.apy) : '--'}
+            {stakingData.apy ? formatWPY(stakingData.apy) : '--'}
           </div>
         </div>
 
