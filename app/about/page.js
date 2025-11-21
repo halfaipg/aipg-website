@@ -428,7 +428,7 @@ const About = () => {
             </div>
             <div className="text-center mb-4">
               <a
-                href="https://chat.aipowergrid.io"
+                href="https://aipg.chat"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex justify-center items-center gap-x-2 text-center text-sm font-medium bg-white text-black rounded-full px-6 py-3 hover:bg-gray-100 transition-colors"
