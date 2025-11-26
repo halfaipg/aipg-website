@@ -10,7 +10,7 @@ const Wallet = () => {
       <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
         <div className="text-center">
           <h1 className="text-2xl sm:text-4xl font-semibold text-white mb-2">
-            Our Wallets
+          Our Wallets
           </h1>
           <p className="text-gray-300 text-lg">
             AIPG wallets are available for Linux, Windows, MacOS, Raspberry Pi, and Web
@@ -21,13 +21,13 @@ const Wallet = () => {
         <div className="grid md:grid-cols-3 grid-cols-1 gap-12 md:gap-[89px]">
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
-              <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-x86_64-linux-gnu.tar.gz">
-                <img
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-x86_64-linux-gnu.tar.gz">
+              <img
                   className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto transform scale-[0.8] mb-0"
-                  src="/wallet-icons/280_Linux-Transparent_324x324.png"
-                  alt="Linux Wallet"
-                />
-              </a>
+                src="/wallet-icons/280_Linux-Transparent_324x324.png"
+                alt="Linux Wallet"
+              />
+            </a>
               <h3 className="absolute top-[-2px] left-1/2 transform -translate-x-1/2 text-xl font-bold text-white">
                 Linux Wallet
               </h3>
@@ -44,13 +44,13 @@ const Wallet = () => {
           </div>
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
-              <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-aarch64-linux-gnu.tar.gz">
-                <img
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-aarch64-linux-gnu.tar.gz">
+              <img
                   className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto transform scale-[0.8] mb-0"
-                  src="/wallet-icons/279_RaspberryPi-Transparent_324x324.png"
-                  alt="Raspberry Pi Wallet"
-                />
-              </a>
+                src="/wallet-icons/279_RaspberryPi-Transparent_324x324.png"
+                alt="Raspberry Pi Wallet"
+              />
+            </a>
               <h3 className="absolute top-[-2px] left-1/2 transform -translate-x-1/2 text-xl font-bold text-white">
                 ARM Wallet
               </h3>
@@ -67,13 +67,13 @@ const Wallet = () => {
           </div>
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
-              <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-win64-setup-unsigned.exe">
-                <img
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-win64-setup-unsigned.exe">
+              <img
                   className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto transform scale-[0.8] mb-0"
-                  src="/wallet-icons/278_Windows-Transparent_324x324.png"
-                  alt="Windows Wallet"
-                />
-              </a>
+                src="/wallet-icons/278_Windows-Transparent_324x324.png"
+                alt="Windows Wallet"
+              />
+            </a>
               <h3 className="absolute top-[-2px] left-1/2 transform -translate-x-1/2 text-xl font-bold text-white">
                 Windows Wallet
               </h3>
@@ -90,13 +90,13 @@ const Wallet = () => {
           </div>
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
-              <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-osx-unsigned.tar.gz">
-                <img
+            <a href="https://github.com/AIPowerGrid/AI-Power-Grid-Core/releases/download/v1.4.0/AI-Power-Grid-1.4.0-osx-unsigned.tar.gz">
+              <img
                   className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto transform scale-[0.8] mb-0"
-                  src="/wallet-icons/277_Mac-Transparent_324x324.png"
-                  alt="MacOS Wallet"
-                />
-              </a>
+                src="/wallet-icons/277_Mac-Transparent_324x324.png"
+                alt="MacOS Wallet"
+              />
+            </a>
               <h3 className="absolute top-[-2px] left-1/2 transform -translate-x-1/2 text-xl font-bold text-white">
                 MacOS Wallet
               </h3>
@@ -113,13 +113,13 @@ const Wallet = () => {
           </div>
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
-              <a href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet" target="_blank" rel="noopener noreferrer">
-                <img
+            <a href="https://github.com/AIPowerGrid/AIPG-Paper-Wallet" target="_blank" rel="noopener noreferrer">
+              <img
                   className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto transform scale-[0.8] mb-0"
-                  src="/wallet-icons/276_paperwallet_324x324.png"
-                  alt="Paper Wallet"
-                />
-              </a>
+                src="/wallet-icons/276_paperwallet_324x324.png"
+                alt="Paper Wallet"
+              />
+            </a>
               <h3 className="absolute top-[-2px] left-1/2 transform -translate-x-1/2 text-xl font-bold text-white">
                 Paper Wallet
               </h3>
@@ -138,13 +138,13 @@ const Wallet = () => {
           </div>
           <div className="flex flex-col pt-4 pb-0">
             <div className="relative">
-              <a href="https://webwallet.aipowergrid.io" target="_blank" rel="noopener noreferrer">
-                <img
+            <a href="https://webwallet.aipowergrid.io" target="_blank" rel="noopener noreferrer">
+              <img
                   className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto transform scale-[0.8] mb-0"
-                  src="/wallet-icons/281_web_wallet aipg_324x324.png"
-                  alt="Web Wallet"
-                />
-              </a>
+                src="/wallet-icons/281_web_wallet aipg_324x324.png"
+                alt="Web Wallet"
+              />
+            </a>
               <h3 className="absolute top-[-2px] left-1/2 transform -translate-x-1/2 text-xl font-bold text-white">
                 Web Wallet
               </h3>

@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import BTCChart from "@/components/BTCChart";
 
+// Archived copy of the AIPG Autonomous Fund page (previously app/strategic-reserve/page.js)
+// Kept here so it can be easily restored in the future.
 export default function StrategicReservePage() {
   return (
     <div className="bg-black relative min-h-screen">
@@ -364,3 +366,5 @@ export default function StrategicReservePage() {
     </div>
   );
 }
+
+

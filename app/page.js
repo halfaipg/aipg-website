@@ -75,8 +75,8 @@ export default function Home() {
       <div className="w-full py-8 md:py-12">
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
-            Positive-Sum Impact
-          </span>
+          Positive-Sum Impact
+        </span>
         </div>
       </div>
       <div ref={servicesRef} className="fadeInSection"><Services /></div>
@@ -84,8 +84,8 @@ export default function Home() {
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
             Roadmap
-          </span>
-        </div>
+        </span>
+      </div>
       </div>
       <div ref={timelineRef} className="fadeInSection"><Timeline /></div>
       <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>
