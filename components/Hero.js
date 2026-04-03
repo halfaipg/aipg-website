@@ -37,7 +37,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-200 mt-5">
-            Electricity changed the industrial world—an open AI grid can change the digital one. AIPG transforms idle GPUs into a permissionless, censorship-resistant AI utility that lights up open-source creativity everywhere.
+            Generate images, chat with LLMs, and build AI apps — all powered by a decentralized network of community GPUs. No corporate API. OpenAI compatible. Earn AIPG for contributing compute.
           </p>
         </div>
 
@@ -174,25 +174,26 @@ const Hero = () => {
         {/* Base Announcement */}
         <div className={`mt-8 flex justify-center ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 flex items-center gap-x-2">
-            <span className="text-white font-medium text-sm">AI Power Grid is moving to</span>
-            <a 
-              href="https://www.base.org/" 
-              target="_blank" 
+            <span className="text-white font-medium text-sm">Live on</span>
+            <a
+              href="https://basescan.org/token/0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-x-1 hover:opacity-80 transition-opacity"
             >
-              <svg 
-                className="w-3 h-3" 
+              <svg
+                className="w-3 h-3"
                 viewBox="0 0 1280 1280"
                 fill="none"
               >
-                <path 
-                  fill="#1652F0" 
+                <path
+                  fill="#1652F0"
                   d="M0,101.12c0-34.64,0-51.95,6.53-65.28,6.25-12.76,16.56-23.07,29.32-29.32C49.17,0,66.48,0,101.12,0h1077.76c34.63,0,51.96,0,65.28,6.53,12.75,6.25,23.06,16.56,29.32,29.32,6.52,13.32,6.52,30.64,6.52,65.28v1077.76c0,34.63,0,51.96-6.52,65.28-6.26,12.75-16.57,23.06-29.32,29.32-13.32,6.52-30.65,6.52-65.28,6.52H101.12c-34.64,0-51.95,0-65.28-6.52-12.76-6.26-23.07-16.57-29.32-29.32-6.53-13.32-6.53-30.65-6.53-65.28V101.12Z"
                 />
               </svg>
-              <span className="text-white font-semibold text-sm">base!</span>
+              <span className="text-white font-semibold text-sm">Base</span>
             </a>
+            <span className="text-gray-400 text-sm">· OpenAI compatible API</span>
           </div>
         </div>
         

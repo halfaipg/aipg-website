@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Modal from "@/components/Modal";
-import Team from "@/components/Team";
+// import Team from "@/components/Team";
 
 const About = () => {
   const images = [
@@ -207,15 +207,36 @@ const About = () => {
         </div>
       </div>
 
-      {/* Team Section */}
+      {/* Products Section */}
       <div className="w-full py-8 md:py-12" style={{backgroundColor: '#1F1F1F'}}>
-        <div className="flex justify-center items-center">
-          <span className="text-2xl sm:text-4xl font-semibold text-white">
-            The Team
-          </span>
+        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-2xl sm:text-4xl font-semibold text-white">What&apos;s Live</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a href="https://aipg.art" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
+              <h3 className="text-white font-semibold text-lg mb-2">AI Art</h3>
+              <p className="text-gray-400 text-sm">Generate images with Flux, SDXL, Stable Diffusion</p>
+              <span className="text-[#f8991d] text-sm mt-3 inline-block">aipg.art →</span>
+            </a>
+            <a href="https://aipg.chat" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
+              <h3 className="text-white font-semibold text-lg mb-2">AI Chat</h3>
+              <p className="text-gray-400 text-sm">Chat with open-source LLMs — Llama, Mistral, Qwen</p>
+              <span className="text-[#f8991d] text-sm mt-3 inline-block">aipg.chat →</span>
+            </a>
+            <a href="https://docs.aipowergrid.io/streaming-api" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
+              <h3 className="text-white font-semibold text-lg mb-2">Streaming API</h3>
+              <p className="text-gray-400 text-sm">OpenAI compatible. Same SDKs, decentralized.</p>
+              <span className="text-[#f8991d] text-sm mt-3 inline-block">API Docs →</span>
+            </a>
+            <a href="https://github.com/AIPowerGrid/grid-inference-worker/releases" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
+              <h3 className="text-white font-semibold text-lg mb-2">Earn AIPG</h3>
+              <p className="text-gray-400 text-sm">Run a worker on your GPU. Earn tokens for compute.</p>
+              <span className="text-[#f8991d] text-sm mt-3 inline-block">Download Worker →</span>
+            </a>
+          </div>
         </div>
       </div>
-      <Team />
 
       {/* Metrics Section - Adapted with Timeline Box Styling */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

@@ -1,36 +1,29 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
-import Features from "@/components/Features";
 import Hero from "@/components/Hero";
+import Products from "@/components/Products";
 import Problem from "@/components/Problem";
 import Infrastructure from "@/components/Infrastructure";
-import LiveDemo from "@/components/LiveDemo";
+import Features from "@/components/Features";
 import Services from "@/components/Services";
 import Timeline from "@/components/Timeline";
-import TimelineNew from "@/components/Timeline-New"; // Import the Timeline-New component
 
 export default function Home() {
   const heroRef = useRef(null);
+  const productsRef = useRef(null);
   const problemRef = useRef(null);
   const infrastructureRef = useRef(null);
-  const liveDemoRef = useRef(null);
   const featuresRef = useRef(null);
   const servicesRef = useRef(null);
   const timelineRef = useRef(null);
-  const timelineNewRef = useRef(null);
 
   useEffect(() => {
-    const generalThreshold = 0.001;
-    const teamThreshold = 0.001;
-    const roadmapThreshold = 0.001;
-
     const observerOptions = {
-      general: { threshold: generalThreshold, rootMargin: "0px 0px -50px 0px" },
-      team: { threshold: teamThreshold, rootMargin: "0px 0px -50px 0px" },
-      roadmap: { threshold: roadmapThreshold, rootMargin: "0px 0px -50px 0px" }
+      threshold: 0.001,
+      rootMargin: "0px 0px -50px 0px",
     };
 
-    const handleVisibilityChange = (entries, observer) => {
+    const handleVisibilityChange = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
@@ -40,43 +33,33 @@ export default function Home() {
       });
     };
 
-    const generalObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.general);
-    const teamObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.team);
-    const roadmapObserver = new IntersectionObserver(handleVisibilityChange, observerOptions.roadmap);
+    const observer = new IntersectionObserver(handleVisibilityChange, observerOptions);
 
-    const refs = [heroRef, problemRef, infrastructureRef, liveDemoRef, featuresRef, servicesRef, timelineRef, timelineNewRef];
+    const refs = [heroRef, productsRef, problemRef, infrastructureRef, featuresRef, servicesRef, timelineRef];
     refs.forEach(ref => {
-      if (ref.current) {
-        generalObserver.observe(ref.current);
-        roadmapObserver.observe(ref.current);
-      }
+      if (ref.current) observer.observe(ref.current);
     });
 
     return () => {
       refs.forEach(ref => {
-        if (ref.current) {
-          generalObserver.unobserve(ref.current);
-          roadmapObserver.unobserve(ref.current);
-        }
+        if (ref.current) observer.unobserve(ref.current);
       });
-      generalObserver.disconnect();
-      teamObserver.disconnect();
-      roadmapObserver.disconnect();
+      observer.disconnect();
     };
   }, []);
 
   return (
     <main className="dark">
       <div ref={heroRef} className="fadeInSection"><Hero /></div>
+      <div ref={productsRef} className="fadeInSection"><Products /></div>
       <div ref={problemRef} className="fadeInSection"><Problem /></div>
       <div ref={infrastructureRef} className="fadeInSection"><Infrastructure /></div>
-      <div ref={liveDemoRef} className="fadeInSection"><LiveDemo /></div>
       <div ref={featuresRef} className="fadeInSection"><Features /></div>
       <div className="w-full py-8 md:py-12">
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
-          Positive-Sum Impact
-        </span>
+            Positive-Sum Impact
+          </span>
         </div>
       </div>
       <div ref={servicesRef} className="fadeInSection"><Services /></div>
@@ -84,14 +67,11 @@ export default function Home() {
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
             Roadmap
-        </span>
-      </div>
+          </span>
+        </div>
       </div>
       <div ref={timelineRef} className="fadeInSection"><Timeline /></div>
-      <div className="flex flex-1 self-center w-full justify-center items-center" style={{ paddingTop: '2rem' }}>
-        <span className="text-2xl sm:text-4xl font-semibold py-4 sm:py-0 section-header">
-        </span>
-      </div>
+      <div className="pb-16 md:pb-20 lg:pb-24"></div>
     </main>
   );
 }
