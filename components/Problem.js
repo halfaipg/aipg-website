@@ -14,7 +14,7 @@ const Problem = () => {
               Big tech giants are building walls around the most powerful AI models, locking them behind expensive pay-per-token APIs and corporate gatekeepers. This creates a world where only the biggest players control access to frontier AI capabilities, while independent developers and creators are left paying premium prices for restricted access.
             </p>
             <p className="mt-3 text-gray-300">
-              AIPG breaks down these barriers by turning the community's idle GPUs into a permissionless, censorship-resistant AI utility. Instead of renting AI from corporate landlords, developers tap directly into a distributed network of compute contributors who earn tokens for providing real inference work—no wasteful hashing, only useful AI.
+              AIPG breaks down these barriers by turning the community's idle GPUs into a permissionless, censorship-resistant AI utility. Instead of renting AI from corporate landlords, developers tap directly into a distributed network of compute contributors who earn tokens for providing real inference work.
             </p>
           </div>
 
