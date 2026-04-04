@@ -318,7 +318,7 @@ const About = () => {
             </div>
             <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
               <p className="text-xl font-mono text-white">
-                UTXO +<br />PoW
+                Base<br />L2
               </p>
             </div>
           </div>
