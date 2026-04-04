@@ -87,6 +87,44 @@ const Products = () => {
           </a>
         ))}
       </div>
+
+      {/* Code snippet */}
+      <div className="mt-12 max-w-2xl mx-auto">
+        <p className="text-center text-gray-400 text-sm mb-4">
+          Works with any OpenAI SDK. Three lines to get started:
+        </p>
+        <div className="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+          <div className="text-gray-500">
+            <span className="text-[#c586c0]">from</span>{" "}
+            <span className="text-[#4ec9b0]">openai</span>{" "}
+            <span className="text-[#c586c0]">import</span>{" "}
+            <span className="text-white">OpenAI</span>
+          </div>
+          <div className="mt-2 text-gray-500">
+            <span className="text-white">client</span>{" "}
+            <span className="text-gray-500">=</span>{" "}
+            <span className="text-[#4ec9b0]">OpenAI</span>
+            <span className="text-gray-400">(</span>
+          </div>
+          <div className="text-gray-500 pl-8">
+            <span className="text-[#9cdcfe]">base_url</span>
+            <span className="text-gray-500">=</span>
+            <span className="text-[#ce9178]">"https://api.aipowergrid.io/v1"</span>
+            <span className="text-gray-400">,</span>
+          </div>
+          <div className="text-gray-500 pl-8">
+            <span className="text-[#9cdcfe]">api_key</span>
+            <span className="text-gray-500">=</span>
+            <span className="text-[#ce9178]">"your-key"</span>
+          </div>
+          <div className="text-gray-400">)</div>
+        </div>
+        <p className="text-center mt-4">
+          <a href="https://api.aipowergrid.io/register" target="_blank" className="text-[#f8991d] text-sm font-medium hover:underline">
+            Get a free API key →
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

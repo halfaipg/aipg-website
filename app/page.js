@@ -58,7 +58,7 @@ export default function Home() {
       <div className="w-full py-8 md:py-12">
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
-            Positive-Sum Impact
+            Why It Matters
           </span>
         </div>
       </div>
