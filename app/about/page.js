@@ -266,7 +266,7 @@ const About = () => {
             </div>
             <div className="bg-gray-900 p-4 text-center h-24 flex items-center justify-center">
               <p className="text-xl font-mono text-white">
-                {formatNumber(metrics.supply)} <span className="text-xs align-top">AIPG</span>
+                150M <span className="text-xs align-top">AIPG</span>
               </p>
             </div>
           </div>
