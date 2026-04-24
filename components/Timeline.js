@@ -54,38 +54,43 @@ const entries = [
   {
     date: "2024",
     title: "Building the Grid",
-    body: "Launched aipg.art for AI image generation, aipg.chat for LLM conversations, and the first GPU worker network. Public beta with community feedback shaping every release.",
+    body: "Launched aipg.art for image generation, aipg.chat for LLM conversations, and the first GPU worker network. Public beta shaped by community feedback.",
   },
   {
     date: "Q1–Q2 2025",
-    title: "Base L2 & Smart Contracts",
-    body: "Migrated to Base L2 with 150M fixed-supply AIPG token. Deployed core smart contracts: StakingVault, ModelVault, RecipeVault, JobAnchor, and WorkerRegistry. Staking live with no lockup period.",
+    title: "Base L2 Migration",
+    body: "Migrated to Base L2 with 150M fixed-supply AIPG token. Deployed StakingVault and core infrastructure contracts. Staking live with no lockup period.",
   },
   {
     date: "Q3–Q4 2025",
-    title: "Grid Mainnet & SDK",
-    body: "Grid mainnet launched with on-chain model registry, job verification via Merkle proofs, and worker bonding. Released the Grid SDK for developers. Dashboard and API explorer went live.",
+    title: "Grid SDK & Dashboard",
+    body: "Released the Grid SDK for developers. Dashboard and API explorer went live. On-chain model registry for worker discovery.",
   },
   {
     date: "Q1 2026",
     completed: true,
-    title: "Streaming API — OpenAI & Anthropic Compatible",
-    body: "Shipped real-time token streaming. The Grid is now a drop-in replacement for OpenAI and Anthropic — same SDKs, same code, decentralized. Image generation with FLUX.2 klein (sub-second). Workers connect via WebSocket for instant job delivery.",
+    title: "Streaming API",
+    body: "Real-time token streaming with OpenAI and Anthropic compatibility. Drop-in replacement — same SDKs, same code. Sub-second image generation with FLUX.",
   },
   {
     date: "Q2 2026",
-    title: "Video, NFTs & Trusted Workers",
-    body: "AI video generation from text prompts. AI art NFTs with full generation parameters stored on-chain — not just a JPEG, the actual recipe so anyone can recreate it. Trusted worker bonding: stake AIPG for priority jobs and higher earnings.",
+    title: "P2P Mode & Trusted Workers",
+    body: "Decentralized job distribution via libp2p gossipsub — no central coordinator required. Trusted worker bonding: stake AIPG for priority jobs and higher earnings.",
   },
   {
     date: "Q3 2026",
-    title: "Token Factory & Developer Launchpad",
-    body: "ARC-20 Token Factory: launch your own token backed by real AI compute from The Grid. Developer Launchpad seed program: free inference, dev support, and help shipping AI products on The Grid.",
+    title: "Video & Token Factory",
+    body: "AI video generation from text prompts. ARC-20 Token Factory: launch tokens backed by real AI compute. Developer Launchpad with free inference for builders.",
   },
   {
     date: "Q4 2026",
+    title: "On-Chain Verification & NFTs",
+    body: "Worker registry and job escrow on Base L2. AI art NFTs with full generation parameters on-chain — not just a JPEG, the actual recipe. Dispute resolution via stake slashing.",
+  },
+  {
+    date: "2027",
     title: "Confidential AI",
-    body: "Private AI sessions powered by NVIDIA confidential computing on Blackwell GPUs. The GPU operator can't see your prompts or outputs. Verifiable, private, decentralized inference.",
+    body: "Private AI sessions using trusted execution environments. Verifiable, private inference where operators can't see your prompts or outputs.",
   },
 ];
 

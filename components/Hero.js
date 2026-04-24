@@ -37,7 +37,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-200 mt-5">
-            Generate images, chat with LLMs, and build AI apps — all powered by a decentralized network of community GPUs. No corporate API. OpenAI compatible. Earn AIPG for contributing compute.
+            Generate images, chat with LLMs, and build AI apps on a decentralized GPU network. OpenAI-compatible API. Run a worker and earn AIPG.
           </p>
         </div>
 
