@@ -28,7 +28,7 @@ const products = [
   {
     title: "Build with the API",
     description: "Drop-in replacement for OpenAI. Same SDKs, real-time streaming, decentralized.",
-    href: "https://docs.aipowergrid.io/streaming-api",
+    href: "https://docs.aipowergrid.io/generate",
     label: "Streaming API Docs",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

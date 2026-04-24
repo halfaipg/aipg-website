@@ -224,7 +224,7 @@ const About = () => {
               <p className="text-gray-400 text-sm">Chat with open-source LLMs — Llama, Mistral, Qwen</p>
               <span className="text-[#f8991d] text-sm mt-3 inline-block">aipg.chat →</span>
             </a>
-            <a href="https://docs.aipowergrid.io/streaming-api" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
+            <a href="https://docs.aipowergrid.io/generate" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
               <h3 className="text-white font-semibold text-lg mb-2">Streaming API</h3>
               <p className="text-gray-400 text-sm">OpenAI compatible. Same SDKs, decentralized.</p>
               <span className="text-[#f8991d] text-sm mt-3 inline-block">API Docs →</span>
