@@ -83,10 +83,10 @@ const About = () => {
               A New Kind of Power Grid
             </h2>
             <p className="mt-2 md:mt-4 text-gray-300">
-              Electricity changed the industrial world—an open AI grid can change the digital one. AI Power Grid (AIPG) transforms idle GPUs into a permissionless, censorship-resistant AI utility that lights up open-source creativity everywhere.
+              Electricity changed the industrial world. An open AI grid can change the digital one.
             </p>
             <p className="mt-4 text-gray-300">
-              By turning community hardware into a distributed AI infrastructure, AIPG breaks down the walls that big tech has built around frontier models. Instead of renting AI from corporate landlords, developers tap directly into a people-powered network where GPU owners earn tokens for providing real inference work—no wasteful hashing, only useful AI.
+              AIPG turns community GPUs into distributed AI infrastructure. Developers get an OpenAI-compatible API. GPU owners earn tokens for running inference. The network is open to everyone.
             </p>
           </div>
 
@@ -111,10 +111,10 @@ const About = () => {
                 </svg>
                 <div className="grow">
                   <h3 className="text-lg font-semibold text-white">
-                  Global Access Without Permission
+                  Global Access
                   </h3>
                   <p className="mt-1 text-gray-300">
-                  Creators worldwide tap into high-end AI capabilities without asking permission from corporate gatekeepers. Whether you're building in Buenos Aires or Bangalore, AIPG provides the same frontier model access that was previously reserved for big tech companies.
+                  Same API whether you're building in Buenos Aires or Bangalore. No waitlists, no geographic restrictions.
                   </p>
                 </div>
               </div>
@@ -138,10 +138,10 @@ const About = () => {
                 </svg>
                 <div className="grow">
                   <h3 className="text-lg font-semibold text-white">
-                    People-Powered Economics
+                    Earn with Your GPU
                   </h3>
                   <p className="mt-1 text-gray-300">
-                    Token rewards create entirely new income streams for GPU owners and AI contributors. Instead of wasteful cryptocurrency mining, community members earn meaningful rewards by providing actual AI inference services that people need and use.
+                    GPU owners earn AIPG tokens for running inference jobs. Real work, real rewards.
                   </p>
                 </div>
               </div>
@@ -171,10 +171,10 @@ const About = () => {
                 </svg>
                 <div className="grow">
                   <h3 className="text-lg font-semibold text-white">
-                    Open Source, Open Doors
+                    Open Source
                   </h3>
                   <p className="mt-1 text-gray-300">
-                  All code, models, and workflows live in the open, killing vendor lock-in and accelerating innovation. Complete transparency means you're never locked into proprietary systems—inspect our code, run your own instances, and maintain full control.
+                  All code is public. No vendor lock-in. Run your own instance or use the network.
                   </p>
                 </div>
               </div>
@@ -195,10 +195,10 @@ const About = () => {
                 </svg>
                 <div className="grow">
                   <h3 className="text-lg font-semibold text-white">
-                    Sustainability
+                    Useful Work
                   </h3>
                   <p className="mt-1 text-gray-300">
-                  Repurposed hardware slashes proof-of-work waste by channeling computational power into useful AI inference instead of arbitrary hash calculations. Every GPU cycle serves actual human creativity and productivity rather than burning energy for digital scarcity.
+                  Every token represents real AI inference that served a real user. GPUs do productive work.
                   </p>
                 </div>
               </div>
@@ -347,7 +347,7 @@ const About = () => {
                   The Community-Powered AI Network
                 </h2>
                 <p className="text-gray-300">
-                  AIPG transforms the relationship between compute and AI by creating a permissionless network where GPU owners contribute idle hardware to run state-of-the-art models. Our smart routing engine matches every prompt to the optimal worker node, while AIPG tokens flow to contributors based on actual inference work performed—no wasteful hashing, only useful AI that serves real human creativity and productivity.
+                  GPU owners contribute hardware to run AI models. Smart routing sends requests to the best available worker. Workers earn AIPG for every job completed.
                 </p>
               </div>
               <div className="grid md:grid-cols-2 gap-6 lg:gap-8">

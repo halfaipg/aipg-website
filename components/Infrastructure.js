@@ -7,10 +7,10 @@ const Infrastructure = () => {
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl md:leading-tight dark:text-white">
-            People-Powered Infrastructure
+            How The Grid Works
           </h2>
           <p className="mt-1 text-gray-600 dark:text-gray-400">
-            Crowd-sourced workers run state-of-the-art models while smart routing matches every prompt to the best node. AIPG tokens flow to compute contributors—no wasteful hashing, only useful inference.
+            Community GPUs run AI models. Smart routing sends your request to the best available worker. Workers earn AIPG for every job they complete.
           </p>
         </div>
 
@@ -36,11 +36,11 @@ const Infrastructure = () => {
                 <path d="M8.5 15.5L15.5 8.5"/>
               </svg>
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                Distributed Worker Network
+                GPU Workers
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Transform your idle GPU into a powerful AI node. Join thousands of contributors earning tokens by running cutting-edge models—from gaming rigs to data centers, every machine strengthens our decentralized network.
+              Gaming rigs to data centers — any GPU can join the network and start earning by running AI models.
             </p>
           </div>
 
@@ -52,11 +52,11 @@ const Infrastructure = () => {
                 <path d="M2 12l10 5 10-5"/>
               </svg>
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                Smart Routing Engine
+                Smart Routing
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Intelligent algorithms instantly match your AI requests to the perfect worker node. Our smart routing considers model type, current load, and performance metrics to deliver lightning-fast results every time.
+              Requests automatically route to the best available worker based on model, load, and latency.
             </p>
           </div>
 
@@ -68,11 +68,11 @@ const Infrastructure = () => {
                 <path d="M8 12h8"/>
               </svg>
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                Token Incentive System
+                Token Rewards
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Earn meaningful rewards for powering real AI workloads. No wasteful mining—every AIPG token represents actual value created through AI inference that serves real users and builds the future of decentralized intelligence.
+              Workers earn AIPG for every job completed. Each token represents real inference work done.
             </p>
           </div>
         </div>

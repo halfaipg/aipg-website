@@ -8,14 +8,24 @@ const Problem = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="xl:pl-6">
             <h2 className="text-3xl text-white font-bold lg:text-4xl">
-              Why the World Needs an Open AI Movement
+              Why Open AI Infrastructure Matters
             </h2>
-            <p className="mt-3 text-gray-300">
-              Big tech giants are building walls around the most powerful AI models, locking them behind expensive pay-per-token APIs and corporate gatekeepers. This creates a world where only the biggest players control access to frontier AI capabilities, while independent developers and creators are left paying premium prices for restricted access.
-            </p>
-            <p className="mt-3 text-gray-300">
-              AIPG breaks down these barriers by turning the community's idle GPUs into a permissionless, censorship-resistant AI utility. Instead of renting AI from corporate landlords, developers tap directly into a distributed network of compute contributors who earn tokens for providing real inference work.
-            </p>
+            <div className="mt-4 space-y-3">
+              <p className="text-gray-300 font-medium">The problem:</p>
+              <ul className="text-gray-300 space-y-2 list-disc list-inside">
+                <li>Powerful AI models locked behind expensive APIs</li>
+                <li>Independent developers pay premium prices</li>
+                <li>Access controlled by a handful of companies</li>
+              </ul>
+            </div>
+            <div className="mt-4 space-y-3">
+              <p className="text-gray-300 font-medium">The solution:</p>
+              <ul className="text-gray-300 space-y-2 list-disc list-inside">
+                <li>AIPG turns idle GPUs into AI infrastructure</li>
+                <li>Developers get OpenAI-compatible access</li>
+                <li>GPU owners earn tokens for real work</li>
+              </ul>
+            </div>
           </div>
 
           <div className="space-y-6 lg:space-y-10">
@@ -26,11 +36,11 @@ const Problem = () => {
                   <path d="M8 8V6a4 4 0 0 1 8 0v2"/>
                 </svg>
                 <h3 className="text-base sm:text-lg font-semibold text-gray-200">
-                  Corporate Gatekeepers
+                  Centralized AI
                 </h3>
               </div>
               <p className="text-gray-400">
-                Frontier models locked behind expensive APIs, controlled by a handful of tech giants who decide who gets access and at what price. This creates artificial scarcity around powerful AI capabilities.
+                Today's AI APIs are controlled by a few large providers. Pricing, access, and availability are all decided centrally.
               </p>
             </div>
 
@@ -46,11 +56,11 @@ const Problem = () => {
                   <path d="M12 8v8"/>
                 </svg>
                 <h3 className="text-base sm:text-lg font-semibold text-gray-200">
-                  Community-Powered Alternative
+                  Distributed AI
                 </h3>
               </div>
               <p className="text-gray-400">
-                AIPG creates a permissionless, decentralized network where GPU owners earn tokens for providing useful AI inference compute, democratizing access and keeping frontier AI power directly in the hands of the global community.
+                AIPG is an open network where anyone can contribute compute and earn. Access is permissionless. The network is owned by everyone who participates.
               </p>
             </div>
           </div>
