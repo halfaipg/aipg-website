@@ -25,7 +25,7 @@ const Hero = () => {
         </div>
         <div className={`mt-5 max-w-4xl text-center mx-auto ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ minHeight: '8rem' }}>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight">
-            <span className="text-white">A New Kind of</span>
+            <span className="text-white">Free AI for</span>
             <br className="sm:hidden" />
             <span className="text-white hidden sm:inline"> </span>
             <span style={{
@@ -33,12 +33,49 @@ const Hero = () => {
                     textShadow: '0 0 30px rgba(248, 153, 29, 0.5), 0 0 60px rgba(248, 153, 29, 0.3)',
                     animation: 'glow 2s ease-in-out infinite alternate'
                   }}>
-              Power Grid
+              Everyone
             </span>
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-200 mt-5">
-            Generate images, chat with LLMs, and build AI apps on a decentralized GPU network. OpenAI-compatible API. Run a worker and earn AIPG.
+            Learn AI, build agents, ship products — without barriers. Free tier funded by the community. Powered by decentralized GPUs.
           </p>
+        </div>
+
+        {/* Value Props */}
+        <div className={`mt-8 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-center">
+            <div className="text-2xl mb-1">🆓</div>
+            <div className="text-white font-semibold text-sm">Free Daily Access</div>
+            <div className="text-gray-400 text-xs">No credit card needed</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-center">
+            <div className="text-2xl mb-1">🤝</div>
+            <div className="text-white font-semibold text-sm">Community Funded</div>
+            <div className="text-gray-400 text-xs">Paid users fund free access</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-center">
+            <div className="text-2xl mb-1">🔓</div>
+            <div className="text-white font-semibold text-sm">No Gatekeepers</div>
+            <div className="text-gray-400 text-xs">OpenAI-compatible API</div>
+          </div>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className={`mt-8 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <a
+            className="inline-flex justify-center items-center gap-x-2 text-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-orange-500/50"
+            href="https://api.aipowergrid.io/register"
+            target="_blank"
+          >
+            Get Free API Key
+          </a>
+          <a
+            className="inline-flex justify-center items-center gap-x-2 text-center bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all border border-white/20"
+            href="https://docs.aipowergrid.io"
+            target="_blank"
+          >
+            Start Learning
+          </a>
         </div>
 
         <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
