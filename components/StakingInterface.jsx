@@ -77,8 +77,12 @@ export function StakingInterface() {
       {/* Global Stats - Always Visible */}
       <div className="mb-6">
         <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 text-center transition-all duration-500">
-          <div className="flex justify-center mb-2">
-            <span className="text-3xl">📊</span>
+          <div className="flex justify-center mb-3">
+            <div className="w-11 h-11 rounded-xl bg-purple-500/15 border border-purple-500/40 flex items-center justify-center">
+              <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
           </div>
           <div className="text-gray-400 text-sm mb-1">Total Still Staked</div>
           <div className="text-4xl font-bold text-purple-400">
@@ -95,7 +99,11 @@ export function StakingInterface() {
       {!isConnected && (
         <div className="bg-gray-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 text-center">
           <div className="flex justify-center mb-4">
-            <span className="text-5xl">🔐</span>
+            <div className="w-16 h-16 rounded-2xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center">
+              <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
           </div>
           <h3 className="text-xl font-bold text-white mb-3">Connect Your Wallet</h3>
           <p className="text-gray-400 mb-6">
@@ -112,8 +120,12 @@ export function StakingInterface() {
         <>
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
-          <div className="flex justify-center mb-2">
-            <span className="text-3xl">💰</span>
+          <div className="flex justify-center mb-3">
+            <div className="w-11 h-11 rounded-xl bg-purple-500/15 border border-purple-500/40 flex items-center justify-center">
+              <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+              </svg>
+            </div>
           </div>
           <div className="text-gray-400 text-sm mb-1">Your Staked Balance</div>
           <div className="text-3xl font-bold text-purple-400">
@@ -126,8 +138,12 @@ export function StakingInterface() {
         </div>
 
         <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
-          <div className="flex justify-center mb-2">
-            <span className="text-3xl">👛</span>
+          <div className="flex justify-center mb-3">
+            <div className="w-11 h-11 rounded-xl bg-orange-500/15 border border-orange-500/40 flex items-center justify-center">
+              <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"/>
+              </svg>
+            </div>
           </div>
           <div className="text-gray-400 text-sm mb-1">Wallet Balance</div>
           <div className="text-3xl font-bold text-orange-400">

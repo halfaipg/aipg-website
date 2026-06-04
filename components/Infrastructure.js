@@ -82,15 +82,21 @@ const Infrastructure = () => {
         <div className="mt-16 grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Autonomous Network */}
           <div className="bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/20 rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="text-4xl">⛓️</div>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-14 h-14 rounded-xl bg-purple-500/15 border border-purple-500/40 flex items-center justify-center flex-shrink-0">
+                <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                </svg>
+              </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Fully Autonomous Network</h3>
+                <h3 className="text-xl font-bold text-white">A network nobody can shut down</h3>
                 <span className="text-purple-400 text-sm font-medium">In Development</span>
               </div>
             </div>
             <p className="text-gray-300 mb-4">
-              The AIPG network is evolving to run entirely on-chain. Smart contracts will handle job routing, payments, and rewards — no central coordinator required.
+              Every centralized AI you've used can be unplugged by a company, a regulator, or a Stripe ban.
+              AIPG is moving entirely on-chain — smart contracts handle routing, payments, and verification.
+              The team builds the protocol. The protocol runs itself.
             </p>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li className="flex items-start gap-2">
@@ -114,15 +120,21 @@ const Infrastructure = () => {
 
           {/* Confidential Computing */}
           <div className="bg-gradient-to-br from-green-500/10 to-teal-500/10 border border-green-500/20 rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="text-4xl">🔒</div>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-14 h-14 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center flex-shrink-0">
+                <svg className="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Confidential Computing</h3>
-                <span className="text-green-400 text-sm font-medium">Coming with Blackwell</span>
+                <h3 className="text-xl font-bold text-white">Privacy at the hardware level</h3>
+                <span className="text-emerald-400 text-sm font-medium">Coming with Blackwell</span>
               </div>
             </div>
             <p className="text-gray-300 mb-4">
-              NVIDIA Confidential Computing on Blackwell GPUs (B200/B300) enables true privacy — even node operators can't see your prompts or outputs.
+              Your medical notes, your legal docs, your agent's API keys — they shouldn't be readable by
+              the stranger running the GPU. NVIDIA Confidential Computing on Blackwell (B200/B300) encrypts
+              your workload in GPU memory and proves cryptographically it ran in a secure enclave.
             </p>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li className="flex items-start gap-2">

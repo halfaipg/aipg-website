@@ -36,9 +36,9 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mt-5 leading-relaxed">
-            Closed AI charges $20 a month before you write a single line of code.
+            Ship agents, run workflows, generate images and video — on community GPUs.
             <br className="hidden md:inline" />
-            We don't. Every paid request on AIPG funds free access for someone else.
+            Every paid request funds free access for someone who can't afford the $20-a-month gate.
           </p>
         </div>
 
