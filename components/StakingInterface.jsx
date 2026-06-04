@@ -35,6 +35,9 @@ function formatAPY(apy) {
   return apy.toFixed(2) + '%';
 }
 
+// Staking is being wound down - new stakes disabled
+const STAKING_DISABLED = true;
+
 export function StakingInterface() {
   const { address, isConnected } = useAccount();
   const {
@@ -49,7 +52,7 @@ export function StakingInterface() {
 
   const [stakeAmount, setStakeAmount] = useState('');
   const [unstakeAmount, setUnstakeAmount] = useState('');
-  const [activeTab, setActiveTab] = useState('stake');
+  const [activeTab, setActiveTab] = useState('unstake'); // Default to unstake tab
   const [isTransacting, setIsTransacting] = useState(false);
 
   const handleStake = async () => {
@@ -276,75 +279,13 @@ export function StakingInterface() {
       </div>
 
       {/* Main Interface */}
-      <div className="bg-gray-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8">
+      <div className="bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-8">
         <div className="flex flex-col items-center mb-6">
-          <div className="flex gap-4 mb-4">
-            <button
-              onClick={() => setActiveTab('stake')}
-              className={`px-6 py-2 rounded-xl font-semibold transition-all ${
-                activeTab === 'stake'
-                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
-                  : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700'
-              }`}
-            >
-              Stake
-            </button>
-            <button
-              onClick={() => setActiveTab('unstake')}
-              className={`px-6 py-2 rounded-xl font-semibold transition-all ${
-                activeTab === 'unstake'
-                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
-                  : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700'
-              }`}
-            >
-              Unstake
-            </button>
-          </div>
-
+          <h3 className="text-xl font-bold text-white mb-4">Withdraw Your AIPG</h3>
           <ConnectButton showBalance={false} />
         </div>
 
-        {activeTab === 'stake' ? (
-          <div className="space-y-6">
-            <div>
-              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">
-                Amount to Stake {stakingData.stakedBalance && stakingData.stakedBalance > 0n && (
-                  <span className="text-cyan-400">(Add to your existing stake)</span>
-                )}
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  value={stakeAmount}
-                  onChange={(e) => setStakeAmount(e.target.value)}
-                  placeholder="100 minimum"
-                  min="100"
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500 text-center md:text-left"
-                />
-                <button
-                  onClick={() => setStakeAmount(stakingData.tokenBalance ? formatEther(stakingData.tokenBalance) : '0')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 px-3 py-1 rounded-lg text-sm font-semibold transition-all"
-                >
-                  MAX
-                </button>
-              </div>
-              <div className="text-gray-500 text-sm mt-1 text-center md:text-left">
-                Available: {stakingData.tokenBalance ? parseFloat(formatEther(stakingData.tokenBalance)).toLocaleString() : '0'} AIPG
-              </div>
-              <div className="text-yellow-500 text-sm mt-1 text-center md:text-left">
-                ⚠️ Minimum: 100 AIPG
-              </div>
-            </div>
-
-            <button
-              onClick={handleStake}
-              disabled={isLoading || !stakeAmount || parseFloat(stakeAmount) <= 0}
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-cyan-500/50"
-            >
-              {isLoading ? 'Processing...' : needsApproval ? 'Approve & Stake' : 'Stake AIPG'}
-            </button>
-          </div>
-        ) : (
+        {STAKING_DISABLED && (
           <div className="space-y-6">
             <div>
               <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Unstake</label>
@@ -384,30 +325,21 @@ export function StakingInterface() {
             <div>
               <div className="text-gray-400 text-sm mb-2">Claimable Rewards</div>
               <div className="text-3xl font-bold text-green-400">
-                {stakingData.pendingRewards 
+                {stakingData.pendingRewards
                   ? parseFloat(formatEther(stakingData.pendingRewards)).toLocaleString(undefined, { maximumFractionDigits: 6 })
                   : '0'
                 } AIPG
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <button
-                onClick={handleClaim}
-                disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
-                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
-              >
-                {isLoading ? 'Processing...' : 'Claim Rewards'}
-              </button>
-              <button
-                onClick={handleCompound}
-                disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
-                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-cyan-500/50"
-              >
-                {isLoading ? 'Processing...' : '🔄 Compound'}
-              </button>
-            </div>
+            <button
+              onClick={handleClaim}
+              disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
+            >
+              {isLoading ? 'Processing...' : 'Claim Rewards'}
+            </button>
             <p className="text-gray-500 text-xs mt-1">
-              Compound = Claim rewards + Add to stake (2 transactions)
+              Don't forget to claim your rewards before withdrawing
             </p>
           </div>
         </div>
