@@ -6,12 +6,12 @@ const RunNode = () => {
     <div className="bg-gradient-to-b from-black to-gray-900">
       <div className="max-w-[85rem] px-6 py-16 sm:px-8 lg:px-10 lg:py-20 mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl text-white font-bold lg:text-4xl mb-4">
-            Power the Network, Earn Rewards
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <h2 className="text-3xl text-white font-bold lg:text-5xl mb-4 leading-tight">
+            Got a GPU? Put it to work.
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Run infrastructure, get paid. Two ways to contribute.
+          <p className="text-xl text-gray-300">
+            The network runs on real hardware that real people plug in. If you have spare compute, you can earn AIPG by serving inference for everyone else.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ const RunNode = () => {
             </div>
 
             <a
-              href="https://docs.aipowergrid.io/workers"
+              href="https://docs.aipowergrid.io/worker-llm"
               target="_blank"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-xl transition-all"
             >
