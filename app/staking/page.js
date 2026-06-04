@@ -34,7 +34,7 @@ export default function StakingPage() {
                       ✓ Your tokens are safe
                     </div>
                     <div className="bg-amber-500/20 text-amber-300 px-4 py-2 rounded-lg text-sm">
-                      ⏳ Rewards ending soon
+                      ✓ Rewards have ended
                     </div>
                   </div>
                 </div>
@@ -82,7 +82,9 @@ export default function StakingPage() {
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-30 transition"></div>
             <div className="relative bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 text-center">
-            <div className="text-green-400 text-3xl mb-4">🔓</div>
+            <div className="flex justify-center mb-4">
+              <span className="text-green-400 text-3xl">🔓</span>
+            </div>
             <h3 className="text-xl font-bold text-white mb-2">No Lock Period</h3>
             <p className="text-gray-400">
               Withdraw your AIPG anytime. Your tokens are never locked.
@@ -93,10 +95,12 @@ export default function StakingPage() {
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-30 transition"></div>
             <div className="relative bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 text-center">
-              <div className="text-green-400 text-3xl mb-4">💸</div>
-              <h3 className="text-xl font-bold text-white mb-2">Claim Remaining Rewards</h3>
+              <div className="flex justify-center mb-4">
+                <span className="text-green-400 text-3xl">✅</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Instant Withdrawal</h3>
               <p className="text-gray-400">
-                Any pending rewards are still yours. Claim them when you withdraw.
+                Your tokens are returned immediately. No waiting period.
               </p>
             </div>
           </div>
@@ -104,7 +108,9 @@ export default function StakingPage() {
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-30 transition"></div>
             <div className="relative bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 text-center">
-              <div className="text-green-400 text-3xl mb-4">🚀</div>
+              <div className="flex justify-center mb-4">
+                <span className="text-green-400 text-3xl">🚀</span>
+              </div>
               <h3 className="text-xl font-bold text-white mb-2">Ready for Nodes</h3>
               <p className="text-gray-400">
                 Withdraw now to participate in the upcoming node programs.
@@ -146,7 +152,7 @@ export default function StakingPage() {
           <div className="relative bg-gray-800/30 backdrop-blur-sm border border-green-500/10 rounded-2xl p-6">
           <h2 className="text-2xl font-bold text-white mb-6 text-center">How to Withdraw</h2>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
             <div className="bg-gray-900/30 rounded-xl p-4 text-center">
               <div className="bg-green-500/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-500/30">
                 <span className="text-green-400 font-bold text-xl">1</span>
@@ -160,15 +166,7 @@ export default function StakingPage() {
                 <span className="text-green-400 font-bold text-xl">2</span>
               </div>
               <h4 className="text-white font-semibold mb-2 text-base">Click Withdraw</h4>
-              <p className="text-gray-400 text-sm">Go to the Unstake tab and click MAX to withdraw all</p>
-            </div>
-
-            <div className="bg-gray-900/30 rounded-xl p-4 text-center">
-              <div className="bg-green-500/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-500/30">
-                <span className="text-green-400 font-bold text-xl">3</span>
-              </div>
-              <h4 className="text-white font-semibold mb-2 text-base">Claim Rewards</h4>
-              <p className="text-gray-400 text-sm">Don't forget to claim any pending rewards too</p>
+              <p className="text-gray-400 text-sm">Click MAX then Withdraw to get all your AIPG back</p>
             </div>
             </div>
           </div>
@@ -188,12 +186,7 @@ export default function StakingPage() {
 
             <div className="bg-gray-900/30 rounded-xl p-4">
               <h4 className="text-lg font-semibold text-white mb-2">Is there a deadline to withdraw?</h4>
-              <p className="text-gray-400 text-sm">No hard deadline. Your tokens are safe and you can withdraw anytime. However, rewards will stop accruing soon, so there's no benefit to staying staked.</p>
-            </div>
-
-            <div className="bg-gray-900/30 rounded-xl p-4">
-              <h4 className="text-lg font-semibold text-white mb-2">What about my pending rewards?</h4>
-              <p className="text-gray-400 text-sm">Any rewards you've already earned are still yours. Make sure to click "Claim Rewards" when you withdraw to receive them.</p>
+              <p className="text-gray-400 text-sm">No hard deadline. Your tokens are safe and you can withdraw anytime. The staking program has ended, so there's no benefit to staying staked.</p>
             </div>
 
             <div className="bg-gray-900/30 rounded-xl p-4">
