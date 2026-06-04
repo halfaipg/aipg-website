@@ -8,11 +8,12 @@ const Problem = () => {
         {/* Mission Statement */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl text-white font-bold lg:text-5xl mb-6 leading-tight">
-            The kid in Lagos learning to build an agent shouldn't lose to a credit card.
+            AI shouldn't have a doorman.
           </h2>
           <p className="text-xl text-gray-300 leading-relaxed">
-            The most useful technology of our generation now costs more per month than a lot of people make in a week.
-            That's the problem AIPG was built to fix — and we fix it by letting the people who can pay, pay for the people who can't.
+            $20 a month before your first line of code. A trial that expires. A card you don't have.
+            Closed AI is full of velvet ropes. AIPG is built so the people who can pay fund the people who can't —
+            and so the network can never be shut down by anyone, including us.
           </p>
         </div>
 
