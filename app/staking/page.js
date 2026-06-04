@@ -62,14 +62,18 @@ export default function StakingPage() {
                 <p className="text-gray-300 mb-6">
                   Instead of passive staking, earn AIPG by actively contributing to the network.
                 </p>
-                <div className="grid md:grid-cols-2 gap-4 text-left">
-                  <div className="bg-gray-900/50 rounded-xl p-4">
-                    <div className="text-2xl mb-2">🖥️</div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-gray-900/50 rounded-xl p-4 text-center">
+                    <div className="flex justify-center mb-2">
+                      <span className="text-2xl">🖥️</span>
+                    </div>
                     <h4 className="text-lg font-bold text-cyan-400 mb-1">AI Worker Nodes</h4>
                     <p className="text-gray-400 text-sm">Run GPU inference workers and earn AIPG for every request you process.</p>
                   </div>
-                  <div className="bg-gray-900/50 rounded-xl p-4">
-                    <div className="text-2xl mb-2">🔐</div>
+                  <div className="bg-gray-900/50 rounded-xl p-4 text-center">
+                    <div className="flex justify-center mb-2">
+                      <span className="text-2xl">🔐</span>
+                    </div>
                     <h4 className="text-lg font-bold text-cyan-400 mb-1">Validator Nodes</h4>
                     <p className="text-gray-400 text-sm">Secure the network and validate transactions. Coming soon.</p>
                   </div>
