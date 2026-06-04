@@ -96,7 +96,7 @@ const Infrastructure = () => {
             <p className="text-gray-300 mb-4">
               Every centralized AI you've used can be unplugged by a company, a regulator, or a Stripe ban.
               AIPG is moving entirely on-chain — smart contracts handle routing, payments, and verification.
-              The team builds the protocol. The protocol runs itself.
+              The team builds the protocol. The protocol runs itself. Once it's done, even we can't turn it off.
             </p>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li className="flex items-start gap-2">

@@ -65,32 +65,6 @@ const Problem = () => {
           </div>
         </div>
 
-        {/* The Model */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-white mb-2">The simplest economy in AI</h3>
-            <p className="text-gray-400">Three roles. One flow. No middlemen.</p>
-          </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
-            <div className="flex-1 p-4">
-              <div className="text-3xl font-bold text-orange-400">Paid users</div>
-              <div className="text-gray-400 mt-2">Pay for higher limits and confidential workloads</div>
-            </div>
-            <div className="text-3xl text-gray-600">→</div>
-            <div className="flex-1 p-4">
-              <div className="text-3xl font-bold text-blue-400">Node operators</div>
-              <div className="text-gray-400 mt-2">Run GPUs, serve requests, earn AIPG</div>
-            </div>
-            <div className="text-3xl text-gray-600">→</div>
-            <div className="flex-1 p-4">
-              <div className="text-3xl font-bold text-green-400">Free users</div>
-              <div className="text-gray-400 mt-2">Build, learn, ship — on the same network</div>
-            </div>
-          </div>
-          <p className="text-center text-gray-300 mt-8 max-w-2xl mx-auto leading-relaxed">
-            Every paid call expands the free tier. The bigger AIPG gets, the more free access there is to go around.
-          </p>
-        </div>
       </div>
     </div>
   );
