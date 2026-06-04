@@ -64,18 +64,27 @@ export default function StakingPage() {
                 </p>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-gray-900/50 rounded-xl p-4 text-center">
-                    <div className="flex justify-center mb-2">
-                      <span className="text-2xl">🖥️</span>
+                    <div className="flex justify-center mb-3">
+                      <div className="w-11 h-11 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                          <rect x="3" y="4" width="18" height="12" rx="2"/>
+                          <path d="M8 20h8M12 16v4"/>
+                        </svg>
+                      </div>
                     </div>
                     <h4 className="text-lg font-bold text-cyan-400 mb-1">AI Worker Nodes</h4>
-                    <p className="text-gray-400 text-sm">Run GPU inference workers and earn AIPG for every request you process.</p>
+                    <p className="text-gray-400 text-sm">Run an LLM, image, or video worker — earn AIPG for every job you serve.</p>
                   </div>
                   <div className="bg-gray-900/50 rounded-xl p-4 text-center">
-                    <div className="flex justify-center mb-2">
-                      <span className="text-2xl">🔐</span>
+                    <div className="flex justify-center mb-3">
+                      <div className="w-11 h-11 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                      </div>
                     </div>
                     <h4 className="text-lg font-bold text-cyan-400 mb-1">Validator Nodes</h4>
-                    <p className="text-gray-400 text-sm">Secure the network and validate transactions. Coming soon.</p>
+                    <p className="text-gray-400 text-sm">Bond AIPG to verify worker results and earn verification fees. Coming soon.</p>
                   </div>
                 </div>
               </div>
@@ -87,7 +96,11 @@ export default function StakingPage() {
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-30 transition"></div>
             <div className="relative bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 text-center">
             <div className="flex justify-center mb-4">
-              <span className="text-green-400 text-3xl">🔓</span>
+              <div className="w-14 h-14 rounded-xl bg-green-500/15 border border-green-500/40 flex items-center justify-center">
+                <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 11V7a4 4 0 118 0M5 11h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z"/>
+                </svg>
+              </div>
             </div>
             <h3 className="text-xl font-bold text-white mb-2">No Lock Period</h3>
             <p className="text-gray-400">
@@ -100,7 +113,11 @@ export default function StakingPage() {
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-30 transition"></div>
             <div className="relative bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 text-center">
               <div className="flex justify-center mb-4">
-                <span className="text-green-400 text-3xl">✅</span>
+                <div className="w-14 h-14 rounded-xl bg-green-500/15 border border-green-500/40 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Instant Withdrawal</h3>
               <p className="text-gray-400">
@@ -113,7 +130,11 @@ export default function StakingPage() {
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-30 transition"></div>
             <div className="relative bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 text-center">
               <div className="flex justify-center mb-4">
-                <span className="text-green-400 text-3xl">🚀</span>
+                <div className="w-14 h-14 rounded-xl bg-green-500/15 border border-green-500/40 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Ready for Nodes</h3>
               <p className="text-gray-400">
@@ -127,7 +148,13 @@ export default function StakingPage() {
         <div className="mb-12 relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-20 transition duration-500"></div>
           <div className="relative bg-gradient-to-br from-green-900/20 to-emerald-900/20 backdrop-blur-sm border border-green-500/30 rounded-2xl p-8 text-center">
-          <div className="text-4xl mb-4">🔒</div>
+          <div className="flex justify-center mb-4">
+            <div className="w-14 h-14 rounded-xl bg-green-500/15 border border-green-500/40 flex items-center justify-center">
+              <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+          </div>
           <h3 className="text-2xl font-bold text-white mb-3">Verified Smart Contract</h3>
           <p className="text-gray-300 mb-6 max-w-3xl mx-auto">
             Our staking contract is verified on BaseScan and audited for security. Your funds are protected by battle-tested OpenZeppelin libraries.

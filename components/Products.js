@@ -15,21 +15,22 @@ const products = [
     ),
   },
   {
-    title: "Chat with AI",
-    description: "Talk to open-source LLMs. Llama, Mistral, Qwen, and more. No corporate middleman.",
+    title: "Run Agents & Workflows",
+    description: "Open-source LLMs powering your agents, automations, and AI workflows. Llama, Mistral, Qwen — no corporate worldview baked in.",
     href: "https://aipg.chat",
     label: "aipg.chat",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 1v6m0 10v6m11-11h-6m-10 0H1m17.07-7.07l-4.24 4.24M7.17 16.83l-4.24 4.24m0-18.14l4.24 4.24m9.66 9.66l4.24 4.24"/>
       </svg>
     ),
   },
   {
     title: "Build with the API",
-    description: "Drop-in replacement for OpenAI. Same SDKs, real-time streaming, decentralized.",
-    href: "https://docs.aipowergrid.io/generate",
-    label: "Streaming API Docs",
+    description: "Drop-in for OpenAI and Anthropic. Same SDKs, real-time streaming, decentralized backend. Free daily quota.",
+    href: "https://docs.aipowergrid.io/streaming-api",
+    label: "API Docs",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <polyline points="16 18 22 12 16 6" />
@@ -39,9 +40,9 @@ const products = [
   },
   {
     title: "Earn with your GPU",
-    description: "Run the worker, point it at The Grid, earn AIPG tokens for every job you complete.",
-    href: "https://github.com/AIPowerGrid/grid-inference-worker/releases",
-    label: "Download Worker",
+    description: "Run an LLM, image, or video worker. Earn AIPG for every request you serve. Worker bond: 1,000 AIPG.",
+    href: "https://docs.aipowergrid.io/run-a-node",
+    label: "Run a Worker",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -57,10 +58,10 @@ const Products = () => {
     <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-12">
         <h2 className="text-2xl sm:text-4xl font-semibold text-white">
-          Use The Grid
+          Build on The Grid
         </h2>
         <p className="mt-3 text-gray-400 text-lg">
-          Everything works today. Pick one and try it.
+          Agents, automations, art, video — running on community GPUs today. Pick one and ship.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
