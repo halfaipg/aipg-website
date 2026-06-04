@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 const Hero = () => {
   const [contentVisible, setContentVisible] = useState(false);
-  const fullText = "A New Kind of Power Grid";
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,45 +35,66 @@ const Hero = () => {
               Everyone
             </span>
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-200 mt-5">
-            Learn AI, build agents, ship products — without barriers. Free tier funded by the community. Powered by decentralized GPUs.
+          <p className="text-lg md:text-xl text-gray-300 mt-5 leading-relaxed">
+            Closed AI charges $20 a month before you write a single line of code.
+            <br className="hidden md:inline" />
+            We don't. Every paid request on AIPG funds free access for someone else.
           </p>
         </div>
 
         {/* Value Props */}
-        <div className={`mt-8 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-center">
-            <div className="text-2xl mb-1">🆓</div>
-            <div className="text-white font-semibold text-sm">Free Daily Access</div>
-            <div className="text-gray-400 text-xs">No credit card needed</div>
+        <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-orange-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
+            <div className="flex justify-center mb-3">
+              <div className="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center">
+                <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div className="text-white font-semibold text-sm mb-1.5">Free, every day</div>
+            <div className="text-gray-400 text-xs leading-snug">Daily API quota for builders, students, anyone curious. No card. No trial.</div>
           </div>
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-center">
-            <div className="text-2xl mb-1">🤝</div>
-            <div className="text-white font-semibold text-sm">Community Funded</div>
-            <div className="text-gray-400 text-xs">Paid users fund free access</div>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-cyan-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
+            <div className="flex justify-center mb-3">
+              <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" opacity="0.4"/>
+                </svg>
+              </div>
+            </div>
+            <div className="text-white font-semibold text-sm mb-1.5">Paid users fund the free tier</div>
+            <div className="text-gray-400 text-xs leading-snug">Your bill funds someone learning to code in a country where $20/mo isn't on the table.</div>
           </div>
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-center">
-            <div className="text-2xl mb-1">🔓</div>
-            <div className="text-white font-semibold text-sm">No Gatekeepers</div>
-            <div className="text-gray-400 text-xs">OpenAI-compatible API</div>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-emerald-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
+            <div className="flex justify-center mb-3">
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+            </div>
+            <div className="text-white font-semibold text-sm mb-1.5">No one can turn it off</div>
+            <div className="text-gray-400 text-xs leading-snug">OpenAI-compatible API on a network heading fully on-chain. No corporate kill switch.</div>
           </div>
         </div>
 
         {/* CTA Buttons */}
-        <div className={`mt-8 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+        <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-orange-500/50"
             href="https://api.aipowergrid.io/register"
             target="_blank"
           >
-            Get Free API Key
+            Get your free API key
           </a>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all border border-white/20"
             href="https://docs.aipowergrid.io"
             target="_blank"
           >
-            Start Learning
+            Read the docs
           </a>
         </div>
 
