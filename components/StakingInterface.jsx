@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useStaking } from '@/hooks/useStaking';
@@ -17,79 +17,16 @@ function formatBalance(value) {
   return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
 }
 
-function formatWPY(wpy) {
-  if (wpy >= 1000000) {
-    return (wpy / 1000000).toFixed(2) + 'M%';
-  } else if (wpy >= 1000) {
-    return (wpy / 1000).toFixed(2) + 'K%';
-  }
-  return wpy.toFixed(2) + '%';
-}
-
-function formatAPY(apy) {
-  if (apy >= 1000000) {
-    return (apy / 1000000).toFixed(2) + 'M%';
-  } else if (apy >= 1000) {
-    return (apy / 1000).toFixed(2) + 'K%';
-  }
-  return apy.toFixed(2) + '%';
-}
-
-// Staking is being wound down - new stakes disabled
-const STAKING_DISABLED = true;
-
 export function StakingInterface() {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const {
     stakingData,
-    stake,
     unstake,
-    claimRewards,
-    approveToken,
-    isLoading,
-    needsApproval
+    isLoading
   } = useStaking();
 
-  const [stakeAmount, setStakeAmount] = useState('');
   const [unstakeAmount, setUnstakeAmount] = useState('');
-  const [activeTab, setActiveTab] = useState('unstake'); // Default to unstake tab
   const [isTransacting, setIsTransacting] = useState(false);
-
-  const handleStake = async () => {
-    if (!stakeAmount || parseFloat(stakeAmount) <= 0) return;
-    
-    // Check minimum stake amount
-    if (parseFloat(stakeAmount) < 100) {
-      alert('⚠️ Minimum stake amount is 100 AIPG');
-      return;
-    }
-    
-    try {
-      setIsTransacting(true);
-      if (needsApproval) {
-        await approveToken(stakeAmount);
-      }
-      await stake(stakeAmount);
-      setStakeAmount('');
-      
-      // Keep loading state for 5 seconds to show animation
-      setTimeout(() => setIsTransacting(false), 5000);
-    } catch (error) {
-      setIsTransacting(false);
-      console.error('Stake error:', error);
-      
-      // Don't show alert for user cancellations
-      if (error.message === 'Transaction cancelled') {
-        return;
-      }
-      
-      if (error.message === 'Approval needed') {
-        alert('Please approve the transaction in your wallet first, then try staking again.');
-      } else {
-        alert(`Error: ${error.message || 'Transaction failed'}`);
-      }
-    }
-  };
 
   const handleUnstake = async () => {
     if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return;
@@ -104,65 +41,6 @@ export function StakingInterface() {
     } catch (error) {
       setIsTransacting(false);
       console.error('Unstake error:', error);
-      
-      // Don't show alert for user cancellations
-      if (error.message === 'Transaction cancelled') {
-        return;
-      }
-      
-      // User-friendly error messages
-      if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
-        alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
-      } else {
-        alert(`Error: ${error.message || 'Transaction failed'}`);
-      }
-    }
-  };
-
-  const handleClaim = async () => {
-    try {
-      setIsTransacting(true);
-      await claimRewards();
-      
-      // Keep loading state for 5 seconds to show animation
-      setTimeout(() => setIsTransacting(false), 5000);
-    } catch (error) {
-      setIsTransacting(false);
-      console.error('Claim error:', error);
-      
-      // Don't show alert for user cancellations
-      if (error.message === 'Transaction cancelled') {
-        return;
-      }
-      
-      // User-friendly error messages
-      if (error.message?.includes('Ledger device') || error.message?.includes('0x6511')) {
-        alert('Ledger error: Please make sure your Ledger is unlocked, the Ethereum app is open, and you approve the transaction.');
-      } else {
-        alert(`Error: ${error.message || 'Transaction failed'}`);
-      }
-    }
-  };
-
-  const handleCompound = async () => {
-    try {
-      setIsTransacting(true);
-      
-      // First claim the rewards
-      await claimRewards();
-      
-      // Wait a moment for the claim to process
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Then stake the rewards amount
-      const rewardsAmount = formatEther(stakingData.pendingRewards);
-      await stake(rewardsAmount);
-      
-      // Keep loading state for 5 seconds to show animation
-      setTimeout(() => setIsTransacting(false), 5000);
-    } catch (error) {
-      setIsTransacting(false);
-      console.error('Compound error:', error);
       
       // Don't show alert for user cancellations
       if (error.message === 'Transaction cancelled') {
@@ -197,19 +75,13 @@ export function StakingInterface() {
       )}
 
       {/* Global Stats - Always Visible */}
-      <div className={`grid ${!isConnected ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-4 mb-6`}>
-        {!isConnected && (
-          <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 text-center transition-all duration-500">
-            <div className="text-gray-400 text-sm mb-1">Global Weekly Yield</div>
-            <div className="text-4xl font-bold text-orange-400">
-              {stakingData.apy ? formatWPY(stakingData.apy) : '--'}
-            </div>
+      <div className="mb-6">
+        <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 text-center transition-all duration-500">
+          <div className="flex justify-center mb-2">
+            <span className="text-3xl">📊</span>
           </div>
-        )}
-
-        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 text-center transition-all duration-500">
-          <div className="text-gray-400 text-sm mb-1">Total Value Staked</div>
-          <div className="text-4xl font-bold text-green-400">
+          <div className="text-gray-400 text-sm mb-1">Total Still Staked</div>
+          <div className="text-4xl font-bold text-purple-400">
             {stakingData.totalStaked !== undefined
               ? formatBalance(parseFloat(formatEther(stakingData.totalStaked)))
               : '--'
@@ -222,10 +94,12 @@ export function StakingInterface() {
       {/* Connect Wallet Prompt */}
       {!isConnected && (
         <div className="bg-gray-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 text-center">
-          <div className="text-5xl mb-4">🔐</div>
+          <div className="flex justify-center mb-4">
+            <span className="text-5xl">🔐</span>
+          </div>
           <h3 className="text-xl font-bold text-white mb-3">Connect Your Wallet</h3>
           <p className="text-gray-400 mb-6">
-            Connect your wallet to start staking AIPG and earning rewards
+            Connect your wallet to withdraw your staked AIPG
           </p>
           <div className="flex justify-center">
             <ConnectButton />
@@ -236,16 +110,12 @@ export function StakingInterface() {
       {/* User Stats Dashboard - Only when connected */}
       {isConnected && (
         <>
-      <div className="grid md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
-          <div className="text-gray-400 text-sm mb-1">Weekly Yield</div>
-          <div className="text-3xl font-bold text-cyan-400">
-            {stakingData.apy ? formatWPY(stakingData.apy) : '--'}
-          </div>
-        </div>
-
+      <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
-          <div className="text-gray-400 text-sm mb-1">Your Staked</div>
+          <div className="flex justify-center mb-2">
+            <span className="text-3xl">💰</span>
+          </div>
+          <div className="text-gray-400 text-sm mb-1">Your Staked Balance</div>
           <div className="text-3xl font-bold text-purple-400">
             {stakingData.stakedBalance !== undefined
               ? parseFloat(formatEther(stakingData.stakedBalance)).toLocaleString(undefined, { maximumFractionDigits: 2 })
@@ -255,18 +125,10 @@ export function StakingInterface() {
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
-          <div className="text-gray-400 text-sm mb-1">Pending Rewards</div>
-          <div className="text-3xl font-bold text-green-400">
-            {stakingData.pendingRewards !== undefined
-              ? parseFloat(formatEther(stakingData.pendingRewards)).toLocaleString(undefined, { maximumFractionDigits: 4 })
-              : '--'
-            }
-          </div>
-          <div className="text-gray-500 text-xs">AIPG</div>
-        </div>
-
         <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-6 transition-all duration-500 text-center">
+          <div className="flex justify-center mb-2">
+            <span className="text-3xl">👛</span>
+          </div>
           <div className="text-gray-400 text-sm mb-1">Wallet Balance</div>
           <div className="text-3xl font-bold text-orange-400">
             {stakingData.tokenBalance !== undefined
@@ -288,7 +150,7 @@ export function StakingInterface() {
         {STAKING_DISABLED && (
           <div className="space-y-6">
             <div>
-              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Unstake</label>
+              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Withdraw</label>
               <div className="relative">
                 <input
                   type="number"
@@ -314,35 +176,10 @@ export function StakingInterface() {
               disabled={isLoading || !unstakeAmount || parseFloat(unstakeAmount) <= 0}
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
             >
-              {isLoading ? 'Processing...' : 'Unstake AIPG'}
+              {isLoading ? 'Processing...' : 'Withdraw AIPG'}
             </button>
           </div>
         )}
-
-        {/* Claim Rewards Section */}
-        <div className="mt-8 pt-8 border-t border-gray-700">
-          <div className="flex flex-col items-center text-center gap-4">
-            <div>
-              <div className="text-gray-400 text-sm mb-2">Claimable Rewards</div>
-              <div className="text-3xl font-bold text-green-400">
-                {stakingData.pendingRewards
-                  ? parseFloat(formatEther(stakingData.pendingRewards)).toLocaleString(undefined, { maximumFractionDigits: 6 })
-                  : '0'
-                } AIPG
-              </div>
-            </div>
-            <button
-              onClick={handleClaim}
-              disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-8 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
-            >
-              {isLoading ? 'Processing...' : 'Claim Rewards'}
-            </button>
-            <p className="text-gray-500 text-xs mt-1">
-              Don't forget to claim your rewards before withdrawing
-            </p>
-          </div>
-        </div>
       </div>
 
       </>
