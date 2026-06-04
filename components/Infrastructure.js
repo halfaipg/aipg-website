@@ -77,6 +77,73 @@ const Infrastructure = () => {
           </div>
         </div>
         </div>
+
+        {/* Future: Autonomous Network & Privacy */}
+        <div className="mt-16 grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Autonomous Network */}
+          <div className="bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/20 rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="text-4xl">⛓️</div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Fully Autonomous Network</h3>
+                <span className="text-purple-400 text-sm font-medium">In Development</span>
+              </div>
+            </div>
+            <p className="text-gray-300 mb-4">
+              The AIPG network is evolving to run entirely on-chain. Smart contracts will handle job routing, payments, and rewards — no central coordinator required.
+            </p>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">◆</span>
+                <span>On-chain job anchoring with cryptographic proofs</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">◆</span>
+                <span>Bonded validators verify inference results</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">◆</span>
+                <span>Automatic payments via smart contracts</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">◆</span>
+                <span>P2P network with no single point of failure</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Confidential Computing */}
+          <div className="bg-gradient-to-br from-green-500/10 to-teal-500/10 border border-green-500/20 rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="text-4xl">🔒</div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Confidential Computing</h3>
+                <span className="text-green-400 text-sm font-medium">Coming with Blackwell</span>
+              </div>
+            </div>
+            <p className="text-gray-300 mb-4">
+              NVIDIA Confidential Computing on Blackwell GPUs (B200/B300) enables true privacy — even node operators can't see your prompts or outputs.
+            </p>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-green-400 mt-1">◆</span>
+                <span>Hardware-isolated Trusted Execution Environment (TEE)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400 mt-1">◆</span>
+                <span>GPU memory encrypted end-to-end during inference</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400 mt-1">◆</span>
+                <span>Cryptographic attestation proves genuine secure enclave</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400 mt-1">◆</span>
+                <span>Run sensitive workloads on untrusted infrastructure</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
