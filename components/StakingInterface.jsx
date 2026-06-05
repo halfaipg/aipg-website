@@ -163,39 +163,37 @@ export function StakingInterface() {
           <ConnectButton showBalance={false} />
         </div>
 
-        {STAKING_DISABLED && (
-          <div className="space-y-6">
-            <div>
-              <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Withdraw</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  value={unstakeAmount}
-                  onChange={(e) => setUnstakeAmount(e.target.value)}
-                  placeholder="0.0"
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500 text-center md:text-left"
-                />
-                <button
-                  onClick={() => setUnstakeAmount(stakingData.stakedBalance ? formatEther(stakingData.stakedBalance) : '0')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 px-3 py-1 rounded-lg text-sm font-semibold transition-all"
-                >
-                  MAX
-                </button>
-              </div>
-              <div className="text-gray-500 text-sm mt-1 text-center md:text-left">
-                Staked: {stakingData.stakedBalance ? parseFloat(formatEther(stakingData.stakedBalance)).toLocaleString() : '0'} AIPG
-              </div>
+        <div className="space-y-6">
+          <div>
+            <label className="block text-gray-400 text-sm mb-2 text-center md:text-left">Amount to Withdraw</label>
+            <div className="relative">
+              <input
+                type="number"
+                value={unstakeAmount}
+                onChange={(e) => setUnstakeAmount(e.target.value)}
+                placeholder="0.0"
+                className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-4 text-white text-xl focus:outline-none focus:border-cyan-500 text-center md:text-left"
+              />
+              <button
+                onClick={() => setUnstakeAmount(stakingData.stakedBalance ? formatEther(stakingData.stakedBalance) : '0')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 px-3 py-1 rounded-lg text-sm font-semibold transition-all"
+              >
+                MAX
+              </button>
             </div>
-
-            <button
-              onClick={handleUnstake}
-              disabled={isLoading || !unstakeAmount || parseFloat(unstakeAmount) <= 0}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
-            >
-              {isLoading ? 'Processing...' : 'Withdraw AIPG'}
-            </button>
+            <div className="text-gray-500 text-sm mt-1 text-center md:text-left">
+              Staked: {stakingData.stakedBalance ? parseFloat(formatEther(stakingData.stakedBalance)).toLocaleString() : '0'} AIPG
+            </div>
           </div>
-        )}
+
+          <button
+            onClick={handleUnstake}
+            disabled={isLoading || !unstakeAmount || parseFloat(unstakeAmount) <= 0}
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
+          >
+            {isLoading ? 'Processing...' : 'Withdraw AIPG'}
+          </button>
+        </div>
       </div>
 
       </>
