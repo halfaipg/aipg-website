@@ -24,7 +24,7 @@ const Services = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            Creators worldwide tap into high-end AI capabilities without asking permission from corporate gatekeepers. Whether you're building in Buenos Aires or Bangalore, AIPG provides the same frontier model access that was previously reserved for big tech companies and their preferred partners.
+            Same API whether you're in Buenos Aires or Bangalore. No waitlists, no geographic restrictions, no approval process.
             </p>
           </div>
 
@@ -39,11 +39,11 @@ const Services = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
               </svg>
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-              New Economics
+              Earn with Your GPU
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            Token rewards create entirely new income streams for GPU owners and AI contributors. Instead of wasteful cryptocurrency mining, community members earn meaningful rewards by providing actual AI inference services that people need and use every day.
+            GPU owners earn AIPG tokens for running inference jobs. Real work, real rewards. Your hardware serves actual users instead of sitting idle.
             </p>
           </div>
 
@@ -58,11 +58,11 @@ const Services = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
               </svg>
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-              Sustainability
+              Useful Work
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            Repurposed hardware slashes proof-of-work waste by channeling computational power into useful AI inference instead of arbitrary hash calculations. Every GPU cycle serves actual human creativity and productivity rather than burning energy for digital scarcity.
+            Every token represents real AI inference that served a real user. GPUs do productive work instead of arbitrary calculations.
             </p>
           </div>
         </div>

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/docs",
+      "destination": "https://aipg-documentation.vercel.app/docs"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://aipg-documentation.vercel.app/docs/:path*"
+    }
+  ]
+}

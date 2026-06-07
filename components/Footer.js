@@ -38,7 +38,7 @@ const Footer = () => {
                 </p>
                 <p>
                   <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://api.aipowergrid.io/v1/health" target="_blank">
+                    href="https://docs.aipowergrid.io/generate" target="_blank">
                     Streaming API
                   </a>
                 </p>
@@ -62,7 +62,7 @@ const Footer = () => {
                 </p>
                 <p>
                   <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://docs.aipowergrid.io/streaming-api" target="_blank">
+                    href="https://docs.aipowergrid.io/generate" target="_blank">
                     API Reference
                   </a>
                 </p>
