@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
 import Problem from "@/components/Problem";
+import RunNode from "@/components/RunNode";
 import Infrastructure from "@/components/Infrastructure";
 import Features from "@/components/Features";
 import Services from "@/components/Services";
@@ -12,6 +13,7 @@ export default function Home() {
   const heroRef = useRef(null);
   const productsRef = useRef(null);
   const problemRef = useRef(null);
+  const runNodeRef = useRef(null);
   const infrastructureRef = useRef(null);
   const featuresRef = useRef(null);
   const servicesRef = useRef(null);
@@ -35,7 +37,7 @@ export default function Home() {
 
     const observer = new IntersectionObserver(handleVisibilityChange, observerOptions);
 
-    const refs = [heroRef, productsRef, problemRef, infrastructureRef, featuresRef, servicesRef, timelineRef];
+    const refs = [heroRef, productsRef, problemRef, runNodeRef, infrastructureRef, featuresRef, servicesRef, timelineRef];
     refs.forEach(ref => {
       if (ref.current) observer.observe(ref.current);
     });
@@ -53,12 +55,13 @@ export default function Home() {
       <div ref={heroRef} className="fadeInSection"><Hero /></div>
       <div ref={productsRef} className="fadeInSection"><Products /></div>
       <div ref={problemRef} className="fadeInSection"><Problem /></div>
+      <div ref={runNodeRef} className="fadeInSection"><RunNode /></div>
       <div ref={infrastructureRef} className="fadeInSection"><Infrastructure /></div>
       <div ref={featuresRef} className="fadeInSection"><Features /></div>
       <div className="w-full py-8 md:py-12">
         <div className="flex justify-center items-center">
           <span className="text-2xl sm:text-4xl font-semibold text-white">
-            Positive-Sum Impact
+            Why It Matters
           </span>
         </div>
       </div>

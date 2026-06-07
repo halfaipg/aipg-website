@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 const Hero = () => {
   const [contentVisible, setContentVisible] = useState(false);
-  const fullText = "A New Kind of Power Grid";
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,7 +13,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden pt-5 before:absolute before:top-[89px] before:start-1/2 before:bg-[url('/squared-bg-element.svg')] before:bg-no-repeat before:bg-center before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-[calc(50%+5px)] dark:before:bg-[url('/squared-bg-element.svg')]">
+    <div className="relative overflow-hidden pt-5">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-3 md:pt-6 pb-8">
         <div className="flex justify-center items-center mb-4">
           <img
@@ -25,7 +24,7 @@ const Hero = () => {
         </div>
         <div className={`mt-5 max-w-4xl text-center mx-auto ${contentVisible ? 'fade-in' : 'hidden-initially'}`} style={{ minHeight: '8rem' }}>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight">
-            <span className="text-white">A New Kind of</span>
+            <span className="text-white">Free AI for</span>
             <br className="sm:hidden" />
             <span className="text-white hidden sm:inline"> </span>
             <span style={{
@@ -33,12 +32,70 @@ const Hero = () => {
                     textShadow: '0 0 30px rgba(248, 153, 29, 0.5), 0 0 60px rgba(248, 153, 29, 0.3)',
                     animation: 'glow 2s ease-in-out infinite alternate'
                   }}>
-              Power Grid
+              Everyone
             </span>
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-200 mt-5">
-            Generate images, chat with LLMs, and build AI apps — all powered by a decentralized network of community GPUs. No corporate API. OpenAI compatible. Earn AIPG for contributing compute.
+          <p className="text-lg md:text-xl text-gray-300 mt-5 leading-relaxed">
+            Ship agents, run workflows, generate images and video — on community GPUs.
+            <br className="hidden md:inline" />
+            Every paid request funds free access for someone who can't afford the $20-a-month gate.
           </p>
+        </div>
+
+        {/* Value Props */}
+        <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-orange-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
+            <div className="flex justify-center mb-3">
+              <div className="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center">
+                <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div className="text-white font-semibold text-sm mb-1.5">Free, every day</div>
+            <div className="text-gray-400 text-xs leading-snug">Daily API quota for builders, students, anyone curious. No card. No trial.</div>
+          </div>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-cyan-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
+            <div className="flex justify-center mb-3">
+              <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" opacity="0.4"/>
+                </svg>
+              </div>
+            </div>
+            <div className="text-white font-semibold text-sm mb-1.5">Paid users fund the free tier</div>
+            <div className="text-gray-400 text-xs leading-snug">Your bill funds someone learning to code in a country where $20/mo isn't on the table.</div>
+          </div>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-emerald-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
+            <div className="flex justify-center mb-3">
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+            </div>
+            <div className="text-white font-semibold text-sm mb-1.5">No one can turn it off</div>
+            <div className="text-gray-400 text-xs leading-snug">OpenAI-compatible API on a network heading fully on-chain. No corporate kill switch.</div>
+          </div>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          <a
+            className="inline-flex justify-center items-center gap-x-2 text-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-orange-500/50"
+            href="https://api.aipowergrid.io/register"
+            target="_blank"
+          >
+            Get your free API key
+          </a>
+          <a
+            className="inline-flex justify-center items-center gap-x-2 text-center bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all border border-white/20"
+            href="https://docs.aipowergrid.io"
+            target="_blank"
+          >
+            Read the docs
+          </a>
         </div>
 
         <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
