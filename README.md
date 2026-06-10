@@ -1,40 +1,48 @@
-```
-# Next.js Project
+# AI Power Grid — Website
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The marketing site for [AI Power Grid](https://aipowergrid.io): free AI for
+everyone, funded by paid usage, running on a decentralized GPU network.
 
-## Getting Started
+Built with Next.js (App Router) + Tailwind, with RainbowKit/wagmi for the
+wallet-connected staking interface. Deployed on Vercel.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Local dev server |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Next.js lint |
+| `npm run test:e2e` | Playwright smoke tests (loads /, /staking; fails on console errors) |
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `app/` — routes (App Router). Home, `/staking` (withdrawal-only; the staking
+  program has wound down), `/about`, `/wallet`.
+- `components/` — page sections (`Hero`, `Problem`, `RunNode`, `Infrastructure`,
+  `StakingInterface`, etc.).
+- `tests/e2e/` — Playwright smoke tests.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Docs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Developer and operator documentation lives in
+[aipg-documentation](https://github.com/AIPowerGrid/aipg-documentation) and is
+served at [aipowergrid.io/docs](https://aipowergrid.io/docs) via a Vercel
+rewrite (see `vercel.json`).
 
-## Deploy on Vercel
+## Related repos
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-```
+- [system-core](https://github.com/AIPowerGrid/system-core) — the Grid API
+- [comfy-bridge](https://github.com/AIPowerGrid/comfy-bridge) — image/video worker
+- [grid-inference-worker](https://github.com/AIPowerGrid/grid-inference-worker) — LLM worker
+- [aipg-smart-contracts](https://github.com/AIPowerGrid/aipg-smart-contracts) — on-chain (Base)
