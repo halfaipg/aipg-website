@@ -22,11 +22,25 @@ export function StakingInterface() {
   const {
     stakingData,
     unstake,
+    claimRewards,
     isLoading
   } = useStaking();
 
   const [unstakeAmount, setUnstakeAmount] = useState('');
   const [isTransacting, setIsTransacting] = useState(false);
+
+  const handleClaim = async () => {
+    try {
+      setIsTransacting(true);
+      await claimRewards();
+      setTimeout(() => setIsTransacting(false), 5000);
+    } catch (error) {
+      setIsTransacting(false);
+      console.error('Claim error:', error);
+      if (error.message === 'Transaction cancelled') return;
+      alert(`Error: ${error.message || 'Claim failed'}`);
+    }
+  };
 
   const handleUnstake = async () => {
     if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return;
@@ -154,6 +168,29 @@ export function StakingInterface() {
           </div>
           <div className="text-gray-500 text-xs">AIPG</div>
         </div>
+      </div>
+
+      {/* Unclaimed Rewards — earned during the staking program, claimable anytime */}
+      <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/40 rounded-2xl p-6 mb-8 text-center">
+        <div className="text-gray-400 text-sm mb-1">Unclaimed Staking Rewards</div>
+        <div className="text-4xl font-bold text-green-400 mb-1">
+          {stakingData.pendingRewards !== undefined
+            ? parseFloat(formatEther(stakingData.pendingRewards)).toLocaleString(undefined, { maximumFractionDigits: 2 })
+            : '--'
+          }
+        </div>
+        <div className="text-gray-500 text-xs mb-4">AIPG</div>
+        <button
+          onClick={handleClaim}
+          disabled={isLoading || !stakingData.pendingRewards || stakingData.pendingRewards === 0n}
+          className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold px-10 py-3 rounded-xl transition-all disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/50"
+        >
+          {isLoading ? 'Processing...' : 'Claim Rewards'}
+        </button>
+        <p className="text-gray-500 text-xs mt-3">
+          Rewards accrued during the staking program are recorded on-chain and never expire.
+          Withdrawing your stake does not affect them — claim whenever you like.
+        </p>
       </div>
 
       {/* Main Interface */}
