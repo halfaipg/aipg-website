@@ -32,9 +32,6 @@ export default function Navbar() {
       >
         About
       </Link>
-      {/* <button onClick={() => setShowDropdown('pools')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
-        Pools
-      </button> */}
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
         href="https://docs.aipowergrid.io"
@@ -90,56 +87,6 @@ export default function Navbar() {
 
   const renderDropdownOptions = (dropdown) => {
     switch (dropdown) {
-      // case 'pools':
-      //   return (
-      //     <>
-      //       <Link 
-      //         href="https://pool.aipowergrid.io/" 
-      //         target="_blank" 
-      //         onClick={() => setIsOpen(false)} 
-      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-      //       >
-      //         Official
-      //       </Link>
-      //       <Link 
-      //         href="https://miningpoolstats.stream/aipowergrid" 
-      //         target="_blank" 
-      //         onClick={() => setIsOpen(false)} 
-      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-      //       >
-      //         Public
-      //       </Link>
-      //     </>
-      //   );
-      // case 'exchanges':
-      //   return (
-      //     <>
-      //       <Link 
-      //         href="https://xeggex.com/market/AIPG_USDT" 
-      //         target="_blank"
-      //         onClick={() => setIsOpen(false)} 
-      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-      //       >
-      //         Xeggex
-      //       </Link>
-      //       <Link 
-      //         href="https://www.coinex.com/en/exchange/aipg-usdt" 
-      //         target="_blank"
-      //         onClick={() => setIsOpen(false)} 
-      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-      //       >
-      //         CoinEx
-      //       </Link>
-      //       <Link 
-      //         href="https://tradeogre.com/exchange/AIPG-USDT" 
-      //         target="_blank"
-      //         onClick={() => setIsOpen(false)} 
-      //         className="block px-4 py-2 text-sm text-white hover:text-gray-200 dark:text:white dark:hover:text-gray-300 text-center sm:text-left"
-      //       >
-      //         TradeOgre
-      //       </Link>
-      //     </>
-      //   );
       default:
         return null;
     }

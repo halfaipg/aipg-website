@@ -74,6 +74,7 @@ export default function StakingPage() {
                     </div>
                     <h4 className="text-lg font-bold text-cyan-400 mb-1">AI Worker Nodes</h4>
                     <p className="text-gray-400 text-sm">Run an LLM, image, or video worker — earn AIPG for every job you serve.</p>
+                    <a href="https://docs.aipowergrid.io/run-a-node" target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-sm text-cyan-300 hover:text-cyan-200 underline">Get started →</a>
                   </div>
                   <div className="bg-gray-900/50 rounded-xl p-4 text-center">
                     <div className="flex justify-center mb-3">
