@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 import Hero from "@/components/Hero";
+import GridStatement from "@/components/GridStatement";
 import Products from "@/components/Products";
 import Problem from "@/components/Problem";
 import RunNode from "@/components/RunNode";
@@ -53,6 +54,7 @@ export default function Home() {
   return (
     <main className="dark">
       <div ref={heroRef} className="fadeInSection"><Hero /></div>
+      <GridStatement />
       <div ref={productsRef} className="fadeInSection"><Products /></div>
       <div ref={problemRef} className="fadeInSection"><Problem /></div>
       <div ref={runNodeRef} className="fadeInSection"><RunNode /></div>

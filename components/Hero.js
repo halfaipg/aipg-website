@@ -84,7 +84,7 @@ const Hero = () => {
         <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-orange-500/50"
-            href="https://api.aipowergrid.io/register"
+            href="https://dashboard.aipowergrid.io"
             target="_blank"
           >
             Get your free API key
@@ -97,6 +97,10 @@ const Hero = () => {
             Read the docs
           </a>
         </div>
+
+        <p className={`mt-4 text-center text-sm text-gray-400 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
+          Agents welcome — OpenAI-compatible <span className="text-gray-300">/v1</span> with token streaming. Point any OpenAI SDK at it and go.
+        </p>
 
         <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
