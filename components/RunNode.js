@@ -8,16 +8,19 @@ const RunNode = () => {
         {/* Header */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <h2 className="text-3xl text-white font-bold lg:text-5xl mb-4 leading-tight">
-            Got a GPU? Put it to work.
+            Plug in your GPU. Power the Grid. Earn.
           </h2>
           <p className="text-xl text-gray-300">
-            The network runs on real hardware that real people plug in. If you have spare compute, you can earn AIPG by serving inference for everyone else.
+            The network runs on real hardware that real people plug in. Two ways to take part:
+            run a <span className="text-white font-semibold">Generator</span> to contribute compute
+            and earn, or a <span className="text-white font-semibold">Sentinel</span> to help secure
+            it. Any modern GPU works — the software figures out what your card can do.
           </p>
         </div>
 
         {/* Node Types */}
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* AI Worker Node */}
+          {/* Generator */}
           <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-orange-500/30 rounded-2xl p-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
               LIVE NOW
@@ -31,24 +34,28 @@ const RunNode = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">AI Worker Node</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">Generator</h3>
             <p className="text-gray-300 mb-6">
-              Run an LLM, image, or video worker. Serve real requests for builders, agents, and apps —
-              earn AIPG for every job you complete.
+              Contribute compute and earn AIPG for every job you complete. Text, image, video,
+              upscaling and more — the software auto-detects your GPU and serves what it can handle.
             </p>
 
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Text · Image · Video — pick one or run all three</span>
+                <span>Any modern GPU earns — bigger cards take bigger jobs</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Works with Ollama, vLLM, ComfyUI, or your own backend</span>
+                <span>Text · Image · Video · upscaling — matched to your card automatically</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Bond 1,000 AIPG · earn per request served</span>
+                <span>Works with ComfyUI, vLLM, Ollama, or your own backend</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-300">
+                <span className="text-green-400">✓</span>
+                <span>Connect a GPU · earn per request served</span>
               </div>
             </div>
 
@@ -57,14 +64,14 @@ const RunNode = () => {
               target="_blank"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-xl transition-all"
             >
-              Run a Worker
+              Run a Generator
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
               </svg>
             </a>
           </div>
 
-          {/* Validator Node */}
+          {/* Sentinel */}
           <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/30 rounded-2xl p-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
               COMING SOON
@@ -76,24 +83,29 @@ const RunNode = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Validator Node</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">Sentinel</h3>
             <p className="text-gray-300 mb-6">
-              Sample inference jobs, verify the workers were honest, and put your stake behind that
-              attestation. Real economic security — not vibes.
+              Secure the Grid: re-check that Generators were honest, run safety screening, and host
+              part of the model library — with your stake behind it. Real economic security, not vibes.
+              A consumer 24GB card (a used 3090) is plenty.
             </p>
 
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Verify worker outputs on-chain</span>
+                <span>Verify Generator outputs (proof-of-inference) on-chain</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Bond 10,000 AIPG · slashable for false attestations</span>
+                <span>Run safety screening + host a shard of the model library</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Earn verification fees + cut of slashed bonds</span>
+                <span>Stake AIPG · slashable for false attestations</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-300">
+                <span className="text-blue-400">◇</span>
+                <span>Earn verification fees + storage rewards</span>
               </div>
             </div>
 

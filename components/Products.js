@@ -40,7 +40,7 @@ const products = [
   },
   {
     title: "Earn with your GPU",
-    description: "Run an LLM, image, or video worker. Earn AIPG for every request you serve. Worker bond: 1,000 AIPG.",
+    description: "Run an LLM, image, or video worker. Earn AIPG for every request you serve. No bond required to start (on-chain bonding planned).",
     href: "https://docs.aipowergrid.io/run-a-node",
     label: "Run a Worker",
     icon: (
