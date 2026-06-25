@@ -121,7 +121,7 @@ const Products = () => {
           <div className="text-gray-400">)</div>
         </div>
         <p className="text-center mt-4">
-          <a href="https://dashboard.aipowergrid.io" target="_blank" className="text-[#f8991d] text-sm font-medium hover:underline">
+          <a href="https://console.aipowergrid.io" target="_blank" className="text-[#f8991d] text-sm font-medium hover:underline">
             Get a free API key →
           </a>
         </p>

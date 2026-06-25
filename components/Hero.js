@@ -84,7 +84,7 @@ const Hero = () => {
         <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-orange-500/50"
-            href="https://dashboard.aipowergrid.io"
+            href="https://console.aipowergrid.io"
             target="_blank"
           >
             Get your free API key

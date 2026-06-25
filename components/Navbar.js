@@ -42,7 +42,7 @@ export default function Navbar() {
       </Link>
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
-        href="https://dashboard.aipowergrid.io"
+        href="https://console.aipowergrid.io"
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => setIsOpen(false)}
@@ -65,6 +65,15 @@ export default function Navbar() {
         onClick={() => setIsOpen(false)}
       >
         Explorer
+      </Link>
+      <Link
+        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        href="https://console.aipowergrid.io/payouts"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => setIsOpen(false)}
+      >
+        Payouts
       </Link>
       <Link
         className="font-medium text-orange-400 hover:text-orange-300 sm:py-6 md:py-6 pb-2 dark:hover:text-orange-300 text-center sm:text-left"

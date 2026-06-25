@@ -44,7 +44,7 @@ const Footer = () => {
                 </p>
                 <p>
                   <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="https://dashboard.aipowergrid.io" target="_blank">
+                    href="https://console.aipowergrid.io" target="_blank">
                     Dashboard
                   </a>
                 </p>
@@ -77,6 +77,12 @@ const Footer = () => {
                     href="https://basescan.org/token/0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608"
                     target="_blank">
                     Explorer (BaseScan)
+                  </a>
+                </p>
+                <p>
+                  <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    href="https://console.aipowergrid.io/payouts" target="_blank">
+                    Worker Payouts
                   </a>
                 </p>
               </div>
