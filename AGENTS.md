@@ -57,7 +57,7 @@ on Vercel.
 
 ## Local Contracts
 
-- **Inherit org engineering standards:** `/Users/j/fix-axios-vuln/aipg-documentation/engineering-standards/`
+- **Inherit org engineering standards:** `aipg-documentation/engineering-standards/`
   (core + git + the matching language file).
 - This is a **marketing site**, not a product surface. No private keys, no secrets, no server
   state. The only "backend" is the btc-chart route (public CoinGecko + bundled CSV).
