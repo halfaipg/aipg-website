@@ -10,7 +10,7 @@ const Infrastructure = () => {
             How The Grid Works
           </h2>
           <p className="mt-1 text-gray-600 dark:text-gray-400">
-            Community GPUs run AI models. Smart routing sends your request to the best available worker. Workers earn AIPG for every job they complete.
+            Community GPUs run AI models. Smart routing sends your request to the best available worker. Workers earn USDC and AIPG for every job they complete.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ const Infrastructure = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Workers earn AIPG for every job completed. Each token represents real inference work done.
+              Workers earn USDC and AIPG for every job completed. Rewards flow per job of real inference work.
             </p>
           </div>
         </div>

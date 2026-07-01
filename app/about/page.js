@@ -86,7 +86,7 @@ const About = () => {
               Electricity changed the industrial world. An open AI grid can change the digital one.
             </p>
             <p className="mt-4 text-gray-300">
-              AIPG turns community GPUs into distributed AI infrastructure. Developers get an OpenAI-compatible API. GPU owners earn tokens for running inference. The network is open to everyone.
+              AIPG turns community GPUs into distributed AI infrastructure. Developers get an OpenAI-compatible API. GPU owners earn USDC and AIPG for running inference. The network is open to everyone.
             </p>
           </div>
 
@@ -141,7 +141,7 @@ const About = () => {
                     Earn with Your GPU
                   </h3>
                   <p className="mt-1 text-gray-300">
-                    GPU owners earn AIPG tokens for running inference jobs. Real work, real rewards.
+                    GPU owners earn USDC and AIPG for running inference jobs. Real work, real rewards.
                   </p>
                 </div>
               </div>
@@ -198,7 +198,7 @@ const About = () => {
                     Useful Work
                   </h3>
                   <p className="mt-1 text-gray-300">
-                  Every token represents real AI inference that served a real user. GPUs do productive work.
+                  Rewards flow per job served to a real user. GPUs do productive work.
                   </p>
                 </div>
               </div>
@@ -216,22 +216,22 @@ const About = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <a href="https://aipg.art" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
               <h3 className="text-white font-semibold text-lg mb-2">AI Art</h3>
-              <p className="text-gray-400 text-sm">Generate images with Flux, SDXL, Stable Diffusion</p>
+              <p className="text-gray-400 text-sm">Generate images with z-image-turbo, FLUX.2 Klein, Krea 2 Turbo</p>
               <span className="text-[#f8991d] text-sm mt-3 inline-block">aipg.art →</span>
             </a>
             <a href="https://aipg.chat" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
               <h3 className="text-white font-semibold text-lg mb-2">AI Chat</h3>
-              <p className="text-gray-400 text-sm">Chat with open-source LLMs — Llama, Mistral, Qwen</p>
+              <p className="text-gray-400 text-sm">Chat with open-source LLMs — gpt-oss, Qwen3, DeepSeek</p>
               <span className="text-[#f8991d] text-sm mt-3 inline-block">aipg.chat →</span>
             </a>
             <a href="https://docs.aipowergrid.io/generate" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
               <h3 className="text-white font-semibold text-lg mb-2">Streaming API</h3>
-              <p className="text-gray-400 text-sm">OpenAI compatible. Same SDKs, decentralized.</p>
+              <p className="text-gray-400 text-sm">OpenAI compatible. Same SDKs, community-powered.</p>
               <span className="text-[#f8991d] text-sm mt-3 inline-block">API Docs →</span>
             </a>
             <a href="https://github.com/AIPowerGrid/grid-inference-worker/releases" target="_blank" className="block p-6 rounded-2xl bg-black/30 border border-white/10 hover:border-[#f8991d]/50 transition-all">
-              <h3 className="text-white font-semibold text-lg mb-2">Earn AIPG</h3>
-              <p className="text-gray-400 text-sm">Run a worker on your GPU. Earn tokens for compute.</p>
+              <h3 className="text-white font-semibold text-lg mb-2">Earn Rewards</h3>
+              <p className="text-gray-400 text-sm">Run a worker on your GPU. Earn USDC and AIPG for compute.</p>
               <span className="text-[#f8991d] text-sm mt-3 inline-block">Download Worker →</span>
             </a>
           </div>
@@ -347,7 +347,7 @@ const About = () => {
                   The Community-Powered AI Network
                 </h2>
                 <p className="text-gray-300">
-                  GPU owners contribute hardware to run AI models. Smart routing sends requests to the best available worker. Workers earn AIPG for every job completed.
+                  GPU owners contribute hardware to run AI models. Smart routing sends requests to the best available worker. Workers earn USDC and AIPG for every job completed.
                 </p>
               </div>
               <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
@@ -497,7 +497,7 @@ const About = () => {
             </div>
             <div className="space-y-2">
               <p className="text-sm text-gray-300">
-                <strong>Advanced Features:</strong> Text2img, img2img, and inpainting capabilities powered by Grid workers running Stable Diffusion models.
+                <strong>Advanced Features:</strong> Text2img, img2img, and inpainting capabilities powered by Grid workers running z-image-turbo, FLUX.2 Klein, and Krea 2 Turbo.
               </p>
               <p className="text-sm text-gray-300">
                 <strong>Coming Soon:</strong> NFT minting with deterministic metadata—mint the actual AI generation parameters instead of just links to images!

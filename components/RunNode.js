@@ -36,7 +36,7 @@ const RunNode = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Generator</h3>
             <p className="text-gray-300 mb-6">
-              Contribute compute and earn AIPG for every job you complete. Text, image, video,
+              Contribute compute and earn USDC and AIPG for every job you complete. Text, image, video,
               upscaling and more — the software auto-detects your GPU and serves what it can handle.
             </p>
 

@@ -43,7 +43,7 @@ const Services = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            GPU owners earn AIPG tokens for running inference jobs. Real work, real rewards. Your hardware serves actual users instead of sitting idle.
+            GPU owners earn USDC and AIPG for running inference jobs. Real work, real rewards. Your hardware serves actual users instead of sitting idle.
             </p>
           </div>
 
@@ -62,7 +62,7 @@ const Services = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            Every token represents real AI inference that served a real user. GPUs do productive work instead of arbitrary calculations.
+            Rewards flow per job served to a real user. GPUs do productive work instead of arbitrary calculations.
             </p>
           </div>
         </div>

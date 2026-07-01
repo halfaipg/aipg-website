@@ -64,13 +64,13 @@ const entries = [
   {
     date: "Q3–Q4 2025",
     title: "Grid SDK & Dashboard",
-    body: "Released the Grid SDK for developers. Dashboard and API explorer went live. On-chain model registry for worker discovery.",
+    body: "Released the Grid SDK for developers. Developer console and API explorer went live at console.aipowergrid.io. On-chain model registry for worker discovery.",
   },
   {
     date: "Q1 2026",
     completed: true,
     title: "Streaming API",
-    body: "Real-time token streaming with OpenAI and Anthropic compatibility. Drop-in replacement — same SDKs, same code. Sub-second image generation with FLUX.",
+    body: "Real-time token streaming with OpenAI and Anthropic compatibility. Drop-in replacement — same SDKs, same code. Sub-second image generation with z-image-turbo, plus text-to-video via LTX-2.3.",
   },
   {
     date: "Q2 2026",
@@ -79,8 +79,8 @@ const entries = [
   },
   {
     date: "Q3 2026",
-    title: "Video & Token Factory",
-    body: "AI video generation from text prompts. ARC-20 Token Factory: launch tokens backed by real AI compute. Developer Launchpad with free inference for builders.",
+    title: "Token Factory & Launchpad",
+    body: "AIPG Token Factory: launch tokens backed by real AI compute. Developer Launchpad with free inference for builders.",
   },
   {
     date: "Q4 2026",

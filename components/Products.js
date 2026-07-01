@@ -3,7 +3,7 @@
 const products = [
   {
     title: "Generate Images",
-    description: "Create AI art with Flux, SDXL, and Stable Diffusion. Thousands of models and workflows.",
+    description: "Create AI art with z-image-turbo, FLUX.2 Klein, and Krea 2 Turbo. Curated open image models.",
     href: "https://aipg.art",
     label: "aipg.art",
     icon: (
@@ -16,7 +16,7 @@ const products = [
   },
   {
     title: "Run Agents & Workflows",
-    description: "Open-source LLMs powering your agents, automations, and AI workflows. Llama, Mistral, Qwen — no corporate worldview baked in.",
+    description: "Open-source LLMs powering your agents, automations, and AI workflows. gpt-oss, Qwen3, DeepSeek — no corporate worldview baked in.",
     href: "https://aipg.chat",
     label: "aipg.chat",
     icon: (
@@ -28,7 +28,7 @@ const products = [
   },
   {
     title: "Build with the API",
-    description: "Drop-in for OpenAI and Anthropic. Same SDKs, real-time streaming, decentralized backend. Free daily quota.",
+    description: "Drop-in for OpenAI and Anthropic. Same SDKs, real-time streaming, community-powered backend. Free daily quota.",
     href: "https://docs.aipowergrid.io/streaming-api",
     label: "API Docs",
     icon: (
@@ -40,7 +40,7 @@ const products = [
   },
   {
     title: "Earn with your GPU",
-    description: "Run an LLM, image, or video worker. Earn AIPG for every request you serve. No bond required to start (on-chain bonding planned).",
+    description: "Run an LLM, image, or video worker. Earn USDC and AIPG for every request you serve. No bond required to start (on-chain bonding planned).",
     href: "https://docs.aipowergrid.io/run-a-node",
     label: "Run a Worker",
     icon: (
