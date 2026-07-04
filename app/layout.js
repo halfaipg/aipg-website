@@ -21,7 +21,7 @@ export const metadata = {
     siteName: "AI Power Grid",
     images: [
       {
-        url: "https://aipowergrid.io/opengraph-image.png",
+        url: "https://aipowergrid.io/opengraph-image.jpg",
         width: 1200,
         height: 630,
         alt: "AI Power Grid - Decentralized AI Infrastructure Network",
@@ -34,7 +34,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "AI Power Grid - Decentralized AI Infrastructure Network",
     description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
-    images: ["https://aipowergrid.io/opengraph-image.png"],
+    images: ["https://aipowergrid.io/opengraph-image.jpg"],
     creator: "@AIPowerGrid",
   },
 };
