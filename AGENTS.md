@@ -84,6 +84,7 @@ on Vercel.
 
 - `npm run build` must succeed.
 - `npm run lint` (Next.js lint).
+- `npm audit` must report zero known vulnerabilities before deploy.
 - `npm run test:e2e` — Playwright smoke (builds + serves prod, loads `/` and `/staking`, fails on
   any non-wallet console/page error).
 
