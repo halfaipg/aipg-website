@@ -59,8 +59,10 @@ on Vercel.
 
 - **Inherit org engineering standards:** `aipg-documentation/engineering-standards/`
   (core + git + the matching language file).
-- This is a **marketing site**, not a product surface. No private keys, no secrets, no server
-  state. The only "backend" is the btc-chart route (public CoinGecko + bundled CSV).
+- This is primarily a marketing site, but `/staking` is a real withdrawal product surface. No
+  private keys, secrets, or local server state belong here. The only application backend route
+  is btc-chart (public CoinGecko + bundled CSV); wallet writes go directly to reviewed Base
+  contracts through wagmi/viem.
 - **Chain = Base mainnet only** (`wagmi/chains` `base`, id 8453). On-chain addresses live ONLY in
   `lib/stakingContracts.js` — never hardcode contract addresses in components/pages.
 - **Staking is withdrawal-only.** The staking program has wound down; the UI must not offer new
@@ -90,3 +92,4 @@ on Vercel.
 - [app/AGENTS.md](app/AGENTS.md) — App Router routes + the btc-chart API route.
 - [components/AGENTS.md](components/AGENTS.md) — page sections + web3 staking UI.
 - [lib/AGENTS.md](lib/AGENTS.md) — wagmi config + on-chain contract addresses/ABIs.
+- [tests/AGENTS.md](tests/AGENTS.md) — Playwright production-build smoke tests.

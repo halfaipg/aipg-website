@@ -73,7 +73,7 @@ export default function StakingPage() {
                       </div>
                     </div>
                     <h4 className="text-lg font-bold text-cyan-400 mb-1">AI Worker Nodes</h4>
-                    <p className="text-gray-400 text-sm">Run an LLM, image, or video worker — earn USDC and AIPG for every job you serve.</p>
+                    <p className="text-gray-400 text-sm">Run an LLM, image, or video worker and earn from the current AIPG payout rail.</p>
                     <a href="https://docs.aipowergrid.io/run-a-node" target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-sm text-cyan-300 hover:text-cyan-200 underline">Get started →</a>
                   </div>
                   <div className="bg-gray-900/50 rounded-xl p-4 text-center">
@@ -223,7 +223,7 @@ export default function StakingPage() {
 
             <div className="bg-gray-900/30 rounded-xl p-4">
               <h4 className="text-lg font-semibold text-white mb-2">How do I participate in the node program?</h4>
-              <p className="text-gray-400 text-sm">Details coming soon. Join our Discord to be notified when the Validator Node and AI Worker Node programs launch.</p>
+              <p className="text-gray-400 text-sm">AI workers are live today. Validator evidence is in preview; join our Discord for the future validator staking and rewards launch.</p>
             </div>
             </div>
           </div>
@@ -233,4 +233,3 @@ export default function StakingPage() {
     </div>
   );
 }
-

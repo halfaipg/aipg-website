@@ -36,9 +36,9 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mt-5 leading-relaxed">
-            Ship agents, run workflows, generate images and video — on community GPUs.
+            Ship agents, generate images, render video, and run AI workflows — on community GPUs.
             <br className="hidden md:inline" />
-            Every paid request funds free access for someone who can't afford the $20-a-month gate.
+            Every paid generation funds free access for someone who can't afford the $20-a-month gate.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ const Hero = () => {
               </div>
             </div>
             <div className="text-white font-semibold text-sm mb-1.5">No one can turn it off</div>
-            <div className="text-gray-400 text-xs leading-snug">OpenAI-compatible API on a network heading fully on-chain. No corporate kill switch.</div>
+            <div className="text-gray-400 text-xs leading-snug">OpenAI-compatible generation API on a network heading fully on-chain. No corporate kill switch.</div>
           </div>
         </div>
 
@@ -99,7 +99,7 @@ const Hero = () => {
         </div>
 
         <p className={`mt-4 text-center text-sm text-gray-400 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
-          Agents welcome — OpenAI-compatible <span className="text-gray-300">/v1</span> with token streaming. Point any OpenAI SDK at it and go.
+          Agents welcome — OpenAI-compatible <span className="text-gray-300">/v1</span> for text, image, and video generation. Point any OpenAI SDK at it and go.
         </p>
 
         <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
@@ -254,7 +254,7 @@ const Hero = () => {
               </svg>
               <span className="text-white font-semibold text-sm">Base</span>
             </a>
-            <span className="text-gray-400 text-sm">· OpenAI compatible API</span>
+            <span className="text-gray-400 text-sm">· OpenAI compatible generation API</span>
           </div>
         </div>
         

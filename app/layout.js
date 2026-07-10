@@ -8,15 +8,15 @@ import Providers from "@/context/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI Power Grid - Decentralized AI Infrastructure Network",
-  description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+  title: "AI Power Grid - Decentralized AI Generation Network",
+  description: "Transform idle GPUs into a permissionless AI generation layer for text, images, video, agents, and workflows. GPU owners earn rewards for real user jobs.",
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
   },
   openGraph: {
-    title: "AI Power Grid - Decentralized AI Infrastructure Network",
-    description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+    title: "AI Power Grid - Decentralized AI Generation Network",
+    description: "Transform idle GPUs into a permissionless AI generation layer for text, images, video, agents, and workflows. GPU owners earn rewards for real user jobs.",
     url: "https://aipowergrid.io",
     siteName: "AI Power Grid",
     images: [
@@ -24,7 +24,7 @@ export const metadata = {
         url: "https://aipowergrid.io/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: "AI Power Grid - Decentralized AI Infrastructure Network",
+        alt: "AI Power Grid - Decentralized AI Generation Network",
       },
     ],
     locale: "en_US",
@@ -32,8 +32,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Power Grid - Decentralized AI Infrastructure Network",
-    description: "Transform idle GPUs into a permissionless AI utility. AIPG democratizes access to frontier AI models through a community-powered network where GPU owners earn rewards for real inference work.",
+    title: "AI Power Grid - Decentralized AI Generation Network",
+    description: "Transform idle GPUs into a permissionless AI generation layer for text, images, video, agents, and workflows. GPU owners earn rewards for real user jobs.",
     images: ["https://aipowergrid.io/opengraph-image.jpg"],
     creator: "@AIPowerGrid",
   },

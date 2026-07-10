@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import Hero from "@/components/Hero";
 import GridStatement from "@/components/GridStatement";
 import Products from "@/components/Products";
+import CryptoNativeLayer from "@/components/CryptoNativeLayer";
 import Problem from "@/components/Problem";
 import RunNode from "@/components/RunNode";
 import Infrastructure from "@/components/Infrastructure";
@@ -13,6 +14,7 @@ import Timeline from "@/components/Timeline";
 export default function Home() {
   const heroRef = useRef(null);
   const productsRef = useRef(null);
+  const cryptoLayerRef = useRef(null);
   const problemRef = useRef(null);
   const runNodeRef = useRef(null);
   const infrastructureRef = useRef(null);
@@ -38,7 +40,7 @@ export default function Home() {
 
     const observer = new IntersectionObserver(handleVisibilityChange, observerOptions);
 
-    const refs = [heroRef, productsRef, problemRef, runNodeRef, infrastructureRef, featuresRef, servicesRef, timelineRef];
+    const refs = [heroRef, productsRef, cryptoLayerRef, problemRef, runNodeRef, infrastructureRef, featuresRef, servicesRef, timelineRef];
     refs.forEach(ref => {
       if (ref.current) observer.observe(ref.current);
     });
@@ -56,6 +58,7 @@ export default function Home() {
       <div ref={heroRef} className="fadeInSection"><Hero /></div>
       <GridStatement />
       <div ref={productsRef} className="fadeInSection"><Products /></div>
+      <div ref={cryptoLayerRef} className="fadeInSection"><CryptoNativeLayer /></div>
       <div ref={problemRef} className="fadeInSection"><Problem /></div>
       <div ref={runNodeRef} className="fadeInSection"><RunNode /></div>
       <div ref={infrastructureRef} className="fadeInSection"><Infrastructure /></div>

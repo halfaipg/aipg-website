@@ -28,7 +28,7 @@ const products = [
   },
   {
     title: "Build with the API",
-    description: "Drop-in for OpenAI and Anthropic. Same SDKs, real-time streaming, community-powered backend. Free daily quota.",
+    description: "Drop-in for OpenAI and Anthropic text, image, and video endpoints. Same SDKs, community-powered backend. Free daily quota.",
     href: "https://docs.aipowergrid.io/streaming-api",
     label: "API Docs",
     icon: (
@@ -40,7 +40,7 @@ const products = [
   },
   {
     title: "Earn with your GPU",
-    description: "Run an LLM, image, or video worker. Earn USDC and AIPG for every request you serve. No bond required to start (on-chain bonding planned).",
+    description: "Run an LLM, image, or video worker. Earn from the current hourly AIPG payout rail. No bond required to start; future bonding policy is not finalized.",
     href: "https://docs.aipowergrid.io/run-a-node",
     label: "Run a Worker",
     icon: (
@@ -61,7 +61,7 @@ const Products = () => {
           Build on The Grid
         </h2>
         <p className="mt-3 text-gray-400 text-lg">
-          Agents, automations, art, video — running on community GPUs today. Pick one and ship.
+          Agents, automations, art, video, workflows — running on community GPUs today. Pick one and ship.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -92,7 +92,7 @@ const Products = () => {
       {/* Code snippet */}
       <div className="mt-12 max-w-2xl mx-auto">
         <p className="text-center text-gray-400 text-sm mb-4">
-          Works with any OpenAI SDK. Three lines to get started:
+          Text, image, and video generation through familiar APIs. Three lines to get started:
         </p>
         <div className="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 font-mono text-sm leading-relaxed overflow-x-auto">
           <div className="text-gray-500">

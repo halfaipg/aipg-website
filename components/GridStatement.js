@@ -20,9 +20,9 @@ const GridStatement = () => {
           </span>
         </h2>
         <p className="mt-6 text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
-          AI Power Grid meters intelligence by the token — drawn from GPUs anyone
-          can plug in, and settled on-chain. The meter stays honest, and no one
-          owns the off switch.
+          AI Power Grid meters generative compute — text, images, video, and
+          workflows drawn from GPUs anyone can plug in, with settlement moving
+          on-chain. The meter stays honest, and no one owns the off switch.
         </p>
       </div>
     </section>

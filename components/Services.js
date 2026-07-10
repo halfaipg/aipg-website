@@ -43,7 +43,7 @@ const Services = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            GPU owners earn USDC and AIPG for running inference jobs. Real work, real rewards. Your hardware serves actual users instead of sitting idle.
+            GPU owners earn AIPG today for running text, image, and video jobs. Real work, publicly verifiable payouts. Your hardware serves actual users instead of sitting idle.
             </p>
           </div>
 

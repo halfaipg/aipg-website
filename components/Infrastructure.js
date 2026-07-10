@@ -10,7 +10,7 @@ const Infrastructure = () => {
             How The Grid Works
           </h2>
           <p className="mt-1 text-gray-600 dark:text-gray-400">
-            Community GPUs run AI models. Smart routing sends your request to the best available worker. Workers earn USDC and AIPG for every job they complete.
+            Community GPUs run AI models. Smart routing sends your request to an available worker. Workers currently share an hourly AIPG budget according to recorded work.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ const Infrastructure = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Workers earn USDC and AIPG for every job completed. Rewards flow per job of real inference work.
+              Workers earn from an hourly AIPG budget according to recorded generative work. Multi-asset payouts are planned, not live.
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ const Infrastructure = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-1">◆</span>
-                <span>Bonded validators verify inference results</span>
+                <span>Validator nodes submit assignment-bound evidence; bonding and rewards come later</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-1">◆</span>
@@ -161,4 +161,4 @@ const Infrastructure = () => {
   );
 };
 
-export default Infrastructure; 
+export default Infrastructure;

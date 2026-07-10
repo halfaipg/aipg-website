@@ -59,7 +59,7 @@ const entries = [
   {
     date: "Q1–Q2 2025",
     title: "Base L2 Migration",
-    body: "Migrated to Base L2 with 150M fixed-supply AIPG token. Deployed StakingVault and core infrastructure contracts. Staking live with no lockup period.",
+    body: "Migrated to Base L2 with 150M fixed-supply AIPG token. Deployed StakingVault and core infrastructure contracts. The passive staking program later ended; withdrawals remain available.",
   },
   {
     date: "Q3–Q4 2025",
@@ -70,17 +70,17 @@ const entries = [
     date: "Q1 2026",
     completed: true,
     title: "Streaming API",
-    body: "Real-time token streaming with OpenAI and Anthropic compatibility. Drop-in replacement — same SDKs, same code. Sub-second image generation with z-image-turbo, plus text-to-video via LTX-2.3.",
+    body: "Real-time token streaming with OpenAI and Anthropic compatibility. Familiar SDK integration, fast image generation with z-image-turbo, and text-to-video via LTX-2.3.",
   },
   {
     date: "Q2 2026",
-    title: "P2P Mode & Trusted Workers",
-    body: "Decentralized job distribution via libp2p gossipsub — no central coordinator required. Trusted worker bonding: stake AIPG for priority jobs and higher earnings.",
+    title: "Validator Evidence & Worker Trust",
+    body: "Grid-issued text assignments, targeted probes, scorecards, and a non-economic quorum lifecycle. P2P dispatch and worker bonding remain gated prototypes, not production claims.",
   },
   {
     date: "Q3 2026",
-    title: "Token Factory & Launchpad",
-    body: "AIPG Token Factory: launch tokens backed by real AI compute. Developer Launchpad with free inference for builders.",
+    title: "Validator Distribution & Partner Nodes",
+    body: "Package an easy validator release, prove independent multi-validator operation, and harden the path toward trusted partner-run core nodes.",
   },
   {
     date: "Q4 2026",

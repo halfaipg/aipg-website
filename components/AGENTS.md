@@ -7,8 +7,9 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 
 ## Ownership
 
-- **Marketing sections:** `Hero`, `Problem`, `Products`, `RunNode`, `Infrastructure`, `Features`,
-  `Services`, `Timeline`, `Stats`, `Team`, `FAQ`, `Ticker`, `Modal` (+ co-located `*.css`).
+- **Marketing sections:** `Hero`, `GridStatement`, `Products`, `CryptoNativeLayer`, `Problem`,
+  `RunNode`, `Infrastructure`, `Features`, `Services`, `Timeline`, `Stats`, `Team`, `FAQ`,
+  `Ticker`, `Modal` (+ co-located `*.css`).
 - **Chrome:** `Navbar.js`, `Footer.js`, `TopBar.js` (TopBar currently commented out in layout),
   `VoiceAgentWidget.js`.
 - **Charts:** `BTCChart.js` — lightweight-charts client consuming `/api/btc-chart`.
@@ -32,7 +33,10 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 
 ## Verification
 
-—
+- Run `npm run build` for component changes.
+- Run `npm run test:e2e` for page composition, mount-path, or staking changes.
+- Manually verify wallet-disconnected, wrong-network, pending, rejection, and
+  transaction-error states for `StakingInterface.jsx` changes.
 
 ## Child DOX Index
 

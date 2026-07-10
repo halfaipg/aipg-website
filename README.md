@@ -42,7 +42,7 @@ rewrite (see `vercel.json`).
 
 ## Related repos
 
-- [system-core](https://github.com/AIPowerGrid/system-core) — the Grid API
-- [comfy-bridge](https://github.com/AIPowerGrid/comfy-bridge) — image/video worker
-- [grid-inference-worker](https://github.com/AIPowerGrid/grid-inference-worker) — LLM worker
+- [grid-core](https://github.com/AIPowerGrid/grid-core) - the Grid API
+- [grid-media-worker](https://github.com/AIPowerGrid/grid-media-worker) - image/video worker
+- [grid-text-worker](https://github.com/AIPowerGrid/grid-text-worker) - LLM worker
 - [aipg-smart-contracts](https://github.com/AIPowerGrid/aipg-smart-contracts) — on-chain (Base)
