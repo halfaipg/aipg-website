@@ -14,7 +14,7 @@ const RunNode = () => {
             The network runs on real hardware that real people plug in. Two ways to take part:
             run a <span className="text-white font-semibold">Generator</span> to contribute compute
             and earn, or a <span className="text-white font-semibold">Sentinel</span> to help secure
-            it. Any modern GPU works — the software figures out what your card can do.
+            it. Signed worker profiles define exactly which hardware and jobs are supported.
           </p>
         </div>
 
@@ -43,7 +43,7 @@ const RunNode = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Any modern GPU earns — bigger cards take bigger jobs</span>
+                <span>Supported GPUs are matched to measured, signed profiles</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
@@ -60,8 +60,7 @@ const RunNode = () => {
             </div>
 
             <a
-              href="https://docs.aipowergrid.io/worker-llm"
-              target="_blank"
+              href="/run"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-xl transition-all"
             >
               Run a Generator

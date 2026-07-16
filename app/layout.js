@@ -42,6 +42,20 @@ export const revalidate = 30;
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href="https://aipowergrid.io/llms.txt"
+          title="AI Power Grid agent index"
+        />
+        <link
+          rel="help"
+          type="text/markdown"
+          href="https://aipowergrid.io/.well-known/skills/grid/SKILL.md"
+          title="AI Power Grid agent skill"
+        />
+      </head>
       <body className={inter.className}>
         <Providers>
           {/* <TopBar /> */}

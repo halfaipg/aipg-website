@@ -2,12 +2,14 @@
 
 ## Purpose
 
-Playwright smoke coverage for production-built marketing and staking-withdrawal
-surfaces.
+Playwright smoke coverage for production-built marketing, worker onboarding,
+and staking-withdrawal surfaces.
 
 ## Ownership
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
+- `e2e/run.spec.ts` - release-gated worker download surface, browser-error, and
+  horizontal-overflow checks.
 
 ## Local Contracts
 

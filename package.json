@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "deploy": "npm run build && rsync --exclude=.git -azP . ubuntu@64.176.215.66:/root/site/",
     "test:e2e": "playwright test",
     "smoke": "playwright test"
@@ -42,6 +42,8 @@
   "devDependencies": {
     "@playwright/test": "^1.49.0",
     "autoprefixer": "^10.0.1",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.20",
     "ignore-loader": "^0.1.2",
     "node-loader": "^2.0.0",
     "postcss": "^8.5.16",

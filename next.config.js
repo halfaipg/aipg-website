@@ -13,6 +13,15 @@ const nextConfig = {
     });
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/.well-known/skills/grid/SKILL.md',
+        destination: 'https://raw.githubusercontent.com/AIPowerGrid/grid-skill/main/SKILL.md',
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

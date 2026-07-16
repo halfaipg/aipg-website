@@ -52,8 +52,9 @@ on Vercel.
 - **`context/Providers.js`** — global client providers (Wagmi → React Query → RainbowKit →
   next-themes); wraps the whole tree in `app/layout.js`.
 - **`tests/e2e/`** — Playwright smoke tests (config `playwright.config.ts`).
-- **`public/`** — static assets (images, logos). **`*.csv`** at root are BTC price history read
-  by the btc-chart API route. **Not** DOX boundaries.
+- **`public/`** — static assets (images, logos) plus `llms.txt`, the curated machine-readable
+  entry point for agents. **`*.csv`** at root are BTC price history read by the btc-chart API
+  route. **Not** DOX boundaries.
 
 ## Local Contracts
 
@@ -71,6 +72,9 @@ on Vercel.
   external script/media origin must be added to the CSP there or it will be blocked in prod.
 - `/docs` and `/docs/*` are Vercel rewrites to the separate aipg-documentation deployment
   (`vercel.json`) — not routes in this repo.
+- Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
+  `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
+  skill body into this repo; one canonical copy prevents endpoint and authentication drift.
 
 ## Work Guidance
 

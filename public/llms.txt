@@ -1,0 +1,32 @@
+# AI Power Grid
+
+> AI Power Grid is a decentralized generation network for text, images, video,
+> and 3D workloads. Developers use its OpenAI-compatible API, and independent
+> workers provide the underlying compute.
+
+Agents helping a user call the Grid should read the Grid agent skill first. It
+contains the current API origin, authentication handoff, endpoint map, tested
+HTTP examples, and safety notes. Do not invent or request anonymous API keys;
+send the human through the authenticated console handoff described by the skill.
+
+## Agent Skill
+
+- [Grid agent skill](https://aipowergrid.io/.well-known/skills/grid/SKILL.md): Canonical machine-readable instructions for text, image, video, and 3D generation.
+- [Grid skill source](https://github.com/AIPowerGrid/grid-skill): Version-controlled source and human installation notes.
+
+## Developer Documentation
+
+- [Documentation index](https://aipowergrid.io/docs): Product and network documentation.
+- [Quick start](https://aipowergrid.io/docs/quick-start): First API request and account setup.
+- [Generate with the Grid](https://aipowergrid.io/docs/generate): Text and media generation examples.
+- [Developer API](https://aipowergrid.io/docs/developers): API compatibility and integration guidance.
+- [Text worker](https://aipowergrid.io/docs/worker-llm): Run an inference worker.
+- [Media worker](https://aipowergrid.io/docs/worker-media): Run an image or video worker.
+- [Validator node](https://aipowergrid.io/docs/validator-node): Validator design and current authority.
+
+## Public Products
+
+- [Developer console](https://console.aipowergrid.io): Human authentication, API keys, usage, and credits.
+- [Grid chat](https://aipg.chat): Hosted conversational interface.
+- [Art gallery](https://aipg.art): Hosted image, video, and 3D generation tools.
+- [Network explorer](https://explorer.aipowergrid.io): Public network and job visibility.

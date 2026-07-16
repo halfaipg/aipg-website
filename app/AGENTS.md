@@ -8,11 +8,15 @@ with a scroll-reveal IntersectionObserver).
 
 ## Ownership
 
-- `layout.js` — root layout: metadata/OpenGraph, fonts, `context/Providers` wrapper, Navbar/Footer.
+- `layout.js` — root layout: metadata/OpenGraph, agent-discovery links, fonts,
+  `context/Providers` wrapper, Navbar/Footer.
   `globals.css` — global styles incl. the `fadeInSection`/`visible` reveal classes used by `page.js`.
 - `page.js` — home page; composes `components/` sections.
 - `about/page.js` — about page. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
+- `run/` — worker-manager download and onboarding surface. It enables downloads
+  only from a public, non-prerelease `manager-v*` GitHub release with both the
+  aggregate checksum and signed release manifest assets present.
 - `api/btc-chart/route.js` — GET endpoint merging bundled CSV history with live CoinGecko daily
   prices into OHLC; feeds `components/BTCChart`.
 - `strategic-reserve/AutonomousFundPageArchive.js` — archived page component, not a live route
@@ -31,6 +35,8 @@ with a scroll-reveal IntersectionObserver).
 - New section on the home page → add the component under `components/`, import here, and (if it
   should reveal on scroll) wrap it in a `fadeInSection` ref like the existing sections.
 - New external script/media origin used by a page must be added to the CSP in `next.config.js`.
+- `/run` may recommend an OS in the browser, but only the downloaded manager may
+  decide hardware compatibility or unlock a worker capability.
 
 ## Verification
 
