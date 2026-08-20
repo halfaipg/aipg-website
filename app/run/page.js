@@ -1,7 +1,9 @@
 import RunDownloads from "./RunDownloads";
 
-const RELEASES_API =
+const MEDIA_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-media-worker/releases?per_page=20";
+const TEXT_RELEASES_API =
+  "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases?per_page=20";
 
 export const metadata = {
   title: "Run an AI Power Grid Worker",
@@ -9,17 +11,21 @@ export const metadata = {
     "Download the signed AI Power Grid worker manager, validate your NVIDIA GPU locally, connect a payout wallet, and serve decentralized AI jobs.",
 };
 
+async function getReleaseList(url) {
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+    next: { revalidate: 300 },
+  });
+  if (!response.ok) return [];
+  return response.json();
+}
+
 async function getManagerRelease() {
   try {
-    const response = await fetch(RELEASES_API, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-      next: { revalidate: 300 },
-    });
-    if (!response.ok) return null;
-    const releases = await response.json();
+    const releases = await getReleaseList(MEDIA_RELEASES_API);
     const release = releases.find(
       (item) =>
         !item.draft &&
@@ -52,12 +58,40 @@ async function getManagerRelease() {
   }
 }
 
+async function getTextRelease() {
+  try {
+    const releases = await getReleaseList(TEXT_RELEASES_API);
+    const release = releases.find((item) => !item.draft && !item.prerelease);
+    if (!release) return null;
+    const asset = (name) => {
+      const found = release.assets.find((item) => item.name === name);
+      return found
+        ? { name: found.name, url: found.browser_download_url, bytes: found.size }
+        : null;
+    };
+    return {
+      version: release.tag_name.replace(/^v/, ""),
+      publishedAt: release.published_at,
+      releaseUrl: release.html_url,
+      linux: asset("grid-inference-worker-linux-x64"),
+      linuxArm64: asset("grid-inference-worker-linux-arm64"),
+      macos: asset("grid-inference-worker-macos-arm64.zip"),
+      windows: asset("grid-inference-worker-windows-x64.exe"),
+    };
+  } catch {
+    return null;
+  }
+}
+
 export default async function RunPage() {
-  const release = await getManagerRelease();
+  const [mediaRelease, textRelease] = await Promise.all([
+    getManagerRelease(),
+    getTextRelease(),
+  ]);
 
   return (
     <main className="bg-black text-white">
-      <RunDownloads release={release} />
+      <RunDownloads mediaRelease={mediaRelease} textRelease={textRelease} />
 
       <section className="border-y border-white/10 bg-[#111214]">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-20">

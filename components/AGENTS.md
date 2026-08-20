@@ -25,6 +25,9 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   `useStaking` still exports `stake`/`approveToken`. On-chain reads/writes go through `useStaking`
   only — never call contracts directly from a component.
 - Contract addresses/ABIs come from `lib/stakingContracts.js`; do not hardcode them here.
+- `RunNode` must distinguish live paid workers from the validator preview:
+  validators are CPU-only evidence nodes with no stake, rewards, slashing, or
+  routing authority until real probe-group quorum ships.
 
 ## Work Guidance
 

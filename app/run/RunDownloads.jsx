@@ -12,6 +12,8 @@ import {
 
 const PLATFORMS = {
   linux: { label: "Linux", detail: "Ubuntu 22.04+ x86_64" },
+  linuxArm64: { label: "Linux ARM64", detail: "Linux aarch64" },
+  macos: { label: "macOS", detail: "Apple Silicon" },
   windows: { label: "Windows", detail: "Windows 11 x86_64" },
 };
 
@@ -20,7 +22,8 @@ function formatBytes(value) {
   return `${(value / 1024 / 1024).toFixed(1)} MB`;
 }
 
-export default function RunDownloads({ release }) {
+export default function RunDownloads({ mediaRelease, textRelease }) {
+  const [workerType, setWorkerType] = useState("text");
   const [platform, setPlatform] = useState("linux");
 
   useEffect(() => {
@@ -28,11 +31,29 @@ export default function RunDownloads({ release }) {
     const userAgent = navigator.userAgent || "";
     if (/^win/i.test(platformHint) || /windows/i.test(userAgent)) {
       setPlatform("windows");
+    } else if (/mac/i.test(platformHint) || /macintosh/i.test(userAgent)) {
+      setPlatform("macos");
+    } else if (/aarch64|arm64/i.test(platformHint)) {
+      setPlatform("linuxArm64");
     }
   }, []);
 
+  useEffect(() => {
+    if (workerType === "media" && !["linux", "windows"].includes(platform)) {
+      setPlatform("linux");
+    }
+  }, [platform, workerType]);
+
+  const release = workerType === "text" ? textRelease : mediaRelease;
   const selected = useMemo(() => release?.[platform] || null, [release, platform]);
-  const releaseReady = Boolean(release && selected && release.checksums && release.manifest);
+  const releaseReady = Boolean(
+    release &&
+      selected &&
+      (workerType === "text" || (release.checksums && release.manifest)),
+  );
+  const platformEntries = Object.entries(PLATFORMS).filter(
+    ([value]) => workerType === "text" || ["linux", "windows"].includes(value),
+  );
 
   return (
     <>
@@ -50,18 +71,39 @@ export default function RunDownloads({ release }) {
           <div className="w-full max-w-3xl">
             <div className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-orange-300">
               <FiShield aria-hidden="true" />
-              Signed worker manager
+              Worker software
             </div>
             <h1 className="max-w-3xl text-5xl font-black leading-[1.04] sm:text-6xl lg:text-7xl">
               Run AI Power Grid
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
-              Put a supported NVIDIA GPU to work serving decentralized audio jobs.
-              One manager validates the machine, installs exact artifacts, tests the
-              runtime, connects your payout wallet, and starts the worker.
+              Put a supported GPU to work serving decentralized text, image, video,
+              and audio jobs. Start with the live text worker today; the media manager
+              remains release-gated until its signed hardware profiles qualify.
             </p>
 
             <div className="mt-9 max-w-xl border border-white/15 bg-black/75 p-5 backdrop-blur-sm">
+              <div className="mb-4 grid grid-cols-2 border border-white/15 bg-[#111214] p-1">
+                {[
+                  ["text", "Text worker"],
+                  ["media", "Media manager"],
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setWorkerType(value)}
+                    className={`min-h-12 px-3 text-sm font-semibold transition-colors ${
+                      workerType === value
+                        ? "bg-orange-500 text-black"
+                        : "text-gray-300 hover:bg-white/10"
+                    }`}
+                    aria-pressed={workerType === value}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
               <div className="mb-4 flex items-center justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold">Choose your operating system</p>
@@ -75,7 +117,7 @@ export default function RunDownloads({ release }) {
               </div>
 
               <div className="mb-4 grid grid-cols-2 border border-white/15 bg-[#111214] p-1">
-                {Object.entries(PLATFORMS).map(([value, item]) => (
+                {platformEntries.map(([value, item]) => (
                   <button
                     key={value}
                     type="button"
@@ -98,7 +140,7 @@ export default function RunDownloads({ release }) {
                   className="flex min-h-12 w-full items-center justify-center gap-2 bg-orange-500 px-5 font-bold text-black transition-colors hover:bg-orange-400"
                 >
                   <FiDownload aria-hidden="true" />
-                  Download for {PLATFORMS[platform].label}
+                  Download {workerType === "text" ? "text worker" : "media manager"} for {PLATFORMS[platform].label}
                   {formatBytes(selected.bytes) && (
                     <span className="font-normal text-black/65">
                       {formatBytes(selected.bytes)}
@@ -111,7 +153,9 @@ export default function RunDownloads({ release }) {
                   disabled
                   className="min-h-12 w-full cursor-not-allowed bg-white/10 px-5 font-semibold text-gray-400"
                 >
-                  Release qualification in progress
+                  {workerType === "media"
+                    ? "Media qualification in progress"
+                    : "Text release unavailable"}
                 </button>
               )}
 
@@ -122,12 +166,14 @@ export default function RunDownloads({ release }) {
                 </span>
                 {releaseReady && (
                   <>
-                    <a
-                      href={release.checksums.url}
-                      className="inline-flex items-center gap-1.5 hover:text-white"
-                    >
-                      SHA256SUMS <FiExternalLink aria-hidden="true" />
-                    </a>
+                    {release.checksums ? (
+                      <a
+                        href={release.checksums.url}
+                        className="inline-flex items-center gap-1.5 hover:text-white"
+                      >
+                        SHA256SUMS <FiExternalLink aria-hidden="true" />
+                      </a>
+                    ) : null}
                     <a
                       href={release.releaseUrl}
                       className="inline-flex items-center gap-1.5 hover:text-white"
@@ -145,16 +191,18 @@ export default function RunDownloads({ release }) {
       <section className="bg-[#090a0c]">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 md:grid-cols-[1fr_auto] md:items-center md:px-8">
           <div>
-            <h2 className="text-xl font-bold">ACE-Step audio profile</h2>
+            <h2 className="text-xl font-bold">Live text worker · qualified media next</h2>
             <p className="mt-2 text-sm leading-6 text-gray-400">
-              Minimum: 6 GiB NVIDIA VRAM, 16 GiB RAM, and 24 GiB free disk.
-              Recommended: 12 GiB VRAM, 32 GiB RAM, and 32 GiB free disk.
+              The text worker connects to your existing Ollama, vLLM, SGLang,
+              LMDeploy, LM Studio, or KoboldCpp backend. The first managed media
+              profile targets ACE-Step audio and stays unavailable until its signed
+              qualification evidence is complete.
             </p>
           </div>
           <ul className="grid gap-2 text-sm text-gray-300 sm:grid-cols-3 md:grid-cols-1">
-            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Resumable install</li>
-            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Local audio canary</li>
-            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Wallet delegation</li>
+            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Text release live</li>
+            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />WebSocket dispatch</li>
+            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Media fail-closed</li>
           </ul>
         </div>
       </section>

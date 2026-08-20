@@ -14,9 +14,13 @@ with a scroll-reveal IntersectionObserver).
 - `page.js` — home page; composes `components/` sections.
 - `about/page.js` — about page. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
-- `run/` — worker-manager download and onboarding surface. It enables downloads
-  only from a public, non-prerelease `manager-v*` GitHub release with both the
-  aggregate checksum and signed release manifest assets present.
+- `run/` — worker download and onboarding surface. It exposes the current text
+  worker release independently, while media-manager downloads require a public,
+  non-prerelease `manager-v*` release with both the aggregate checksum and
+  signed release manifest assets present.
+- `validate/` — validator preview onboarding. It release-gates all four binaries
+  on the presence of `SHA256SUMS` and the SPDX SBOM, and sends authenticated key
+  creation to the Console rather than handling credentials on the marketing site.
 - `api/btc-chart/route.js` — GET endpoint merging bundled CSV history with live CoinGecko daily
   prices into OHLC; feeds `components/BTCChart`.
 - `strategic-reserve/AutonomousFundPageArchive.js` — archived page component, not a live route

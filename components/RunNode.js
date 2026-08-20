@@ -13,7 +13,7 @@ const RunNode = () => {
           <p className="text-xl text-gray-300">
             The network runs on real hardware that real people plug in. Two ways to take part:
             run a <span className="text-white font-semibold">Generator</span> to contribute compute
-            and earn, or a <span className="text-white font-semibold">Sentinel</span> to help secure
+            and earn, or a <span className="text-white font-semibold">Validator</span> to independently test
             it. Signed worker profiles define exactly which hardware and jobs are supported.
           </p>
         </div>
@@ -70,10 +70,10 @@ const RunNode = () => {
             </a>
           </div>
 
-          {/* Sentinel */}
+          {/* Validator */}
           <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/30 rounded-2xl p-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-              COMING SOON
+              PREVIEW
             </div>
             <div className="mb-5">
               <div className="w-14 h-14 rounded-xl bg-blue-500/15 border border-blue-500/40 flex items-center justify-center">
@@ -82,38 +82,37 @@ const RunNode = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Sentinel</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">Validator</h3>
             <p className="text-gray-300 mb-6">
-              Secure the Grid: re-check that Generators were honest, run safety screening, and host
-              part of the model library — with your stake behind it. Real economic security, not vibes.
-              A consumer 24GB card (a used 3090) is plenty.
+              Run independent, Grid-assigned checks against worker outputs and sign the evidence.
+              The preview is CPU-only and intentionally has no routing, payout, strike, slash, or
+              reward authority.
             </p>
 
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Verify Generator outputs (proof-of-inference) on-chain</span>
+                <span>Receive short-lived, targeted assignments from Core</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Run safety screening + host a shard of the model library</span>
+                <span>Sign evidence with a wallet linked to your Grid account</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Stake AIPG · slashable for false attestations</span>
+                <span>No random fallback probes when assignments are unavailable</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Earn verification fees + storage rewards</span>
+                <span>No rewards yet — this is distributed testing, not real quorum</span>
               </div>
             </div>
 
             <a
-              href="https://discord.gg/W9D8j6HCtC"
-              target="_blank"
+              href="/validate"
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl transition-all border border-white/20"
             >
-              Join Waitlist
+              Run a Validator
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
               </svg>
