@@ -17,7 +17,11 @@ with a scroll-reveal IntersectionObserver).
 - `run/` — worker download and onboarding surface. It exposes the current text
   worker release independently, while media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
-  signed release manifest assets present.
+  signed release manifest assets present. Its local operator planner uses coarse
+  browser-only hardware inputs to recommend a worker path; exact capability
+  approval remains local to signed profiles. Live opportunity rows combine
+  public worker counts with 30-day job and observed-performance telemetry and
+  must never be described as a hardware benchmark or earnings promise.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   on the presence of `SHA256SUMS` and the SPDX SBOM, and sends authenticated key
   creation to the Console rather than handling credentials on the marketing site.

@@ -17,8 +17,13 @@ test.describe('/run smoke', () => {
     await expect(page.getByRole('heading', { name: 'Run AI Power Grid' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Text worker' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Media manager' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Linux', exact: true })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Windows', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Linux', exact: true }).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Windows', exact: true }).first()).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Find the useful path for your machine' }),
+    ).toBeVisible();
+    await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
+    await expect(page.getByText(/not a forecast for your GPU/i)).toBeVisible();
 
     const download = page.getByRole('link', { name: /Download .* for/ });
     const releaseGate = page.getByRole('button', {
@@ -51,10 +56,18 @@ test.describe('/run mobile smoke', () => {
     await page.goto('/run', { waitUntil: 'networkidle' });
 
     await expect(page.getByRole('heading', { name: 'Run AI Power Grid' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'macOS' })).toHaveAttribute(
+    await expect(page.getByRole('button', { name: 'macOS' }).first()).toHaveAttribute(
       'aria-pressed',
       'true',
     );
+    await page
+      .getByRole('group', { name: 'Operating system' })
+      .getByRole('button', { name: 'macOS' })
+      .click();
+    await page.getByLabel('Accelerator').selectOption('apple');
+    await expect(
+      page.getByRole('heading', { name: 'Start with the text worker and your existing backend' }),
+    ).toBeVisible();
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >

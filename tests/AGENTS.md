@@ -9,7 +9,8 @@ and staking-withdrawal surfaces.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding surfaces,
-  trust-boundary copy, browser-error, and horizontal-overflow checks.
+  local hardware-path recommendation, telemetry disclaimers, trust-boundary
+  copy, browser-error, and horizontal-overflow checks.
 
 ## Local Contracts
 

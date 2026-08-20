@@ -1,9 +1,11 @@
 import RunDownloads from "./RunDownloads";
+import OperatorPlanner from "./OperatorPlanner";
 
 const MEDIA_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-media-worker/releases?per_page=20";
 const TEXT_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases?per_page=20";
+const GRID_API = "https://api.aipowergrid.io";
 
 export const metadata = {
   title: "Run an AI Power Grid Worker",
@@ -83,15 +85,60 @@ async function getTextRelease() {
   }
 }
 
+async function getOperatorOpportunities() {
+  try {
+    const [statusResponse, statsResponse] = await Promise.all([
+      fetch(`${GRID_API}/v1/status/models`, { next: { revalidate: 300 } }),
+      fetch(`${GRID_API}/v1/stats/models?period=month`, { next: { revalidate: 300 } }),
+    ]);
+    if (!statusResponse.ok || !statsResponse.ok) return [];
+    const [status, stats] = await Promise.all([statusResponse.json(), statsResponse.json()]);
+    if (!Array.isArray(status) || !Array.isArray(stats?.models)) return [];
+
+    const history = new Map(
+      stats.models.map((item) => [`${item.type}:${item.name}`, item]),
+    );
+    return status
+      .filter(
+        (item) =>
+          item &&
+          typeof item.name === "string" &&
+          typeof item.type === "string" &&
+          Number.isFinite(Number(item.count)),
+      )
+      .map((item) => {
+        const measured = history.get(`${item.type}:${item.name}`) || {};
+        return {
+          name: item.name,
+          type: item.type,
+          workers: Math.max(0, Number(item.count) || 0),
+          jobs30d: Math.max(0, Number(measured.jobs) || 0),
+          tokensPerSecond: Number.isFinite(Number(measured.tokens_per_s))
+            ? Number(measured.tokens_per_s)
+            : null,
+          averageLatencySeconds: Number.isFinite(Number(measured.avg_latency_s))
+            ? Number(measured.avg_latency_s)
+            : null,
+        };
+      })
+      .sort((left, right) => left.workers - right.workers || right.jobs30d - left.jobs30d);
+  } catch {
+    return [];
+  }
+}
+
 export default async function RunPage() {
-  const [mediaRelease, textRelease] = await Promise.all([
+  const [mediaRelease, textRelease, opportunities] = await Promise.all([
     getManagerRelease(),
     getTextRelease(),
+    getOperatorOpportunities(),
   ]);
 
   return (
     <main className="bg-black text-white">
       <RunDownloads mediaRelease={mediaRelease} textRelease={textRelease} />
+
+      <OperatorPlanner opportunities={opportunities} />
 
       <section className="border-y border-white/10 bg-[#111214]">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-20">
