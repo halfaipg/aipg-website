@@ -200,6 +200,17 @@ export default function RunDownloads({
                         <FiExternalLink aria-hidden="true" />
                       </a>
                       {qualificationSelected ? (
+                        <a
+                          href="https://github.com/AIPowerGrid/grid-media-worker/issues/8"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex min-h-11 items-center justify-center gap-2 border border-white/15 px-4 text-sm font-semibold text-gray-300 hover:bg-white/10"
+                        >
+                          Volunteer a GPU for qualification
+                          <FiExternalLink aria-hidden="true" />
+                        </a>
+                      ) : null}
+                      {qualificationSelected ? (
                         <p className="text-xs leading-5 text-gray-400">
                           Local benchmark only. It cannot connect a worker or
                           earn rewards. Verify the SHA-256 manifest and GitHub
