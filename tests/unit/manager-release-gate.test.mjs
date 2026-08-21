@@ -133,6 +133,45 @@ test("rejects a release asset whose GitHub digest disagrees", () => {
   );
 });
 
+test("rejects an extra unverified media release asset", () => {
+  const value = fixture("qualification");
+  value.release.assets.push({
+    name: "install-unverified.sh",
+    digest: `sha256:${"f".repeat(64)}`,
+    size: 10,
+  });
+  const result = assessQualificationRelease(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+  assert.equal(result.ready, false);
+  assert.ok(
+    result.reasons.includes(
+      "GitHub release assets do not exactly match the media payload",
+    ),
+  );
+});
+
+test("rejects media metadata without a valid GitHub identity", () => {
+  const value = fixture("manager");
+  const manifest = value.release.assets.find(
+    (asset) => asset.name === "manager-release.json",
+  );
+  manifest.digest = null;
+  const result = assessManagerRelease(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+  assert.equal(result.ready, false);
+  assert.ok(
+    result.reasons.includes(
+      "release metadata asset has no valid identity: manager-release.json",
+    ),
+  );
+});
+
 test("accepts only an immutable signed and fully-qualified manager contract", () => {
   const value = fixture("manager");
   assert.deepEqual(

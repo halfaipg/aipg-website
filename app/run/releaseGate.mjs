@@ -11,11 +11,13 @@ const MANAGER_PAYLOADS = [
   "grid-media-manager-windows-x86_64.exe",
   "grid-media-manager-release.spdx.json",
 ];
+const MANAGER_MANIFEST = "manager-release.json";
 const QUALIFICATION_PAYLOADS = [
   "grid-media-manager-linux-x86_64",
   "grid-media-manager-windows-x86_64.exe",
   "grid-media-manager-qualification.spdx.json",
 ];
+const QUALIFICATION_MANIFEST = "manager-qualification.json";
 const TEXT_PAYLOADS = [
   "grid-inference-worker-linux-x64",
   "grid-inference-worker-linux-arm64",
@@ -50,6 +52,7 @@ function validatePayload(
   manifest,
   checksumText,
   expectedNames,
+  manifestName,
   reasons,
 ) {
   const checksums = parseChecksums(checksumText);
@@ -75,10 +78,20 @@ function validatePayload(
     return;
   }
 
+  const releaseAssetList = Array.isArray(release?.assets) ? release.assets : [];
+  const releaseAssetNames = releaseAssetList.map((asset) => asset?.name);
+  const expectedReleaseNames = [...expectedNames, manifestName, "SHA256SUMS"];
+  if (
+    releaseAssetList.length !== expectedReleaseNames.length ||
+    new Set(releaseAssetNames).size !== releaseAssetList.length ||
+    expectedReleaseNames.some((name) => !releaseAssetNames.includes(name))
+  ) {
+    reasons.push("GitHub release assets do not exactly match the media payload");
+    return;
+  }
+
   const releaseAssets = new Map(
-    Array.isArray(release?.assets)
-      ? release.assets.map((asset) => [asset?.name, asset])
-      : [],
+    releaseAssetList.map((asset) => [asset.name, asset]),
   );
   for (const item of manifestAssets) {
     const releaseAsset = releaseAssets.get(item.name);
@@ -91,6 +104,17 @@ function validatePayload(
       releaseAsset?.size !== item.bytes
     ) {
       reasons.push(`payload identity mismatch: ${item.name || "unknown"}`);
+    }
+  }
+
+  for (const name of [manifestName, "SHA256SUMS"]) {
+    const asset = releaseAssets.get(name);
+    if (
+      !/^sha256:[0-9a-f]{64}$/.test(asset?.digest || "") ||
+      !Number.isSafeInteger(asset?.size) ||
+      asset.size <= 0
+    ) {
+      reasons.push(`release metadata asset has no valid identity: ${name}`);
     }
   }
 }
@@ -212,7 +236,14 @@ export function assessManagerRelease(release, manifest, checksumText) {
   if (!HEX_SHA256.test(profile.qualification_manifest_sha256 || "")) {
     reasons.push("manager profile has no valid qualification commitment");
   }
-  validatePayload(release, manifest, checksumText, MANAGER_PAYLOADS, reasons);
+  validatePayload(
+    release,
+    manifest,
+    checksumText,
+    MANAGER_PAYLOADS,
+    MANAGER_MANIFEST,
+    reasons,
+  );
   return { ready: reasons.length === 0, reasons };
 }
 
@@ -259,6 +290,7 @@ export function assessQualificationRelease(release, manifest, checksumText) {
     manifest,
     checksumText,
     QUALIFICATION_PAYLOADS,
+    QUALIFICATION_MANIFEST,
     reasons,
   );
   return { ready: reasons.length === 0, reasons };
