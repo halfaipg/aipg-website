@@ -11,7 +11,7 @@ test.describe('/run smoke', () => {
       browserErrors.push(`pageerror: ${error.message}`);
     });
 
-    const response = await page.goto('/run', { waitUntil: 'networkidle' });
+    const response = await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
     expect(response?.ok()).toBeTruthy();
     await expect(page.getByRole('heading', { name: 'Run AI Power Grid' })).toBeVisible();
@@ -22,6 +22,7 @@ test.describe('/run smoke', () => {
     await expect(
       page.getByRole('heading', { name: 'Find the useful path for your machine' }),
     ).toBeVisible();
+    await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
     await expect(page.getByLabel('GPU or accelerator model')).toBeVisible();
     await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
     await expect(page.getByLabel('Expected text speed')).toHaveValue('0');
@@ -64,9 +65,10 @@ test.describe('/run mobile smoke', () => {
         get: () => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
       });
     });
-    await page.goto('/run', { waitUntil: 'networkidle' });
+    await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
     await expect(page.getByRole('heading', { name: 'Run AI Power Grid' })).toBeVisible();
+    await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
     await expect(page.getByRole('button', { name: 'macOS' }).first()).toHaveAttribute(
       'aria-pressed',
       'true',

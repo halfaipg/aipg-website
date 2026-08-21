@@ -21,7 +21,7 @@ test.describe('/staking smoke', () => {
       consoleErrors.push(`pageerror: ${err.message}`);
     });
 
-    await page.goto('/staking', { waitUntil: 'networkidle' });
+    await page.goto('/staking', { waitUntil: 'domcontentloaded' });
 
     // The header copy must be present — proves React tree mounted.
     await expect(page.getByText(/withdraw your AIPG/i)).toBeVisible({ timeout: 15_000 });
@@ -49,7 +49,7 @@ test.describe('/staking smoke', () => {
       consoleErrors.push(`pageerror: ${err.message}`);
     });
 
-    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     // Hero headline ("AI shouldn't have a doorman.") implies React tree mounted.
     // We match the most stable substring rather than the full sentence in case

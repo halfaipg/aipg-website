@@ -17,6 +17,9 @@ with a scroll-reveal IntersectionObserver).
 - `run/` — worker download and onboarding surface. Text-worker downloads require
   an immutable, stable `v*` release whose exact four-platform binary set, SPDX
   SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
+  the server hashes the manifest and checksum bytes it actually downloads and
+  requires those byte lengths and digests to match GitHub's immutable asset
+  metadata before parsing either file;
   the manifest must also record verified Developer ID/notarization for macOS and
   Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
   Media-manager downloads require a public,
