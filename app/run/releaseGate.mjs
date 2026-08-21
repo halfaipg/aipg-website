@@ -310,6 +310,30 @@ export function assessTextRelease(release, manifest, checksumText) {
   ) {
     reasons.push("text manifest version does not match the release tag");
   }
+  const signing = manifest?.platform_signing || {};
+  const macos = signing.macos || {};
+  const windows = signing.windows || {};
+  if (
+    !(
+      macos.verified === true &&
+      macos.identity === "developer_id_application" &&
+      macos.notarized === true &&
+      typeof macos.team_id === "string" &&
+      macos.team_id
+    )
+  ) {
+    reasons.push("text macOS Developer ID/notarization is not verified");
+  }
+  if (
+    !(
+      windows.verified === true &&
+      windows.identity === "authenticode" &&
+      typeof windows.subject === "string" &&
+      windows.subject
+    )
+  ) {
+    reasons.push("text Windows Authenticode is not verified");
+  }
   validateTextPayload(release, manifest, checksumText, reasons);
   return { ready: reasons.length === 0, reasons };
 }

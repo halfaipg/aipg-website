@@ -17,7 +17,9 @@ with a scroll-reveal IntersectionObserver).
 - `run/` — worker download and onboarding surface. Text-worker downloads require
   an immutable, stable `v*` release whose exact four-platform binary set, SPDX
   SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
-  mutable legacy releases fail closed. Media-manager downloads require a public,
+  the manifest must also record verified Developer ID/notarization for macOS and
+  Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
+  Media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
   machine-readable release manifest plus SPDX SBOM assets present. The server
   must verify immutable-release state, manifest profile gates, GitHub asset
