@@ -17,7 +17,10 @@ with a scroll-reveal IntersectionObserver).
 - `run/` — worker download and onboarding surface. It exposes the current text
   worker release independently, while media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
-  signed release manifest plus SPDX SBOM assets present. Its local operator
+  machine-readable release manifest plus SPDX SBOM assets present. The server
+  must verify immutable-release state, manifest profile gates, GitHub asset
+  digests and sizes, and exact aggregate-checksum coverage before exposing a
+  media download. Its local operator
   planner uses coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
   expected/measured throughput inputs to recommend a worker path;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
@@ -25,8 +28,9 @@ with a scroll-reveal IntersectionObserver).
   While the media release is gated, the download panel links to the public
   qualification cohort runbook. A complete `manager-qualification-v*`
   prerelease may expose a separately labelled benchmark-only binary, checksum,
-  and SBOM; it must never be presented as a worker release and cannot enroll or
-  advertise capabilities.
+  and SBOM only after the same payload-identity checks plus explicit
+  no-enrollment/no-advertisement restrictions pass; it must never be presented
+  as a worker release.
   Jobs per worker is only a historical workload-share signal; capacity risk and
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
