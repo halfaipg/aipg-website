@@ -53,6 +53,9 @@ on Vercel.
 - **`context/Providers.js`** — global client providers (Wagmi → React Query → RainbowKit →
   next-themes); wraps the whole tree in `app/layout.js`.
 - **`tests/e2e/`** — Playwright smoke tests (config `playwright.config.ts`).
+- **`.github/workflows/`, `.gitleaks.toml`, `.gitleaksignore`** — CI and secret-release
+  gates. Gitleaks scans the tracked tree and complete reachable Git history;
+  reviewed historical findings are acknowledged only by exact fingerprints.
 - **`public/`** — static assets (images, logos) plus `llms.txt`, the curated machine-readable
   entry point for agents. **`*.csv`** at root are BTC price history read by the btc-chart API
   route. **Not** DOX boundaries.
@@ -94,6 +97,12 @@ on Vercel.
 - `npm audit` must report zero known vulnerabilities before deploy.
 - `npm run test:e2e` — Playwright smoke (builds + serves prod, loads `/` and `/staking`, fails on
   any non-wallet console/page error).
+- Copy `git ls-files --cached --others --exclude-standard` to a temporary directory and run
+  `gitleaks detect --source <temp> --no-git --config "$PWD/.gitleaks.toml"
+  --gitleaks-ignore-path "$PWD" --redact --verbose` — scan tracked and untracked source without
+  ignored build caches.
+- `gitleaks git . --log-opts=HEAD --config .gitleaks.toml --redact --verbose` — scan complete
+  reachable history against exact reviewed fingerprints.
 
 ## Child DOX Index
 
