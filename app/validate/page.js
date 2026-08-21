@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { decodeReleaseContract } from "../releaseContract.mjs";
 import {
   FiCheck,
   FiDownload,
@@ -43,18 +44,30 @@ async function getValidatorRelease() {
     const findAsset = (name) =>
       release.assets.find((item) => item.name === name) || null;
     const asset = (name) => findAsset(name)?.browser_download_url || null;
-    const manifestUrl = asset("validator-release.json");
-    const checksumsUrl = asset("SHA256SUMS");
-    if (!manifestUrl || !checksumsUrl) return null;
+    const manifestAsset = findAsset("validator-release.json");
+    const checksumAsset = findAsset("SHA256SUMS");
+    const manifestUrl = manifestAsset?.browser_download_url;
+    const checksumsUrl = checksumAsset?.browser_download_url;
+    if (!manifestAsset || !checksumAsset || !manifestUrl || !checksumsUrl) {
+      return null;
+    }
     const [manifestResponse, checksumsResponse] = await Promise.all([
       fetch(manifestUrl, { next: { revalidate: 300 } }),
       fetch(checksumsUrl, { next: { revalidate: 300 } }),
     ]);
     if (!manifestResponse.ok || !checksumsResponse.ok) return null;
-    const [manifest, checksums] = await Promise.all([
-      manifestResponse.json(),
-      checksumsResponse.text(),
+    const [manifestBytes, checksumBytes] = await Promise.all([
+      manifestResponse.arrayBuffer(),
+      checksumsResponse.arrayBuffer(),
     ]);
+    const contract = decodeReleaseContract(
+      manifestAsset,
+      checksumAsset,
+      manifestBytes,
+      checksumBytes,
+    );
+    if (!contract) return null;
+    const { manifest, checksums } = contract;
     if (!assessValidatorRelease(release, manifest, checksums).ready) {
       return null;
     }

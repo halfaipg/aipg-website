@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import test from "node:test";
 
-import { decodeReleaseContract } from "../../app/run/releaseGate.mjs";
+import { decodeReleaseContract } from "../../app/releaseContract.mjs";
 
 const encoder = new TextEncoder();
 

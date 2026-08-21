@@ -11,6 +11,8 @@ with a scroll-reveal IntersectionObserver).
 - `layout.js` — root layout: metadata/OpenGraph, agent-discovery links, fonts,
   `context/Providers` wrapper, Navbar/Footer.
   `globals.css` — global styles incl. the `fadeInSection`/`visible` reveal classes used by `page.js`.
+- `releaseContract.mjs` — shared server-only SHA-256/size binding and strict
+  decoding for downloaded release manifests and checksum files.
 - `page.js` — home page; composes `components/` sections.
 - `about/page.js` — about page. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.

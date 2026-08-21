@@ -1,10 +1,10 @@
 import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
+import { decodeReleaseContract } from "../releaseContract.mjs";
 import {
   assessManagerRelease,
   assessQualificationRelease,
   assessTextRelease,
-  decodeReleaseContract,
 } from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
