@@ -23,7 +23,8 @@ with a scroll-reveal IntersectionObserver).
   requires those byte lengths and digests to match GitHub's immutable asset
   metadata before parsing either file; release metadata is size-bounded before
   download, and the manifest commit must equal the commit resolved from the
-  immutable Git tag;
+  immutable Git tag. Immutable tag and asset evidence uses a long server cache;
+  release-list discovery remains short-lived so a new version appears promptly;
   the manifest must also record verified Developer ID/notarization for macOS and
   Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
   Media-manager downloads require a public,

@@ -5,6 +5,7 @@ import test from "node:test";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
+  IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
   releaseContractAssetSizesAllowed,
 } from "../../app/releaseContract.mjs";
 
@@ -136,6 +137,10 @@ test("resolves only a valid GitHub tag commit", async () => {
     commit,
   );
   assert.match(calls[0].url, /\/commits\/v0\.1\.0-preview$/);
+  assert.equal(
+    calls[0].options.next.revalidate,
+    IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
+  );
   assert.equal(
     await getReleaseTagCommit("invalid repository", "v0.1.0", fetcher),
     null,

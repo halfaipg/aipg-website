@@ -2,6 +2,7 @@ import Image from "next/image";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
+  IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
   releaseContractAssetSizesAllowed,
 } from "../releaseContract.mjs";
 import {
@@ -60,8 +61,12 @@ async function getValidatorRelease() {
       return null;
     }
     const [manifestResponse, checksumsResponse] = await Promise.all([
-      fetch(manifestUrl, { next: { revalidate: 300 } }),
-      fetch(checksumsUrl, { next: { revalidate: 300 } }),
+      fetch(manifestUrl, {
+        next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+      }),
+      fetch(checksumsUrl, {
+        next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+      }),
     ]);
     if (!manifestResponse.ok || !checksumsResponse.ok) return null;
     const [manifestBytes, checksumBytes, resolvedTagCommit] = await Promise.all(

@@ -4,6 +4,7 @@ const HEX_COMMIT = /^[0-9a-f]{40}$/;
 const REPOSITORY = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 const MAX_MANIFEST_BYTES = 256 * 1024;
 const MAX_CHECKSUM_BYTES = 64 * 1024;
+export const IMMUTABLE_RELEASE_REVALIDATE_SECONDS = 24 * 60 * 60;
 
 export function releaseContractAssetSizesAllowed(manifestAsset, checksumAsset) {
   return (
@@ -27,7 +28,7 @@ export async function getReleaseTagCommit(repository, tag, fetcher = fetch) {
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
       },
-      next: { revalidate: 300 },
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
     },
   );
   if (!response.ok) return null;

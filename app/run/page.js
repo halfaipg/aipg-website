@@ -3,6 +3,7 @@ import OperatorPlanner from "./OperatorPlanner";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
+  IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
   releaseContractAssetSizesAllowed,
 } from "../releaseContract.mjs";
 import {
@@ -48,8 +49,12 @@ async function getReleaseContract(release, manifestName) {
     return null;
   }
   const [manifestResponse, checksumResponse] = await Promise.all([
-    fetch(manifest.browser_download_url, { next: { revalidate: 300 } }),
-    fetch(checksums.browser_download_url, { next: { revalidate: 300 } }),
+    fetch(manifest.browser_download_url, {
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+    }),
+    fetch(checksums.browser_download_url, {
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+    }),
   ]);
   if (!manifestResponse.ok || !checksumResponse.ok) return null;
   try {
