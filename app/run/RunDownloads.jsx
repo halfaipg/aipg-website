@@ -57,8 +57,9 @@ export default function RunDownloads({
   const releaseReady = Boolean(
     release &&
     selected &&
-    (workerType === "text" ||
-      (release.checksums && release.manifest && release.sbom)),
+    release.checksums &&
+    release.manifest &&
+    release.sbom,
   );
   const qualificationSelected =
     workerType === "media"
@@ -91,9 +92,9 @@ export default function RunDownloads({
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
               Put a supported GPU to work serving decentralized text, image,
-              video, and audio jobs. Start with the live text worker today; the
-              media manager remains release-gated until its signed hardware
-              profiles qualify.
+              video, and audio jobs. Downloads open only for immutable releases
+              whose manifests, checksums, SBOMs, and GitHub asset identities
+              pass the public release gate.
             </p>
 
             <div className="mt-9 max-w-xl border border-white/15 bg-black/75 p-5 backdrop-blur-sm">
@@ -281,19 +282,26 @@ export default function RunDownloads({
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 md:grid-cols-[1fr_auto] md:items-center md:px-8">
           <div>
             <h2 className="text-xl font-bold">
-              Live text worker · qualified media next
+              {textRelease
+                ? "Verified text worker · qualified media next"
+                : "Text candidate in validation · qualified media next"}
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-400">
-              The text worker connects to your existing Ollama, vLLM, SGLang,
-              LMDeploy, LM Studio, or KoboldCpp backend. The first managed media
-              profile targets ACE-Step audio and stays unavailable until its
-              signed qualification evidence is complete.
+              The text worker connects to an existing Ollama, vLLM, SGLang,
+              LMDeploy, LM Studio, or KoboldCpp backend after its hardened
+              release clears staging. The first managed media profile targets
+              ACE-Step audio and stays unavailable until its signed
+              qualification evidence is complete.
             </p>
           </div>
           <ul className="grid gap-2 text-sm text-gray-300 sm:grid-cols-3 md:grid-cols-1">
             <li className="flex items-center gap-2">
-              <FiCheck className="text-green-400" />
-              Text release live
+              {textRelease ? (
+                <FiCheck className="text-green-400" />
+              ) : (
+                <FiShield className="text-gray-400" />
+              )}
+              {textRelease ? "Text release verified" : "Text release gated"}
             </li>
             <li className="flex items-center gap-2">
               <FiCheck className="text-green-400" />

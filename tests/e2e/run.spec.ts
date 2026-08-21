@@ -30,7 +30,9 @@ test.describe('/run smoke', () => {
     await page.getByLabel('GPU or accelerator model').fill('RTX 3090');
     await page.getByLabel('Expected text speed').fill('42');
     await expect(
-      page.getByRole('heading', { name: 'Start with the live text worker' }),
+      page.getByRole('heading', {
+        name: /Start with the verified text worker|Prepare for the hardened text-worker release/,
+      }),
     ).toBeVisible();
     await expect(page.getByText('RTX 3090', { exact: true })).toBeVisible();
 
@@ -75,7 +77,9 @@ test.describe('/run mobile smoke', () => {
       .click();
     await page.getByLabel('Accelerator type', { exact: true }).selectOption('apple');
     await expect(
-      page.getByRole('heading', { name: 'Start with the text worker and your existing backend' }),
+      page.getByRole('heading', {
+        name: /Start with the text worker and your existing backend|Prepare an existing backend for the text-worker candidate/,
+      }),
     ).toBeVisible();
 
     const overflow = await page.evaluate(() =>

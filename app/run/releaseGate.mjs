@@ -3,6 +3,7 @@ const HEX_COMMIT = /^[0-9a-f]{40}$/;
 const MANAGER_TAG = /^manager-v[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$/;
 const QUALIFICATION_TAG =
   /^manager-qualification-v[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$/;
+const TEXT_TAG = /^v[0-9]+\.[0-9]+\.[0-9]+$/;
 
 const REQUIRED_CLASSES = ["minimum", "midrange", "datacenter"];
 const MANAGER_PAYLOADS = [
@@ -15,6 +16,15 @@ const QUALIFICATION_PAYLOADS = [
   "grid-media-manager-windows-x86_64.exe",
   "grid-media-manager-qualification.spdx.json",
 ];
+const TEXT_PAYLOADS = [
+  "grid-inference-worker-linux-x64",
+  "grid-inference-worker-linux-arm64",
+  "grid-inference-worker-macos-arm64.zip",
+  "grid-inference-worker-windows-x64.exe",
+  "grid-inference-worker-release.spdx.json",
+];
+const TEXT_CHECKSUMMED = [...TEXT_PAYLOADS, "worker-release.json"];
+const TEXT_RELEASE_ASSETS = [...TEXT_CHECKSUMMED, "SHA256SUMS"];
 
 function sameStrings(actual, expected) {
   return (
@@ -35,7 +45,13 @@ function parseChecksums(value) {
   return result;
 }
 
-function validatePayload(release, manifest, checksumText, expectedNames, reasons) {
+function validatePayload(
+  release,
+  manifest,
+  checksumText,
+  expectedNames,
+  reasons,
+) {
   const checksums = parseChecksums(checksumText);
   if (
     !checksums ||
@@ -79,6 +95,79 @@ function validatePayload(release, manifest, checksumText, expectedNames, reasons
   }
 }
 
+function validateTextPayload(release, manifest, checksumText, reasons) {
+  const checksums = parseChecksums(checksumText);
+  if (
+    !checksums ||
+    checksums.size !== TEXT_CHECKSUMMED.length ||
+    TEXT_CHECKSUMMED.some((name) => !checksums.has(name))
+  ) {
+    reasons.push("text checksums do not cover the exact release payload");
+    return;
+  }
+
+  const manifestAssets = manifest?.assets;
+  if (
+    !Array.isArray(manifestAssets) ||
+    manifestAssets.length !== TEXT_PAYLOADS.length ||
+    manifestAssets.some((item) => !item || typeof item !== "object") ||
+    TEXT_PAYLOADS.some(
+      (name) => !manifestAssets.some((item) => item.name === name),
+    )
+  ) {
+    reasons.push("text manifest does not describe the exact release payload");
+    return;
+  }
+
+  const releaseAssets = Array.isArray(release?.assets) ? release.assets : [];
+  const releaseAssetNames = releaseAssets.map((asset) => asset?.name);
+  if (
+    releaseAssets.length !== TEXT_RELEASE_ASSETS.length ||
+    new Set(releaseAssetNames).size !== releaseAssets.length ||
+    TEXT_RELEASE_ASSETS.some((name) => !releaseAssetNames.includes(name))
+  ) {
+    reasons.push("GitHub release assets do not exactly match the text payload");
+    return;
+  }
+
+  const releaseAssetMap = new Map(
+    releaseAssets.map((asset) => [asset.name, asset]),
+  );
+  for (const item of manifestAssets) {
+    const releaseAsset = releaseAssetMap.get(item.name);
+    if (
+      !HEX_SHA256.test(item.sha256 || "") ||
+      !Number.isSafeInteger(item.bytes) ||
+      item.bytes <= 0 ||
+      checksums.get(item.name) !== item.sha256 ||
+      releaseAsset?.digest !== `sha256:${item.sha256}` ||
+      releaseAsset?.size !== item.bytes
+    ) {
+      reasons.push(`text payload identity mismatch: ${item.name || "unknown"}`);
+    }
+  }
+
+  const manifestReleaseAsset = releaseAssetMap.get("worker-release.json");
+  if (
+    !HEX_SHA256.test(checksums.get("worker-release.json") || "") ||
+    manifestReleaseAsset?.digest !==
+      `sha256:${checksums.get("worker-release.json")}` ||
+    !Number.isSafeInteger(manifestReleaseAsset?.size) ||
+    manifestReleaseAsset.size <= 0
+  ) {
+    reasons.push("text manifest asset identity does not match its checksum");
+  }
+
+  const checksumAsset = releaseAssetMap.get("SHA256SUMS");
+  if (
+    !/^sha256:[0-9a-f]{64}$/.test(checksumAsset?.digest || "") ||
+    !Number.isSafeInteger(checksumAsset?.size) ||
+    checksumAsset.size <= 0
+  ) {
+    reasons.push("text checksum asset has no valid GitHub identity");
+  }
+}
+
 function validateReleaseEnvelope(release, manifest, tagPattern, reasons) {
   if (release?.draft !== false) reasons.push("release is still a draft");
   if (release?.immutable !== true) reasons.push("release is not immutable");
@@ -96,13 +185,15 @@ function validateReleaseEnvelope(release, manifest, tagPattern, reasons) {
 export function assessManagerRelease(release, manifest, checksumText) {
   const reasons = [];
   validateReleaseEnvelope(release, manifest, MANAGER_TAG, reasons);
-  if (release?.prerelease !== false) reasons.push("manager release is a prerelease");
+  if (release?.prerelease !== false)
+    reasons.push("manager release is a prerelease");
   if (manifest?.schema !== "aipg-manager-release-v1") {
     reasons.push("manager manifest schema is invalid");
   }
 
   const profile = manifest?.profile || {};
-  if (profile.status !== "active") reasons.push("manager profile is not active");
+  if (profile.status !== "active")
+    reasons.push("manager profile is not active");
   if (profile.signature_verified !== true) {
     reasons.push("manager profile signature is not verified");
   }
@@ -136,7 +227,8 @@ export function assessQualificationRelease(release, manifest, checksumText) {
   }
 
   const profile = manifest?.profile || {};
-  if (profile.status !== "draft") reasons.push("qualification profile is not a draft");
+  if (profile.status !== "draft")
+    reasons.push("qualification profile is not a draft");
   if (profile.signature_verified !== false) {
     reasons.push("qualification profile is unexpectedly signed");
   }
@@ -169,5 +261,23 @@ export function assessQualificationRelease(release, manifest, checksumText) {
     QUALIFICATION_PAYLOADS,
     reasons,
   );
+  return { ready: reasons.length === 0, reasons };
+}
+
+export function assessTextRelease(release, manifest, checksumText) {
+  const reasons = [];
+  validateReleaseEnvelope(release, manifest, TEXT_TAG, reasons);
+  if (release?.prerelease !== false)
+    reasons.push("text release is a prerelease");
+  if (manifest?.schema !== "aipg-text-worker-release-v1") {
+    reasons.push("text manifest schema is invalid");
+  }
+  if (
+    typeof manifest?.version !== "string" ||
+    `v${manifest.version}` !== release?.tag_name
+  ) {
+    reasons.push("text manifest version does not match the release tag");
+  }
+  validateTextPayload(release, manifest, checksumText, reasons);
   return { ready: reasons.length === 0, reasons };
 }

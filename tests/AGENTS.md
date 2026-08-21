@@ -18,6 +18,8 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
+- `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
+  checksum, manifest, SBOM, GitHub digest, and size contract.
 - `unit/marketing-claims.test.mjs` - static release-policy guard preventing
   gated media, confidential inference, universal hardware support, autonomous
   Core, blanket open-source, permanent-free, permissionless-Core, and live

@@ -3,6 +3,7 @@ import OperatorPlanner from "./OperatorPlanner";
 import {
   assessManagerRelease,
   assessQualificationRelease,
+  assessTextRelease,
 } from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
@@ -14,7 +15,7 @@ const GRID_API = "https://api.aipowergrid.io";
 export const metadata = {
   title: "Run an AI Power Grid Worker",
   description:
-    "Download the signed AI Power Grid worker manager, validate your NVIDIA GPU locally, connect a payout wallet, and serve decentralized AI jobs.",
+    "Find verified AI Power Grid worker releases, validate hardware locally, and inspect current network capacity needs.",
 };
 
 async function getReleaseList(url) {
@@ -62,7 +63,8 @@ async function getManagerRelease() {
     const contract = await getReleaseContract(release, "manager-release.json");
     if (
       !contract ||
-      !assessManagerRelease(release, contract.manifest, contract.checksums).ready
+      !assessManagerRelease(release, contract.manifest, contract.checksums)
+        .ready
     ) {
       return null;
     }
@@ -151,8 +153,21 @@ async function getManagerQualificationRelease() {
 async function getTextRelease() {
   try {
     const releases = await getReleaseList(TEXT_RELEASES_API);
-    const release = releases.find((item) => !item.draft && !item.prerelease);
+    const release = releases.find(
+      (item) =>
+        !item.draft &&
+        !item.prerelease &&
+        typeof item.tag_name === "string" &&
+        /^v[0-9]+\.[0-9]+\.[0-9]+$/.test(item.tag_name),
+    );
     if (!release) return null;
+    const contract = await getReleaseContract(release, "worker-release.json");
+    if (
+      !contract ||
+      !assessTextRelease(release, contract.manifest, contract.checksums).ready
+    ) {
+      return null;
+    }
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
@@ -171,6 +186,9 @@ async function getTextRelease() {
       linuxArm64: asset("grid-inference-worker-linux-arm64"),
       macos: asset("grid-inference-worker-macos-arm64.zip"),
       windows: asset("grid-inference-worker-windows-x64.exe"),
+      checksums: asset("SHA256SUMS"),
+      manifest: asset("worker-release.json"),
+      sbom: asset("grid-inference-worker-release.spdx.json"),
     };
   } catch {
     return null;
@@ -247,6 +265,7 @@ export default async function RunPage() {
       <OperatorPlanner
         opportunities={opportunities}
         mediaReady={Boolean(mediaRelease)}
+        textReady={Boolean(textRelease)}
       />
 
       <section className="border-y border-white/10 bg-[#111214]">
