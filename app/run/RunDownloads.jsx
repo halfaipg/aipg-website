@@ -22,7 +22,11 @@ function formatBytes(value) {
   return `${(value / 1024 / 1024).toFixed(1)} MB`;
 }
 
-export default function RunDownloads({ mediaRelease, textRelease }) {
+export default function RunDownloads({
+  mediaRelease,
+  mediaQualificationRelease,
+  textRelease,
+}) {
   const [workerType, setWorkerType] = useState("text");
   const [platform, setPlatform] = useState("linux");
 
@@ -56,6 +60,10 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
     (workerType === "text" ||
       (release.checksums && release.manifest && release.sbom)),
   );
+  const qualificationSelected =
+    workerType === "media"
+      ? mediaQualificationRelease?.[platform] || null
+      : null;
   const platformEntries = Object.entries(PLATFORMS).filter(
     ([value]) => workerType === "text" || ["linux", "windows"].includes(value),
   );
@@ -72,7 +80,7 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
           className="object-cover object-center opacity-45"
         />
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative mx-auto flex min-h-[620px] max-w-6xl items-center px-6 py-20 md:px-8 lg:min-h-[680px]">
+        <div className="relative mx-auto flex min-h-[620px] max-w-6xl items-start px-6 pb-16 pt-28 md:items-center md:px-8 md:py-20 lg:min-h-[680px]">
           <div className="w-full max-w-3xl">
             <div className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-orange-300">
               <FiShield aria-hidden="true" />
@@ -172,15 +180,33 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
                       : "Text release unavailable"}
                   </button>
                   {workerType === "media" ? (
-                    <a
-                      href="https://github.com/AIPowerGrid/grid-media-worker/blob/main/docs/MANAGER_QUALIFICATION.md"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-3 flex min-h-11 items-center justify-center gap-2 border border-cyan-400/40 px-4 text-sm font-semibold text-cyan-300 hover:bg-cyan-400/10"
-                    >
-                      Help qualify a GPU class
-                      <FiExternalLink aria-hidden="true" />
-                    </a>
+                    <div className="mt-3 grid gap-2">
+                      {qualificationSelected ? (
+                        <a
+                          href={qualificationSelected.url}
+                          className="flex min-h-11 items-center justify-center gap-2 border border-cyan-400/60 px-4 text-sm font-semibold text-cyan-200 hover:bg-cyan-400/10"
+                        >
+                          <FiDownload aria-hidden="true" />
+                          Download benchmark-only qualification tool
+                        </a>
+                      ) : null}
+                      <a
+                        href="https://github.com/AIPowerGrid/grid-media-worker/blob/main/docs/MANAGER_QUALIFICATION.md"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex min-h-11 items-center justify-center gap-2 border border-white/15 px-4 text-sm font-semibold text-gray-300 hover:bg-white/10"
+                      >
+                        Qualification instructions
+                        <FiExternalLink aria-hidden="true" />
+                      </a>
+                      {qualificationSelected ? (
+                        <p className="text-xs leading-5 text-gray-400">
+                          Local benchmark only. It cannot connect a worker or
+                          earn rewards. Verify the SHA-256 manifest and GitHub
+                          provenance before running it.
+                        </p>
+                      ) : null}
+                    </div>
                   ) : null}
                 </div>
               )}
@@ -216,6 +242,24 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
                     </a>
                   </>
                 )}
+                {!releaseReady && qualificationSelected ? (
+                  <>
+                    <a
+                      href={mediaQualificationRelease.checksums.url}
+                      className="inline-flex items-center gap-1.5 hover:text-white"
+                    >
+                      Qualification SHA256SUMS
+                      <FiExternalLink aria-hidden="true" />
+                    </a>
+                    <a
+                      href={mediaQualificationRelease.sbom.url}
+                      className="inline-flex items-center gap-1.5 hover:text-white"
+                    >
+                      Qualification SBOM
+                      <FiExternalLink aria-hidden="true" />
+                    </a>
+                  </>
+                ) : null}
               </div>
             </div>
           </div>

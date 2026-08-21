@@ -23,8 +23,10 @@ with a scroll-reveal IntersectionObserver).
   exact capability approval remains local to signed profiles. Live opportunity rows combine
   public worker counts with 30-day job and observed-performance telemetry.
   While the media release is gated, the download panel links to the public
-  qualification cohort runbook so suitable GPU owners can contribute only
-  privacy-safe evidence.
+  qualification cohort runbook. A complete `manager-qualification-v*`
+  prerelease may expose a separately labelled benchmark-only binary, checksum,
+  and SBOM; it must never be presented as a worker release and cannot enroll or
+  advertise capabilities.
   Jobs per worker is only a historical workload-share signal; capacity risk and
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
