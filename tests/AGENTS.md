@@ -18,6 +18,8 @@ onboarding, and staking-withdrawal surfaces.
   weak-quorum, unscoped, or economically authoritative Core.
 - `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
   checksum, manifest, SBOM, GitHub digest, and size contract.
+- `unit/release-contract-download.test.mjs` - downloaded manifest/checksum byte
+  hashing, length binding, strict UTF-8 parsing, and tamper rejection.
 
 ## Local Contracts
 
@@ -25,6 +27,9 @@ onboarding, and staking-withdrawal surfaces.
   depend on a funded wallet.
 - Fail on uncaught page errors and unexpected console errors, not only HTTP 200.
 - Cover disconnected and read-only states; wallet-provider mocks stay explicit.
+- Navigate to `domcontentloaded` and then assert route-specific readiness.
+  Wallet providers maintain background traffic, so global `networkidle` is not
+  a stable application-ready signal and must not gate these parallel smokes.
 
 ## Work Guidance
 

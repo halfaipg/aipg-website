@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FiActivity,
   FiAlertTriangle,
@@ -144,6 +144,11 @@ export default function OperatorPlanner({
   const [ram, setRam] = useState(64);
   const [disk, setDisk] = useState(100);
   const [throughput, setThroughput] = useState(0);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   const result = useMemo(
     () =>
@@ -161,7 +166,10 @@ export default function OperatorPlanner({
   );
 
   return (
-    <section className="border-y border-white/10 bg-[#0b0c0e]">
+    <section
+      className="border-y border-white/10 bg-[#0b0c0e]"
+      data-operator-planner-ready={hydrated ? "true" : "false"}
+    >
       <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
         <div className="mb-10 max-w-3xl">
           <p className="mb-3 text-sm font-bold uppercase text-cyan-400">

@@ -13,7 +13,7 @@ test.describe("/run smoke", () => {
       browserErrors.push(`pageerror: ${error.message}`);
     });
 
-    const response = await page.goto("/run", { waitUntil: "networkidle" });
+    const response = await page.goto("/run", { waitUntil: "domcontentloaded" });
 
     expect(response?.ok()).toBeTruthy();
     await expect(
@@ -36,6 +36,9 @@ test.describe("/run smoke", () => {
         name: "Find the useful path for your machine",
       }),
     ).toBeVisible();
+    await expect(
+      page.locator('[data-operator-planner-ready="true"]'),
+    ).toBeAttached();
     await expect(page.getByLabel("GPU or accelerator model")).toBeVisible();
     await expect(page.getByLabel("GPU VRAM")).toHaveValue("24");
     await expect(page.getByLabel("Expected text speed")).toHaveValue("0");
@@ -43,8 +46,12 @@ test.describe("/run smoke", () => {
 
     await page.getByLabel("GPU or accelerator model").fill("RTX 3090");
     await page.getByLabel("Expected text speed").fill("42");
+    const recommendation = page.locator('[aria-live="polite"]');
     await expect(
-      page.getByRole("heading", {
+      recommendation.getByText("42 tok/s", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      recommendation.getByRole("heading", {
         name: /Start with the verified text worker|Prepare for the hardened text-worker release/,
       }),
     ).toBeVisible();
@@ -86,14 +93,19 @@ test.describe("/run mobile smoke", () => {
         get: () => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
       });
     });
-    await page.goto("/run", { waitUntil: "networkidle" });
+    await page.goto("/run", { waitUntil: "domcontentloaded" });
 
     await expect(
       page.getByRole("heading", { name: "Run AI Power Grid" }),
     ).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "macOS" }).first(),
-    ).toHaveAttribute("aria-pressed", "true");
+      page.locator('[data-operator-planner-ready="true"]'),
+    ).toBeAttached();
+    const downloadMacos = page
+      .getByRole("button", { name: "macOS" })
+      .first();
+    await downloadMacos.click();
+    await expect(downloadMacos).toHaveAttribute("aria-pressed", "true");
     await page
       .getByRole("group", { name: "Operating system" })
       .getByRole("button", { name: "macOS" })
@@ -127,7 +139,9 @@ test.describe("/validate smoke", () => {
   test("states the preview trust boundary and renders a gated release path", async ({
     page,
   }) => {
-    const response = await page.goto("/validate", { waitUntil: "networkidle" });
+    const response = await page.goto("/validate", {
+      waitUntil: "domcontentloaded",
+    });
 
     expect(response?.ok()).toBeTruthy();
     await expect(
@@ -162,7 +176,7 @@ test.describe("/validate mobile smoke", () => {
   test("keeps validator onboarding readable without horizontal overflow", async ({
     page,
   }) => {
-    await page.goto("/validate", { waitUntil: "networkidle" });
+    await page.goto("/validate", { waitUntil: "domcontentloaded" });
     await expect(
       page.getByRole("heading", { name: "Check the Grid independently." }),
     ).toBeVisible();
@@ -193,7 +207,9 @@ test.describe("/status smoke", () => {
       browserErrors.push(`pageerror: ${error.message}`),
     );
 
-    const response = await page.goto("/status", { waitUntil: "networkidle" });
+    const response = await page.goto("/status", {
+      waitUntil: "domcontentloaded",
+    });
     expect(response?.ok()).toBeTruthy();
     await expect(
       page.getByText("Network status", { exact: true }).first(),
@@ -226,7 +242,7 @@ test.describe("/status mobile smoke", () => {
   test("keeps network status readable without page overflow", async ({
     page,
   }) => {
-    await page.goto("/status", { waitUntil: "networkidle" });
+    await page.goto("/status", { waitUntil: "domcontentloaded" });
     await expect(
       page.getByText("Network status", { exact: true }).first(),
     ).toBeVisible();

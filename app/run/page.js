@@ -4,6 +4,7 @@ import {
   assessManagerRelease,
   assessQualificationRelease,
   assessTextRelease,
+  decodeReleaseContract,
 } from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
@@ -40,10 +41,16 @@ async function getReleaseContract(release, manifestName) {
   ]);
   if (!manifestResponse.ok || !checksumResponse.ok) return null;
   try {
-    return {
-      manifest: await manifestResponse.json(),
-      checksums: await checksumResponse.text(),
-    };
+    const [manifestBytes, checksumBytes] = await Promise.all([
+      manifestResponse.arrayBuffer(),
+      checksumResponse.arrayBuffer(),
+    ]);
+    return decodeReleaseContract(
+      manifest,
+      checksums,
+      manifestBytes,
+      checksumBytes,
+    );
   } catch {
     return null;
   }
