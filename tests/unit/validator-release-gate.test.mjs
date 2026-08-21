@@ -30,6 +30,7 @@ function readyRelease() {
       immutable: true,
       tag_name: "v0.1.0-preview",
       target_commitish: COMMIT,
+      resolved_tag_commit: COMMIT,
       assets: [
         ...assets.map((item) => ({
           name: item.name,

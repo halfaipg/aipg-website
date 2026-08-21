@@ -21,7 +21,9 @@ with a scroll-reveal IntersectionObserver).
   SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
   the server hashes the manifest and checksum bytes it actually downloads and
   requires those byte lengths and digests to match GitHub's immutable asset
-  metadata before parsing either file;
+  metadata before parsing either file; release metadata is size-bounded before
+  download, and the manifest commit must equal the commit resolved from the
+  immutable Git tag;
   the manifest must also record verified Developer ID/notarization for macOS and
   Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
   Media-manager downloads require a public,
@@ -29,7 +31,8 @@ with a scroll-reveal IntersectionObserver).
   machine-readable release manifest plus SPDX SBOM assets present. The server
   must verify immutable-release state, manifest profile gates, GitHub asset
   digests and sizes, and exact aggregate-checksum coverage before exposing a
-  media download. The final manager manifest must record verified Windows
+  media download. The manifest commit must equal the immutable tag's resolved
+  commit. The final manager manifest must record verified Windows
   Authenticode before the download opens. Its local operator planner uses
   coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
   expected/measured throughput inputs to recommend a worker path;
@@ -48,7 +51,8 @@ with a scroll-reveal IntersectionObserver).
   and the checksum-covered installer on an immutable exact-commit prerelease,
   `validator-release.json`, exact GitHub asset digests/sizes, Developer ID plus
   notarization for macOS, Authenticode for Windows, `SHA256SUMS`, and the SPDX
-  SBOM, plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
+  SBOM, exact resolved tag commit, plus the live Core
+  `shared_quorum_preview`, 3-of-5, non-economic
   capability contract. GitHub artifacts alone must never unlock downloads.
   It sends authenticated key creation to the Console rather than
   handling credentials on the marketing site, and recruits independently

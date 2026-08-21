@@ -201,8 +201,14 @@ function validateReleaseEnvelope(release, manifest, tagPattern, reasons) {
   if (manifest?.tag !== release?.tag_name) {
     reasons.push("manifest tag does not match the release");
   }
-  if (!HEX_COMMIT.test(manifest?.commit || "")) {
-    reasons.push("manifest commit is invalid");
+  if (!HEX_COMMIT.test(release?.resolved_tag_commit || "")) {
+    reasons.push("release tag does not resolve to an exact commit");
+  }
+  if (
+    !HEX_COMMIT.test(manifest?.commit || "") ||
+    manifest.commit !== release?.resolved_tag_commit
+  ) {
+    reasons.push("manifest commit does not match the release tag");
   }
 }
 

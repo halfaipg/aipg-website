@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { decodeReleaseContract } from "../releaseContract.mjs";
+import {
+  decodeReleaseContract,
+  getReleaseTagCommit,
+  releaseContractAssetSizesAllowed,
+} from "../releaseContract.mjs";
 import {
   FiCheck,
   FiDownload,
@@ -17,6 +21,7 @@ import {
 const RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-validator/releases?per_page=20";
 const RELEASE_TAG = "v0.1.0-preview";
+const VALIDATOR_REPOSITORY = "AIPowerGrid/grid-validator";
 const VALIDATOR_CAPABILITIES_API =
   "https://api.aipowergrid.io/v1/validator/capabilities";
 
@@ -51,15 +56,21 @@ async function getValidatorRelease() {
     if (!manifestAsset || !checksumAsset || !manifestUrl || !checksumsUrl) {
       return null;
     }
+    if (!releaseContractAssetSizesAllowed(manifestAsset, checksumAsset)) {
+      return null;
+    }
     const [manifestResponse, checksumsResponse] = await Promise.all([
       fetch(manifestUrl, { next: { revalidate: 300 } }),
       fetch(checksumsUrl, { next: { revalidate: 300 } }),
     ]);
     if (!manifestResponse.ok || !checksumsResponse.ok) return null;
-    const [manifestBytes, checksumBytes] = await Promise.all([
-      manifestResponse.arrayBuffer(),
-      checksumsResponse.arrayBuffer(),
-    ]);
+    const [manifestBytes, checksumBytes, resolvedTagCommit] = await Promise.all(
+      [
+        manifestResponse.arrayBuffer(),
+        checksumsResponse.arrayBuffer(),
+        getReleaseTagCommit(VALIDATOR_REPOSITORY, release.tag_name),
+      ],
+    );
     const contract = decodeReleaseContract(
       manifestAsset,
       checksumAsset,
@@ -68,7 +79,11 @@ async function getValidatorRelease() {
     );
     if (!contract) return null;
     const { manifest, checksums } = contract;
-    if (!assessValidatorRelease(release, manifest, checksums).ready) {
+    const verifiedRelease = {
+      ...release,
+      resolved_tag_commit: resolvedTagCommit,
+    };
+    if (!assessValidatorRelease(verifiedRelease, manifest, checksums).ready) {
       return null;
     }
     const assets = {

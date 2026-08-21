@@ -2,7 +2,11 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import test from "node:test";
 
-import { decodeReleaseContract } from "../../app/releaseContract.mjs";
+import {
+  decodeReleaseContract,
+  getReleaseTagCommit,
+  releaseContractAssetSizesAllowed,
+} from "../../app/releaseContract.mjs";
 
 const encoder = new TextEncoder();
 
@@ -90,6 +94,50 @@ test("rejects metadata length mismatch and invalid UTF-8", () => {
       invalidUtf8,
       value.checksumBytes,
     ),
+    null,
+  );
+});
+
+test("rejects oversized release metadata before download", () => {
+  const value = fixture();
+  assert.equal(
+    releaseContractAssetSizesAllowed(value.manifestAsset, value.checksumAsset),
+    true,
+  );
+  assert.equal(
+    releaseContractAssetSizesAllowed(
+      { ...value.manifestAsset, size: 256 * 1024 + 1 },
+      value.checksumAsset,
+    ),
+    false,
+  );
+  assert.equal(
+    releaseContractAssetSizesAllowed(
+      value.manifestAsset,
+      { ...value.checksumAsset, size: 64 * 1024 + 1 },
+    ),
+    false,
+  );
+});
+
+test("resolves only a valid GitHub tag commit", async () => {
+  const calls = [];
+  const commit = "d".repeat(40);
+  const fetcher = async (url, options) => {
+    calls.push({ url, options });
+    return { ok: true, json: async () => ({ sha: commit }) };
+  };
+  assert.equal(
+    await getReleaseTagCommit(
+      "AIPowerGrid/grid-validator",
+      "v0.1.0-preview",
+      fetcher,
+    ),
+    commit,
+  );
+  assert.match(calls[0].url, /\/commits\/v0\.1\.0-preview$/);
+  assert.equal(
+    await getReleaseTagCommit("invalid repository", "v0.1.0", fetcher),
     null,
   );
 });

@@ -63,6 +63,19 @@ test.describe("/run smoke", () => {
     });
     expect((await download.count()) + (await releaseGate.count())).toBe(1);
 
+    await page.getByRole("button", { name: "Media manager" }).click();
+    await expect(
+      page.getByRole("button", { name: "Media qualification in progress" }),
+    ).toBeVisible();
+    const qualificationDownload = page.getByRole("link", {
+      name: "Download benchmark-only qualification tool",
+    });
+    await expect(qualificationDownload).toBeVisible();
+    await expect(qualificationDownload).toHaveAttribute(
+      "href",
+      /manager-qualification-v0\.1\.0-preview\.1/,
+    );
+
     const overflow = await page.evaluate(
       () =>
         Math.max(

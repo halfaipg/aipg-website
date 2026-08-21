@@ -37,6 +37,9 @@ export function assessValidatorRelease(release, manifest, checksumText) {
   if (!HEX_COMMIT.test(release?.target_commitish || "")) {
     reasons.push("release target is not an exact commit");
   }
+  if (!HEX_COMMIT.test(release?.resolved_tag_commit || "")) {
+    reasons.push("validator tag does not resolve to an exact commit");
+  }
 
   if (manifest?.schema !== "aipg-validator-release-v1") {
     reasons.push("validator manifest schema is invalid");
@@ -52,7 +55,8 @@ export function assessValidatorRelease(release, manifest, checksumText) {
   }
   if (
     !HEX_COMMIT.test(manifest?.commit || "") ||
-    manifest?.commit !== release?.target_commitish
+    manifest?.commit !== release?.target_commitish ||
+    manifest?.commit !== release?.resolved_tag_commit
   ) {
     reasons.push("validator manifest commit does not match the release");
   }

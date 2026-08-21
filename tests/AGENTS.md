@@ -19,7 +19,8 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
   checksum, manifest, SBOM, GitHub digest, and size contract.
 - `unit/release-contract-download.test.mjs` - downloaded manifest/checksum byte
-  hashing, length binding, strict UTF-8 parsing, and tamper rejection.
+  hashing, bounded metadata sizes, resolved Git-tag commit lookup, length
+  binding, strict UTF-8 parsing, and tamper rejection.
 
 ## Local Contracts
 
