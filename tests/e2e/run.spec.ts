@@ -98,6 +98,11 @@ test.describe('/validate smoke', () => {
     ).toBeVisible();
     await expect(page.getByText(/no validator rewards, staking, slashing/i)).toBeVisible();
     await expect(page.getByRole('link', { name: /Create validator key/i })).toBeVisible();
+    await expect(
+      page.getByText(
+        /Downloads remain closed until production Core|preview release is still being qualified/i,
+      ),
+    ).toBeVisible();
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >

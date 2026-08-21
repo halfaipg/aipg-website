@@ -8,10 +8,13 @@ import {
   FiTerminal,
   FiUsers,
 } from "react-icons/fi";
+import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
 const RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-validator/releases?per_page=20";
 const RELEASE_TAG = "v0.1.0-preview";
+const VALIDATOR_CAPABILITIES_API =
+  "https://api.aipowergrid.io/v1/validator/capabilities";
 
 export const metadata = {
   title: "Run an AI Power Grid Validator",
@@ -58,6 +61,23 @@ async function getValidatorRelease() {
   }
 }
 
+async function getValidatorCoreReadiness() {
+  try {
+    const response = await fetch(VALIDATOR_CAPABILITIES_API, {
+      next: { revalidate: 60 },
+    });
+    if (!response.ok) {
+      return {
+        ready: false,
+        reasons: [`capability endpoint returned ${response.status}`],
+      };
+    }
+    return assessValidatorCoreCapability(await response.json());
+  } catch {
+    return { ready: false, reasons: ["capability endpoint unavailable"] };
+  }
+}
+
 const DOWNLOADS = [
   ["Linux x64", "linuxX64"],
   ["Linux ARM64", "linuxArm64"],
@@ -66,7 +86,11 @@ const DOWNLOADS = [
 ];
 
 export default async function ValidatePage() {
-  const release = await getValidatorRelease();
+  const [releaseCandidate, coreReadiness] = await Promise.all([
+    getValidatorRelease(),
+    getValidatorCoreReadiness(),
+  ]);
+  const release = coreReadiness.ready ? releaseCandidate : null;
 
   return (
     <main className="bg-black text-white">
@@ -214,9 +238,9 @@ export default async function ValidatePage() {
                 </>
               ) : (
                 <div className="border border-orange-400/30 bg-orange-400/5 p-5 text-sm text-orange-200">
-                  The preview release is still being qualified. Downloads stay
-                  closed until all four binaries, installer, checksums, SBOM,
-                  and provenance are present.
+                  {coreReadiness.ready
+                    ? "The preview release is still being qualified. Downloads stay closed until all four binaries, installer, checksums, SBOM, and provenance are present."
+                    : "Downloads remain closed until production Core advertises the reviewed shared-quorum preview contract. Source installation remains available for no-probe checks."}
                 </div>
               )}
               <div className="flex flex-wrap gap-4 text-sm text-gray-400">

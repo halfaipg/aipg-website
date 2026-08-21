@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run test:unit",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "test:unit": "node --test tests/unit/*.test.mjs",
     "deploy": "npm run build && rsync --exclude=.git -azP . ubuntu@64.176.215.66:/root/site/",
     "test:e2e": "playwright test",
     "smoke": "playwright test"

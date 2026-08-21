@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Playwright smoke coverage for production-built marketing, worker onboarding,
-and staking-withdrawal surfaces.
+Unit and Playwright smoke coverage for production-built marketing, worker
+onboarding, and staking-withdrawal surfaces.
 
 ## Ownership
 
@@ -12,6 +12,9 @@ and staking-withdrawal surfaces.
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
   checks.
+- `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
+  prevent GitHub artifacts from unlocking validator downloads against an old,
+  weak-quorum, unscoped, or economically authoritative Core.
 
 ## Local Contracts
 
@@ -28,6 +31,7 @@ and staking-withdrawal surfaces.
 ## Verification
 
 - Run `npm run test:e2e`; it builds and serves the production app.
+- Run `npm run test:unit` for capability and release-policy logic.
 - Review screenshots/traces on failures before updating expectations.
 
 ## Child DOX Index
