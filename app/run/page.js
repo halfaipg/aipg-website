@@ -1,5 +1,9 @@
 import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
+import {
+  assessManagerRelease,
+  assessQualificationRelease,
+} from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-media-worker/releases?per_page=20";
@@ -25,6 +29,25 @@ async function getReleaseList(url) {
   return response.json();
 }
 
+async function getReleaseContract(release, manifestName) {
+  const manifest = release.assets.find((item) => item.name === manifestName);
+  const checksums = release.assets.find((item) => item.name === "SHA256SUMS");
+  if (!manifest || !checksums) return null;
+  const [manifestResponse, checksumResponse] = await Promise.all([
+    fetch(manifest.browser_download_url, { next: { revalidate: 300 } }),
+    fetch(checksums.browser_download_url, { next: { revalidate: 300 } }),
+  ]);
+  if (!manifestResponse.ok || !checksumResponse.ok) return null;
+  try {
+    return {
+      manifest: await manifestResponse.json(),
+      checksums: await checksumResponse.text(),
+    };
+  } catch {
+    return null;
+  }
+}
+
 async function getManagerRelease() {
   try {
     const releases = await getReleaseList(MEDIA_RELEASES_API);
@@ -36,6 +59,13 @@ async function getManagerRelease() {
         item.tag_name.startsWith("manager-v"),
     );
     if (!release) return null;
+    const contract = await getReleaseContract(release, "manager-release.json");
+    if (
+      !contract ||
+      !assessManagerRelease(release, contract.manifest, contract.checksums).ready
+    ) {
+      return null;
+    }
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
@@ -72,6 +102,20 @@ async function getManagerQualificationRelease() {
         item.tag_name.startsWith("manager-qualification-v"),
     );
     if (!release) return null;
+    const contract = await getReleaseContract(
+      release,
+      "manager-qualification.json",
+    );
+    if (
+      !contract ||
+      !assessQualificationRelease(
+        release,
+        contract.manifest,
+        contract.checksums,
+      ).ready
+    ) {
+      return null;
+    }
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
