@@ -14,8 +14,10 @@ with a scroll-reveal IntersectionObserver).
 - `page.js` — home page; composes `components/` sections.
 - `about/page.js` — about page. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
-- `run/` — worker download and onboarding surface. It exposes the current text
-  worker release independently, while media-manager downloads require a public,
+- `run/` — worker download and onboarding surface. Text-worker downloads require
+  an immutable, stable `v*` release whose exact four-platform binary set, SPDX
+  SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
+  mutable legacy releases fail closed. Media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
   machine-readable release manifest plus SPDX SBOM assets present. The server
   must verify immutable-release state, manifest profile gates, GitHub asset
@@ -69,7 +71,8 @@ with a scroll-reveal IntersectionObserver).
 
 ## Verification
 
-—
+- `npm run test:unit` for worker release-policy contracts.
+- `npm run build` for the production route and server-side release fetches.
 
 ## Child DOX Index
 
