@@ -161,15 +161,28 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
                   )}
                 </a>
               ) : (
-                <button
-                  type="button"
-                  disabled
-                  className="min-h-12 w-full cursor-not-allowed bg-white/10 px-5 font-semibold text-gray-400"
-                >
-                  {workerType === "media"
-                    ? "Media qualification in progress"
-                    : "Text release unavailable"}
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    disabled
+                    className="min-h-12 w-full cursor-not-allowed bg-white/10 px-5 font-semibold text-gray-400"
+                  >
+                    {workerType === "media"
+                      ? "Media qualification in progress"
+                      : "Text release unavailable"}
+                  </button>
+                  {workerType === "media" ? (
+                    <a
+                      href="https://github.com/AIPowerGrid/grid-media-worker/blob/main/docs/MANAGER_QUALIFICATION.md"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-3 flex min-h-11 items-center justify-center gap-2 border border-cyan-400/40 px-4 text-sm font-semibold text-cyan-300 hover:bg-cyan-400/10"
+                    >
+                      Help qualify a GPU class
+                      <FiExternalLink aria-hidden="true" />
+                    </a>
+                  ) : null}
+                </div>
               )}
 
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-gray-400">

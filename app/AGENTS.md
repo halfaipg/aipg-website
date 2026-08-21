@@ -22,6 +22,9 @@ with a scroll-reveal IntersectionObserver).
   expected/measured throughput inputs to recommend a worker path;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
   public worker counts with 30-day job and observed-performance telemetry.
+  While the media release is gated, the download panel links to the public
+  qualification cohort runbook so suitable GPU owners can contribute only
+  privacy-safe evidence.
   Jobs per worker is only a historical workload-share signal; capacity risk and
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
