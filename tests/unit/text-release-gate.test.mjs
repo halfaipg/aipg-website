@@ -47,6 +47,19 @@ function fixture() {
     tag: "v0.3.5",
     version: "0.3.5",
     commit: "c".repeat(40),
+    platform_signing: {
+      macos: {
+        verified: true,
+        identity: "developer_id_application",
+        notarized: true,
+        team_id: "TEAM123456",
+      },
+      windows: {
+        verified: true,
+        identity: "authenticode",
+        subject: "AI Power Grid",
+      },
+    },
     assets: payloads,
   };
   const checksums = `${[
@@ -128,5 +141,25 @@ test("rejects tag and manifest version drift", () => {
     result.reasons.includes(
       "text manifest version does not match the release tag",
     ),
+  );
+});
+
+test("rejects text releases without verified platform signing", () => {
+  const value = fixture();
+  value.manifest.platform_signing.macos.notarized = false;
+  value.manifest.platform_signing.windows.verified = false;
+  const result = assessTextRelease(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+  assert.equal(result.ready, false);
+  assert.ok(
+    result.reasons.includes(
+      "text macOS Developer ID/notarization is not verified",
+    ),
+  );
+  assert.ok(
+    result.reasons.includes("text Windows Authenticode is not verified"),
   );
 });
