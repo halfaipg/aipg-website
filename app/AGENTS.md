@@ -28,6 +28,10 @@ with a scroll-reveal IntersectionObserver).
   handling credentials on the marketing site, and recruits independently
   controlled operators through the public cohort runbook without collecting
   secrets on the marketing site.
+- `status/` — public, read-only network posture. It renders Core's privacy-safe
+  `aipg.network.status.v1` contract and distinguishes current incidents from
+  non-outage decentralization advisories; an unavailable feed must not be
+  presented as proof that generation is offline.
 - `api/btc-chart/route.js` — GET endpoint merging bundled CSV history with live CoinGecko daily
   prices into OHLC; feeds `components/BTCChart`.
 - `strategic-reserve/AutonomousFundPageArchive.js` — archived page component, not a live route

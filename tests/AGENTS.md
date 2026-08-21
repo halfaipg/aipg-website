@@ -8,9 +8,10 @@ and staking-withdrawal surfaces.
 ## Ownership
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
-- `e2e/run.spec.ts` - release-gated worker and validator onboarding surfaces,
-  local hardware-path recommendation, telemetry disclaimers, trust-boundary
-  copy, browser-error, and horizontal-overflow checks.
+- `e2e/run.spec.ts` - release-gated worker and validator onboarding plus the
+  public network-status surface, local hardware-path recommendation, telemetry
+  disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
+  checks.
 
 ## Local Contracts
 

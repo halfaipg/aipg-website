@@ -43,7 +43,8 @@ on Vercel.
 
 ## Ownership
 
-- **`app/`** — App Router routes (home, `/about`, `/staking`, `/wallet`) plus one API route
+- **`app/`** — App Router routes (home, `/about`, `/run`, `/validate`, `/status`,
+  `/staking`, `/wallet`) plus one API route
   (`/api/btc-chart`). Owned in its own AGENTS.md.
 - **`components/`** — page sections and the web3 staking UI. Owned in its own AGENTS.md.
 - **`lib/`** — web3 config + on-chain contract addresses/ABIs (Base). Owned in its own AGENTS.md.

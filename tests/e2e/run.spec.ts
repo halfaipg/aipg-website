@@ -114,3 +114,41 @@ test.describe('/validate mobile smoke', () => {
     await page.screenshot({ path: 'test-results/validate-mobile.png', fullPage: true });
   });
 });
+
+test.describe('/status smoke', () => {
+  test('renders an honest aggregate status or feed-unavailable state', async ({ page }) => {
+    const browserErrors: string[] = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error') browserErrors.push(message.text());
+    });
+    page.on('pageerror', (error) => browserErrors.push(`pageerror: ${error.message}`));
+
+    const response = await page.goto('/status', { waitUntil: 'networkidle' });
+    expect(response?.ok()).toBeTruthy();
+    await expect(page.getByText('Network status', { exact: true }).first()).toBeVisible();
+    const live = page.getByRole('heading', { name: /AI Power Grid is (operational|degraded)/i });
+    const unavailable = page.getByRole('heading', { name: 'Live status feed unavailable' });
+    expect((await live.count()) + (await unavailable.count())).toBe(1);
+    const overflow = await page.evaluate(() =>
+      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
+      window.innerWidth,
+    );
+    expect(overflow).toBe(false);
+    expect(browserErrors, `browser errors on /status:\n${browserErrors.join('\n')}`).toEqual([]);
+  });
+});
+
+test.describe('/status mobile smoke', () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test('keeps network status readable without page overflow', async ({ page }) => {
+    await page.goto('/status', { waitUntil: 'networkidle' });
+    await expect(page.getByText('Network status', { exact: true }).first()).toBeVisible();
+    const overflow = await page.evaluate(() =>
+      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
+      window.innerWidth,
+    );
+    expect(overflow).toBe(false);
+    await page.screenshot({ path: 'test-results/status-mobile.png', fullPage: true });
+  });
+});
