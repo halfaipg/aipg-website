@@ -102,7 +102,9 @@ on Vercel.
   --gitleaks-ignore-path "$PWD" --redact --verbose` — scan tracked and untracked source without
   ignored build caches.
 - `gitleaks git . --log-opts=HEAD --config .gitleaks.toml --redact --verbose` — scan complete
-  reachable history against exact reviewed fingerprints.
+  reachable history against exact reviewed fingerprints. The CI gate also
+  proves that a committed synthetic EVM key is rejected even when labelled as
+  an example.
 
 ## Child DOX Index
 
