@@ -34,7 +34,8 @@ async function getValidatorRelease() {
     );
     if (!release) return null;
     const asset = (name) =>
-      release.assets.find((item) => item.name === name)?.browser_download_url || null;
+      release.assets.find((item) => item.name === name)?.browser_download_url ||
+      null;
     const assets = {
       linuxX64: asset("aipg-validator-linux-x64.zip"),
       linuxArm64: asset("aipg-validator-linux-arm64.zip"),
@@ -42,9 +43,14 @@ async function getValidatorRelease() {
       windowsX64: asset("aipg-validator-windows-x64.zip"),
       checksums: asset("SHA256SUMS"),
       sbom: asset("aipg-validator-release.spdx.json"),
+      installer: asset("install-validator.sh"),
     };
     return Object.values(assets).every(Boolean)
-      ? { ...assets, releaseUrl: release.html_url, publishedAt: release.published_at }
+      ? {
+          ...assets,
+          releaseUrl: release.html_url,
+          publishedAt: release.published_at,
+        }
       : null;
   } catch {
     return null;
@@ -82,9 +88,9 @@ export default async function ValidatePage() {
               Check the Grid independently.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
-              Run a lightweight node that receives targeted assignments, evaluates worker
-              responses, and signs compact evidence. It needs a CPU and an internet connection,
-              not a GPU.
+              Run a lightweight node that receives targeted assignments,
+              evaluates worker responses, and signs compact evidence. It needs a
+              CPU and an internet connection, not a GPU.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -109,12 +115,17 @@ export default async function ValidatePage() {
       <section className="border-b border-white/10 bg-[#0b0c0e]">
         <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
           <div className="mb-8 max-w-3xl">
-            <p className="mb-3 text-sm font-bold uppercase text-orange-400">Before you run it</p>
-            <h2 className="text-3xl font-bold md:text-4xl">Preview means evidence, not authority</h2>
+            <p className="mb-3 text-sm font-bold uppercase text-orange-400">
+              Before you run it
+            </p>
+            <h2 className="text-3xl font-bold md:text-4xl">
+              Preview means evidence, not authority
+            </h2>
             <p className="mt-4 leading-7 text-gray-400">
-              There are no validator rewards, staking, slashing, or worker penalties in this
-              release. Until independently operated nodes and shared 3-of-5 probe groups are
-              proven, this is distributed testing rather than decentralized validation.
+              There are no validator rewards, staking, slashing, or worker
+              penalties in this release. Until independently operated nodes and
+              shared 3-of-5 probe groups are proven, this is distributed testing
+              rather than decentralized validation.
             </p>
           </div>
           <ul className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
@@ -123,7 +134,10 @@ export default async function ValidatePage() {
               "Wallet-signed registration and evidence",
               "No inference, funding, or account-management scope",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-3 bg-[#111214] p-5 text-sm text-gray-300">
+              <li
+                key={item}
+                className="flex items-start gap-3 bg-[#111214] p-5 text-sm text-gray-300"
+              >
                 <FiCheck className="mt-0.5 shrink-0 text-green-400" /> {item}
               </li>
             ))}
@@ -135,38 +149,59 @@ export default async function ValidatePage() {
         <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="mb-3 text-sm font-bold uppercase text-cyan-400">Install</p>
-              <h2 className="text-3xl font-bold md:text-4xl">Verified downloads</h2>
+              <p className="mb-3 text-sm font-bold uppercase text-cyan-400">
+                Install
+              </p>
+              <h2 className="text-3xl font-bold md:text-4xl">
+                Verified downloads
+              </h2>
               <p className="mt-4 leading-7 text-gray-400">
-                Every archive ships with a SHA-256 manifest, SPDX SBOM, and GitHub build
-                provenance. The installer checks the archive before executing it.
+                Every archive ships with a SHA-256 manifest, SPDX SBOM, and
+                GitHub build provenance. The installer checks the archive before
+                executing it.
               </p>
             </div>
             <div className="space-y-5">
               {release ? (
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {DOWNLOADS.map(([label, key]) => (
-                    <a
-                      key={key}
-                      href={release[key]}
-                      className="flex min-h-12 items-center justify-between border border-white/15 bg-[#111214] px-4 text-sm font-semibold hover:border-cyan-400/60"
-                    >
-                      {label} <FiDownload aria-hidden="true" />
-                    </a>
-                  ))}
-                </div>
+                <>
+                  <a
+                    href={release.installer}
+                    className="mb-2 flex min-h-12 items-center justify-between bg-cyan-400 px-4 text-sm font-bold text-black hover:bg-cyan-300"
+                  >
+                    Download verified installer{" "}
+                    <FiDownload aria-hidden="true" />
+                  </a>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {DOWNLOADS.map(([label, key]) => (
+                      <a
+                        key={key}
+                        href={release[key]}
+                        className="flex min-h-12 items-center justify-between border border-white/15 bg-[#111214] px-4 text-sm font-semibold hover:border-cyan-400/60"
+                      >
+                        {label} <FiDownload aria-hidden="true" />
+                      </a>
+                    ))}
+                  </div>
+                </>
               ) : (
                 <div className="border border-orange-400/30 bg-orange-400/5 p-5 text-sm text-orange-200">
-                  The preview release is still being qualified. Downloads stay closed until all
-                  four binaries, checksums, SBOM, and provenance are present.
+                  The preview release is still being qualified. Downloads stay
+                  closed until all four binaries, installer, checksums, SBOM,
+                  and provenance are present.
                 </div>
               )}
               <div className="flex flex-wrap gap-4 text-sm text-gray-400">
                 {release ? (
                   <>
-                    <a href={release.checksums} className="hover:text-white">SHA256SUMS</a>
-                    <a href={release.sbom} className="hover:text-white">SPDX SBOM</a>
-                    <a href={release.releaseUrl} className="hover:text-white">Release notes</a>
+                    <a href={release.checksums} className="hover:text-white">
+                      SHA256SUMS
+                    </a>
+                    <a href={release.sbom} className="hover:text-white">
+                      SPDX SBOM
+                    </a>
+                    <a href={release.releaseUrl} className="hover:text-white">
+                      Release notes
+                    </a>
                   </>
                 ) : null}
               </div>
