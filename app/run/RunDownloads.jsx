@@ -27,7 +27,8 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
   const [platform, setPlatform] = useState("linux");
 
   useEffect(() => {
-    const platformHint = navigator.userAgentData?.platform || navigator.platform || "";
+    const platformHint =
+      navigator.userAgentData?.platform || navigator.platform || "";
     const userAgent = navigator.userAgent || "";
     if (/^win/i.test(platformHint) || /windows/i.test(userAgent)) {
       setPlatform("windows");
@@ -45,11 +46,15 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
   }, [platform, workerType]);
 
   const release = workerType === "text" ? textRelease : mediaRelease;
-  const selected = useMemo(() => release?.[platform] || null, [release, platform]);
+  const selected = useMemo(
+    () => release?.[platform] || null,
+    [release, platform],
+  );
   const releaseReady = Boolean(
     release &&
-      selected &&
-      (workerType === "text" || (release.checksums && release.manifest)),
+    selected &&
+    (workerType === "text" ||
+      (release.checksums && release.manifest && release.sbom)),
   );
   const platformEntries = Object.entries(PLATFORMS).filter(
     ([value]) => workerType === "text" || ["linux", "windows"].includes(value),
@@ -77,9 +82,10 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
               Run AI Power Grid
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
-              Put a supported GPU to work serving decentralized text, image, video,
-              and audio jobs. Start with the live text worker today; the media manager
-              remains release-gated until its signed hardware profiles qualify.
+              Put a supported GPU to work serving decentralized text, image,
+              video, and audio jobs. Start with the live text worker today; the
+              media manager remains release-gated until its signed hardware
+              profiles qualify.
             </p>
 
             <div className="mt-9 max-w-xl border border-white/15 bg-black/75 p-5 backdrop-blur-sm">
@@ -106,13 +112,17 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
 
               <div className="mb-4 flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm font-semibold">Choose your operating system</p>
+                  <p className="text-sm font-semibold">
+                    Choose your operating system
+                  </p>
                   <p className="mt-1 text-xs text-gray-400">
                     Final compatibility is checked locally.
                   </p>
                 </div>
                 {release?.version && (
-                  <span className="text-xs font-mono text-gray-400">v{release.version}</span>
+                  <span className="text-xs font-mono text-gray-400">
+                    v{release.version}
+                  </span>
                 )}
               </div>
 
@@ -140,7 +150,10 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
                   className="flex min-h-12 w-full items-center justify-center gap-2 bg-orange-500 px-5 font-bold text-black transition-colors hover:bg-orange-400"
                 >
                   <FiDownload aria-hidden="true" />
-                  Download {workerType === "text" ? "text worker" : "media manager"} for {PLATFORMS[platform].label}
+                  Download{" "}
+                  {workerType === "text"
+                    ? "text worker"
+                    : "media manager"} for {PLATFORMS[platform].label}
                   {formatBytes(selected.bytes) && (
                     <span className="font-normal text-black/65">
                       {formatBytes(selected.bytes)}
@@ -174,6 +187,14 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
                         SHA256SUMS <FiExternalLink aria-hidden="true" />
                       </a>
                     ) : null}
+                    {release.sbom ? (
+                      <a
+                        href={release.sbom.url}
+                        className="inline-flex items-center gap-1.5 hover:text-white"
+                      >
+                        SPDX SBOM <FiExternalLink aria-hidden="true" />
+                      </a>
+                    ) : null}
                     <a
                       href={release.releaseUrl}
                       className="inline-flex items-center gap-1.5 hover:text-white"
@@ -191,18 +212,29 @@ export default function RunDownloads({ mediaRelease, textRelease }) {
       <section className="bg-[#090a0c]">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 md:grid-cols-[1fr_auto] md:items-center md:px-8">
           <div>
-            <h2 className="text-xl font-bold">Live text worker · qualified media next</h2>
+            <h2 className="text-xl font-bold">
+              Live text worker · qualified media next
+            </h2>
             <p className="mt-2 text-sm leading-6 text-gray-400">
               The text worker connects to your existing Ollama, vLLM, SGLang,
               LMDeploy, LM Studio, or KoboldCpp backend. The first managed media
-              profile targets ACE-Step audio and stays unavailable until its signed
-              qualification evidence is complete.
+              profile targets ACE-Step audio and stays unavailable until its
+              signed qualification evidence is complete.
             </p>
           </div>
           <ul className="grid gap-2 text-sm text-gray-300 sm:grid-cols-3 md:grid-cols-1">
-            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Text release live</li>
-            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />WebSocket dispatch</li>
-            <li className="flex items-center gap-2"><FiCheck className="text-green-400" />Media fail-closed</li>
+            <li className="flex items-center gap-2">
+              <FiCheck className="text-green-400" />
+              Text release live
+            </li>
+            <li className="flex items-center gap-2">
+              <FiCheck className="text-green-400" />
+              WebSocket dispatch
+            </li>
+            <li className="flex items-center gap-2">
+              <FiCheck className="text-green-400" />
+              Media fail-closed
+            </li>
           </ul>
         </div>
       </section>
