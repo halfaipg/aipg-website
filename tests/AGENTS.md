@@ -12,8 +12,9 @@ onboarding, and staking-withdrawal surfaces.
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
   checks.
-- `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
-  prevent GitHub artifacts from unlocking validator downloads against an old,
+- `unit/validator-release-gate.test.mjs` - pure release and capability-contract
+  tests that require an immutable, source-bound, platform-signed preview and
+  prevent GitHub artifacts from unlocking downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
 - `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
   checksum, manifest, SBOM, GitHub digest, and size contract.

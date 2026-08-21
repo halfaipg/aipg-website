@@ -8,7 +8,10 @@ import {
   FiTerminal,
   FiUsers,
 } from "react-icons/fi";
-import { assessValidatorCoreCapability } from "./releaseGate.mjs";
+import {
+  assessValidatorCoreCapability,
+  assessValidatorRelease,
+} from "./releaseGate.mjs";
 
 const RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-validator/releases?per_page=20";
@@ -37,15 +40,30 @@ async function getValidatorRelease() {
       (item) => !item.draft && item.tag_name === RELEASE_TAG,
     );
     if (!release) return null;
-    const asset = (name) =>
-      release.assets.find((item) => item.name === name)?.browser_download_url ||
-      null;
+    const findAsset = (name) =>
+      release.assets.find((item) => item.name === name) || null;
+    const asset = (name) => findAsset(name)?.browser_download_url || null;
+    const manifestUrl = asset("validator-release.json");
+    const checksumsUrl = asset("SHA256SUMS");
+    if (!manifestUrl || !checksumsUrl) return null;
+    const [manifestResponse, checksumsResponse] = await Promise.all([
+      fetch(manifestUrl, { next: { revalidate: 300 } }),
+      fetch(checksumsUrl, { next: { revalidate: 300 } }),
+    ]);
+    if (!manifestResponse.ok || !checksumsResponse.ok) return null;
+    const [manifest, checksums] = await Promise.all([
+      manifestResponse.json(),
+      checksumsResponse.text(),
+    ]);
+    if (!assessValidatorRelease(release, manifest, checksums).ready) {
+      return null;
+    }
     const assets = {
       linuxX64: asset("aipg-validator-linux-x64.zip"),
       linuxArm64: asset("aipg-validator-linux-arm64.zip"),
       macArm64: asset("aipg-validator-macos-arm64.zip"),
       windowsX64: asset("aipg-validator-windows-x64.zip"),
-      checksums: asset("SHA256SUMS"),
+      checksums: checksumsUrl,
       sbom: asset("aipg-validator-release.spdx.json"),
       installer: asset("install-validator.sh"),
     };
@@ -239,7 +257,7 @@ export default async function ValidatePage() {
               ) : (
                 <div className="border border-orange-400/30 bg-orange-400/5 p-5 text-sm text-orange-200">
                   {coreReadiness.ready
-                    ? "The preview release is still being qualified. Downloads stay closed until all four binaries, installer, checksums, SBOM, and provenance are present."
+                    ? "The preview release is still being qualified. Downloads stay closed until all four binaries, installer, checksums, SBOM, provenance, and platform signatures are verified."
                     : "Downloads remain closed until production Core advertises the reviewed shared-quorum preview contract. Source installation remains available for no-probe checks."}
                 </div>
               )}

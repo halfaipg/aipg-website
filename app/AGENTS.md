@@ -37,8 +37,10 @@ with a scroll-reveal IntersectionObserver).
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
-  and the checksum-covered installer on the presence of `SHA256SUMS` and the
-  SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
+  and the checksum-covered installer on an immutable exact-commit prerelease,
+  `validator-release.json`, exact GitHub asset digests/sizes, Developer ID plus
+  notarization for macOS, Authenticode for Windows, `SHA256SUMS`, and the SPDX
+  SBOM, plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
   capability contract. GitHub artifacts alone must never unlock downloads.
   It sends authenticated key creation to the Console rather than
   handling credentials on the marketing site, and recruits independently
