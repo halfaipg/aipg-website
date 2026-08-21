@@ -22,8 +22,17 @@ test.describe('/run smoke', () => {
     await expect(
       page.getByRole('heading', { name: 'Find the useful path for your machine' }),
     ).toBeVisible();
+    await expect(page.getByLabel('GPU or accelerator model')).toBeVisible();
     await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
-    await expect(page.getByText(/not a forecast for your GPU/i)).toBeVisible();
+    await expect(page.getByLabel('Expected text speed')).toHaveValue('0');
+    await expect(page.getByText(/not a payout forecast/i)).toBeVisible();
+
+    await page.getByLabel('GPU or accelerator model').fill('RTX 3090');
+    await page.getByLabel('Expected text speed').fill('42');
+    await expect(
+      page.getByRole('heading', { name: 'Start with the live text worker' }),
+    ).toBeVisible();
+    await expect(page.getByText('RTX 3090', { exact: true })).toBeVisible();
 
     const download = page.getByRole('link', { name: /Download .* for/ });
     const releaseGate = page.getByRole('button', {
@@ -64,7 +73,7 @@ test.describe('/run mobile smoke', () => {
       .getByRole('group', { name: 'Operating system' })
       .getByRole('button', { name: 'macOS' })
       .click();
-    await page.getByLabel('Accelerator').selectOption('apple');
+    await page.getByLabel('Accelerator type', { exact: true }).selectOption('apple');
     await expect(
       page.getByRole('heading', { name: 'Start with the text worker and your existing backend' }),
     ).toBeVisible();

@@ -18,10 +18,13 @@ with a scroll-reveal IntersectionObserver).
   worker release independently, while media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
   signed release manifest plus SPDX SBOM assets present. Its local operator
-  planner uses coarse browser-only hardware inputs to recommend a worker path;
+  planner uses coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
+  expected/measured throughput inputs to recommend a worker path;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
-  public worker counts with 30-day job and observed-performance telemetry and
-  must never be described as a hardware benchmark or earnings promise.
+  public worker counts with 30-day job and observed-performance telemetry.
+  Jobs per worker is only a historical workload-share signal; capacity risk and
+  workload must remain separate and neither may be described as a hardware
+  benchmark, payout forecast, or earnings promise.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM, sends authenticated key creation to the Console rather than

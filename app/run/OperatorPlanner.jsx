@@ -23,10 +23,10 @@ const ACCELERATORS = [
   ["cpu", "CPU only"],
 ];
 
-function demandLabel(workers) {
-  if (workers <= 1) return { text: "Highest capacity need", color: "text-orange-300" };
-  if (workers === 2) return { text: "Needs another replica", color: "text-yellow-300" };
-  return { text: "Replicated", color: "text-green-300" };
+function resilienceLabel(workers) {
+  if (workers <= 1) return { text: "Single-worker risk", color: "text-orange-300" };
+  if (workers === 2) return { text: "One replica short", color: "text-yellow-300" };
+  return { text: "3+ workers", color: "text-green-300" };
 }
 
 function formatObserved(model) {
@@ -43,16 +43,31 @@ function formatCount(value) {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
-function recommendation({ os, accelerator, vram, ram, disk }) {
+function recommendation({ os, accelerator, vram, ram, disk, throughput, mediaReady }) {
   const nvidia = accelerator === "nvidia";
   const managerPlatform = os === "linux" || os === "windows";
   const audioCandidate = managerPlatform && nvidia && vram >= 12 && ram >= 32 && disk >= 49;
   const manualMediaCandidate = managerPlatform && nvidia && vram >= 24 && ram >= 32;
 
+  if (throughput > 0) {
+    return {
+      title: "Start with the live text worker",
+      body: "You already have an expected or measured text-generation speed, so the live worker is the shortest path to useful Grid work. Confirm the same backend, model, and context settings with the local worker check.",
+      accent: "border-green-400/50 bg-green-400/5",
+      secondary: mediaReady && manualMediaCandidate
+        ? "This machine also looks like a media-manager candidate; the downloaded manager still makes the final capability decision."
+        : "Your throughput entry is planning data, not a Grid benchmark or a promise of jobs, den, or payout.",
+    };
+  }
+
   if (audioCandidate) {
     return {
-      title: "Managed audio is your clearest profile match",
-      body: "Your entered hardware clears the draft ACE-Step minimums. The public media manager is still qualification-gated, so this is a candidate result, not permission to serve yet.",
+      title: mediaReady
+        ? "Managed audio is your clearest profile match"
+        : "Media candidate; use the live text path today",
+      body: mediaReady
+        ? "Your entered hardware clears the draft ACE-Step minimums. The downloaded manager still has to verify the signed profile and pass its local canary before serving."
+        : "Your entered hardware clears the draft ACE-Step minimums, but the public media manager is still qualification-gated. This is a candidate result, not permission to serve yet.",
       accent: "border-cyan-400/50 bg-cyan-400/5",
       secondary: manualMediaCandidate
         ? "You are also a strong candidate for the operator-managed ComfyUI image/video path; exact workflows and checkpoints still need a local test."
@@ -89,16 +104,18 @@ function recommendation({ os, accelerator, vram, ram, disk }) {
   };
 }
 
-export default function OperatorPlanner({ opportunities }) {
+export default function OperatorPlanner({ opportunities, mediaReady }) {
   const [os, setOs] = useState("linux");
   const [accelerator, setAccelerator] = useState("nvidia");
+  const [gpuModel, setGpuModel] = useState("");
   const [vram, setVram] = useState(24);
   const [ram, setRam] = useState(64);
   const [disk, setDisk] = useState(100);
+  const [throughput, setThroughput] = useState(0);
 
   const result = useMemo(
-    () => recommendation({ os, accelerator, vram, ram, disk }),
-    [accelerator, disk, os, ram, vram],
+    () => recommendation({ os, accelerator, vram, ram, disk, throughput, mediaReady }),
+    [accelerator, disk, mediaReady, os, ram, throughput, vram],
   );
 
   return (
@@ -138,9 +155,10 @@ export default function OperatorPlanner({ opportunities }) {
 
             <label className="block">
               <span className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                <FiCpu aria-hidden="true" /> Accelerator
+                <FiCpu aria-hidden="true" /> Accelerator type
               </span>
               <select
+                aria-label="Accelerator type"
                 value={accelerator}
                 onChange={(event) => setAccelerator(event.target.value)}
                 className="min-h-11 w-full border border-white/15 bg-[#111214] px-3 text-white outline-none focus:border-cyan-400"
@@ -153,10 +171,30 @@ export default function OperatorPlanner({ opportunities }) {
               </select>
             </label>
 
-            <div className="grid gap-4 sm:grid-cols-3">
+            <label className="block">
+              <span className="mb-2 flex items-center gap-2 text-sm font-semibold">
+                <FiCpu aria-hidden="true" /> GPU or accelerator model
+              </span>
+              <input
+                type="text"
+                value={gpuModel}
+                onChange={(event) => setGpuModel(event.target.value.slice(0, 80))}
+                placeholder="For example, RTX 3090 or MI300X"
+                autoComplete="off"
+                className="min-h-11 w-full border border-white/15 bg-[#111214] px-3 text-white outline-none placeholder:text-gray-600 focus:border-cyan-400"
+              />
+            </label>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <NumberField label="GPU VRAM" unit="GB" value={vram} setValue={setVram} />
               <NumberField label="System RAM" unit="GB" value={ram} setValue={setRam} />
               <NumberField label="Free disk" unit="GB" value={disk} setValue={setDisk} />
+              <NumberField
+                label="Expected text speed"
+                unit="tok/s"
+                value={throughput}
+                setValue={setThroughput}
+              />
             </div>
           </div>
 
@@ -167,6 +205,20 @@ export default function OperatorPlanner({ opportunities }) {
             <p className="mt-5 border-t border-white/10 pt-5 text-sm leading-6 text-gray-400">
               {result.secondary}
             </p>
+            <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-5 text-xs">
+              <div>
+                <dt className="text-gray-500">Entered accelerator</dt>
+                <dd className="mt-1 break-words text-gray-200">
+                  {gpuModel.trim() || ACCELERATORS.find(([value]) => value === accelerator)?.[1]}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-500">Expected text speed</dt>
+                <dd className="mt-1 text-gray-200">
+                  {throughput > 0 ? `${throughput} tok/s` : "Not entered"}
+                </dd>
+              </div>
+            </dl>
           </div>
         </div>
 
@@ -179,8 +231,8 @@ export default function OperatorPlanner({ opportunities }) {
               <h3 className="text-2xl font-bold">Capacity and actual 30-day work</h3>
             </div>
             <p className="max-w-xl text-sm leading-6 text-gray-400">
-              Throughput is observed across the existing Grid worker set. It is not a forecast for
-              your GPU, and job history is not a promise of future work or earnings.
+              Jobs per worker is a rough workload-share signal, not a payout forecast. Throughput
+              is observed across the existing Grid and is not a benchmark for your GPU.
             </p>
           </div>
 
@@ -188,7 +240,8 @@ export default function OperatorPlanner({ opportunities }) {
             <>
               <div className="divide-y divide-white/10 border border-white/10 md:hidden">
                 {opportunities.map((model) => {
-                  const need = demandLabel(model.workers);
+                  const resilience = resilienceLabel(model.workers);
+                  const jobsPerWorker = model.workers > 0 ? model.jobs30d / model.workers : null;
                   return (
                     <div key={`${model.type}:${model.name}`} className="bg-black/30 p-4">
                       <div className="flex items-start justify-between gap-4">
@@ -196,11 +249,11 @@ export default function OperatorPlanner({ opportunities }) {
                           <p className="break-words font-semibold text-white">{model.name}</p>
                           <p className="mt-1 text-xs capitalize text-gray-400">{model.type}</p>
                         </div>
-                        <span className={`text-right text-xs font-semibold ${need.color}`}>
-                          {need.text}
+                        <span className={`text-right text-xs font-semibold ${resilience.color}`}>
+                          {resilience.text}
                         </span>
                       </div>
-                      <dl className="mt-4 grid grid-cols-3 gap-3 text-xs">
+                      <dl className="mt-4 grid grid-cols-2 gap-3 text-xs sm:grid-cols-4">
                         <div>
                           <dt className="text-gray-500">Workers</dt>
                           <dd className="mt-1 font-mono text-white">{model.workers}</dd>
@@ -208,6 +261,12 @@ export default function OperatorPlanner({ opportunities }) {
                         <div>
                           <dt className="text-gray-500">Jobs, 30d</dt>
                           <dd className="mt-1 font-mono text-white">{formatCount(model.jobs30d)}</dd>
+                        </div>
+                        <div>
+                          <dt className="text-gray-500">Jobs / worker</dt>
+                          <dd className="mt-1 font-mono text-white">
+                            {jobsPerWorker === null ? "—" : jobsPerWorker.toFixed(1)}
+                          </dd>
                         </div>
                         <div>
                           <dt className="text-gray-500">Observed</dt>
@@ -219,28 +278,35 @@ export default function OperatorPlanner({ opportunities }) {
                 })}
               </div>
               <div className="hidden overflow-x-auto border border-white/10 md:block">
-                <table className="w-full min-w-[760px] text-left text-sm">
+                <table className="w-full min-w-[860px] text-left text-sm">
                   <thead className="bg-[#111214] text-xs uppercase text-gray-400">
                     <tr>
                       <th className="px-4 py-3 font-semibold">Model</th>
                       <th className="px-4 py-3 font-semibold">Type</th>
                       <th className="px-4 py-3 font-semibold">Workers</th>
                       <th className="px-4 py-3 font-semibold">Jobs, 30d</th>
+                      <th className="px-4 py-3 font-semibold">Jobs / worker</th>
                       <th className="px-4 py-3 font-semibold">Observed</th>
-                      <th className="px-4 py-3 font-semibold">Capacity</th>
+                      <th className="px-4 py-3 font-semibold">Resilience</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/10">
                     {opportunities.map((model) => {
-                      const need = demandLabel(model.workers);
+                      const resilience = resilienceLabel(model.workers);
+                      const jobsPerWorker = model.workers > 0 ? model.jobs30d / model.workers : null;
                       return (
                         <tr key={`${model.type}:${model.name}`} className="bg-black/30">
                           <td className="px-4 py-4 font-medium text-white">{model.name}</td>
                           <td className="px-4 py-4 capitalize text-gray-400">{model.type}</td>
                           <td className="px-4 py-4 font-mono">{model.workers}</td>
                           <td className="px-4 py-4 font-mono">{formatCount(model.jobs30d)}</td>
+                          <td className="px-4 py-4 font-mono">
+                            {jobsPerWorker === null ? "—" : jobsPerWorker.toFixed(1)}
+                          </td>
                           <td className="px-4 py-4 text-gray-400">{formatObserved(model)}</td>
-                          <td className={`px-4 py-4 font-semibold ${need.color}`}>{need.text}</td>
+                          <td className={`px-4 py-4 font-semibold ${resilience.color}`}>
+                            {resilience.text}
+                          </td>
                         </tr>
                       );
                     })}

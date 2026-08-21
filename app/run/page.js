@@ -151,7 +151,10 @@ export default async function RunPage() {
     <main className="bg-black text-white">
       <RunDownloads mediaRelease={mediaRelease} textRelease={textRelease} />
 
-      <OperatorPlanner opportunities={opportunities} />
+      <OperatorPlanner
+        opportunities={opportunities}
+        mediaReady={Boolean(mediaRelease)}
+      />
 
       <section className="border-y border-white/10 bg-[#111214]">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-20">
