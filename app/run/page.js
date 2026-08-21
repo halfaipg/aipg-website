@@ -61,6 +61,49 @@ async function getManagerRelease() {
   }
 }
 
+async function getManagerQualificationRelease() {
+  try {
+    const releases = await getReleaseList(MEDIA_RELEASES_API);
+    const release = releases.find(
+      (item) =>
+        !item.draft &&
+        item.prerelease &&
+        typeof item.tag_name === "string" &&
+        item.tag_name.startsWith("manager-qualification-v"),
+    );
+    if (!release) return null;
+    const asset = (name) => {
+      const found = release.assets.find((item) => item.name === name);
+      return found
+        ? {
+            name: found.name,
+            url: found.browser_download_url,
+            bytes: found.size,
+          }
+        : null;
+    };
+    const candidate = {
+      version: release.tag_name.replace("manager-qualification-v", ""),
+      publishedAt: release.published_at,
+      releaseUrl: release.html_url,
+      linux: asset("grid-media-manager-linux-x86_64"),
+      windows: asset("grid-media-manager-windows-x86_64.exe"),
+      checksums: asset("SHA256SUMS"),
+      manifest: asset("manager-qualification.json"),
+      sbom: asset("grid-media-manager-qualification.spdx.json"),
+    };
+    return candidate.linux &&
+      candidate.windows &&
+      candidate.checksums &&
+      candidate.manifest &&
+      candidate.sbom
+      ? candidate
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 async function getTextRelease() {
   try {
     const releases = await getReleaseList(TEXT_RELEASES_API);
@@ -141,15 +184,21 @@ async function getOperatorOpportunities() {
 }
 
 export default async function RunPage() {
-  const [mediaRelease, textRelease, opportunities] = await Promise.all([
-    getManagerRelease(),
-    getTextRelease(),
-    getOperatorOpportunities(),
-  ]);
+  const [mediaRelease, mediaQualificationRelease, textRelease, opportunities] =
+    await Promise.all([
+      getManagerRelease(),
+      getManagerQualificationRelease(),
+      getTextRelease(),
+      getOperatorOpportunities(),
+    ]);
 
   return (
     <main className="bg-black text-white">
-      <RunDownloads mediaRelease={mediaRelease} textRelease={textRelease} />
+      <RunDownloads
+        mediaRelease={mediaRelease}
+        mediaQualificationRelease={mediaQualificationRelease}
+        textRelease={textRelease}
+      />
 
       <OperatorPlanner
         opportunities={opportunities}
