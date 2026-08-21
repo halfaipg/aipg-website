@@ -236,6 +236,17 @@ export function assessManagerRelease(release, manifest, checksumText) {
   if (!HEX_SHA256.test(profile.qualification_manifest_sha256 || "")) {
     reasons.push("manager profile has no valid qualification commitment");
   }
+  const windows = manifest?.platform_signing?.windows || {};
+  if (
+    !(
+      windows.verified === true &&
+      windows.identity === "authenticode" &&
+      typeof windows.subject === "string" &&
+      windows.subject
+    )
+  ) {
+    reasons.push("manager Windows Authenticode is not verified");
+  }
   validatePayload(
     release,
     manifest,

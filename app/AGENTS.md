@@ -24,8 +24,9 @@ with a scroll-reveal IntersectionObserver).
   machine-readable release manifest plus SPDX SBOM assets present. The server
   must verify immutable-release state, manifest profile gates, GitHub asset
   digests and sizes, and exact aggregate-checksum coverage before exposing a
-  media download. Its local operator
-  planner uses coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
+  media download. The final manager manifest must record verified Windows
+  Authenticode before the download opens. Its local operator planner uses
+  coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
   expected/measured throughput inputs to recommend a worker path;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
   public worker counts with 30-day job and observed-performance telemetry.

@@ -76,6 +76,17 @@ function fixture(kind) {
     tag,
     commit: "e".repeat(40),
     profile,
+    ...(!isQualification
+      ? {
+          platform_signing: {
+            windows: {
+              verified: true,
+              identity: "authenticode",
+              subject: "AI Power Grid",
+            },
+          },
+        }
+      : {}),
     assets,
     ...(isQualification
       ? {
@@ -183,5 +194,19 @@ test("accepts only an immutable signed and fully-qualified manager contract", ()
   assert.equal(
     assessManagerRelease(value.release, value.manifest, value.checksums).ready,
     false,
+  );
+});
+
+test("rejects a manager release without verified Authenticode", () => {
+  const value = fixture("manager");
+  value.manifest.platform_signing.windows.verified = false;
+  const result = assessManagerRelease(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+  assert.equal(result.ready, false);
+  assert.ok(
+    result.reasons.includes("manager Windows Authenticode is not verified"),
   );
 });
