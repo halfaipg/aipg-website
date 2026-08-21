@@ -26,15 +26,10 @@ regex = '''\b(aipgcoregen|aipg-transient|aipgcore[a-z0-9-]*)\b'''
 tags = ["aipg", "infra"]
 
 [[rules]]
-id = "aipg-eth-private-key"
-description = "EVM private key (64 hex, optionally 0x)"
-regex = '''\b(0x)?[a-fA-F0-9]{64}\b'''
+id = "aipg-evm-private-key"
+description = "EVM private key in a key-bearing assignment"
+regex = '''(?i)(?:private[_ -]?key|wallet[_ -]?key|signer[_ -]?key)\s*[:=]\s*["']?(?:0x)?[a-f0-9]{64}\b'''
 tags = ["aipg", "wallet"]
-# Hex-64 is also sha256 hashes / git oids → high false positives. Treated as a
-# REVIEW signal, not an auto-block; the human triages contracts/worker output.
-[rules.allowlist]
-regexes = ['''[a-f0-9]{64}''']  # lowercase-only 64hex (hashes) are usually benign
-paths = ['''(?i)(test|fixture|mock|\.lock|package-lock|yarn\.lock|poetry\.lock)''']
 
 [[rules]]
 id = "aipg-mnemonic"
@@ -42,21 +37,25 @@ description = "BIP-39 mnemonic / seed phrase markers"
 regex = '''(?i)(mnemonic|seed[\s_-]?phrase)\s*[:=]\s*["']?(\w+\s+){11,}'''
 tags = ["aipg", "wallet"]
 
-# Global allowlist: example/template/sample env + docs placeholders never block.
-[allowlist]
-description = "Non-secret placeholders, lockfiles, and the scanner's own config"
-paths = [
-  '''(?i)\.env\.(example|template|sample)$''',
-  '''(?i)(^|/)(examples?|samples?)/''',
-  '''(?i)\.(lock)$''',
-  '''(?i)(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|poetry\.lock|Cargo\.lock)$''',
-  # The scanner's own files contain the patterns by definition — never self-flag.
-  '''(?i)\.gitleaks\.toml$''',
-  '''(?i)secret-scan\.ya?ml$''',
-]
+[[allowlists]]
+description = "Published AIPG Base token contract"
+targetRules = ["generic-api-key"]
 regexes = [
-  '''(?i)(your[-_]?api[-_]?key|example|placeholder|changeme|xxxx+|<[a-z_]+>)''',
-  # EVM addresses (0x + 40 hex) are PUBLIC on-chain identifiers, never secrets —
-  # gitleaks' generic rule over-flags `ADDR = '0x...'` assignments.
-  '''0x[a-fA-F0-9]{40}\b''',
+  '''(?i)^0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608$''',
+]
+
+[[allowlists]]
+description = "Deterministic invalid EVM test key"
+targetRules = ["aipg-evm-private-key"]
+regexTarget = "match"
+regexes = [
+  '''(?i)^PRIVATE_KEY=0x1{64}\b''',
+]
+
+[[allowlists]]
+description = "Scanner definitions name the forbidden bucket patterns"
+targetRules = ["aipg-r2-bucket"]
+paths = [
+  '''(^|/)\.gitleaks\.toml$''',
+  '''(^|/)\.github/workflows/secret-scan\.ya?ml$''',
 ]
