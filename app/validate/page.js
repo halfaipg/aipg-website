@@ -6,6 +6,7 @@ import {
   FiKey,
   FiShield,
   FiTerminal,
+  FiUsers,
 } from "react-icons/fi";
 
 const RELEASES_API =
@@ -107,6 +108,14 @@ export default async function ValidatePage() {
               >
                 Source <FiExternalLink aria-hidden="true" />
               </a>
+              <a
+                href="https://discord.gg/W9D8j6HCtC"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center gap-2 border border-white/20 bg-black/50 px-6 font-semibold hover:bg-white/10"
+              >
+                <FiUsers aria-hidden="true" /> Join preview cohort
+              </a>
             </div>
           </div>
         </div>
@@ -142,6 +151,26 @@ export default async function ValidatePage() {
               </li>
             ))}
           </ul>
+          <div className="mt-8 flex flex-col gap-4 border-l-2 border-cyan-400 bg-[#111214] p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="font-bold text-white">
+                We are recruiting 5-10 independent operators
+              </h3>
+              <p className="mt-1 text-sm leading-6 text-gray-400">
+                One person or organization counts once, even if it runs several
+                nodes. The first cohort will complete a 72-hour qualification
+                after the matching Core release is live.
+              </p>
+            </div>
+            <a
+              href="https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-12 shrink-0 items-center gap-2 border border-cyan-400/60 px-5 text-sm font-bold text-cyan-300 hover:bg-cyan-400/10"
+            >
+              Cohort runbook <FiExternalLink aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </section>
 

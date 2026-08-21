@@ -24,8 +24,10 @@ with a scroll-reveal IntersectionObserver).
   must never be described as a hardware benchmark or earnings promise.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
-  SPDX SBOM, and sends authenticated key creation to the Console rather than
-  handling credentials on the marketing site.
+  SPDX SBOM, sends authenticated key creation to the Console rather than
+  handling credentials on the marketing site, and recruits independently
+  controlled operators through the public cohort runbook without collecting
+  secrets on the marketing site.
 - `api/btc-chart/route.js` — GET endpoint merging bundled CSV history with live CoinGecko daily
   prices into OHLC; feeds `components/BTCChart`.
 - `strategic-reserve/AutonomousFundPageArchive.js` — archived page component, not a live route
