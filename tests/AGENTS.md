@@ -9,7 +9,8 @@ onboarding, and staking-withdrawal surfaces.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
-  consent-based dedicated enrollment and the Windows menu without personal
+  the preview.12 operator app, consent-based setup, Windows menu option 8,
+  explicit exit behavior, and exact versioned downloads without personal
   private-key entry or Console key juggling, plus the
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
