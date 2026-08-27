@@ -32,13 +32,15 @@ with a scroll-reveal IntersectionObserver).
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
   capability contract with exact validator-purpose endpoint scopes. It targets
-  the immutable `v0.1.0-preview.9` release and exposes its exact public GHCR
+  the immutable `v0.1.0-preview.11` release and exposes its exact public GHCR
   tag for Linux x64/ARM64; GitHub artifacts alone must never
   unlock downloads.
-  Its ordered onboarding installs and prepares the signing wallet locally,
-  sends only the public address plus authenticated key creation to the Console,
-  and then completes local initialization. It never handles private keys on the
-  marketing site. Recruitment links to the tracked public cohort issue for
+  Its ordered onboarding uses consent-based local `enroll` to authenticate a
+  dedicated node account and save a validator-only key. Windows users can use
+  the persistent executable menu without PowerShell. No private keys are pasted
+  into setup or handled on the marketing site. Existing-account pairing remains
+  a separate, unshipped flow; never direct users to replace an existing identity.
+  Recruitment links to the tracked public cohort issue for
   expressions of interest and the public cohort runbook for qualification;
   neither surface collects secrets on the marketing site.
 - `status/` — public, read-only network posture. It renders Core's privacy-safe
