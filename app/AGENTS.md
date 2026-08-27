@@ -38,9 +38,9 @@ with a scroll-reveal IntersectionObserver).
   Its ordered onboarding installs and prepares the signing wallet locally,
   sends only the public address plus authenticated key creation to the Console,
   and then completes local initialization. It never handles private keys on the
-  marketing site, and recruits independently
-  controlled operators through the public cohort runbook without collecting
-  secrets on the marketing site.
+  marketing site. Recruitment links to the tracked public cohort issue for
+  expressions of interest and the public cohort runbook for qualification;
+  neither surface collects secrets on the marketing site.
 - `status/` — public, read-only network posture. It renders Core's privacy-safe
   `aipg.network.status.v1` contract and distinguishes current incidents from
   non-outage decentralization advisories; an unavailable feed must not be
