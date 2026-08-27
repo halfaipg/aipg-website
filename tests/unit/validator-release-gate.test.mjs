@@ -24,17 +24,17 @@ function readyCapability() {
     endpoints: {
       assignments: {
         enabled: true,
-        auth: "v2_account_key",
+        auth: "validator.assignments",
         economic_effect: "none",
       },
       targeted_probe: {
         enabled: true,
-        auth: "v2_account_key",
+        auth: "validator.probe",
         economic_effect: "none",
       },
       attest: {
         enabled: true,
-        auth: "v2_account_key",
+        auth: "validator.attest",
         economic_effect: "none",
       },
     },
@@ -82,4 +82,17 @@ test("rejects weak quorum and unscoped endpoint contracts", () => {
   assert.equal(result.ready, false);
   assert.ok(result.reasons.includes("quorum policy is not 3-of-5"));
   assert.ok(result.reasons.includes("attest endpoint contract is incomplete"));
+});
+
+test("accepts the exact production capability contract", () => {
+  const capability = readyCapability();
+  capability.features.sealed_assignments = true;
+  capability.probe_policy = {
+    assignment_disclosure: "after_probe_completion",
+  };
+
+  assert.deepEqual(assessValidatorCoreCapability(capability), {
+    ready: true,
+    reasons: [],
+  });
 });

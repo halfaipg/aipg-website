@@ -1,4 +1,8 @@
-const REQUIRED_ENDPOINTS = ["assignments", "targeted_probe", "attest"];
+const REQUIRED_ENDPOINTS = {
+  assignments: "validator.assignments",
+  targeted_probe: "validator.probe",
+  attest: "validator.attest",
+};
 
 export function assessValidatorCoreCapability(payload) {
   const reasons = [];
@@ -38,11 +42,11 @@ export function assessValidatorCoreCapability(payload) {
     reasons.push("operator-independence state is missing");
   }
 
-  for (const endpoint of REQUIRED_ENDPOINTS) {
+  for (const [endpoint, requiredScope] of Object.entries(REQUIRED_ENDPOINTS)) {
     const contract = endpoints[endpoint] || {};
     if (
       contract.enabled !== true ||
-      contract.auth !== "v2_account_key" ||
+      contract.auth !== requiredScope ||
       contract.economic_effect !== "none"
     ) {
       reasons.push(`${endpoint} endpoint contract is incomplete`);

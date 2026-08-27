@@ -12,14 +12,14 @@ import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
 const RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-validator/releases?per_page=20";
-const RELEASE_TAG = "v0.1.0-preview";
+const RELEASE_TAG = "v0.1.0-preview.2";
 const VALIDATOR_CAPABILITIES_API =
   "https://api.aipowergrid.io/v1/validator/capabilities";
 
 export const metadata = {
   title: "Run an AI Power Grid Validator",
   description:
-    "Install the signed CPU-only validator preview, register a wallet-bound identity, and contribute independent worker evidence.",
+    "Install the verified unsigned CPU-only validator preview, register a wallet-bound identity, and contribute independent worker evidence.",
 };
 
 async function getValidatorRelease() {
@@ -263,6 +263,7 @@ export default async function ValidatePage() {
                   <FiTerminal /> Health check
                 </p>
                 <p>aipg-validator init</p>
+                <p>aipg-validator check --no-probe</p>
                 <p>aipg-validator check</p>
                 <p>aipg-validator run</p>
               </div>
