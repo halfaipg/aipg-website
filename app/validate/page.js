@@ -10,9 +10,9 @@ import {
 } from "react-icons/fi";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
-const RELEASES_API =
-  "https://api.github.com/repos/AIPowerGrid/grid-validator/releases?per_page=20";
-const RELEASE_TAG = "v0.1.0-preview.3";
+const RELEASE_TAG = "v0.1.0-preview.5";
+const RELEASE_API =
+  `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
   "https://api.aipowergrid.io/v1/validator/capabilities";
 
@@ -24,7 +24,7 @@ export const metadata = {
 
 async function getValidatorRelease() {
   try {
-    const response = await fetch(RELEASES_API, {
+    const response = await fetch(RELEASE_API, {
       headers: {
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
@@ -32,11 +32,8 @@ async function getValidatorRelease() {
       next: { revalidate: 300 },
     });
     if (!response.ok) return null;
-    const releases = await response.json();
-    const release = releases.find(
-      (item) => !item.draft && item.tag_name === RELEASE_TAG,
-    );
-    if (!release) return null;
+    const release = await response.json();
+    if (release.draft || release.tag_name !== RELEASE_TAG) return null;
     const asset = (name) =>
       release.assets.find((item) => item.name === name)?.browser_download_url ||
       null;
@@ -119,10 +116,10 @@ export default async function ValidatePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="https://console.aipowergrid.io/dashboard/validators"
+                href="#downloads"
                 className="inline-flex min-h-12 items-center gap-2 bg-cyan-400 px-6 font-bold text-black hover:bg-cyan-300"
               >
-                <FiKey aria-hidden="true" /> Create validator key
+                <FiDownload aria-hidden="true" /> Install validator
               </a>
               <a
                 href="https://github.com/AIPowerGrid/grid-validator"
@@ -198,7 +195,7 @@ export default async function ValidatePage() {
         </div>
       </section>
 
-      <section className="bg-black">
+      <section id="downloads" className="scroll-mt-20 bg-black">
         <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
@@ -260,8 +257,19 @@ export default async function ValidatePage() {
               </div>
               <div className="border border-white/10 bg-[#101113] p-5 font-mono text-sm text-gray-200">
                 <p className="mb-3 flex items-center gap-2 font-sans font-semibold text-white">
-                  <FiTerminal /> Health check
+                  <FiTerminal /> First-time setup
                 </p>
+                <p>aipg-validator prepare-wallet</p>
+                <p className="mt-2 font-sans text-xs text-gray-400">
+                  Link the printed public address, then create the restricted
+                  validator key in the Console. The private key stays local.
+                </p>
+                <a
+                  href="https://console.aipowergrid.io/dashboard/validators"
+                  className="my-3 inline-flex min-h-10 items-center gap-2 border border-cyan-400/50 px-3 font-sans text-xs font-bold text-cyan-300 hover:bg-cyan-400/10"
+                >
+                  <FiKey aria-hidden="true" /> Link wallet and create key
+                </a>
                 <p>aipg-validator init</p>
                 <p>aipg-validator check --no-probe</p>
                 <p>aipg-validator check</p>
@@ -270,7 +278,7 @@ export default async function ValidatePage() {
               <div className="border border-white/10 bg-[#101113] p-5 text-sm text-gray-300">
                 <p className="font-semibold text-white">Docker on Linux x64 / ARM64</p>
                 <code className="mt-3 block overflow-x-auto text-cyan-300">
-                  docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.3
+                  docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.5
                 </code>
                 <p className="mt-3 leading-6 text-gray-400">
                   The preview image is public and version-pinned. Prereleases do

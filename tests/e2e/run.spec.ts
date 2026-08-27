@@ -97,21 +97,23 @@ test.describe('/validate smoke', () => {
       page.getByRole('heading', { name: 'Check the Grid independently.' }),
     ).toBeVisible();
     await expect(page.getByText(/no validator rewards, staking, slashing/i)).toBeVisible();
-    await expect(page.getByRole('link', { name: /Create validator key/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Install validator/i })).toBeVisible();
+    await expect(page.getByText('aipg-validator prepare-wallet')).toBeVisible();
+    await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Download verified installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.3\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.5\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.3\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.5\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.3\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.5\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
-      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.3'),
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.5'),
     ).toBeVisible();
 
     const overflow = await page.evaluate(() =>
