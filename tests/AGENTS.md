@@ -9,7 +9,8 @@ onboarding, and staking-withdrawal surfaces.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
-  local validator wallet preparation before Console key creation, plus the
+  consent-based dedicated enrollment and the Windows menu without personal
+  private-key entry or Console key juggling, plus the
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
   checks.

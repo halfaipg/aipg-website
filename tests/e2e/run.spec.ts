@@ -110,23 +110,25 @@ test.describe('/validate smoke', () => {
       'href',
       'https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md',
     );
-    await expect(page.getByText('aipg-validator prepare-wallet')).toBeVisible();
+    await expect(page.getByText('aipg-validator enroll', { exact: true })).toBeVisible();
     await expect(page.getByText('aipg-validator self-test')).toBeVisible();
-    await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toBeVisible();
+    await expect(page.getByText(/Choose 1 for automatic setup/)).toBeVisible();
+    await expect(page.getByText(/Existing-account pairing is not available yet/)).toBeVisible();
+    await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Download verified installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.9\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.11\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.9\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.11\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.9\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.11\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
-      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.9'),
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.11'),
     ).toBeVisible();
 
     const overflow = await page.evaluate(() =>

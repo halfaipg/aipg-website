@@ -3,14 +3,13 @@ import {
   FiCheck,
   FiDownload,
   FiExternalLink,
-  FiKey,
   FiShield,
   FiTerminal,
   FiUsers,
 } from "react-icons/fi";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
-const RELEASE_TAG = "v0.1.0-preview.9";
+const RELEASE_TAG = "v0.1.0-preview.11";
 const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
@@ -274,18 +273,19 @@ export default async function ValidatePage() {
                   <FiTerminal /> First-time setup
                 </p>
                 <p>aipg-validator self-test</p>
-                <p>aipg-validator prepare-wallet</p>
+                <p>aipg-validator enroll</p>
                 <p className="mt-2 font-sans text-xs text-gray-400">
-                  Link the printed public address, then create the restricted
-                  validator key in the Console. The private key stays local.
+                  On Windows, extract the download and double-click
+                  aipg-validator.exe. Choose 1 for automatic setup, confirm,
+                  then 4 to check registration and 5 to run.
                 </p>
-                <a
-                  href="https://console.aipowergrid.io/dashboard/validators"
-                  className="my-3 inline-flex min-h-10 items-center gap-2 border border-cyan-400/50 px-3 font-sans text-xs font-bold text-cyan-300 hover:bg-cyan-400/10"
-                >
-                  <FiKey aria-hidden="true" /> Link wallet and create key
-                </a>
-                <p>aipg-validator init</p>
+                <p className="my-3 font-sans text-xs text-gray-400">
+                  Setup creates a dedicated node account and saves its signing
+                  key locally. No personal private key, funded wallet, Google,
+                  or GitHub login is needed. Existing-account pairing is not
+                  available yet; keep your existing node configuration if you
+                  already run a validator.
+                </p>
                 <p>aipg-validator check --no-probe</p>
                 <p>aipg-validator check</p>
                 <p>aipg-validator run</p>
@@ -293,7 +293,7 @@ export default async function ValidatePage() {
               <div className="border border-white/10 bg-[#101113] p-5 text-sm text-gray-300">
                 <p className="font-semibold text-white">Docker on Linux x64 / ARM64</p>
                 <code className="mt-3 block overflow-x-auto text-cyan-300">
-                  docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.9
+                  docker pull ghcr.io/aipowergrid/validator:{RELEASE_TAG}
                 </code>
                 <p className="mt-3 leading-6 text-gray-400">
                   The preview image is public and version-pinned. Prereleases do
