@@ -15,6 +15,10 @@ const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
   "https://api.aipowergrid.io/v1/validator/capabilities";
+const COHORT_ISSUE_URL =
+  "https://github.com/AIPowerGrid/grid-validator/issues/5";
+const COHORT_RUNBOOK_URL =
+  "https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md";
 
 export const metadata = {
   title: "Run an AI Power Grid Validator",
@@ -130,7 +134,7 @@ export default async function ValidatePage() {
                 Source <FiExternalLink aria-hidden="true" />
               </a>
               <a
-                href="https://discord.gg/W9D8j6HCtC"
+                href={COHORT_ISSUE_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex min-h-12 items-center gap-2 border border-white/20 bg-black/50 px-6 font-semibold hover:bg-white/10"
@@ -179,18 +183,28 @@ export default async function ValidatePage() {
               </h3>
               <p className="mt-1 text-sm leading-6 text-gray-400">
                 One person or organization counts once, even if it runs several
-                nodes. The first cohort will complete a 72-hour qualification
-                after the matching Core release is live.
+                nodes. Volunteer through the tracked cohort issue, then complete
+                a 72-hour no-reward qualification.
               </p>
             </div>
-            <a
-              href="https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-12 shrink-0 items-center gap-2 border border-cyan-400/60 px-5 text-sm font-bold text-cyan-300 hover:bg-cyan-400/10"
-            >
-              Cohort runbook <FiExternalLink aria-hidden="true" />
-            </a>
+            <div className="flex shrink-0 flex-wrap gap-3">
+              <a
+                href={COHORT_ISSUE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center gap-2 bg-cyan-400 px-5 text-sm font-bold text-black hover:bg-cyan-300"
+              >
+                Volunteer to run a node <FiUsers aria-hidden="true" />
+              </a>
+              <a
+                href={COHORT_RUNBOOK_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center gap-2 border border-cyan-400/60 px-5 text-sm font-bold text-cyan-300 hover:bg-cyan-400/10"
+              >
+                Cohort runbook <FiExternalLink aria-hidden="true" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

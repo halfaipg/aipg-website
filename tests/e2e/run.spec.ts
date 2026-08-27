@@ -98,6 +98,18 @@ test.describe('/validate smoke', () => {
     ).toBeVisible();
     await expect(page.getByText(/no validator rewards, staking, slashing/i)).toBeVisible();
     await expect(page.getByRole('link', { name: /Install validator/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Join preview cohort/i })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-validator/issues/5',
+    );
+    await expect(page.getByRole('link', { name: /Volunteer to run a node/i })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-validator/issues/5',
+    );
+    await expect(page.getByRole('link', { name: /Cohort runbook/i })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md',
+    );
     await expect(page.getByText('aipg-validator prepare-wallet')).toBeVisible();
     await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Download verified installer' })).toHaveAttribute(
