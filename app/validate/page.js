@@ -10,7 +10,7 @@ import {
 } from "react-icons/fi";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
-const RELEASE_TAG = "v0.1.0-preview.8";
+const RELEASE_TAG = "v0.1.0-preview.9";
 const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
@@ -273,6 +273,7 @@ export default async function ValidatePage() {
                 <p className="mb-3 flex items-center gap-2 font-sans font-semibold text-white">
                   <FiTerminal /> First-time setup
                 </p>
+                <p>aipg-validator self-test</p>
                 <p>aipg-validator prepare-wallet</p>
                 <p className="mt-2 font-sans text-xs text-gray-400">
                   Link the printed public address, then create the restricted
@@ -292,7 +293,7 @@ export default async function ValidatePage() {
               <div className="border border-white/10 bg-[#101113] p-5 text-sm text-gray-300">
                 <p className="font-semibold text-white">Docker on Linux x64 / ARM64</p>
                 <code className="mt-3 block overflow-x-auto text-cyan-300">
-                  docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.8
+                  docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.9
                 </code>
                 <p className="mt-3 leading-6 text-gray-400">
                   The preview image is public and version-pinned. Prereleases do
