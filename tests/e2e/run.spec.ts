@@ -89,7 +89,7 @@ test.describe('/run mobile smoke', () => {
 });
 
 test.describe('/validate smoke', () => {
-  test('states the preview trust boundary and renders a gated release path', async ({ page }) => {
+  test('states the preview trust boundary and renders verified preview downloads', async ({ page }) => {
     const response = await page.goto('/validate', { waitUntil: 'networkidle' });
 
     expect(response?.ok()).toBeTruthy();
@@ -98,11 +98,18 @@ test.describe('/validate smoke', () => {
     ).toBeVisible();
     await expect(page.getByText(/no validator rewards, staking, slashing/i)).toBeVisible();
     await expect(page.getByRole('link', { name: /Create validator key/i })).toBeVisible();
-    await expect(
-      page.getByText(
-        /Downloads remain closed until production Core|preview release is still being qualified/i,
-      ),
-    ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Download verified installer' })).toHaveAttribute(
+      'href',
+      /releases\/download\/v0\.1\.0-preview\.2\/install-validator\.sh$/,
+    );
+    await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
+      'href',
+      /releases\/download\/v0\.1\.0-preview\.2\/aipg-validator-linux-x64\.zip$/,
+    );
+    await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
+      'href',
+      /releases\/download\/v0\.1\.0-preview\.2\/aipg-validator-windows-x64\.zip$/,
+    );
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
