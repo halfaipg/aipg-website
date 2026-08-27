@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
-const RELEASE_TAG = "v0.1.0-preview.12";
+const RELEASE_TAG = "v0.1.0-preview.13";
 const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
