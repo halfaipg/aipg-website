@@ -14,7 +14,7 @@ onboarding, and staking-withdrawal surfaces.
   private-key entry or Console key juggling, plus the
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
-  checks.
+  checks, including validator onboarding at 320px and 390px widths.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
