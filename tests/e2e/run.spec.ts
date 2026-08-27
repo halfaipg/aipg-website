@@ -100,16 +100,19 @@ test.describe('/validate smoke', () => {
     await expect(page.getByRole('link', { name: /Create validator key/i })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Download verified installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.2\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.3\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.2\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.3\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.2\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.3\/aipg-validator-windows-x64\.zip$/,
     );
+    await expect(
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.3'),
+    ).toBeVisible();
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >

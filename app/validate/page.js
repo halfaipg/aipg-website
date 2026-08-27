@@ -12,7 +12,7 @@ import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
 const RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-validator/releases?per_page=20";
-const RELEASE_TAG = "v0.1.0-preview.2";
+const RELEASE_TAG = "v0.1.0-preview.3";
 const VALIDATOR_CAPABILITIES_API =
   "https://api.aipowergrid.io/v1/validator/capabilities";
 
@@ -266,6 +266,16 @@ export default async function ValidatePage() {
                 <p>aipg-validator check --no-probe</p>
                 <p>aipg-validator check</p>
                 <p>aipg-validator run</p>
+              </div>
+              <div className="border border-white/10 bg-[#101113] p-5 text-sm text-gray-300">
+                <p className="font-semibold text-white">Docker on Linux x64 / ARM64</p>
+                <code className="mt-3 block overflow-x-auto text-cyan-300">
+                  docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.3
+                </code>
+                <p className="mt-3 leading-6 text-gray-400">
+                  The preview image is public and version-pinned. Prereleases do
+                  not publish <code>latest</code>.
+                </p>
               </div>
             </div>
           </div>

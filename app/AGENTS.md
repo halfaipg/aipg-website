@@ -32,7 +32,8 @@ with a scroll-reveal IntersectionObserver).
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
   capability contract with exact validator-purpose endpoint scopes. It targets
-  the immutable `v0.1.0-preview.2` release; GitHub artifacts alone must never
+  the immutable `v0.1.0-preview.3` release and exposes its exact public GHCR
+  tag for Linux x64/ARM64; GitHub artifacts alone must never
   unlock downloads.
   It sends authenticated key creation to the Console rather than
   handling credentials on the marketing site, and recruits independently
