@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
-const RELEASE_TAG = "v0.1.0-preview.11";
+const RELEASE_TAG = "v0.1.0-preview.12";
 const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
@@ -272,12 +272,12 @@ export default async function ValidatePage() {
                 <p className="mb-3 flex items-center gap-2 font-sans font-semibold text-white">
                   <FiTerminal /> First-time setup
                 </p>
-                <p>aipg-validator self-test</p>
-                <p>aipg-validator enroll</p>
+                <p>aipg-validator app</p>
                 <p className="mt-2 font-sans text-xs text-gray-400">
                   On Windows, extract the download and double-click
-                  aipg-validator.exe. Choose 1 for automatic setup, confirm,
-                  then 4 to check registration and 5 to run.
+                  aipg-validator.exe. Choose 8 to open the local operator app,
+                  then Set up node, confirm, and Start validator. Existing
+                  operators skip setup and keep their configuration.
                 </p>
                 <p className="my-3 font-sans text-xs text-gray-400">
                   Setup creates a dedicated node account and saves its signing
@@ -286,9 +286,18 @@ export default async function ValidatePage() {
                   available yet; keep your existing node configuration if you
                   already run a validator.
                 </p>
-                <p>aipg-validator check --no-probe</p>
-                <p>aipg-validator check</p>
-                <p>aipg-validator run</p>
+                <p className="font-sans text-xs leading-6 text-gray-400">
+                  Confirm acknowledged heartbeats and accepted evidence in the
+                  app. Closing the browser tab leaves it running; Exit app
+                  stops its node and closes the local server. Never share its
+                  private localhost URL.
+                </p>
+                <a
+                  href="https://aipowergrid.io/docs/validator-node"
+                  className="mt-3 inline-block font-sans text-xs text-cyan-300 hover:text-white"
+                >
+                  Full setup and headless server guide
+                </a>
               </div>
               <div className="border border-white/10 bg-[#101113] p-5 text-sm text-gray-300">
                 <p className="font-semibold text-white">Docker on Linux x64 / ARM64</p>
