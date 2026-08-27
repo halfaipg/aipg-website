@@ -105,11 +105,11 @@ export default async function ValidatePage() {
         />
         <div className="absolute inset-0 bg-black/65" aria-hidden="true" />
         <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-6 py-20 md:px-8">
-          <div className="max-w-3xl">
+          <div className="min-w-0 max-w-3xl">
             <p className="mb-5 flex items-center gap-2 text-sm font-semibold text-cyan-300">
               <FiShield aria-hidden="true" /> Validator preview
             </p>
-            <h1 className="text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">
+            <h1 className="text-3xl font-black leading-tight sm:text-6xl lg:text-7xl">
               Check the Grid independently.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
@@ -210,8 +210,8 @@ export default async function ValidatePage() {
 
       <section id="downloads" className="scroll-mt-20 bg-black">
         <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
+          <div className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+            <div className="min-w-0">
               <p className="mb-3 text-sm font-bold uppercase text-cyan-400">
                 Install
               </p>
@@ -224,7 +224,7 @@ export default async function ValidatePage() {
                 executing it.
               </p>
             </div>
-            <div className="space-y-5">
+            <div className="min-w-0 space-y-5">
               {release ? (
                 <>
                   <a

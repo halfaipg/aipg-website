@@ -148,15 +148,23 @@ test.describe('/validate mobile smoke', () => {
 
   test('keeps validator onboarding readable without horizontal overflow', async ({ page }) => {
     await page.goto('/validate', { waitUntil: 'networkidle' });
-    await expect(
-      page.getByRole('heading', { name: 'Check the Grid independently.' }),
-    ).toBeVisible();
-    const overflow = await page.evaluate(() =>
-      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
-      window.innerWidth,
-    );
-    expect(overflow).toBe(false);
-    await page.screenshot({ path: 'test-results/validate-mobile.png', fullPage: true });
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      const heading = page.getByRole('heading', { name: 'Check the Grid independently.' });
+      await expect(heading).toBeVisible();
+      const overflow = await page.evaluate(() =>
+        Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
+        window.innerWidth,
+      );
+      expect(overflow, `page overflow at ${width}px`).toBe(false);
+      const headingFits = await heading.evaluate((element) => {
+        const text = document.createRange();
+        text.selectNodeContents(element);
+        return [...text.getClientRects()].every(rect => rect.left >= 0 && rect.right <= window.innerWidth);
+      });
+      expect(headingFits, `clipped headline at ${width}px`).toBe(true);
+      await page.screenshot({ path: `test-results/validate-mobile-${width}.png`, fullPage: true });
+    }
   });
 });
 
