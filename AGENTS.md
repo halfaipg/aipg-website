@@ -59,6 +59,9 @@ on Vercel.
 - **`public/`** — static assets (images, logos) plus `llms.txt`, the curated machine-readable
   entry point for agents. **`*.csv`** at root are BTC price history read by the btc-chart API
   route. **Not** DOX boundaries.
+- **`scripts/weekly-proof.mjs`** — fail-closed public-evidence collector that
+  generates a four-post weekly thread draft; the scheduled workflow opens one
+  review issue and never posts to social accounts automatically.
 
 ## Local Contracts
 

@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "proof:weekly": "node scripts/weekly-proof.mjs",
     "test:unit": "node --test tests/unit/*.test.mjs",
     "deploy": "npm run build && rsync --exclude=.git -azP . ubuntu@64.176.215.66:/root/site/",
     "test:e2e": "playwright test",

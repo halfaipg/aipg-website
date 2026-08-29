@@ -1,0 +1,36 @@
+name: weekly-proof
+
+on:
+  schedule:
+    - cron: "17 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: "22"
+      - name: Generate evidence-bound draft
+        run: node scripts/weekly-proof.mjs > "$RUNNER_TEMP/weekly-proof.md"
+      - name: Add the draft to the run summary
+        run: cat "$RUNNER_TEMP/weekly-proof.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Open one review issue for this UTC week
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          title="Weekly proof draft - $(date -u +%F)"
+          existing="$(gh issue list --state all --search "\"$title\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -z "$existing" ]; then
+            gh issue create --title "$title" --body-file "$RUNNER_TEMP/weekly-proof.md"
+          else
+            echo "Issue #$existing already exists; refusing to duplicate it."
+          fi

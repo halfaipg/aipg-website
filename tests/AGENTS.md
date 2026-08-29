@@ -26,6 +26,8 @@ onboarding, and staking-withdrawal surfaces.
   gated media, confidential inference, universal hardware support, autonomous
   Core, blanket open-source, permanent-free, permissionless-Core, and live
   multi-asset/worker-claim payout claims from being marketed as current.
+- `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
+  social-length, and validator-caveat contracts for the weekly proof draft.
 
 ## Local Contracts
 
