@@ -75,8 +75,8 @@ const Hero = () => {
                 </svg>
               </div>
             </div>
-            <div className="text-white font-semibold text-sm mb-1.5">No one can turn it off</div>
-            <div className="text-gray-400 text-xs leading-snug">OpenAI-compatible generation API on a network heading fully on-chain. No corporate kill switch.</div>
+            <div className="text-white font-semibold text-sm mb-1.5">Built beyond one provider</div>
+            <div className="text-gray-400 text-xs leading-snug">Open APIs and distributed GPU supply today, with partner-run coordination and deeper on-chain control ahead.</div>
           </div>
         </div>
 

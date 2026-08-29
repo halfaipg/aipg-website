@@ -40,7 +40,7 @@ const Infrastructure = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Gaming rigs to data centers — any GPU can join the network and start earning by running AI models.
+              Gaming rigs to data centers can join when their OS, backend, model, and available memory pass the worker's local checks.
             </p>
           </div>
 
@@ -95,8 +95,8 @@ const Infrastructure = () => {
             </div>
             <p className="text-gray-300 mb-4">
               Every centralized AI you've used can be unplugged by a company, a regulator, or a Stripe ban.
-              AIPG is moving entirely on-chain — smart contracts handle routing, payments, and verification.
-              The team builds the protocol. The protocol runs itself. Once it's done, even we can't turn it off.
+              AIPG is moving beyond its current coordinated Core through partner-run nodes,
+              verifiable evidence, and progressively on-chain settlement and control.
             </p>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li className="flex items-start gap-2">
@@ -109,7 +109,7 @@ const Infrastructure = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-1">◆</span>
-                <span>Automatic payments via smart contracts</span>
+                <span>Worker-claimed rewards through audited smart contracts</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-1">◆</span>

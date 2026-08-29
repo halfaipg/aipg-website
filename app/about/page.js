@@ -174,7 +174,7 @@ const About = () => {
                     Open Source
                   </h3>
                   <p className="mt-1 text-gray-300">
-                  All code is public. No vendor lock-in. Run your own instance or use the network.
+                  Public contracts, SDKs, workers, validators, and protocol specifications can be inspected and extended.
                   </p>
                 </div>
               </div>
@@ -403,7 +403,7 @@ const About = () => {
                     </h3>
                   </div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    All code and models publicly auditable
+                    Public protocol surfaces and open models are auditable
                   </p>
                 </div>
               </div>

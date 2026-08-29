@@ -21,8 +21,9 @@ const GridStatement = () => {
         </h2>
         <p className="mt-6 text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
           AI Power Grid meters generative compute — text, images, video, and
-          workflows drawn from GPUs anyone can plug in, with settlement moving
-          on-chain. The meter stays honest, and no one owns the off switch.
+          workflows drawn from community GPUs, with worker payouts settled on
+          Base. Core routing is coordinated today; validator evidence and
+          partner-run nodes are the path beyond that control plane.
         </p>
       </div>
     </section>

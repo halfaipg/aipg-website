@@ -14,7 +14,8 @@ const RunNode = () => {
             The network runs on real hardware that real people plug in. Two ways to take part:
             run a <span className="text-white font-semibold">Generator</span> to contribute compute
             and earn, or a <span className="text-white font-semibold">Validator</span> to independently test
-            it. Signed worker profiles define exactly which hardware and jobs are supported.
+            it. The text worker is live today; the managed media installer stays gated until
+            signed hardware profiles qualify.
           </p>
         </div>
 
@@ -23,7 +24,7 @@ const RunNode = () => {
           {/* Generator */}
           <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-orange-500/30 rounded-2xl p-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-              LIVE NOW
+              TEXT LIVE
             </div>
             <div className="mb-5">
               <div className="w-14 h-14 rounded-xl bg-orange-500/15 border border-orange-500/40 flex items-center justify-center">
@@ -36,26 +37,26 @@ const RunNode = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Generator</h3>
             <p className="text-gray-300 mb-6">
-              Contribute compute and earn from the current AIPG worker payout rail. Text, image, video,
-              upscaling and more — the software auto-detects your GPU and serves what it can handle.
+              Connect an existing text backend to the current AIPG worker payout rail. Experienced
+              media operators can run reviewed workflows, while managed media setup remains gated.
             </p>
 
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Supported GPUs are matched to measured, signed profiles</span>
+                <span>Text worker supports Ollama, vLLM, SGLang, LM Studio, and compatible backends</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Text · Image · Video · upscaling — matched to your card automatically</span>
+                <span>Managed media profiles publish only after local qualification</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Works with ComfyUI, vLLM, Ollama, or your own backend</span>
+                <span>Operator-managed ComfyUI workflows remain a separate advanced path</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-green-400">✓</span>
-                <span>Connect a GPU · earn per request served</span>
+                <span>Rewards follow recorded completed work; earnings are not guaranteed</span>
               </div>
             </div>
 
@@ -63,7 +64,7 @@ const RunNode = () => {
               href="/run"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-xl transition-all"
             >
-              Run a Generator
+              Run the Text Worker
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
               </svg>

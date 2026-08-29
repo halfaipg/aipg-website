@@ -28,6 +28,13 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 - `RunNode` must distinguish live paid workers from the validator preview:
   validators are CPU-only evidence nodes with no stake, rewards, slashing, or
   routing authority until real probe-group quorum ships.
+- Marketing copy must distinguish the live text-worker download from the
+  release-gated managed media installer. Do not claim universal GPU support,
+  guaranteed earnings, confidential inference, autonomous Core operation, or
+  shutdown resistance as present-tense production capabilities.
+- Describe the open-source surface specifically (contracts, SDKs, worker and
+  validator clients, models, workflow/protocol specifications). Do not claim
+  every operational component or deployment is public.
 
 ## Work Guidance
 

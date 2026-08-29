@@ -13,7 +13,7 @@ const Problem = () => {
           <p className="text-xl text-gray-300 leading-relaxed">
             $20 a month before your first line of code. A trial that expires. A card you don't have.
             Closed AI is full of velvet ropes. AIPG is built so the people who can pay fund the people who can't —
-            and so the network can never be shut down by anyone, including us.
+            and so builders can choose open APIs backed by distributed GPU supply instead of one closed vendor.
           </p>
         </div>
 
@@ -58,10 +58,10 @@ const Problem = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 text-center">Private. Unbiased. Yours.</h3>
+            <h3 className="text-xl font-bold text-white mb-3 text-center">Open models. Honest boundaries.</h3>
             <p className="text-gray-300 leading-relaxed">
-              Open models, no corporate worldview baked in by a policy team you've never met.
-              On the confidential tier, even the operator running the GPU can't read your prompts.
+              Build with open models without tying your application to one closed provider.
+              Confidential GPU sessions are planned; current community workers are not a private-inference guarantee.
             </p>
           </div>
         </div>
