@@ -20,9 +20,12 @@ with a scroll-reveal IntersectionObserver).
   the server hashes the manifest and checksum bytes it actually downloads and
   requires those byte lengths and digests to match GitHub's immutable asset
   metadata before parsing either file; it also resolves the immutable Git tag
-  to an exact commit and requires the manifest to name that same commit;
-  the manifest must also record verified Developer ID/notarization for macOS and
-  Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
+  to an exact commit and requires the manifest to name that same commit.
+  Linux x64/ARM64 availability depends on that complete release-integrity
+  contract, not on unrelated desktop identities. macOS remains hidden until
+  Developer ID/notarization is verified and Windows remains hidden until
+  Authenticode is verified. Mutable, unverified, and legacy releases fail
+  closed per platform.
   Media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
   machine-readable release manifest plus SPDX SBOM assets present. The server

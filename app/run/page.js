@@ -9,7 +9,7 @@ import {
 import {
   assessManagerRelease,
   assessQualificationRelease,
-  assessTextRelease,
+  assessTextReleaseAvailability,
 } from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
@@ -198,13 +198,15 @@ async function getTextRelease() {
       getReleaseTagCommit(TEXT_REPOSITORY, release.tag_name),
     ]);
     const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
-    if (
-      !contract ||
-      !assessTextRelease(verifiedRelease, contract.manifest, contract.checksums)
-        .ready
-    ) {
+    if (!contract) {
       return null;
     }
+    const availability = assessTextReleaseAvailability(
+      verifiedRelease,
+      contract.manifest,
+      contract.checksums,
+    );
+    if (!availability.integrityReady) return null;
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
@@ -219,10 +221,19 @@ async function getTextRelease() {
       version: release.tag_name.replace(/^v/, ""),
       publishedAt: release.published_at,
       releaseUrl: release.html_url,
-      linux: asset("grid-inference-worker-linux-x64"),
-      linuxArm64: asset("grid-inference-worker-linux-arm64"),
-      macos: asset("grid-inference-worker-macos-arm64.zip"),
-      windows: asset("grid-inference-worker-windows-x64.exe"),
+      linux: availability.platforms.linux.ready
+        ? asset("grid-inference-worker-linux-x64")
+        : null,
+      linuxArm64: availability.platforms.linuxArm64.ready
+        ? asset("grid-inference-worker-linux-arm64")
+        : null,
+      macos: availability.platforms.macos.ready
+        ? asset("grid-inference-worker-macos-arm64.zip")
+        : null,
+      windows: availability.platforms.windows.ready
+        ? asset("grid-inference-worker-windows-x64.exe")
+        : null,
+      platforms: availability.platforms,
       checksums: asset("SHA256SUMS"),
       manifest: asset("worker-release.json"),
       sbom: asset("grid-inference-worker-release.spdx.json"),
@@ -302,7 +313,7 @@ export default async function RunPage() {
       <OperatorPlanner
         opportunities={opportunities}
         mediaReady={Boolean(mediaRelease)}
-        textReady={Boolean(textRelease)}
+        textPlatforms={textRelease?.platforms || {}}
       />
 
       <section className="border-y border-white/10 bg-[#111214]">

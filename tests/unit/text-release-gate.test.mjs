@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { assessTextRelease } from "../../app/run/releaseGate.mjs";
+import {
+  assessTextRelease,
+  assessTextReleaseAvailability,
+} from "../../app/run/releaseGate.mjs";
 
 const payloadNames = [
   "grid-inference-worker-linux-x64",
@@ -163,4 +166,50 @@ test("rejects text releases without verified platform signing", () => {
   assert.ok(
     result.reasons.includes("text Windows Authenticode is not verified"),
   );
+});
+
+test("keeps verified Linux downloads available when desktop signing is absent", () => {
+  const value = fixture();
+  value.manifest.platform_signing.macos = {
+    verified: false,
+    identity: "adhoc",
+    notarized: false,
+    team_id: null,
+  };
+  value.manifest.platform_signing.windows = {
+    verified: false,
+    identity: "unsigned",
+    subject: null,
+  };
+
+  const result = assessTextReleaseAvailability(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+
+  assert.equal(result.integrityReady, true);
+  assert.equal(result.platforms.linux.ready, true);
+  assert.equal(result.platforms.linuxArm64.ready, true);
+  assert.equal(result.platforms.macos.ready, false);
+  assert.equal(result.platforms.windows.ready, false);
+  assert.match(result.platforms.macos.reason, /not Developer ID signed/i);
+  assert.match(result.platforms.windows.reason, /not Authenticode signed/i);
+});
+
+test("blocks every platform when the release payload fails integrity", () => {
+  const value = fixture();
+  value.release.assets[0].digest = `sha256:${"f".repeat(64)}`;
+
+  const result = assessTextReleaseAvailability(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+
+  assert.equal(result.integrityReady, false);
+  assert.equal(result.platforms.linux.ready, false);
+  assert.equal(result.platforms.linuxArm64.ready, false);
+  assert.equal(result.platforms.macos.ready, false);
+  assert.equal(result.platforms.windows.ready, false);
 });

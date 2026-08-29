@@ -50,6 +50,8 @@ export default function RunDownloads({
   }, [platform, workerType]);
 
   const release = workerType === "text" ? textRelease : mediaRelease;
+  const platformStatus =
+    workerType === "text" ? release?.platforms?.[platform] : null;
   const selected = useMemo(
     () => release?.[platform] || null,
     [release, platform],
@@ -178,7 +180,7 @@ export default function RunDownloads({
                   >
                     {workerType === "media"
                       ? "Media qualification in progress"
-                      : "Text release unavailable"}
+                      : platformStatus?.reason || "Text release unavailable"}
                   </button>
                   {workerType === "media" ? (
                     <div className="mt-3 grid gap-2">
@@ -228,7 +230,7 @@ export default function RunDownloads({
                   <FiMonitor aria-hidden="true" />
                   {PLATFORMS[platform].detail}
                 </span>
-                {releaseReady && (
+                {release && (releaseReady || workerType === "text") && (
                   <>
                     {release.checksums ? (
                       <a
@@ -283,15 +285,16 @@ export default function RunDownloads({
           <div>
             <h2 className="text-xl font-bold">
               {textRelease
-                ? "Verified text worker · qualified media next"
+                ? "Verified Linux text worker · desktop signing pending"
                 : "Text candidate in validation · qualified media next"}
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-400">
-              The text worker connects to an existing Ollama, vLLM, SGLang,
-              LMDeploy, LM Studio, or KoboldCpp backend after its hardened
-              release clears staging. The first managed media profile targets
-              ACE-Step audio and stays unavailable until its signed
-              qualification evidence is complete.
+              The verified Linux worker connects to an existing Ollama, vLLM,
+              SGLang, LMDeploy, LM Studio, or KoboldCpp backend. macOS remains
+              blocked until Developer ID notarization and Windows remains
+              blocked until Authenticode signing. The first managed media
+              profile targets ACE-Step audio and stays unavailable until its
+              signed qualification evidence is complete.
             </p>
           </div>
           <ul className="grid gap-2 text-sm text-gray-300 sm:grid-cols-3 md:grid-cols-1">
@@ -301,7 +304,7 @@ export default function RunDownloads({
               ) : (
                 <FiShield className="text-gray-400" />
               )}
-              {textRelease ? "Text release verified" : "Text release gated"}
+              {textRelease ? "Linux release verified" : "Text release gated"}
             </li>
             <li className="flex items-center gap-2">
               <FiCheck className="text-green-400" />

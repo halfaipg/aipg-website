@@ -313,7 +313,7 @@ export function assessQualificationRelease(release, manifest, checksumText) {
   return { ready: reasons.length === 0, reasons };
 }
 
-export function assessTextRelease(release, manifest, checksumText) {
+function assessTextReleaseIntegrity(release, manifest, checksumText) {
   const reasons = [];
   validateReleaseEnvelope(release, manifest, TEXT_TAG, reasons);
   if (release?.prerelease !== false)
@@ -327,30 +327,82 @@ export function assessTextRelease(release, manifest, checksumText) {
   ) {
     reasons.push("text manifest version does not match the release tag");
   }
-  const signing = manifest?.platform_signing || {};
-  const macos = signing.macos || {};
-  const windows = signing.windows || {};
+  validateTextPayload(release, manifest, checksumText, reasons);
+  return reasons;
+}
+
+function macosSigningVerified(manifest) {
+  const macos = manifest?.platform_signing?.macos || {};
+  return (
+    macos.verified === true &&
+    macos.identity === "developer_id_application" &&
+    macos.notarized === true &&
+    typeof macos.team_id === "string" &&
+    Boolean(macos.team_id)
+  );
+}
+
+function windowsSigningVerified(manifest) {
+  const windows = manifest?.platform_signing?.windows || {};
+  return (
+    windows.verified === true &&
+    windows.identity === "authenticode" &&
+    typeof windows.subject === "string" &&
+    Boolean(windows.subject)
+  );
+}
+
+export function assessTextReleaseAvailability(
+  release,
+  manifest,
+  checksumText,
+) {
+  const integrityReasons = assessTextReleaseIntegrity(
+    release,
+    manifest,
+    checksumText,
+  );
+  const integrityReady = integrityReasons.length === 0;
+  const macosReady = integrityReady && macosSigningVerified(manifest);
+  const windowsReady = integrityReady && windowsSigningVerified(manifest);
+
+  return {
+    integrityReady,
+    integrityReasons,
+    platforms: {
+      linux: { ready: integrityReady, reason: null },
+      linuxArm64: { ready: integrityReady, reason: null },
+      macos: {
+        ready: macosReady,
+        reason: macosReady
+          ? null
+          : integrityReady
+            ? "macOS build is not Developer ID signed and notarized"
+            : "Release integrity verification failed",
+      },
+      windows: {
+        ready: windowsReady,
+        reason: windowsReady
+          ? null
+          : integrityReady
+            ? "Windows build is not Authenticode signed"
+            : "Release integrity verification failed",
+      },
+    },
+  };
+}
+
+export function assessTextRelease(release, manifest, checksumText) {
+  const reasons = assessTextReleaseIntegrity(release, manifest, checksumText);
   if (
-    !(
-      macos.verified === true &&
-      macos.identity === "developer_id_application" &&
-      macos.notarized === true &&
-      typeof macos.team_id === "string" &&
-      macos.team_id
-    )
+    !macosSigningVerified(manifest)
   ) {
     reasons.push("text macOS Developer ID/notarization is not verified");
   }
   if (
-    !(
-      windows.verified === true &&
-      windows.identity === "authenticode" &&
-      typeof windows.subject === "string" &&
-      windows.subject
-    )
+    !windowsSigningVerified(manifest)
   ) {
     reasons.push("text Windows Authenticode is not verified");
   }
-  validateTextPayload(release, manifest, checksumText, reasons);
   return { ready: reasons.length === 0, reasons };
 }

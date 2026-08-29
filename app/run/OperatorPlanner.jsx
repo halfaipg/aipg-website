@@ -135,7 +135,7 @@ function recommendation({
 export default function OperatorPlanner({
   opportunities,
   mediaReady,
-  textReady,
+  textPlatforms,
 }) {
   const [os, setOs] = useState("linux");
   const [accelerator, setAccelerator] = useState("nvidia");
@@ -145,6 +145,11 @@ export default function OperatorPlanner({
   const [disk, setDisk] = useState(100);
   const [throughput, setThroughput] = useState(0);
   const [hydrated, setHydrated] = useState(false);
+  const textReady = Boolean(
+    os === "linux"
+      ? textPlatforms?.linux?.ready || textPlatforms?.linuxArm64?.ready
+      : textPlatforms?.[os]?.ready,
+  );
 
   useEffect(() => {
     setHydrated(true);
