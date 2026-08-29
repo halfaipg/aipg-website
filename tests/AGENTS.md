@@ -20,7 +20,8 @@ onboarding, and staking-withdrawal surfaces.
   weak-quorum, unscoped, or economically authoritative Core.
 - `unit/marketing-claims.test.mjs` - static release-policy guard preventing
   gated media, confidential inference, universal hardware support, autonomous
-  Core, and blanket open-source claims from being marketed as live.
+  Core, blanket open-source, permanent-free, permissionless-Core, and live
+  multi-asset/worker-claim payout claims from being marketed as current.
 
 ## Local Contracts
 

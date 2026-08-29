@@ -52,7 +52,7 @@ const Hero = () => {
                 </svg>
               </div>
             </div>
-            <div className="text-white font-semibold text-sm mb-1.5">Free, every day</div>
+            <div className="text-white font-semibold text-sm mb-1.5">Daily access without a subscription</div>
             <div className="text-gray-400 text-xs leading-snug">Daily API quota for builders, students, anyone curious. No card. No trial.</div>
           </div>
           <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-cyan-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
@@ -64,8 +64,8 @@ const Hero = () => {
                 </svg>
               </div>
             </div>
-            <div className="text-white font-semibold text-sm mb-1.5">Paid users fund the free tier</div>
-            <div className="text-gray-400 text-xs leading-snug">Your bill funds someone learning to code in a country where $20/mo isn't on the table.</div>
+            <div className="text-white font-semibold text-sm mb-1.5">Paid usage supports the network</div>
+            <div className="text-gray-400 text-xs leading-snug">Prepaid credits sustain shared access and compensate workers for completed generation.</div>
           </div>
           <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-emerald-500/40 rounded-2xl px-6 py-5 text-center max-w-[240px] transition-colors">
             <div className="flex justify-center mb-3">

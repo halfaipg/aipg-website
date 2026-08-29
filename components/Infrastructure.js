@@ -89,7 +89,7 @@ const Infrastructure = () => {
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">A network nobody can shut down</h3>
+                <h3 className="text-xl font-bold text-white">Toward distributed coordination</h3>
                 <span className="text-purple-400 text-sm font-medium">In Development</span>
               </div>
             </div>
@@ -109,7 +109,7 @@ const Infrastructure = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-1">◆</span>
-                <span>Worker-claimed rewards through audited smart contracts</span>
+                <span>Planned worker-claimed rewards through audited smart contracts</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-1">◆</span>

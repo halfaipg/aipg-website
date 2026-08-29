@@ -35,6 +35,11 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 - Describe the open-source surface specifically (contracts, SDKs, worker and
   validator clients, models, workflow/protocol specifications). Do not claim
   every operational component or deployment is public.
+- Daily access, paid credits, and worker rewards must be described as current
+  account/payout policy, not permanent guarantees or automatic earmarking.
+  Multi-asset and worker-claim payout rails remain explicitly planned.
+- Metadata and embedded assistant prompts are marketing surfaces and inherit
+  the same capability, privacy, payment, and decentralization boundaries.
 
 ## Work Guidance
 

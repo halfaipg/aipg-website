@@ -86,7 +86,7 @@ const About = () => {
               Electricity changed the industrial world. An open AI grid can change the digital one.
             </p>
             <p className="mt-4 text-gray-300">
-              AIPG turns community GPUs into distributed AI generation infrastructure. Developers get an OpenAI-compatible API for text, images, and video. GPU owners currently earn AIPG for serving real user jobs; a USD-valued multi-asset rail is the next economy phase. The network is open to everyone.
+              AIPG turns community GPUs into distributed AI generation infrastructure. Developers get familiar APIs for text, images, video, and audio. GPU owners currently earn AIPG for serving real user jobs; a USD-valued multi-asset rail is the next economy phase. Public clients and APIs are open to builders and operators.
             </p>
           </div>
 

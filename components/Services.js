@@ -62,7 +62,7 @@ const Services = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-            Rewards flow per job served to a real user. GPUs do productive work instead of arbitrary calculations.
+            Recorded completed jobs contribute to each worker's reward share. GPUs do productive work instead of arbitrary calculations.
             </p>
           </div>
         </div>
