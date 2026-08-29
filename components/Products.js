@@ -28,7 +28,7 @@ const products = [
   },
   {
     title: "Build with the API",
-    description: "Drop-in for OpenAI and Anthropic text, image, and video endpoints. Same SDKs, community-powered backend. Free daily quota.",
+    description: "OpenAI and Anthropic compatible text plus Grid image, video, and audio endpoints. Community-powered backend with daily and prepaid credits.",
     href: "https://docs.aipowergrid.io/streaming-api",
     label: "API Docs",
     icon: (
@@ -122,7 +122,7 @@ const Products = () => {
         </div>
         <p className="text-center mt-4">
           <a href="https://console.aipowergrid.io" target="_blank" className="text-[#f8991d] text-sm font-medium hover:underline">
-            Get a free API key →
+            Create an API key →
           </a>
         </p>
       </div>

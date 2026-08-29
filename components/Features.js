@@ -11,10 +11,10 @@ const Features = () => {
             Open Source, Open Doors
             </h2>
             <p className="mt-3 text-gray-800 dark:text-gray-400">
-            All code, models, and workflows are public. No vendor lock-in. No black boxes. You can inspect everything, run your own instances, and build on top of what exists.
+            Public contracts, SDKs, worker and validator clients, models, and workflow specifications are open to inspect and build on.
             </p>
             <p className="mt-3 text-gray-800 dark:text-gray-400">
-            Open development means every improvement benefits everyone. Bug fixes, performance gains, and new features spread across the network immediately.
+            Published interfaces use familiar APIs, so builders can integrate without tying their application to a proprietary client.
             </p>
           </div>
 
@@ -53,11 +53,11 @@ const Features = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                 </svg>
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                Community Owned
+                Community Operated
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-400">
-              The network belongs to the people who build it and run it. No single entity controls AIPG.
+              Independent operators can run workers and preview validators. Core coordination is still moving toward trusted partner nodes.
               </p>
             </div>
           </div>

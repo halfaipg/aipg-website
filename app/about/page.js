@@ -86,7 +86,7 @@ const About = () => {
               Electricity changed the industrial world. An open AI grid can change the digital one.
             </p>
             <p className="mt-4 text-gray-300">
-              AIPG turns community GPUs into distributed AI generation infrastructure. Developers get an OpenAI-compatible API for text, images, and video. GPU owners currently earn AIPG for serving real user jobs; a USD-valued multi-asset rail is the next economy phase. The network is open to everyone.
+              AIPG turns community GPUs into distributed AI generation infrastructure. Developers get familiar APIs for text, images, video, and audio. GPU owners currently earn AIPG for serving real user jobs; a USD-valued multi-asset rail is the next economy phase. Public clients and APIs are open to builders and operators.
             </p>
           </div>
 
@@ -174,7 +174,7 @@ const About = () => {
                     Open Source
                   </h3>
                   <p className="mt-1 text-gray-300">
-                  All code is public. No vendor lock-in. Run your own instance or use the network.
+                  Public contracts, SDKs, workers, validators, and protocol specifications can be inspected and extended.
                   </p>
                 </div>
               </div>
@@ -403,7 +403,7 @@ const About = () => {
                     </h3>
                   </div>
                   <p className="text-gray-600 dark:text-gray-400">
-                    All code and models publicly auditable
+                    Public protocol surfaces and open models are auditable
                   </p>
                 </div>
               </div>

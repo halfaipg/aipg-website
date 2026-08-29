@@ -13,7 +13,7 @@ const Problem = () => {
           <p className="text-xl text-gray-300 leading-relaxed">
             $20 a month before your first line of code. A trial that expires. A card you don't have.
             Closed AI is full of velvet ropes. AIPG is built so the people who can pay fund the people who can't —
-            and so the network can never be shut down by anyone, including us.
+            and so builders can choose open APIs backed by distributed GPU supply instead of one closed vendor.
           </p>
         </div>
 
@@ -28,10 +28,10 @@ const Problem = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 text-center">Free, and it stays free</h3>
+            <h3 className="text-xl font-bold text-white mb-3 text-center">Start without a subscription</h3>
             <p className="text-gray-300 leading-relaxed">
-              Sign up, get a key, build. No trial counting down. No reminder email asking for your card.
-              The free tier is the product — not a hook.
+              Eligible accounts can use a daily allowance, then add prepaid credits when they need
+              more capacity. The current terms are visible in the console before a request is sent.
             </p>
           </div>
 
@@ -43,10 +43,10 @@ const Problem = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 text-center">Pay it forward, automatically</h3>
+            <h3 className="text-xl font-bold text-white mb-3 text-center">Paid usage sustains access</h3>
             <p className="text-gray-300 leading-relaxed">
-              When you pay for higher limits, you're not just buying compute — you're funding the free tier
-              for someone shipping their first agent in a country where $20/mo isn't on the table.
+              Paid credits fund network operations and help us keep a practical daily allowance
+              available while independent workers are compensated for completed work.
             </p>
           </div>
 
@@ -58,10 +58,10 @@ const Problem = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 text-center">Private. Unbiased. Yours.</h3>
+            <h3 className="text-xl font-bold text-white mb-3 text-center">Open models. Honest boundaries.</h3>
             <p className="text-gray-300 leading-relaxed">
-              Open models, no corporate worldview baked in by a policy team you've never met.
-              On the confidential tier, even the operator running the GPU can't read your prompts.
+              Build with open models without tying your application to one closed provider.
+              Confidential GPU sessions are planned; current community workers are not a private-inference guarantee.
             </p>
           </div>
         </div>

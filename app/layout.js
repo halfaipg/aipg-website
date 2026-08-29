@@ -8,15 +8,15 @@ import Providers from "@/context/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI Power Grid - Decentralized AI Generation Network",
-  description: "Transform idle GPUs into a permissionless AI generation layer for text, images, video, agents, and workflows. GPU owners earn rewards for real user jobs.",
+  title: "AI Power Grid - Community-Powered AI Generation",
+  description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
   },
   openGraph: {
-    title: "AI Power Grid - Decentralized AI Generation Network",
-    description: "Transform idle GPUs into a permissionless AI generation layer for text, images, video, agents, and workflows. GPU owners earn rewards for real user jobs.",
+    title: "AI Power Grid - Community-Powered AI Generation",
+    description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
     url: "https://aipowergrid.io",
     siteName: "AI Power Grid",
     images: [
@@ -24,7 +24,7 @@ export const metadata = {
         url: "https://aipowergrid.io/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: "AI Power Grid - Decentralized AI Generation Network",
+        alt: "AI Power Grid - Community-Powered AI Generation",
       },
     ],
     locale: "en_US",
@@ -32,8 +32,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Power Grid - Decentralized AI Generation Network",
-    description: "Transform idle GPUs into a permissionless AI generation layer for text, images, video, agents, and workflows. GPU owners earn rewards for real user jobs.",
+    title: "AI Power Grid - Community-Powered AI Generation",
+    description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
     images: ["https://aipowergrid.io/opengraph-image.jpg"],
     creator: "@AIPowerGrid",
   },
