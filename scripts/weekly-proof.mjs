@@ -5,6 +5,17 @@ import { pathToFileURL } from "node:url";
 const GRID_API = "https://api.aipowergrid.io";
 const LITELLM_PR_API = "https://api.github.com/repos/BerriAI/litellm/pulls/38725";
 const LITELLM_PR_URL = "https://github.com/BerriAI/litellm/pull/38725";
+const WORKER_RELEASE_API =
+  "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases/latest";
+const WORKER_RELEASES_URL =
+  "https://github.com/AIPowerGrid/grid-text-worker/releases";
+const RUN_URL = "https://aipowergrid.io/run";
+const NPM_PACKAGES = [
+  "@aipowergrid/ai-sdk-provider",
+  "@aipowergrid/plugin-aipg",
+  "@aipowergrid/n8n-nodes-aipg",
+  "@aipowergrid/mcp",
+];
 
 const INTEGER = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const DECIMAL = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
@@ -58,7 +69,33 @@ function integrationState(pull) {
   return "closed without merge";
 }
 
-export function buildWeeklyProof({ network, totals, payouts, litellm }, now = new Date()) {
+function packageVersion(payload, expectedName) {
+  if (
+    payload?.name !== expectedName ||
+    typeof payload.version !== "string" ||
+    !/^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$/.test(payload.version)
+  ) {
+    throw new Error(`${expectedName} npm release is invalid`);
+  }
+  return payload.version;
+}
+
+function workerReleaseTag(release) {
+  if (
+    release?.draft !== false ||
+    release?.prerelease !== false ||
+    release?.immutable !== true ||
+    !/^v[0-9]+\.[0-9]+\.[0-9]+$/.test(release?.tag_name || "")
+  ) {
+    throw new Error("text-worker release is not immutable and stable");
+  }
+  return release.tag_name;
+}
+
+export function buildWeeklyProof(
+  { network, totals, payouts, litellm, workerRelease, packages },
+  now = new Date(),
+) {
   if (network?.schema !== "aipg.network.status.v1") {
     throw new Error("network status schema is invalid");
   }
@@ -87,6 +124,14 @@ export function buildWeeklyProof({ network, totals, payouts, litellm }, now = ne
   const modelRows = Array.isArray(capacity.models) ? capacity.models : [];
   const modalities = [...new Set(modelRows.map((row) => row?.type).filter(Boolean))].sort();
   if (!modalities.length) throw new Error("live modalities are unavailable");
+  if (!Array.isArray(capacity.models_below_target)) {
+    throw new Error("redundancy evidence is unavailable");
+  }
+  const belowTarget = capacity.models_below_target.length;
+  const workerTag = workerReleaseTag(workerRelease);
+  const packageRows = Object.fromEntries(
+    NPM_PACKAGES.map((name) => [name, packageVersion(packages?.[name], name)]),
+  );
 
   const date = now.toISOString().slice(0, 10);
   const state = integrationState(litellm);
@@ -94,7 +139,8 @@ export function buildWeeklyProof({ network, totals, payouts, litellm }, now = ne
     `AIPG weekly proof: ${INTEGER.format(workers)} workers are serving ${INTEGER.format(models)} live models across ${modalities.join(", ")}. The public ledger recorded ${INTEGER.format(jobs24h)} jobs in 24h and ${INTEGER.format(jobs30d)} in 30d. Live status: ${network.status}. https://aipowergrid.io/status`,
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
-    `Integration proof: the LiteLLM provider PR is ${state}, and the copy-paste setup for OpenAI SDKs, Open WebUI, Cline, Continue, LangChain, Vercel AI SDK, and n8n is live. ${LITELLM_PR_URL} https://aipowergrid.io/docs/integrations`,
+    `Integration proof: AI SDK ${packageRows["@aipowergrid/ai-sdk-provider"]}, ElizaOS ${packageRows["@aipowergrid/plugin-aipg"]}, n8n ${packageRows["@aipowergrid/n8n-nodes-aipg"]}, and MCP ${packageRows["@aipowergrid/mcp"]} are live on npm. LiteLLM is ${state}. https://aipowergrid.io/docs/integrations`,
+    `GPU supply: verified Linux text worker ${workerTag} is live for x64 and ARM64. ${INTEGER.format(belowTarget)} online models are below the 3-worker redundancy target, so operators can see real capacity gaps at ${RUN_URL}`,
   ];
   for (const [index, post] of posts.entries()) {
     if (post.length > 280) throw new Error(`post ${index + 1} exceeds 280 characters`);
@@ -126,6 +172,12 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 | Independently verified validator operators | ${INTEGER.format(independent)} |
 | Validator economic effect | ${validators.economic_effect || "unknown"} |
 | LiteLLM provider PR | ${state} |
+| Verified Linux text worker | ${workerTag} |
+| Models below redundancy target | ${INTEGER.format(belowTarget)} |
+| Vercel AI SDK package | ${packageRows["@aipowergrid/ai-sdk-provider"]} |
+| ElizaOS package | ${packageRows["@aipowergrid/plugin-aipg"]} |
+| n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]} |
+| MCP package | ${packageRows["@aipowergrid/mcp"]} |
 
 ## Sources
 
@@ -134,17 +186,33 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 - [Public Base payouts](${GRID_API}/v1/payouts/public?limit=200)
 - [LiteLLM provider PR](${LITELLM_PR_URL})
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
+- [Text-worker releases](${WORKER_RELEASES_URL})
+- [Worker onboarding](${RUN_URL})
 `;
 }
 
 export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
-  const [network, totals, payouts, litellm] = await Promise.all([
-    fetchJson(`${GRID_API}/v1/status/network`, fetcher),
-    fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
-    fetchJson(`${GRID_API}/v1/payouts/public?limit=200`, fetcher),
-    fetchJson(LITELLM_PR_API, fetcher).catch(() => null),
-  ]);
-  return buildWeeklyProof({ network, totals, payouts, litellm }, now);
+  const [network, totals, payouts, litellm, workerRelease, ...packagePayloads] =
+    await Promise.all([
+      fetchJson(`${GRID_API}/v1/status/network`, fetcher),
+      fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
+      fetchJson(`${GRID_API}/v1/payouts/public?limit=200`, fetcher),
+      fetchJson(LITELLM_PR_API, fetcher).catch(() => null),
+      fetchJson(WORKER_RELEASE_API, fetcher),
+      ...NPM_PACKAGES.map((name) =>
+        fetchJson(
+          `https://registry.npmjs.org/${name.replace("/", "%2F")}/latest`,
+          fetcher,
+        ),
+      ),
+    ]);
+  const packages = Object.fromEntries(
+    NPM_PACKAGES.map((name, index) => [name, packagePayloads[index]]),
+  );
+  return buildWeeklyProof(
+    { network, totals, payouts, litellm, workerRelease, packages },
+    now,
+  );
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

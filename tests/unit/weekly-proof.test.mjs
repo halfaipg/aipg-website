@@ -13,6 +13,7 @@ function fixture() {
       capacity: {
         workers_online: 8,
         models_online: 4,
+        models_below_target: ["model-a", "model-b"],
         models: [
           { type: "text" },
           { type: "image" },
@@ -42,6 +43,30 @@ function fixture() {
       })),
     },
     litellm: { state: "open", merged_at: null },
+    workerRelease: {
+      draft: false,
+      prerelease: false,
+      immutable: true,
+      tag_name: "v0.3.6",
+    },
+    packages: {
+      "@aipowergrid/ai-sdk-provider": {
+        name: "@aipowergrid/ai-sdk-provider",
+        version: "0.1.0",
+      },
+      "@aipowergrid/plugin-aipg": {
+        name: "@aipowergrid/plugin-aipg",
+        version: "0.1.0",
+      },
+      "@aipowergrid/n8n-nodes-aipg": {
+        name: "@aipowergrid/n8n-nodes-aipg",
+        version: "0.1.2",
+      },
+      "@aipowergrid/mcp": {
+        name: "@aipowergrid/mcp",
+        version: "0.1.1",
+      },
+    },
   };
 }
 
@@ -52,9 +77,12 @@ test("builds an evidence-linked thread without overstating validators", () => {
   assert.match(proof, /1,690 AIPG across 338 Base transfers in the past 7 days/);
   assert.match(proof, /0 independently verified operators/);
   assert.match(proof, /no routing, reward, strike, or slashing authority yet/);
-  assert.match(proof, /LiteLLM provider PR is open for maintainer review/);
-  const posts = [...proof.matchAll(/^### \d\/4\n\n(.+)$/gm)].map((match) => match[1]);
-  assert.equal(posts.length, 4);
+  assert.match(proof, /LiteLLM is open for maintainer review/);
+  assert.match(proof, /AI SDK 0\.1\.0, ElizaOS 0\.1\.0, n8n 0\.1\.2, and MCP 0\.1\.1/);
+  assert.match(proof, /verified Linux text worker v0\.3\.6/);
+  assert.match(proof, /2 online models are below the 3-worker redundancy target/);
+  const posts = [...proof.matchAll(/^### \d\/5\n\n(.+)$/gm)].map((match) => match[1]);
+  assert.equal(posts.length, 5);
   assert.ok(posts.every((post) => post.length <= 280));
 });
 
@@ -71,4 +99,20 @@ test("rejects an unknown network status schema", () => {
   const value = fixture();
   value.network.schema = "future.schema";
   assert.throws(() => buildWeeklyProof(value, NOW), /schema is invalid/);
+});
+
+test("rejects mutable worker releases and malformed npm evidence", () => {
+  const mutable = fixture();
+  mutable.workerRelease.immutable = false;
+  assert.throws(
+    () => buildWeeklyProof(mutable, NOW),
+    /release is not immutable and stable/,
+  );
+
+  const malformed = fixture();
+  malformed.packages["@aipowergrid/mcp"].name = "lookalike";
+  assert.throws(
+    () => buildWeeklyProof(malformed, NOW),
+    /@aipowergrid\/mcp npm release is invalid/,
+  );
 });
