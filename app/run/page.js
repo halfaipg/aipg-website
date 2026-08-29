@@ -1,16 +1,29 @@
 import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
+import {
+  decodeReleaseContract,
+  getReleaseTagCommit,
+  IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
+  releaseContractAssetSizesAllowed,
+} from "../releaseContract.mjs";
+import {
+  assessManagerRelease,
+  assessQualificationRelease,
+  assessTextRelease,
+} from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-media-worker/releases?per_page=20";
 const TEXT_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases?per_page=20";
 const GRID_API = "https://api.aipowergrid.io";
+const MEDIA_REPOSITORY = "AIPowerGrid/grid-media-worker";
+const TEXT_REPOSITORY = "AIPowerGrid/grid-text-worker";
 
 export const metadata = {
   title: "Run an AI Power Grid Worker",
   description:
-    "Download the signed AI Power Grid worker manager, validate your NVIDIA GPU locally, connect a payout wallet, and serve decentralized AI jobs.",
+    "Find verified AI Power Grid worker releases, validate hardware locally, and inspect current network capacity needs.",
 };
 
 async function getReleaseList(url) {
@@ -25,6 +38,41 @@ async function getReleaseList(url) {
   return response.json();
 }
 
+async function getReleaseContract(release, manifestName) {
+  const manifest = release.assets.find((item) => item.name === manifestName);
+  const checksums = release.assets.find((item) => item.name === "SHA256SUMS");
+  if (
+    !manifest ||
+    !checksums ||
+    !releaseContractAssetSizesAllowed(manifest, checksums)
+  ) {
+    return null;
+  }
+  const [manifestResponse, checksumResponse] = await Promise.all([
+    fetch(manifest.browser_download_url, {
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+    }),
+    fetch(checksums.browser_download_url, {
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+    }),
+  ]);
+  if (!manifestResponse.ok || !checksumResponse.ok) return null;
+  try {
+    const [manifestBytes, checksumBytes] = await Promise.all([
+      manifestResponse.arrayBuffer(),
+      checksumResponse.arrayBuffer(),
+    ]);
+    return decodeReleaseContract(
+      manifest,
+      checksums,
+      manifestBytes,
+      checksumBytes,
+    );
+  } catch {
+    return null;
+  }
+}
+
 async function getManagerRelease() {
   try {
     const releases = await getReleaseList(MEDIA_RELEASES_API);
@@ -36,6 +84,21 @@ async function getManagerRelease() {
         item.tag_name.startsWith("manager-v"),
     );
     if (!release) return null;
+    const [contract, resolvedTagCommit] = await Promise.all([
+      getReleaseContract(release, "manager-release.json"),
+      getReleaseTagCommit(MEDIA_REPOSITORY, release.tag_name),
+    ]);
+    const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
+    if (
+      !contract ||
+      !assessManagerRelease(
+        verifiedRelease,
+        contract.manifest,
+        contract.checksums,
+      ).ready
+    ) {
+      return null;
+    }
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
@@ -61,11 +124,87 @@ async function getManagerRelease() {
   }
 }
 
+async function getManagerQualificationRelease() {
+  try {
+    const releases = await getReleaseList(MEDIA_RELEASES_API);
+    const release = releases.find(
+      (item) =>
+        !item.draft &&
+        item.prerelease &&
+        typeof item.tag_name === "string" &&
+        item.tag_name.startsWith("manager-qualification-v"),
+    );
+    if (!release) return null;
+    const [contract, resolvedTagCommit] = await Promise.all([
+      getReleaseContract(release, "manager-qualification.json"),
+      getReleaseTagCommit(MEDIA_REPOSITORY, release.tag_name),
+    ]);
+    const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
+    if (
+      !contract ||
+      !assessQualificationRelease(
+        verifiedRelease,
+        contract.manifest,
+        contract.checksums,
+      ).ready
+    ) {
+      return null;
+    }
+    const asset = (name) => {
+      const found = release.assets.find((item) => item.name === name);
+      return found
+        ? {
+            name: found.name,
+            url: found.browser_download_url,
+            bytes: found.size,
+          }
+        : null;
+    };
+    const candidate = {
+      version: release.tag_name.replace("manager-qualification-v", ""),
+      publishedAt: release.published_at,
+      releaseUrl: release.html_url,
+      linux: asset("grid-media-manager-linux-x86_64"),
+      windows: asset("grid-media-manager-windows-x86_64.exe"),
+      checksums: asset("SHA256SUMS"),
+      manifest: asset("manager-qualification.json"),
+      sbom: asset("grid-media-manager-qualification.spdx.json"),
+    };
+    return candidate.linux &&
+      candidate.windows &&
+      candidate.checksums &&
+      candidate.manifest &&
+      candidate.sbom
+      ? candidate
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 async function getTextRelease() {
   try {
     const releases = await getReleaseList(TEXT_RELEASES_API);
-    const release = releases.find((item) => !item.draft && !item.prerelease);
+    const release = releases.find(
+      (item) =>
+        !item.draft &&
+        !item.prerelease &&
+        typeof item.tag_name === "string" &&
+        /^v[0-9]+\.[0-9]+\.[0-9]+$/.test(item.tag_name),
+    );
     if (!release) return null;
+    const [contract, resolvedTagCommit] = await Promise.all([
+      getReleaseContract(release, "worker-release.json"),
+      getReleaseTagCommit(TEXT_REPOSITORY, release.tag_name),
+    ]);
+    const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
+    if (
+      !contract ||
+      !assessTextRelease(verifiedRelease, contract.manifest, contract.checksums)
+        .ready
+    ) {
+      return null;
+    }
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
@@ -84,6 +223,9 @@ async function getTextRelease() {
       linuxArm64: asset("grid-inference-worker-linux-arm64"),
       macos: asset("grid-inference-worker-macos-arm64.zip"),
       windows: asset("grid-inference-worker-windows-x64.exe"),
+      checksums: asset("SHA256SUMS"),
+      manifest: asset("worker-release.json"),
+      sbom: asset("grid-inference-worker-release.spdx.json"),
     };
   } catch {
     return null;
@@ -141,19 +283,26 @@ async function getOperatorOpportunities() {
 }
 
 export default async function RunPage() {
-  const [mediaRelease, textRelease, opportunities] = await Promise.all([
-    getManagerRelease(),
-    getTextRelease(),
-    getOperatorOpportunities(),
-  ]);
+  const [mediaRelease, mediaQualificationRelease, textRelease, opportunities] =
+    await Promise.all([
+      getManagerRelease(),
+      getManagerQualificationRelease(),
+      getTextRelease(),
+      getOperatorOpportunities(),
+    ]);
 
   return (
     <main className="bg-black text-white">
-      <RunDownloads mediaRelease={mediaRelease} textRelease={textRelease} />
+      <RunDownloads
+        mediaRelease={mediaRelease}
+        mediaQualificationRelease={mediaQualificationRelease}
+        textRelease={textRelease}
+      />
 
       <OperatorPlanner
         opportunities={opportunities}
         mediaReady={Boolean(mediaRelease)}
+        textReady={Boolean(textRelease)}
       />
 
       <section className="border-y border-white/10 bg-[#111214]">

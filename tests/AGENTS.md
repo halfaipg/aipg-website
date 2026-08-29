@@ -18,6 +18,10 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
+- `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
+  checksum, manifest, SBOM, GitHub digest, and size contract.
+- `unit/release-contract-download.test.mjs` - downloaded manifest/checksum byte
+  hashing, length binding, strict UTF-8 parsing, and tamper rejection.
 - `unit/marketing-claims.test.mjs` - static release-policy guard preventing
   gated media, confidential inference, universal hardware support, autonomous
   Core, blanket open-source, permanent-free, permissionless-Core, and live
@@ -29,6 +33,8 @@ onboarding, and staking-withdrawal surfaces.
   depend on a funded wallet.
 - Fail on uncaught page errors and unexpected console errors, not only HTTP 200.
 - Cover disconnected and read-only states; wallet-provider mocks stay explicit.
+- Prefer route-specific readiness assertions over global network idleness for
+  pages that keep wallet-provider background connections open.
 
 ## Work Guidance
 

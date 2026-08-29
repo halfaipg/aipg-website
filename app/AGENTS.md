@@ -14,17 +14,32 @@ with a scroll-reveal IntersectionObserver).
 - `page.js` — home page; composes `components/` sections.
 - `about/page.js` — about page. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
-- `run/` — worker download and onboarding surface. It exposes the current text
-  worker release independently, while media-manager downloads require a public,
+- `run/` — worker download and onboarding surface. Text-worker downloads require
+  an immutable, stable `v*` release whose exact four-platform binary set, SPDX
+  SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
+  the server hashes the manifest and checksum bytes it actually downloads and
+  requires those byte lengths and digests to match GitHub's immutable asset
+  metadata before parsing either file; it also resolves the immutable Git tag
+  to an exact commit and requires the manifest to name that same commit;
+  the manifest must also record verified Developer ID/notarization for macOS and
+  Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
+  Media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
-  signed release manifest plus SPDX SBOM assets present. Its local operator
-  planner uses coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
+  machine-readable release manifest plus SPDX SBOM assets present. The server
+  must verify immutable-release state, manifest profile gates, GitHub asset
+  digests and sizes, and exact aggregate-checksum coverage before exposing a
+  media download. The final manager manifest must record verified Windows
+  Authenticode before the download opens. Its local operator planner uses
+  coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
   expected/measured throughput inputs to recommend a worker path;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
   public worker counts with 30-day job and observed-performance telemetry.
   While the media release is gated, the download panel links to the public
-  qualification cohort runbook so suitable GPU owners can contribute only
-  privacy-safe evidence.
+  qualification cohort runbook. A complete `manager-qualification-v*`
+  prerelease may expose a separately labelled benchmark-only binary, checksum,
+  and SBOM only after the same payload-identity checks plus explicit
+  no-enrollment/no-advertisement restrictions pass; it must never be presented
+  as a worker release.
   Jobs per worker is only a historical workload-share signal; capacity risk and
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
@@ -72,7 +87,8 @@ with a scroll-reveal IntersectionObserver).
 
 ## Verification
 
-—
+- `npm run test:unit` for worker release-policy contracts.
+- `npm run build` for the production route and server-side release fetches.
 
 ## Child DOX Index
 
