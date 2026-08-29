@@ -1,10 +1,15 @@
 import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
 import {
+  decodeReleaseContract,
+  getReleaseTagCommit,
+  IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
+  releaseContractAssetSizesAllowed,
+} from "../releaseContract.mjs";
+import {
   assessManagerRelease,
   assessQualificationRelease,
   assessTextRelease,
-  decodeReleaseContract,
 } from "./releaseGate.mjs";
 
 const MEDIA_RELEASES_API =
@@ -12,6 +17,8 @@ const MEDIA_RELEASES_API =
 const TEXT_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases?per_page=20";
 const GRID_API = "https://api.aipowergrid.io";
+const MEDIA_REPOSITORY = "AIPowerGrid/grid-media-worker";
+const TEXT_REPOSITORY = "AIPowerGrid/grid-text-worker";
 
 export const metadata = {
   title: "Run an AI Power Grid Worker",
@@ -34,10 +41,20 @@ async function getReleaseList(url) {
 async function getReleaseContract(release, manifestName) {
   const manifest = release.assets.find((item) => item.name === manifestName);
   const checksums = release.assets.find((item) => item.name === "SHA256SUMS");
-  if (!manifest || !checksums) return null;
+  if (
+    !manifest ||
+    !checksums ||
+    !releaseContractAssetSizesAllowed(manifest, checksums)
+  ) {
+    return null;
+  }
   const [manifestResponse, checksumResponse] = await Promise.all([
-    fetch(manifest.browser_download_url, { next: { revalidate: 300 } }),
-    fetch(checksums.browser_download_url, { next: { revalidate: 300 } }),
+    fetch(manifest.browser_download_url, {
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+    }),
+    fetch(checksums.browser_download_url, {
+      next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
+    }),
   ]);
   if (!manifestResponse.ok || !checksumResponse.ok) return null;
   try {
@@ -67,11 +84,18 @@ async function getManagerRelease() {
         item.tag_name.startsWith("manager-v"),
     );
     if (!release) return null;
-    const contract = await getReleaseContract(release, "manager-release.json");
+    const [contract, resolvedTagCommit] = await Promise.all([
+      getReleaseContract(release, "manager-release.json"),
+      getReleaseTagCommit(MEDIA_REPOSITORY, release.tag_name),
+    ]);
+    const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
     if (
       !contract ||
-      !assessManagerRelease(release, contract.manifest, contract.checksums)
-        .ready
+      !assessManagerRelease(
+        verifiedRelease,
+        contract.manifest,
+        contract.checksums,
+      ).ready
     ) {
       return null;
     }
@@ -111,14 +135,15 @@ async function getManagerQualificationRelease() {
         item.tag_name.startsWith("manager-qualification-v"),
     );
     if (!release) return null;
-    const contract = await getReleaseContract(
-      release,
-      "manager-qualification.json",
-    );
+    const [contract, resolvedTagCommit] = await Promise.all([
+      getReleaseContract(release, "manager-qualification.json"),
+      getReleaseTagCommit(MEDIA_REPOSITORY, release.tag_name),
+    ]);
+    const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
     if (
       !contract ||
       !assessQualificationRelease(
-        release,
+        verifiedRelease,
         contract.manifest,
         contract.checksums,
       ).ready
@@ -168,10 +193,15 @@ async function getTextRelease() {
         /^v[0-9]+\.[0-9]+\.[0-9]+$/.test(item.tag_name),
     );
     if (!release) return null;
-    const contract = await getReleaseContract(release, "worker-release.json");
+    const [contract, resolvedTagCommit] = await Promise.all([
+      getReleaseContract(release, "worker-release.json"),
+      getReleaseTagCommit(TEXT_REPOSITORY, release.tag_name),
+    ]);
+    const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
     if (
       !contract ||
-      !assessTextRelease(release, contract.manifest, contract.checksums).ready
+      !assessTextRelease(verifiedRelease, contract.manifest, contract.checksums)
+        .ready
     ) {
       return null;
     }

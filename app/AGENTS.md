@@ -19,7 +19,8 @@ with a scroll-reveal IntersectionObserver).
   SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
   the server hashes the manifest and checksum bytes it actually downloads and
   requires those byte lengths and digests to match GitHub's immutable asset
-  metadata before parsing either file;
+  metadata before parsing either file; it also resolves the immutable Git tag
+  to an exact commit and requires the manifest to name that same commit;
   the manifest must also record verified Developer ID/notarization for macOS and
   Authenticode for Windows. Mutable, unsigned, and legacy releases fail closed.
   Media-manager downloads require a public,

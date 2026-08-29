@@ -24,6 +24,7 @@ function fixture() {
     prerelease: false,
     immutable: true,
     tag_name: "v0.3.5",
+    resolved_tag_commit: "c".repeat(40),
     assets: [
       ...payloads.map((item) => ({
         name: item.name,

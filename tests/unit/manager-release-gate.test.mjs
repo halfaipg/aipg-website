@@ -35,6 +35,7 @@ function fixture(kind) {
     prerelease: isQualification,
     immutable: true,
     tag_name: tag,
+    resolved_tag_commit: "e".repeat(40),
     assets: [
       ...assets.map((item) => ({
         name: item.name,
@@ -132,6 +133,20 @@ test("rejects a mutable qualification release", () => {
   );
   assert.equal(result.ready, false);
   assert.ok(result.reasons.includes("release is not immutable"));
+});
+
+test("rejects a manifest that is not bound to the immutable tag commit", () => {
+  const value = fixture("qualification");
+  value.release.resolved_tag_commit = "f".repeat(40);
+  const result = assessQualificationRelease(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+  assert.equal(result.ready, false);
+  assert.ok(
+    result.reasons.includes("manifest commit does not match the release tag"),
+  );
 });
 
 test("rejects a release asset whose GitHub digest disagrees", () => {
