@@ -39,9 +39,35 @@ test.describe('/run smoke', () => {
 
     const download = page.getByRole('link', { name: /Download .* for/ });
     const releaseGate = page.getByRole('button', {
-      name: /release unavailable|qualification in progress/i,
+      name: /release unavailable|qualification in progress|not .*signed/i,
     });
     expect((await download.count()) + (await releaseGate.count())).toBe(1);
+
+    await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
+    await expect(
+      page.getByRole('link', { name: /Download text worker for Linux/ }),
+    ).toHaveAttribute(
+      'href',
+      /grid-text-worker\/releases\/download\/v0\.3\.6\/grid-inference-worker-linux-x64$/,
+    );
+
+    await page.getByRole('button', { name: 'macOS', exact: true }).first().click();
+    await expect(
+      page.getByRole('button', { name: /macOS build is not Developer ID signed/i }),
+    ).toBeVisible();
+
+    await page.getByRole('button', { name: 'Windows', exact: true }).first().click();
+    await expect(
+      page.getByRole('button', { name: /Windows build is not Authenticode signed/i }),
+    ).toBeVisible();
+
+    await page
+      .getByRole('group', { name: 'Operating system' })
+      .getByRole('button', { name: 'Linux' })
+      .click();
+    await expect(
+      page.getByRole('heading', { name: 'Start with the verified text worker' }),
+    ).toBeVisible();
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >

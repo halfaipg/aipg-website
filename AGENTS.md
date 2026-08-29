@@ -79,6 +79,11 @@ on Vercel.
   external script/media origin must be added to the CSP there or it will be blocked in prod.
 - `/docs` and `/docs/*` are Vercel rewrites to the separate aipg-documentation deployment
   (`vercel.json`) — not routes in this repo.
+- `/run` verifies the complete immutable text-worker release envelope before
+  exposing any artifact. Linux x64/ARM64 may download from a provenance- and
+  checksum-verified release without depending on unrelated desktop signing;
+  macOS remains hidden until Developer ID notarization is verified and Windows
+  remains hidden until Authenticode is verified.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.
