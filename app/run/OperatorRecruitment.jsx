@@ -2,6 +2,8 @@ import { FiArrowRight, FiCpu, FiShield } from "react-icons/fi";
 
 const OPERATOR_INTAKE_URL =
   "https://github.com/halfaipg/aipg-website/issues/new?template=operator-interest.yml";
+const TEXT_OPERATOR_COHORT_URL =
+  "https://github.com/AIPowerGrid/grid-text-worker/issues/10";
 
 export default function OperatorRecruitment() {
   return (
@@ -13,29 +15,40 @@ export default function OperatorRecruitment() {
             Operator cohort
           </p>
           <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            Have a GPU we should put to work?
+            Add independent text capacity
           </h2>
           <p className="mt-4 text-sm leading-6 text-gray-300 md:text-base">
-            Share the model, VRAM, operating system, and availability. We will
-            match promising machines to a verified worker path or qualification
-            cohort as capacity opens.
+            The current paid cohort is open to Linux operators with an existing
+            Ollama or OpenAI-compatible GPU backend. Join the tracked cohort for
+            current model gaps, acceptance evidence, and setup support.
           </p>
           <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-gray-400">
             <FiShield className="mt-0.5 shrink-0" aria-hidden="true" />
-            The intake is public and accepts coarse specifications only. Never
-            post credentials, wallet details, network addresses, or private
-            logs.
+            Both GitHub paths are public. Share coarse hardware and availability
+            only. Never post credentials, wallet details, network addresses, or
+            private logs.
           </p>
         </div>
-        <a
-          href={OPERATOR_INTAKE_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex min-h-12 items-center justify-center gap-2 bg-orange-500 px-6 font-bold text-black transition-colors hover:bg-orange-400"
-        >
-          Register operator interest
-          <FiArrowRight aria-hidden="true" />
-        </a>
+        <div className="grid min-w-60 gap-3">
+          <a
+            href={TEXT_OPERATOR_COHORT_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-12 items-center justify-center gap-2 bg-orange-500 px-6 font-bold text-black transition-colors hover:bg-orange-400"
+          >
+            Join the text cohort
+            <FiArrowRight aria-hidden="true" />
+          </a>
+          <a
+            href={OPERATOR_INTAKE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/20 px-6 font-semibold text-white transition-colors hover:bg-white/10"
+          >
+            Register other hardware
+            <FiArrowRight aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
   );
