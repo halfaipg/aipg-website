@@ -63,6 +63,10 @@ with a scroll-reveal IntersectionObserver).
   operator-interest issue form for other hardware. The page and both GitHub
   paths must state that only coarse hardware and availability belong there;
   private setup details stay out of public GitHub issues.
+  A verified Linux text download must be followed immediately by the exact
+  artifact-specific first-run commands, local wizard URL, scoped-key boundary,
+  and online/public-worker verification steps. Never teach operators to place a
+  Grid key or wallet secret in a shell command.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
