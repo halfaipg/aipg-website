@@ -287,6 +287,7 @@ async function getOperatorOpportunities() {
           type: item.type,
           workers: Math.max(0, Number(item.count) || 0),
           jobs30d: Math.max(0, Number(measured.jobs) || 0),
+          acceptedDen30d: Math.max(0, Number(measured.den) || 0),
           tokensPerSecond: Number.isFinite(Number(measured.tokens_per_s))
             ? Number(measured.tokens_per_s)
             : null,

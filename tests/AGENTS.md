@@ -35,7 +35,8 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/operator-evidence.test.mjs` - rolling payout-window validation,
   bounded den-share arithmetic, and exact online-worker matching.
 - `unit/operator-opportunity.test.mjs` - deterministic text-route priority
-  ranking that excludes media, offline, malformed, and fully redundant routes.
+  ranking using accepted den and missing replicas while excluding media,
+  offline, malformed, and fully redundant routes.
 - `unit/operator-intake.test.mjs` - public operator-interest form contract,
   required coarse planning fields, and forbidden sensitive-field boundary.
 - `unit/operator-platform.test.mjs` - shared conservative platform detection
