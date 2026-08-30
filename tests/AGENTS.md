@@ -29,9 +29,9 @@ onboarding, and staking-withdrawal surfaces.
   Core, blanket open-source, permanent-free, permissionless-Core, and live
   multi-asset/worker-claim payout claims from being marketed as current.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
-  immutable worker-release, exact npm-package, and media-qualification
-  validation, social-length, and validator-caveat contracts for the weekly
-  proof draft.
+  immutable worker-release, exact npm-package, profile-bound media
+  qualification, expiring same-model price evidence, social-length, and
+  validator-caveat contracts for the weekly proof draft.
 - `unit/operator-evidence.test.mjs` - rolling payout-window validation,
   bounded den-share arithmetic, and exact online-worker matching.
 - `unit/operator-intake.test.mjs` - public operator-interest form contract,

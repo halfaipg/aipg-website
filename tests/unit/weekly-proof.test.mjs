@@ -42,6 +42,32 @@ function fixture() {
         payouts: 2,
       })),
     },
+    pricing: {
+      schema: "aipg.pricing.v1",
+      comparison_evidence: {
+        status: "current",
+        as_of: "2026-08-29T00:00:00Z",
+        valid_until: "2026-09-29T00:00:00Z",
+        items: [
+          {
+            id: "gpt-oss-120b-standard-token-rates",
+            provider: "Groq",
+            source_url: "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+            aipg_usd: 0.375,
+            competitor_usd: 0.75,
+            savings_percent: 50,
+          },
+          {
+            id: "z-image-turbo-one-megapixel",
+            provider: "fal",
+            source_url: "https://fal.ai/models/fal-ai/z-image/turbo",
+            aipg_usd: 0.003,
+            competitor_usd: 0.005,
+            savings_percent: 40,
+          },
+        ],
+      },
+    },
     litellm: { state: "open", merged_at: null },
     workerRelease: {
       draft: false,
@@ -86,7 +112,7 @@ function fixture() {
       },
       "@aipowergrid/n8n-nodes-aipg": {
         name: "@aipowergrid/n8n-nodes-aipg",
-        version: "0.1.2",
+        version: "0.1.3",
       },
       "@aipowergrid/mcp": {
         name: "@aipowergrid/mcp",
@@ -104,7 +130,7 @@ test("builds an evidence-linked thread without overstating validators", () => {
   assert.match(proof, /0 independently verified operators/);
   assert.match(proof, /no routing, reward, strike, or slashing authority yet/);
   assert.match(proof, /LiteLLM is open for maintainer review/);
-  assert.match(proof, /AI SDK 0\.1\.0, ElizaOS 0\.1\.0, n8n 0\.1\.2, and MCP 0\.1\.1/);
+  assert.match(proof, /AI SDK 0\.1\.0, ElizaOS 0\.1\.0, n8n 0\.1\.3, and MCP 0\.1\.1/);
   assert.match(proof, /verified Linux text worker v0\.3\.6/);
   assert.match(proof, /2 routes are below the 3-worker target/);
   assert.match(
@@ -113,8 +139,10 @@ test("builds an evidence-linked thread without overstating validators", () => {
   );
   assert.match(proof, /the tool is benchmark-only and earns no rewards/);
   assert.match(proof, /Media qualification release ready \| no/);
-  const posts = [...proof.matchAll(/^### \d\/5\n\n(.+)$/gm)].map((match) => match[1]);
-  assert.equal(posts.length, 5);
+  assert.match(proof, /same GPT-OSS-120B workload is \$0\.375 on AIPG vs \$0\.75 on Groq/);
+  assert.match(proof, /1 MP Z-Image Turbo image is \$0\.003 vs \$0\.005 on fal/);
+  const posts = [...proof.matchAll(/^### \d\/6\n\n(.+)$/gm)].map((match) => match[1]);
+  assert.equal(posts.length, 6);
   assert.ok(posts.every((post) => post.length <= 280));
 });
 
@@ -155,5 +183,42 @@ test("rejects inconsistent media qualification evidence", () => {
   assert.throws(
     () => buildWeeklyProof(value, NOW),
     /media qualification status is invalid/,
+  );
+});
+
+test("fails closed on stale, incomplete, or inconsistent pricing evidence", () => {
+  const stale = fixture();
+  stale.pricing.comparison_evidence.status = "stale";
+  assert.throws(() => buildWeeklyProof(stale, NOW), /comparisons are not current/);
+
+  const incomplete = fixture();
+  incomplete.pricing.comparison_evidence.items.pop();
+  assert.throws(
+    () => buildWeeklyProof(incomplete, NOW),
+    /comparisons are incomplete or duplicated/,
+  );
+
+  const inconsistent = fixture();
+  inconsistent.pricing.comparison_evidence.items[0].aipg_usd = 0.7;
+  assert.throws(
+    () => buildWeeklyProof(inconsistent, NOW),
+    /comparison evidence is inconsistent/,
+  );
+});
+
+test("requires official comparison sources and a live review window", () => {
+  const wrongSource = fixture();
+  wrongSource.pricing.comparison_evidence.items[1].source_url =
+    "https://example.com/z-image";
+  assert.throws(
+    () => buildWeeklyProof(wrongSource, NOW),
+    /comparison evidence is inconsistent/,
+  );
+
+  const expired = fixture();
+  expired.pricing.comparison_evidence.valid_until = "2026-08-29T19:59:59Z";
+  assert.throws(
+    () => buildWeeklyProof(expired, NOW),
+    /comparison window is invalid/,
   );
 });

@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { normalizeMediaQualificationStatus } from "../app/run/qualificationStatus.mjs";
 
 const GRID_API = "https://api.aipowergrid.io";
+const PRICING_URL = `${GRID_API}/v1/pricing`;
 const LITELLM_PR_API = "https://api.github.com/repos/BerriAI/litellm/pulls/38725";
 const LITELLM_PR_URL = "https://github.com/BerriAI/litellm/pull/38725";
 const WORKER_RELEASE_API =
@@ -98,11 +99,81 @@ function workerReleaseTag(release) {
   return release.tag_name;
 }
 
+function pricingComparisons(pricing, now) {
+  if (pricing?.schema !== "aipg.pricing.v1") {
+    throw new Error("pricing schema is invalid");
+  }
+  const evidence = pricing.comparison_evidence;
+  if (evidence?.status !== "current" || !Array.isArray(evidence.items)) {
+    throw new Error("pricing comparisons are not current");
+  }
+  const asOf = Date.parse(evidence.as_of || "");
+  const validUntil = Date.parse(evidence.valid_until || "");
+  if (
+    !Number.isFinite(asOf) ||
+    !Number.isFinite(validUntil) ||
+    asOf > now.getTime() ||
+    validUntil < now.getTime() ||
+    validUntil <= asOf
+  ) {
+    throw new Error("pricing comparison window is invalid");
+  }
+
+  const expected = {
+    "gpt-oss-120b-standard-token-rates": {
+      provider: "Groq",
+      sourceHost: "console.groq.com",
+    },
+    "z-image-turbo-one-megapixel": {
+      provider: "fal",
+      sourceHost: "fal.ai",
+    },
+  };
+  const comparisons = Object.fromEntries(
+    evidence.items.map((item) => {
+      if (!item?.id || !(item.id in expected)) {
+        throw new Error("pricing comparison contains an unknown benchmark");
+      }
+      return [item.id, item];
+    }),
+  );
+  if (Object.keys(comparisons).length !== Object.keys(expected).length) {
+    throw new Error("pricing comparisons are incomplete or duplicated");
+  }
+
+  for (const [id, contract] of Object.entries(expected)) {
+    const item = comparisons[id];
+    let source;
+    try {
+      source = new URL(item.source_url);
+    } catch {
+      throw new Error(`${id} source URL is invalid`);
+    }
+    const aipgUsd = finite(item.aipg_usd, `${id} AIPG price`);
+    const competitorUsd = finite(item.competitor_usd, `${id} competitor price`);
+    const savings = finite(item.savings_percent, `${id} savings`);
+    const calculated = ((competitorUsd - aipgUsd) / competitorUsd) * 100;
+    if (
+      item.provider !== contract.provider ||
+      source.protocol !== "https:" ||
+      source.hostname !== contract.sourceHost ||
+      aipgUsd <= 0 ||
+      competitorUsd <= 0 ||
+      aipgUsd >= competitorUsd ||
+      Math.abs(calculated - savings) > 0.05
+    ) {
+      throw new Error(`${id} comparison evidence is inconsistent`);
+    }
+  }
+  return comparisons;
+}
+
 export function buildWeeklyProof(
   {
     network,
     totals,
     payouts,
+    pricing,
     litellm,
     workerRelease,
     mediaQualification,
@@ -151,6 +222,9 @@ export function buildWeeklyProof(
   const mediaSupply = mediaNeeds.length
     ? `Media qualification still needs ${mediaNeeds.join(", ")} evidence; the tool is benchmark-only and earns no rewards.`
     : "Media hardware evidence is complete, but the managed release remains subject to its signing and staging gates.";
+  const comparisons = pricingComparisons(pricing, now);
+  const textPrice = comparisons["gpt-oss-120b-standard-token-rates"];
+  const imagePrice = comparisons["z-image-turbo-one-megapixel"];
   const packageRows = Object.fromEntries(
     NPM_PACKAGES.map((name) => [name, packageVersion(packages?.[name], name)]),
   );
@@ -163,6 +237,7 @@ export function buildWeeklyProof(
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
     `Integration proof: AI SDK ${packageRows["@aipowergrid/ai-sdk-provider"]}, ElizaOS ${packageRows["@aipowergrid/plugin-aipg"]}, n8n ${packageRows["@aipowergrid/n8n-nodes-aipg"]}, and MCP ${packageRows["@aipowergrid/mcp"]} are live on npm. LiteLLM is ${state}. https://aipowergrid.io/docs/integrations`,
     `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
+    `Price proof: the same GPT-OSS-120B workload is $${textPrice.aipg_usd} on AIPG vs $${textPrice.competitor_usd} on Groq (${textPrice.savings_percent}% less); a 1 MP Z-Image Turbo image is $${imagePrice.aipg_usd} vs $${imagePrice.competitor_usd} on fal (${imagePrice.savings_percent}% less). Sources and expiry: ${PRICING_URL}`,
   ];
   for (const [index, post] of posts.entries()) {
     if (post.length > 280) throw new Error(`post ${index + 1} exceeds 280 characters`);
@@ -202,12 +277,16 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 | ElizaOS package | ${packageRows["@aipowergrid/plugin-aipg"]} |
 | n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]} |
 | MCP package | ${packageRows["@aipowergrid/mcp"]} |
+| GPT-OSS-120B comparison | $${textPrice.aipg_usd} AIPG / $${textPrice.competitor_usd} Groq (${textPrice.savings_percent}% less) |
+| Z-Image Turbo comparison | $${imagePrice.aipg_usd} AIPG / $${imagePrice.competitor_usd} fal (${imagePrice.savings_percent}% less) |
+| Price comparison valid until | ${pricing.comparison_evidence.valid_until} |
 
 ## Sources
 
 - [Network status](${GRID_API}/v1/status/network)
 - [Generation totals](${GRID_API}/v1/stats/totals)
 - [Public Base payouts](${GRID_API}/v1/payouts/public?limit=200)
+- [Current pricing and comparison evidence](${PRICING_URL})
 - [LiteLLM provider PR](${LITELLM_PR_URL})
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
 - [Text-worker releases](${WORKER_RELEASES_URL})
@@ -222,6 +301,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
     network,
     totals,
     payouts,
+    pricing,
     litellm,
     workerRelease,
     mediaQualification,
@@ -231,6 +311,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       fetchJson(`${GRID_API}/v1/status/network`, fetcher),
       fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
       fetchJson(`${GRID_API}/v1/payouts/public?limit=200`, fetcher),
+      fetchJson(PRICING_URL, fetcher),
       fetchJson(LITELLM_PR_API, fetcher).catch(() => null),
       fetchJson(WORKER_RELEASE_API, fetcher),
       fetchJson(MEDIA_QUALIFICATION_STATUS_URL, fetcher),
@@ -249,6 +330,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       network,
       totals,
       payouts,
+      pricing,
       litellm,
       workerRelease,
       mediaQualification,
