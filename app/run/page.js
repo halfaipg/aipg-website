@@ -10,7 +10,7 @@ import {
   releaseContractAssetSizesAllowed,
 } from "../releaseContract.mjs";
 import {
-  assessManagerRelease,
+  assessManagerReleaseAvailability,
   assessQualificationRelease,
   assessTextReleaseAvailability,
 } from "./releaseGate.mjs";
@@ -92,16 +92,15 @@ async function getManagerRelease() {
       getReleaseTagCommit(MEDIA_REPOSITORY, release.tag_name),
     ]);
     const verifiedRelease = { ...release, resolved_tag_commit: resolvedTagCommit };
-    if (
-      !contract ||
-      !assessManagerRelease(
-        verifiedRelease,
-        contract.manifest,
-        contract.checksums,
-      ).ready
-    ) {
+    if (!contract) {
       return null;
     }
+    const availability = assessManagerReleaseAvailability(
+      verifiedRelease,
+      contract.manifest,
+      contract.checksums,
+    );
+    if (!availability.integrityReady) return null;
     const asset = (name) => {
       const found = release.assets.find((item) => item.name === name);
       return found
@@ -116,8 +115,13 @@ async function getManagerRelease() {
       version: release.tag_name.replace("manager-v", ""),
       publishedAt: release.published_at,
       releaseUrl: release.html_url,
-      linux: asset("grid-media-manager-linux-x86_64"),
-      windows: asset("grid-media-manager-windows-x86_64.exe"),
+      linux: availability.platforms.linux.ready
+        ? asset("grid-media-manager-linux-x86_64")
+        : null,
+      windows: availability.platforms.windows.ready
+        ? asset("grid-media-manager-windows-x86_64.exe")
+        : null,
+      platforms: availability.platforms,
       checksums: asset("SHA256SUMS"),
       manifest: asset("manager-release.json"),
       sbom: asset("grid-media-manager-release.spdx.json"),

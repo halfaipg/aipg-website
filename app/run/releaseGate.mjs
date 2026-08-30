@@ -212,7 +212,7 @@ function validateReleaseEnvelope(release, manifest, tagPattern, reasons) {
   }
 }
 
-export function assessManagerRelease(release, manifest, checksumText) {
+function assessManagerReleaseIntegrity(release, manifest, checksumText) {
   const reasons = [];
   validateReleaseEnvelope(release, manifest, MANAGER_TAG, reasons);
   if (release?.prerelease !== false)
@@ -242,17 +242,6 @@ export function assessManagerRelease(release, manifest, checksumText) {
   if (!HEX_SHA256.test(profile.qualification_manifest_sha256 || "")) {
     reasons.push("manager profile has no valid qualification commitment");
   }
-  const windows = manifest?.platform_signing?.windows || {};
-  if (
-    !(
-      windows.verified === true &&
-      windows.identity === "authenticode" &&
-      typeof windows.subject === "string" &&
-      windows.subject
-    )
-  ) {
-    reasons.push("manager Windows Authenticode is not verified");
-  }
   validatePayload(
     release,
     manifest,
@@ -261,6 +250,48 @@ export function assessManagerRelease(release, manifest, checksumText) {
     MANAGER_MANIFEST,
     reasons,
   );
+  return reasons;
+}
+
+export function assessManagerReleaseAvailability(
+  release,
+  manifest,
+  checksumText,
+) {
+  const integrityReasons = assessManagerReleaseIntegrity(
+    release,
+    manifest,
+    checksumText,
+  );
+  const integrityReady = integrityReasons.length === 0;
+  const windowsReady = integrityReady && windowsSigningVerified(manifest);
+
+  return {
+    integrityReady,
+    integrityReasons,
+    platforms: {
+      linux: { ready: integrityReady, reason: null },
+      windows: {
+        ready: windowsReady,
+        reason: windowsReady
+          ? null
+          : integrityReady
+            ? "Windows build is not Authenticode signed"
+            : "Release integrity verification failed",
+      },
+    },
+  };
+}
+
+export function assessManagerRelease(release, manifest, checksumText) {
+  const reasons = assessManagerReleaseIntegrity(
+    release,
+    manifest,
+    checksumText,
+  );
+  if (!windowsSigningVerified(manifest)) {
+    reasons.push("manager Windows Authenticode is not verified");
+  }
   return { ready: reasons.length === 0, reasons };
 }
 

@@ -50,8 +50,7 @@ export default function RunDownloads({
   }, [platform, workerType]);
 
   const release = workerType === "text" ? textRelease : mediaRelease;
-  const platformStatus =
-    workerType === "text" ? release?.platforms?.[platform] : null;
+  const platformStatus = release?.platforms?.[platform] || null;
   const selected = useMemo(
     () => release?.[platform] || null,
     [release, platform],
@@ -179,7 +178,7 @@ export default function RunDownloads({
                     className="min-h-12 w-full cursor-not-allowed bg-white/10 px-5 font-semibold text-gray-400"
                   >
                     {workerType === "media"
-                      ? "Media qualification in progress"
+                      ? platformStatus?.reason || "Media qualification in progress"
                       : platformStatus?.reason || "Text release unavailable"}
                   </button>
                   {workerType === "media" ? (

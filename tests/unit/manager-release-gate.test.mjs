@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   assessManagerRelease,
+  assessManagerReleaseAvailability,
   assessQualificationRelease,
 } from "../../app/run/releaseGate.mjs";
 
@@ -224,4 +225,22 @@ test("rejects a manager release without verified Authenticode", () => {
   assert.ok(
     result.reasons.includes("manager Windows Authenticode is not verified"),
   );
+});
+
+test("keeps verified Linux available when Windows is unsigned", () => {
+  const value = fixture("manager");
+  value.manifest.platform_signing.windows.verified = false;
+  value.manifest.platform_signing.windows.identity = "unsigned";
+  value.manifest.platform_signing.windows.subject = null;
+  const result = assessManagerReleaseAvailability(
+    value.release,
+    value.manifest,
+    value.checksums,
+  );
+
+  assert.equal(result.integrityReady, true);
+  assert.deepEqual(result.integrityReasons, []);
+  assert.deepEqual(result.platforms.linux, { ready: true, reason: null });
+  assert.equal(result.platforms.windows.ready, false);
+  assert.match(result.platforms.windows.reason, /not Authenticode signed/i);
 });
