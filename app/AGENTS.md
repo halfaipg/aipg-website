@@ -25,7 +25,11 @@ with a scroll-reveal IntersectionObserver).
   contract, not on unrelated desktop identities. macOS remains hidden until
   Developer ID/notarization is verified and Windows remains hidden until
   Authenticode is verified. Mutable, unverified, and legacy releases fail
-  closed per platform.
+  closed per platform. Starting with `v0.3.7`, the exact payload must also
+  include `install-worker.sh` in the manifest, aggregate checksums, and GitHub
+  asset identities. `/run` prefers that non-executing, architecture-detecting
+  installer for Linux while retaining the exact platform binary as a direct
+  fallback; earlier immutable releases remain bound to their original payload.
   Media-manager downloads require a public,
   non-prerelease `manager-v*` release with both the aggregate checksum and
   machine-readable release manifest plus SPDX SBOM assets present. The server

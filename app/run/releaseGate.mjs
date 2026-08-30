@@ -18,15 +18,32 @@ const QUALIFICATION_PAYLOADS = [
   "grid-media-manager-qualification.spdx.json",
 ];
 const QUALIFICATION_MANIFEST = "manager-qualification.json";
-const TEXT_PAYLOADS = [
+const TEXT_BASE_PAYLOADS = [
   "grid-inference-worker-linux-x64",
   "grid-inference-worker-linux-arm64",
   "grid-inference-worker-macos-arm64.zip",
   "grid-inference-worker-windows-x64.exe",
   "grid-inference-worker-release.spdx.json",
 ];
-const TEXT_CHECKSUMMED = [...TEXT_PAYLOADS, "worker-release.json"];
-const TEXT_RELEASE_ASSETS = [...TEXT_CHECKSUMMED, "SHA256SUMS"];
+const TEXT_INSTALLER = "install-worker.sh";
+const TEXT_INSTALLER_MINIMUM = [0, 3, 7];
+
+function textInstallerRequired(tag) {
+  if (!TEXT_TAG.test(tag || "")) return false;
+  const version = tag.slice(1).split(".").map(Number);
+  for (let index = 0; index < TEXT_INSTALLER_MINIMUM.length; index += 1) {
+    if (version[index] !== TEXT_INSTALLER_MINIMUM[index]) {
+      return version[index] > TEXT_INSTALLER_MINIMUM[index];
+    }
+  }
+  return true;
+}
+
+function textPayloadsFor(release) {
+  return textInstallerRequired(release?.tag_name)
+    ? [...TEXT_BASE_PAYLOADS, TEXT_INSTALLER]
+    : TEXT_BASE_PAYLOADS;
+}
 
 function sameStrings(actual, expected) {
   return (
@@ -120,11 +137,14 @@ function validatePayload(
 }
 
 function validateTextPayload(release, manifest, checksumText, reasons) {
+  const payloads = textPayloadsFor(release);
+  const checksummed = [...payloads, "worker-release.json"];
+  const releaseAssetsExpected = [...checksummed, "SHA256SUMS"];
   const checksums = parseChecksums(checksumText);
   if (
     !checksums ||
-    checksums.size !== TEXT_CHECKSUMMED.length ||
-    TEXT_CHECKSUMMED.some((name) => !checksums.has(name))
+    checksums.size !== checksummed.length ||
+    checksummed.some((name) => !checksums.has(name))
   ) {
     reasons.push("text checksums do not cover the exact release payload");
     return;
@@ -133,9 +153,9 @@ function validateTextPayload(release, manifest, checksumText, reasons) {
   const manifestAssets = manifest?.assets;
   if (
     !Array.isArray(manifestAssets) ||
-    manifestAssets.length !== TEXT_PAYLOADS.length ||
+    manifestAssets.length !== payloads.length ||
     manifestAssets.some((item) => !item || typeof item !== "object") ||
-    TEXT_PAYLOADS.some(
+    payloads.some(
       (name) => !manifestAssets.some((item) => item.name === name),
     )
   ) {
@@ -146,9 +166,9 @@ function validateTextPayload(release, manifest, checksumText, reasons) {
   const releaseAssets = Array.isArray(release?.assets) ? release.assets : [];
   const releaseAssetNames = releaseAssets.map((asset) => asset?.name);
   if (
-    releaseAssets.length !== TEXT_RELEASE_ASSETS.length ||
+    releaseAssets.length !== releaseAssetsExpected.length ||
     new Set(releaseAssetNames).size !== releaseAssets.length ||
-    TEXT_RELEASE_ASSETS.some((name) => !releaseAssetNames.includes(name))
+    releaseAssetsExpected.some((name) => !releaseAssetNames.includes(name))
   ) {
     reasons.push("GitHub release assets do not exactly match the text payload");
     return;
