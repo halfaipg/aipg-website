@@ -94,6 +94,12 @@ test.describe('/run smoke', () => {
       'href',
       /grid-text-worker\/releases\/download\/v0\.3\.6\/grid-inference-worker-linux-x64$/,
     );
+    await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
+    await expect(
+      page.getByText(/chmod \+x grid-inference-worker-linux-x64/),
+    ).toBeVisible();
+    await expect(page.getByText(/Enter it only in the local wizard/)).toBeVisible();
+    await expect(page.getByText(/never needs a wallet private key/i)).toBeVisible();
 
     await page.getByRole('button', { name: 'macOS', exact: true }).first().click();
     await expect(

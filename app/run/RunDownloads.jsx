@@ -279,6 +279,12 @@ export default function RunDownloads({
                   ? "One verified binary opens the local setup wizard; no Python environment or separate Grid installer is required. Your inference backend remains a separate local service."
                   : "The unified media manager is still qualification-gated. Benchmark tools do not enroll a worker or advertise capabilities."}
               </p>
+              {workerType === "text" && releaseReady ? (
+                <FirstRunSteps
+                  artifactName={selected.name}
+                  version={release.version}
+                />
+              ) : null}
             </div>
           </div>
         </div>
@@ -322,5 +328,62 @@ export default function RunDownloads({
         </div>
       </section>
     </>
+  );
+}
+
+function FirstRunSteps({ artifactName, version }) {
+  return (
+    <div className="mt-5 border-t border-white/10 pt-5">
+      <h2 className="text-sm font-bold text-white">First run on Linux</h2>
+      <ol className="mt-3 grid gap-3 text-xs leading-5 text-gray-300">
+        <li>
+          <span className="mr-2 font-mono text-orange-300">1.</span>
+          Start the Ollama or OpenAI-compatible backend that already serves
+          your model.
+        </li>
+        <li>
+          <span className="mr-2 font-mono text-orange-300">2.</span>
+          Make the downloaded binary executable and launch it:
+          <pre className="mt-2 overflow-x-auto border border-white/10 bg-black/70 p-3 text-[11px] leading-5 text-gray-200">
+            <code>
+              {"cd ~/Downloads\nchmod +x " +
+                artifactName +
+                "\n./" +
+                artifactName}
+            </code>
+          </pre>
+        </li>
+        <li>
+          <span className="mr-2 font-mono text-orange-300">3.</span>
+          Complete the local wizard at{" "}
+          <code className="break-all text-gray-100">
+            http://localhost:7861
+          </code>
+          .{" "}
+          {version === "0.3.6" ? (
+            <>
+              Version {version} uses a scoped Grid API key from the developer
+              Console. Enter it only in the local wizard, never in a shell
+              command or public issue.
+            </>
+          ) : (
+            <>
+              Follow the credential step shown by this release&apos;s local
+              wizard and release notes. Never put the credential in a shell
+              command or public issue.
+            </>
+          )}
+        </li>
+        <li>
+          <span className="mr-2 font-mono text-orange-300">4.</span>
+          Wait for the dashboard to report <strong>Online</strong>, then confirm
+          the exact worker name or ID with the public worker check below.
+        </li>
+      </ol>
+      <p className="mt-4 border border-cyan-400/25 bg-cyan-400/5 p-3 text-[11px] leading-5 text-cyan-100">
+        The worker never needs a wallet private key. Configure the payout wallet
+        separately in Console settings after the worker is healthy.
+      </p>
+    </div>
   );
 }
