@@ -3,10 +3,12 @@ import {
   FiCheck,
   FiDownload,
   FiExternalLink,
+  FiRefreshCw,
   FiShield,
   FiTerminal,
   FiUsers,
 } from "react-icons/fi";
+import { normalizeValidatorCohortStatus } from "./cohortStatus.mjs";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 
 const RELEASE_TAG = "v0.1.0-preview.13";
@@ -14,6 +16,8 @@ const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
   "https://api.aipowergrid.io/v1/validator/capabilities";
+const NETWORK_STATUS_API =
+  "https://api.aipowergrid.io/v1/status/network";
 const COHORT_ISSUE_URL =
   "https://github.com/AIPowerGrid/grid-validator/issues/5";
 const COHORT_RUNBOOK_URL =
@@ -22,7 +26,7 @@ const COHORT_RUNBOOK_URL =
 export const metadata = {
   title: "Run an AI Power Grid Validator",
   description:
-    "Install the verified unsigned CPU-only validator preview, register a wallet-bound identity, and contribute independent worker evidence.",
+    "Install the verified unsigned CPU-only validator preview, create a dedicated local signing identity, and contribute independent worker evidence.",
 };
 
 async function getValidatorRelease() {
@@ -78,6 +82,18 @@ async function getValidatorCoreReadiness() {
   }
 }
 
+async function getValidatorCohortStatus() {
+  try {
+    const response = await fetch(NETWORK_STATUS_API, {
+      next: { revalidate: 60 },
+    });
+    if (!response.ok) return null;
+    return normalizeValidatorCohortStatus(await response.json(), RELEASE_TAG);
+  } catch {
+    return null;
+  }
+}
+
 const DOWNLOADS = [
   ["Linux x64", "linuxX64"],
   ["Linux ARM64", "linuxArm64"],
@@ -86,9 +102,10 @@ const DOWNLOADS = [
 ];
 
 export default async function ValidatePage() {
-  const [releaseCandidate, coreReadiness] = await Promise.all([
+  const [releaseCandidate, coreReadiness, cohortStatus] = await Promise.all([
     getValidatorRelease(),
     getValidatorCoreReadiness(),
+    getValidatorCohortStatus(),
   ]);
   const release = coreReadiness.ready ? releaseCandidate : null;
 
@@ -204,6 +221,86 @@ export default async function ValidatePage() {
                 Cohort runbook <FiExternalLink aria-hidden="true" />
               </a>
             </div>
+          </div>
+          <div className="mt-8 border border-white/10 bg-[#111214]">
+            <div className="flex flex-col gap-3 border-b border-white/10 p-5 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase text-cyan-300">
+                  Live preview cohort
+                </p>
+                <h3 className="mt-2 text-xl font-bold text-white">
+                  Registration is not qualification
+                </h3>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-400">
+                  These are current public operational counts. A validator only
+                  adds independent quorum weight after its operator and 72-hour
+                  run are reviewed. Preview evidence still has no economic or
+                  routing effect.
+                </p>
+              </div>
+              <a
+                href="https://aipowergrid.io/status"
+                className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-white"
+              >
+                Network status <FiExternalLink aria-hidden="true" />
+              </a>
+            </div>
+            {cohortStatus ? (
+              <>
+                <dl className="grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    ["Fresh heartbeats", cohortStatus.heartbeatFresh],
+                    ["Participating", cohortStatus.participating],
+                    ["Verified independent", cohortStatus.verifiedIndependent],
+                    ["Assignments completed", cohortStatus.assignmentsCompleted],
+                  ].map(([label, value]) => (
+                    <div key={label} className="bg-[#0b0c0e] p-5">
+                      <dt className="text-xs font-semibold uppercase text-gray-500">
+                        {label}
+                      </dt>
+                      <dd className="mt-2 text-3xl font-black tabular-nums text-white">
+                        {value.toLocaleString("en-US")}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="grid gap-5 p-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+                  <div>
+                    <p className="flex items-center gap-2 font-semibold text-white">
+                      <FiRefreshCw className="text-orange-300" aria-hidden="true" />
+                      Current release adoption
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-gray-400">
+                      {cohortStatus.currentVersionCount} fresh validator
+                      {cohortStatus.currentVersionCount === 1 ? " reports " : "s report "}
+                      <strong className="text-gray-200">{RELEASE_TAG}</strong>
+                      {cohortStatus.olderVersionCount > 0
+                        ? `; ${cohortStatus.olderVersionCount} still report an older preview.`
+                        : "."}
+                    </p>
+                    {cohortStatus.olderVersionCount > 0 ? (
+                      <p className="mt-2 text-sm leading-6 text-orange-200">
+                        Existing operators should replace the executable with
+                        the current release and keep their configuration and
+                        node identity. Do not re-enroll to upgrade.
+                      </p>
+                    ) : null}
+                  </div>
+                  <a
+                    href="#downloads"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 bg-orange-400 px-5 text-sm font-bold text-black hover:bg-orange-300"
+                  >
+                    Get {RELEASE_TAG} <FiDownload aria-hidden="true" />
+                  </a>
+                </div>
+              </>
+            ) : (
+              <p className="p-5 text-sm leading-6 text-gray-400">
+                Live cohort telemetry is temporarily unavailable. This does not
+                prove that validators are offline; use the network status page
+                for the latest public report.
+              </p>
+            )}
           </div>
         </div>
       </section>
