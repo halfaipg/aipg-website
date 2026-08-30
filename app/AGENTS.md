@@ -44,6 +44,11 @@ with a scroll-reveal IntersectionObserver).
   and SBOM only after the same payload-identity checks plus explicit
   no-enrollment/no-advertisement restrictions pass; it must never be presented
   as a worker release.
+  The page also consumes the worker repo's versioned
+  `docs/qualification-status.json` contract to show accepted evidence counts
+  for the required hardware classes. Invalid or unavailable status data must
+  fail soft while keeping the media release gated and linking only to the
+  tracked cohort issue.
   Jobs per worker is only a historical workload-share signal; capacity risk and
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
