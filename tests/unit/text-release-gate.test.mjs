@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 
 import {
@@ -6,7 +7,7 @@ import {
   assessTextReleaseAvailability,
 } from "../../app/run/releaseGate.mjs";
 
-const payloadNames = [
+const basePayloadNames = [
   "grid-inference-worker-linux-x64",
   "grid-inference-worker-linux-arm64",
   "grid-inference-worker-macos-arm64.zip",
@@ -14,7 +15,25 @@ const payloadNames = [
   "grid-inference-worker-release.spdx.json",
 ];
 
-function fixture() {
+test("the text release builder exposes the verified installer asset", () => {
+  const source = fs.readFileSync("app/run/page.js", "utf8");
+  const textBuilder = source.slice(
+    source.indexOf("async function getTextRelease()"),
+    source.indexOf("async function getOperatorOpportunities()"),
+  );
+  const managerBuilder = source.slice(
+    source.indexOf("async function getManagerRelease()"),
+    source.indexOf("async function getManagerQualificationRelease()"),
+  );
+
+  assert.match(textBuilder, /installer: asset\("install-worker\.sh"\)/);
+  assert.doesNotMatch(managerBuilder, /installer:/);
+});
+
+function fixture({ version = "0.3.5", installer = false } = {}) {
+  const payloadNames = installer
+    ? [...basePayloadNames, "install-worker.sh"]
+    : basePayloadNames;
   const payloads = payloadNames.map((name, index) => ({
     name,
     sha256: String(index + 1).repeat(64),
@@ -26,7 +45,7 @@ function fixture() {
     draft: false,
     prerelease: false,
     immutable: true,
-    tag_name: "v0.3.5",
+    tag_name: `v${version}`,
     resolved_tag_commit: "c".repeat(40),
     assets: [
       ...payloads.map((item) => ({
@@ -48,8 +67,8 @@ function fixture() {
   };
   const manifest = {
     schema: "aipg-text-worker-release-v1",
-    tag: "v0.3.5",
-    version: "0.3.5",
+    tag: `v${version}`,
+    version,
     commit: "c".repeat(40),
     platform_signing: {
       macos: {
@@ -78,6 +97,43 @@ test("accepts the exact immutable text-worker release contract", () => {
   assert.deepEqual(
     assessTextRelease(value.release, value.manifest, value.checksums),
     { ready: true, reasons: [] },
+  );
+});
+
+test("requires the checksum-bound installer from v0.3.7 onward", () => {
+  const ready = fixture({ version: "0.3.7", installer: true });
+  assert.equal(
+    assessTextReleaseAvailability(
+      ready.release,
+      ready.manifest,
+      ready.checksums,
+    ).integrityReady,
+    true,
+  );
+
+  const missing = fixture({ version: "0.3.7" });
+  const result = assessTextReleaseAvailability(
+    missing.release,
+    missing.manifest,
+    missing.checksums,
+  );
+  assert.equal(result.integrityReady, false);
+  assert.ok(
+    result.integrityReasons.includes(
+      "text checksums do not cover the exact release payload",
+    ),
+  );
+});
+
+test("keeps pre-installer releases bound to their original exact payload", () => {
+  const value = fixture({ installer: true });
+  assert.equal(
+    assessTextReleaseAvailability(
+      value.release,
+      value.manifest,
+      value.checksums,
+    ).integrityReady,
+    false,
   );
 });
 

@@ -21,7 +21,9 @@ onboarding, and staking-withdrawal surfaces.
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
 - `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
-  checksum, manifest, SBOM, GitHub digest, and size contract.
+  checksum, manifest, SBOM, GitHub digest, and size contract, including the
+  versioned `v0.3.7+` installer requirement without invalidating older exact
+  release envelopes.
 - `unit/release-contract-download.test.mjs` - downloaded manifest/checksum byte
   hashing, length binding, strict UTF-8 parsing, and tamper rejection.
 - `unit/marketing-claims.test.mjs` - static release-policy guard preventing

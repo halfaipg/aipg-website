@@ -51,6 +51,11 @@ export default function RunDownloads({
     release.manifest &&
     release.sbom,
   );
+  const textInstaller =
+    workerType === "text" && ["linux", "linuxArm64"].includes(platform)
+      ? release?.installer || null
+      : null;
+  const primaryDownload = textInstaller || selected;
   const qualificationSelected =
     workerType === "media"
       ? mediaQualificationRelease?.[platform] || null
@@ -144,21 +149,39 @@ export default function RunDownloads({
               </div>
 
               {releaseReady ? (
-                <a
-                  href={selected.url}
-                  className="flex min-h-12 w-full items-center justify-center gap-2 bg-orange-500 px-5 font-bold text-black transition-colors hover:bg-orange-400"
-                >
-                  <FiDownload aria-hidden="true" />
-                  Download{" "}
-                  {workerType === "text"
-                    ? "text worker"
-                    : "media manager"} for {PLATFORMS[platform].label}
-                  {formatBytes(selected.bytes) && (
-                    <span className="font-normal text-black/65">
-                      {formatBytes(selected.bytes)}
-                    </span>
-                  )}
-                </a>
+                <div className="grid gap-2">
+                  <a
+                    href={primaryDownload.url}
+                    className="flex min-h-12 w-full items-center justify-center gap-2 bg-orange-500 px-5 font-bold text-black transition-colors hover:bg-orange-400"
+                  >
+                    <FiDownload aria-hidden="true" />
+                    {textInstaller ? (
+                      <>Download verified Linux installer</>
+                    ) : (
+                      <>
+                        Download{" "}
+                        {workerType === "text"
+                          ? "text worker"
+                          : "media manager"}{" "}
+                        for {PLATFORMS[platform].label}
+                      </>
+                    )}
+                    {formatBytes(primaryDownload.bytes) && (
+                      <span className="font-normal text-black/65">
+                        {formatBytes(primaryDownload.bytes)}
+                      </span>
+                    )}
+                  </a>
+                  {textInstaller ? (
+                    <a
+                      href={selected.url}
+                      className="flex min-h-11 w-full items-center justify-center gap-2 border border-white/15 px-4 text-sm font-semibold text-gray-300 hover:bg-white/10"
+                    >
+                      Download {PLATFORMS[platform].label} binary directly
+                      <FiExternalLink aria-hidden="true" />
+                    </a>
+                  ) : null}
+                </div>
               ) : (
                 <div>
                   <button
@@ -265,12 +288,15 @@ export default function RunDownloads({
               </div>
               <p className="mt-4 border-t border-white/10 pt-4 text-xs leading-5 text-gray-400">
                 {workerType === "text"
-                  ? "One verified binary opens the local setup wizard; no Python environment or separate Grid installer is required. Your inference backend remains a separate local service."
+                  ? textInstaller
+                    ? "The verified installer detects Linux x64 or ARM64, checks the release manifest and binary, and installs without starting the worker. Your inference backend remains a separate local service."
+                    : "One verified binary opens the local setup wizard; no Python environment or separate Grid installer is required. Your inference backend remains a separate local service."
                   : "The unified media manager is still qualification-gated. Benchmark tools do not enroll a worker or advertise capabilities."}
               </p>
               {workerType === "text" && releaseReady ? (
                 <FirstRunSteps
                   artifactName={selected.name}
+                  installerName={textInstaller?.name || null}
                   version={release.version}
                 />
               ) : null}
@@ -320,7 +346,7 @@ export default function RunDownloads({
   );
 }
 
-function FirstRunSteps({ artifactName, version }) {
+function FirstRunSteps({ artifactName, installerName, version }) {
   return (
     <div className="mt-5 border-t border-white/10 pt-5">
       <h2 className="text-sm font-bold text-white">First run on Linux</h2>
@@ -332,13 +358,21 @@ function FirstRunSteps({ artifactName, version }) {
         </li>
         <li>
           <span className="mr-2 font-mono text-orange-300">2.</span>
-          Make the downloaded binary executable and launch it:
+          {installerName
+            ? "Run the checksum-enforcing installer. It installs the worker but does not start it:"
+            : "Make the downloaded binary executable and launch it:"}
           <pre className="mt-2 overflow-x-auto border border-white/10 bg-black/70 p-3 text-[11px] leading-5 text-gray-200">
             <code>
-              {"cd ~/Downloads\nchmod +x " +
-                artifactName +
-                "\n./" +
-                artifactName}
+              {installerName
+                ? "cd ~/Downloads\nchmod +x " +
+                  installerName +
+                  "\n./" +
+                  installerName +
+                  "\n~/.local/bin/grid-inference-worker --verify-runtime\n~/.local/bin/grid-inference-worker"
+                : "cd ~/Downloads\nchmod +x " +
+                  artifactName +
+                  "\n./" +
+                  artifactName}
             </code>
           </pre>
         </li>
