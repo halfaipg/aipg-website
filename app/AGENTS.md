@@ -82,6 +82,10 @@ with a scroll-reveal IntersectionObserver).
   operator-interest issue form for other hardware. The page and both GitHub
   paths must state that only coarse hardware and availability belong there;
   private setup details stay out of public GitHub issues.
+  Recruitment belongs immediately after the verified download surface, before
+  the long planner/evidence sections. A gated macOS or Windows selection must
+  offer both a switch to the verified Linux artifact and the generic hardware
+  intake; a successful text download must link to cohort setup support.
   A verified Linux text download must be followed immediately by the exact
   artifact-specific first-run commands, local wizard URL, scoped-key boundary,
   and online/public-worker verification steps. Never teach operators to place a

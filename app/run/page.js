@@ -355,6 +355,8 @@ export default async function RunPage() {
         textRelease={textRelease}
       />
 
+      <OperatorRecruitment />
+
       <OperatorPlanner
         opportunities={opportunities}
         mediaReady={Boolean(mediaRelease)}
@@ -362,8 +364,6 @@ export default async function RunPage() {
       />
 
       <MediaQualificationStatus status={qualificationStatus} />
-
-      <OperatorRecruitment />
 
       <OperatorEvidence payoutEvidence={payoutEvidence} />
 
