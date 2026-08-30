@@ -149,10 +149,11 @@ test.describe('/run mobile smoke', () => {
       'aria-pressed',
       'true',
     );
-    await page
-      .getByRole('group', { name: 'Operating system' })
-      .getByRole('button', { name: 'macOS' })
-      .click();
+    await expect(
+      page
+        .getByRole('group', { name: 'Operating system' })
+        .getByRole('button', { name: 'macOS' }),
+    ).toHaveAttribute('aria-pressed', 'true');
     await page.getByLabel('Accelerator type', { exact: true }).selectOption('apple');
     await expect(
       page.getByRole('heading', {

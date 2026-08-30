@@ -9,6 +9,7 @@ import {
   FiMonitor,
   FiServer,
 } from "react-icons/fi";
+import { detectOperatorPlatform } from "./platformDetection.mjs";
 
 const OPERATING_SYSTEMS = [
   ["linux", "Linux"],
@@ -152,6 +153,12 @@ export default function OperatorPlanner({
   );
 
   useEffect(() => {
+    const detected = detectOperatorPlatform({
+      userAgentDataPlatform: navigator.userAgentData?.platform,
+      platform: navigator.platform,
+      userAgent: navigator.userAgent,
+    });
+    setOs(detected.os);
     setHydrated(true);
   }, []);
 
