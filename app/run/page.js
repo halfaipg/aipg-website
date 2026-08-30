@@ -245,6 +245,7 @@ async function getTextRelease() {
         ? asset("grid-inference-worker-windows-x64.exe")
         : null,
       platforms: availability.platforms,
+      installer: asset("install-worker.sh"),
       checksums: asset("SHA256SUMS"),
       manifest: asset("worker-release.json"),
       sbom: asset("grid-inference-worker-release.spdx.json"),

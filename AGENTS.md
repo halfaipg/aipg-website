@@ -91,6 +91,8 @@ on Vercel.
 - `/run` verifies the complete immutable text-worker release envelope before
   exposing any artifact. Linux x64/ARM64 may download from a provenance- and
   checksum-verified release without depending on unrelated desktop signing;
+  `v0.3.7+` additionally requires and prefers the release-stamped,
+  checksum-covered Linux installer while preserving direct binary access;
   macOS remains hidden until Developer ID notarization is verified and Windows
   remains hidden until Authenticode is verified.
   Media-manager availability follows the same platform-scoped rule after its
