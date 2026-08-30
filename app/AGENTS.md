@@ -47,6 +47,9 @@ with a scroll-reveal IntersectionObserver).
   supply-priority signal, not a hardware-compatibility verdict. An
   operator must never advertise that route unless the detected backend genuinely serves the
   named model.
+  Its share action derives a bounded operator-opening message from that same
+  normalized priority row, preserves the redundancy target, links only to
+  `/run`, and explicitly refuses an earnings forecast.
   While the media release is gated, the download panel links to the public
   qualification cohort runbook. A complete `manager-qualification-v*`
   prerelease may expose a separately labelled benchmark-only binary, checksum,

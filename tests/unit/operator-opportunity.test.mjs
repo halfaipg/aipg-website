@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { selectTextRoutePriority } from "../../app/run/operatorOpportunityLogic.mjs";
+import {
+  buildTextRouteShare,
+  selectTextRoutePriority,
+} from "../../app/run/operatorOpportunityLogic.mjs";
 
 test("balances accepted den against missing text-route replicas", () => {
   const priority = selectTextRoutePriority([
@@ -60,4 +63,20 @@ test("uses missing replicas when under-target routes have no workload yet", () =
     ])?.name,
     "one-worker",
   );
+});
+
+test("builds a bounded, non-promissory operator opening", () => {
+  const copy = buildTextRouteShare({
+    name: "gpt-oss-120b",
+    workers: 2,
+    missingReplicas: 1,
+  });
+
+  assert.equal(
+    copy,
+    "Independent GPU operators wanted for AI Power Grid. Current text route: gpt-oss-120b (2 serving, target 3). Historical workload is not an earnings forecast. Start: https://aipowergrid.io/run",
+  );
+  assert.ok([...copy].length <= 280);
+  assert.equal(buildTextRouteShare({ name: "offline", workers: 0, missingReplicas: 3 }), null);
+  assert.equal(buildTextRouteShare({ name: "covered", workers: 3, missingReplicas: 0 }), null);
 });
