@@ -6,8 +6,17 @@ import { normalizeMediaQualificationStatus } from "../app/run/qualificationStatu
 
 const GRID_API = "https://api.aipowergrid.io";
 const PRICING_URL = `${GRID_API}/v1/pricing`;
-const LITELLM_PR_API = "https://api.github.com/repos/BerriAI/litellm/pulls/38725";
-const LITELLM_PR_URL = "https://github.com/BerriAI/litellm/pull/38725";
+export const INTEGRATION_PULL_REQUESTS = [
+  { id: "litellm", name: "LiteLLM", repo: "BerriAI/litellm", number: 38725 },
+  { id: "dify", name: "Dify", repo: "langgenius/dify-plugins", number: 2986 },
+  { id: "vercel-ai", name: "Vercel AI SDK", repo: "vercel/ai", number: 20003 },
+  { id: "elizaos", name: "ElizaOS", repo: "elizaOS/eliza", number: 29964 },
+  { id: "langchain", name: "LangChain", repo: "langchain-ai/docs", number: 5770 },
+].map((item) => ({
+  ...item,
+  apiUrl: `https://api.github.com/repos/${item.repo}/pulls/${item.number}`,
+  url: `https://github.com/${item.repo}/pull/${item.number}`,
+}));
 const WORKER_RELEASE_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases/latest";
 const WORKER_RELEASES_URL =
@@ -69,11 +78,47 @@ function payoutWindow(periods, now) {
   );
 }
 
-function integrationState(pull) {
-  if (!pull || typeof pull !== "object") return "status unavailable";
-  if (pull.merged_at) return "merged";
-  if (pull.state === "open") return "open for maintainer review";
-  return "closed without merge";
+function integrationState(pull, expected) {
+  const mergedAt = pull?.merged_at;
+  const validMergedAt =
+    mergedAt === null ||
+    (typeof mergedAt === "string" && Number.isFinite(Date.parse(mergedAt)));
+  if (
+    !pull ||
+    typeof pull !== "object" ||
+    pull.number !== expected.number ||
+    pull.base?.repo?.full_name !== expected.repo ||
+    pull.html_url !== expected.url ||
+    !["open", "closed"].includes(pull.state) ||
+    !validMergedAt ||
+    (pull.state === "open" && mergedAt !== null)
+  ) {
+    throw new Error(`${expected.name} upstream PR evidence is invalid`);
+  }
+  if (mergedAt) return { key: "merged", label: "merged" };
+  if (pull.state === "open") return { key: "open", label: "open for maintainer review" };
+  return { key: "closed", label: "closed without merge" };
+}
+
+function listNames(names) {
+  if (names.length === 1) return names[0];
+  if (names.length === 2) return names.join(" and ");
+  return `${names.slice(0, -1).join(", ")}, and ${names.at(-1)}`;
+}
+
+function integrationSummary(rows) {
+  const labels = {
+    merged: "merged",
+    open: "open",
+    closed: "closed without merge",
+  };
+  return ["merged", "open", "closed"]
+    .map((key) => {
+      const names = rows.filter((row) => row.state.key === key).map((row) => row.name);
+      return names.length ? `${listNames(names)} ${labels[key]}` : null;
+    })
+    .filter(Boolean)
+    .join("; ");
 }
 
 function packageVersion(payload, expectedName) {
@@ -174,7 +219,7 @@ export function buildWeeklyProof(
     totals,
     payouts,
     pricing,
-    litellm,
+    integrations,
     workerRelease,
     mediaQualification,
     packages,
@@ -228,14 +273,18 @@ export function buildWeeklyProof(
   const packageRows = Object.fromEntries(
     NPM_PACKAGES.map((name) => [name, packageVersion(packages?.[name], name)]),
   );
+  const integrationRows = INTEGRATION_PULL_REQUESTS.map((expected) => ({
+    ...expected,
+    state: integrationState(integrations?.[expected.id], expected),
+  }));
 
   const date = now.toISOString().slice(0, 10);
-  const state = integrationState(litellm);
+  const upstreamSummary = integrationSummary(integrationRows);
   const posts = [
     `AIPG weekly proof: ${INTEGER.format(workers)} workers are serving ${INTEGER.format(models)} live models across ${modalities.join(", ")}. The public ledger recorded ${INTEGER.format(jobs24h)} jobs in 24h and ${INTEGER.format(jobs30d)} in 30d. Live status: ${network.status}. https://aipowergrid.io/status`,
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
-    `Integration proof: AI SDK ${packageRows["@aipowergrid/ai-sdk-provider"]}, ElizaOS ${packageRows["@aipowergrid/plugin-aipg"]}, n8n ${packageRows["@aipowergrid/n8n-nodes-aipg"]}, and MCP ${packageRows["@aipowergrid/mcp"]} are live on npm. LiteLLM is ${state}. https://aipowergrid.io/docs/integrations`,
+    `Integration proof: AI SDK ${packageRows["@aipowergrid/ai-sdk-provider"]}, ElizaOS ${packageRows["@aipowergrid/plugin-aipg"]}, n8n ${packageRows["@aipowergrid/n8n-nodes-aipg"]}, and MCP ${packageRows["@aipowergrid/mcp"]} live on npm. Upstream PRs: ${upstreamSummary}. https://aipowergrid.io/docs/integrations`,
     `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
     `Price proof: the same GPT-OSS-120B workload is $${textPrice.aipg_usd} on AIPG vs $${textPrice.competitor_usd} on Groq (${textPrice.savings_percent}% less); a 1 MP Z-Image Turbo image is $${imagePrice.aipg_usd} vs $${imagePrice.competitor_usd} on fal (${imagePrice.savings_percent}% less). Sources and expiry: ${PRICING_URL}`,
   ];
@@ -268,7 +317,7 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 | Validator agreement | ${DECIMAL.format(agreement)}% |
 | Independently verified validator operators | ${INTEGER.format(independent)} |
 | Validator economic effect | ${validators.economic_effect || "unknown"} |
-| LiteLLM provider PR | ${state} |
+${integrationRows.map((row) => `| ${row.name} upstream PR | ${row.state.label} |`).join("\n")}
 | Verified Linux text worker | ${workerTag} |
 | Models below redundancy target | ${INTEGER.format(belowTarget)} |
 | Media qualification classes still needed | ${mediaNeeds.length ? mediaNeeds.join(", ") : "none"} |
@@ -287,7 +336,7 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 - [Generation totals](${GRID_API}/v1/stats/totals)
 - [Public Base payouts](${GRID_API}/v1/payouts/public?limit=200)
 - [Current pricing and comparison evidence](${PRICING_URL})
-- [LiteLLM provider PR](${LITELLM_PR_URL})
+${integrationRows.map((row) => `- [${row.name} upstream PR](${row.url})`).join("\n")}
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
 - [Text-worker releases](${WORKER_RELEASES_URL})
 - [Media qualification status](${MEDIA_QUALIFICATION_STATUS_URL})
@@ -302,26 +351,30 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
     totals,
     payouts,
     pricing,
-    litellm,
     workerRelease,
     mediaQualification,
-    ...packagePayloads
-  ] =
-    await Promise.all([
+    integrationPayloads,
+    packagePayloads,
+  ] = await Promise.all([
       fetchJson(`${GRID_API}/v1/status/network`, fetcher),
       fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
       fetchJson(`${GRID_API}/v1/payouts/public?limit=200`, fetcher),
       fetchJson(PRICING_URL, fetcher),
-      fetchJson(LITELLM_PR_API, fetcher).catch(() => null),
       fetchJson(WORKER_RELEASE_API, fetcher),
       fetchJson(MEDIA_QUALIFICATION_STATUS_URL, fetcher),
-      ...NPM_PACKAGES.map((name) =>
+      Promise.all(
+        INTEGRATION_PULL_REQUESTS.map((item) => fetchJson(item.apiUrl, fetcher)),
+      ),
+      Promise.all(NPM_PACKAGES.map((name) =>
         fetchJson(
           `https://registry.npmjs.org/${name.replace("/", "%2F")}/latest`,
           fetcher,
         ),
-      ),
+      )),
     ]);
+  const integrations = Object.fromEntries(
+    INTEGRATION_PULL_REQUESTS.map((item, index) => [item.id, integrationPayloads[index]]),
+  );
   const packages = Object.fromEntries(
     NPM_PACKAGES.map((name, index) => [name, packagePayloads[index]]),
   );
@@ -331,7 +384,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       totals,
       payouts,
       pricing,
-      litellm,
+      integrations,
       workerRelease,
       mediaQualification,
       packages,

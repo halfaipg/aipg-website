@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { buildWeeklyProof } from "../../scripts/weekly-proof.mjs";
+import {
+  buildWeeklyProof,
+  INTEGRATION_PULL_REQUESTS,
+} from "../../scripts/weekly-proof.mjs";
 
 const NOW = new Date("2026-08-29T20:00:00Z");
 
@@ -68,7 +71,18 @@ function fixture() {
         ],
       },
     },
-    litellm: { state: "open", merged_at: null },
+    integrations: Object.fromEntries(
+      INTEGRATION_PULL_REQUESTS.map((item) => [
+        item.id,
+        {
+          number: item.number,
+          base: { repo: { full_name: item.repo } },
+          html_url: item.url,
+          state: "open",
+          merged_at: null,
+        },
+      ]),
+    ),
     workerRelease: {
       draft: false,
       prerelease: false,
@@ -129,7 +143,14 @@ test("builds an evidence-linked thread without overstating validators", () => {
   assert.match(proof, /1,690 AIPG across 338 Base transfers in the past 7 days/);
   assert.match(proof, /0 independently verified operators/);
   assert.match(proof, /no routing, reward, strike, or slashing authority yet/);
-  assert.match(proof, /LiteLLM is open for maintainer review/);
+  assert.match(
+    proof,
+    /Upstream PRs: LiteLLM, Dify, Vercel AI SDK, ElizaOS, and LangChain open/,
+  );
+  for (const item of INTEGRATION_PULL_REQUESTS) {
+    assert.match(proof, new RegExp(`\\| ${item.name} upstream PR \\| open for maintainer review \\|`));
+    assert.match(proof, new RegExp(`\\[${item.name} upstream PR\\]\\(${item.url}\\)`));
+  }
   assert.match(proof, /AI SDK 0\.1\.0, ElizaOS 0\.1\.0, n8n 0\.1\.3, and MCP 0\.1\.1/);
   assert.match(proof, /verified Linux text worker v0\.3\.6/);
   assert.match(proof, /2 routes are below the 3-worker target/);
@@ -175,6 +196,35 @@ test("rejects mutable worker releases and malformed npm evidence", () => {
     () => buildWeeklyProof(malformed, NOW),
     /@aipowergrid\/mcp npm release is invalid/,
   );
+});
+
+test("binds every upstream submission to its exact repository, PR, and URL", () => {
+  assert.deepEqual(
+    INTEGRATION_PULL_REQUESTS.map(({ name, repo, number }) => ({ name, repo, number })),
+    [
+      { name: "LiteLLM", repo: "BerriAI/litellm", number: 38725 },
+      { name: "Dify", repo: "langgenius/dify-plugins", number: 2986 },
+      { name: "Vercel AI SDK", repo: "vercel/ai", number: 20003 },
+      { name: "ElizaOS", repo: "elizaOS/eliza", number: 29964 },
+      { name: "LangChain", repo: "langchain-ai/docs", number: 5770 },
+    ],
+  );
+
+  const wrongRepo = fixture();
+  wrongRepo.integrations.dify.base.repo.full_name = "lookalike/dify-plugins";
+  assert.throws(
+    () => buildWeeklyProof(wrongRepo, NOW),
+    /Dify upstream PR evidence is invalid/,
+  );
+});
+
+test("reports mixed upstream states without calling a closed PR open", () => {
+  const value = fixture();
+  value.integrations.litellm.state = "closed";
+  value.integrations.litellm.merged_at = "2026-08-30T10:00:00Z";
+  value.integrations.langchain.state = "closed";
+  const proof = buildWeeklyProof(value, NOW);
+  assert.match(proof, /Upstream PRs: LiteLLM merged; Dify, Vercel AI SDK, and ElizaOS open; LangChain closed without merge/);
 });
 
 test("rejects inconsistent media qualification evidence", () => {
