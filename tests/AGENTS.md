@@ -29,7 +29,10 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/marketing-claims.test.mjs` - static release-policy guard preventing
   gated media, confidential inference, universal hardware support, autonomous
   Core, blanket open-source, permanent-free, permissionless-Core, and live
-  multi-asset/worker-claim payout claims from being marketed as current.
+  multi-asset/worker-claim payout claims from being marketed as current. It
+  also keeps the highlighted operator action on `/run`, labels ended staking as
+  legacy withdrawal, and prevents the dedicated validator identity from being
+  described as a funded or account-linked wallet requirement.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
   immutable worker-release, exact npm-package, exact repository/number/URL and
   truthful state reporting for every current upstream integration submission,
