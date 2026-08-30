@@ -109,13 +109,13 @@ export default function OperatorEvidence({ payoutEvidence }) {
                     <dt className="text-xs text-gray-500">
                       Settled pool, rolling 24h
                     </dt>
-                    <dd className="mt-2 text-2xl font-bold text-white">
+                    <dd className="mt-2 break-words text-xl font-bold text-white sm:text-2xl">
                       {formatAipg(payoutEvidence.settledAipg24h)} AIPG
                     </dd>
                   </div>
                   <div>
                     <dt className="text-xs text-gray-500">Observed periods</dt>
-                    <dd className="mt-2 text-2xl font-bold text-white">
+                    <dd className="mt-2 break-words text-xl font-bold text-white sm:text-2xl">
                       {payoutEvidence.observedHours} hourly settlements
                     </dd>
                   </div>
