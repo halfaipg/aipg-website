@@ -34,6 +34,7 @@ const NPM_PACKAGES = [
 
 const INTEGER = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const DECIMAL = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
+const DAY_MS = 24 * 60 * 60 * 1_000;
 
 async function fetchJson(url, fetcher = fetch) {
   const response = await fetcher(url, {
@@ -131,6 +132,41 @@ function packageVersion(payload, expectedName) {
   return payload.version;
 }
 
+function packageDownloadWindow(payload, expectedName, now) {
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+  const downloads = Number(payload?.downloads);
+  if (
+    payload?.package !== expectedName ||
+    !Number.isSafeInteger(downloads) ||
+    downloads < 0 ||
+    !datePattern.test(payload?.start || "") ||
+    !datePattern.test(payload?.end || "")
+  ) {
+    throw new Error(`${expectedName} npm download evidence is invalid`);
+  }
+  const startAt = Date.parse(`${payload.start}T00:00:00Z`);
+  const endAt = Date.parse(`${payload.end}T00:00:00Z`);
+  const completedAt = endAt + DAY_MS;
+  const age = now.getTime() - completedAt;
+  if (endAt - startAt !== 6 * DAY_MS || age < 0 || age > 2 * DAY_MS) {
+    throw new Error(`${expectedName} npm download window is invalid or stale`);
+  }
+  return { downloads, start: payload.start, end: payload.end };
+}
+
+function shortDateRange(start, end) {
+  const startDate = new Date(`${start}T00:00:00Z`);
+  const endDate = new Date(`${end}T00:00:00Z`);
+  const month = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    timeZone: "UTC",
+  });
+  if (start.slice(0, 7) === end.slice(0, 7)) {
+    return `${month.format(startDate)} ${startDate.getUTCDate()}-${endDate.getUTCDate()}`;
+  }
+  return `${month.format(startDate)} ${startDate.getUTCDate()}-${month.format(endDate)} ${endDate.getUTCDate()}`;
+}
+
 function workerReleaseTag(release) {
   if (
     release?.draft !== false ||
@@ -152,6 +188,7 @@ export function buildWeeklyProof(
     workerRelease,
     mediaQualification,
     packages,
+    packageDownloads,
   },
   now = new Date(),
 ) {
@@ -199,6 +236,21 @@ export function buildWeeklyProof(
   const packageRows = Object.fromEntries(
     NPM_PACKAGES.map((name) => [name, packageVersion(packages?.[name], name)]),
   );
+  const downloadRows = Object.fromEntries(
+    NPM_PACKAGES.map((name) => [
+      name,
+      packageDownloadWindow(packageDownloads?.[name], name, now),
+    ]),
+  );
+  const downloadWindows = new Set(
+    Object.values(downloadRows).map((row) => `${row.start}:${row.end}`),
+  );
+  if (downloadWindows.size !== 1) throw new Error("npm download windows do not match");
+  const downloadTotal = Object.values(downloadRows).reduce(
+    (sum, row) => sum + row.downloads,
+    0,
+  );
+  const [{ start: downloadStart, end: downloadEnd }] = Object.values(downloadRows);
   const integrationRows = INTEGRATION_PULL_REQUESTS.map((expected) => ({
     ...expected,
     state: integrationState(integrations?.[expected.id], expected),
@@ -210,7 +262,7 @@ export function buildWeeklyProof(
     `AIPG weekly proof: ${INTEGER.format(workers)} workers are serving ${INTEGER.format(models)} live models across ${modalities.join(", ")}. The public ledger recorded ${INTEGER.format(jobs24h)} jobs in 24h and ${INTEGER.format(jobs30d)} in 30d. Live status: ${network.status}. https://aipowergrid.io/status`,
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
-    `Integration proof: AI SDK ${packageRows["@aipowergrid/ai-sdk-provider"]}, ElizaOS ${packageRows["@aipowergrid/plugin-aipg"]}, n8n ${packageRows["@aipowergrid/n8n-nodes-aipg"]}, and MCP ${packageRows["@aipowergrid/mcp"]} live on npm. Upstream PRs: ${upstreamSummary}. https://aipowergrid.io/docs/integrations`,
+    `Integration proof: npm recorded ${INTEGER.format(downloadTotal)} downloads for our four packages in its ${shortDateRange(downloadStart, downloadEnd)} window (requests, not users). PRs: ${upstreamSummary}. https://aipowergrid.io/docs/integrations`,
     `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
   ];
   for (const [index, post] of posts.entries()) {
@@ -247,10 +299,11 @@ ${integrationRows.map((row) => `| ${row.name} upstream PR | ${row.state.label} |
 | Models below redundancy target | ${INTEGER.format(belowTarget)} |
 | Media qualification classes still needed | ${mediaNeeds.length ? mediaNeeds.join(", ") : "none"} |
 | Media qualification release ready | ${mediaStatus.releaseReady ? "yes" : "no"} |
-| Vercel AI SDK package | ${packageRows["@aipowergrid/ai-sdk-provider"]} |
-| ElizaOS package | ${packageRows["@aipowergrid/plugin-aipg"]} |
-| n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]} |
-| MCP package | ${packageRows["@aipowergrid/mcp"]} |
+| Vercel AI SDK package | ${packageRows["@aipowergrid/ai-sdk-provider"]}; ${INTEGER.format(downloadRows["@aipowergrid/ai-sdk-provider"].downloads)} npm requests |
+| ElizaOS package | ${packageRows["@aipowergrid/plugin-aipg"]}; ${INTEGER.format(downloadRows["@aipowergrid/plugin-aipg"].downloads)} npm requests |
+| n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]}; ${INTEGER.format(downloadRows["@aipowergrid/n8n-nodes-aipg"].downloads)} npm requests |
+| MCP package | ${packageRows["@aipowergrid/mcp"]}; ${INTEGER.format(downloadRows["@aipowergrid/mcp"].downloads)} npm requests |
+| npm download window | ${downloadStart} through ${downloadEnd}; registry requests, not unique users |
 
 ## Sources
 
@@ -259,6 +312,7 @@ ${integrationRows.map((row) => `| ${row.name} upstream PR | ${row.state.label} |
 - [Public Base payouts](${GRID_API}/v1/payouts/public?limit=200)
 ${integrationRows.map((row) => `- [${row.name} upstream PR](${row.url})`).join("\n")}
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
+${NPM_PACKAGES.map((name) => `- [${name} npm download evidence](https://api.npmjs.org/downloads/point/last-week/${name.replace("/", "%2F")})`).join("\n")}
 - [Text-worker releases](${WORKER_RELEASES_URL})
 - [Media qualification status](${MEDIA_QUALIFICATION_STATUS_URL})
 - [Media qualification cohort](${MEDIA_QUALIFICATION_COHORT_URL})
@@ -275,6 +329,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
     mediaQualification,
     integrationPayloads,
     packagePayloads,
+    packageDownloadPayloads,
   ] = await Promise.all([
       fetchJson(`${GRID_API}/v1/status/network`, fetcher),
       fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
@@ -290,12 +345,21 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
           fetcher,
         ),
       )),
+      Promise.all(NPM_PACKAGES.map((name) =>
+        fetchJson(
+          `https://api.npmjs.org/downloads/point/last-week/${name.replace("/", "%2F")}`,
+          fetcher,
+        ),
+      )),
     ]);
   const integrations = Object.fromEntries(
     INTEGRATION_PULL_REQUESTS.map((item, index) => [item.id, integrationPayloads[index]]),
   );
   const packages = Object.fromEntries(
     NPM_PACKAGES.map((name, index) => [name, packagePayloads[index]]),
+  );
+  const packageDownloads = Object.fromEntries(
+    NPM_PACKAGES.map((name, index) => [name, packageDownloadPayloads[index]]),
   );
   return buildWeeklyProof(
     {
@@ -306,6 +370,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       workerRelease,
       mediaQualification,
       packages,
+      packageDownloads,
     },
     now,
   );
