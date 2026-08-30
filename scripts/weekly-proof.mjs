@@ -2,6 +2,8 @@
 
 import { pathToFileURL } from "node:url";
 
+import { normalizeMediaQualificationStatus } from "../app/run/qualificationStatus.mjs";
+
 const GRID_API = "https://api.aipowergrid.io";
 const LITELLM_PR_API = "https://api.github.com/repos/BerriAI/litellm/pulls/38725";
 const LITELLM_PR_URL = "https://github.com/BerriAI/litellm/pull/38725";
@@ -9,6 +11,10 @@ const WORKER_RELEASE_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases/latest";
 const WORKER_RELEASES_URL =
   "https://github.com/AIPowerGrid/grid-text-worker/releases";
+const MEDIA_QUALIFICATION_STATUS_URL =
+  "https://raw.githubusercontent.com/AIPowerGrid/grid-media-worker/main/docs/qualification-status.json";
+const MEDIA_QUALIFICATION_COHORT_URL =
+  "https://github.com/AIPowerGrid/grid-media-worker/issues/8";
 const RUN_URL = "https://aipowergrid.io/run";
 const NPM_PACKAGES = [
   "@aipowergrid/ai-sdk-provider",
@@ -93,7 +99,15 @@ function workerReleaseTag(release) {
 }
 
 export function buildWeeklyProof(
-  { network, totals, payouts, litellm, workerRelease, packages },
+  {
+    network,
+    totals,
+    payouts,
+    litellm,
+    workerRelease,
+    mediaQualification,
+    packages,
+  },
   now = new Date(),
 ) {
   if (network?.schema !== "aipg.network.status.v1") {
@@ -129,6 +143,14 @@ export function buildWeeklyProof(
   }
   const belowTarget = capacity.models_below_target.length;
   const workerTag = workerReleaseTag(workerRelease);
+  const mediaStatus = normalizeMediaQualificationStatus(mediaQualification);
+  if (!mediaStatus) throw new Error("media qualification status is invalid");
+  const mediaNeeds = mediaStatus.classes
+    .filter((item) => item.status === "needed")
+    .map((item) => item.id);
+  const mediaSupply = mediaNeeds.length
+    ? `Media qualification still needs ${mediaNeeds.join(", ")} evidence; the tool is benchmark-only and earns no rewards.`
+    : "Media hardware evidence is complete, but the managed release remains subject to its signing and staging gates.";
   const packageRows = Object.fromEntries(
     NPM_PACKAGES.map((name) => [name, packageVersion(packages?.[name], name)]),
   );
@@ -140,7 +162,7 @@ export function buildWeeklyProof(
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
     `Integration proof: AI SDK ${packageRows["@aipowergrid/ai-sdk-provider"]}, ElizaOS ${packageRows["@aipowergrid/plugin-aipg"]}, n8n ${packageRows["@aipowergrid/n8n-nodes-aipg"]}, and MCP ${packageRows["@aipowergrid/mcp"]} are live on npm. LiteLLM is ${state}. https://aipowergrid.io/docs/integrations`,
-    `GPU supply: verified Linux text worker ${workerTag} is live for x64 and ARM64. ${INTEGER.format(belowTarget)} online models are below the 3-worker redundancy target, so operators can see real capacity gaps at ${RUN_URL}`,
+    `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
   ];
   for (const [index, post] of posts.entries()) {
     if (post.length > 280) throw new Error(`post ${index + 1} exceeds 280 characters`);
@@ -174,6 +196,8 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 | LiteLLM provider PR | ${state} |
 | Verified Linux text worker | ${workerTag} |
 | Models below redundancy target | ${INTEGER.format(belowTarget)} |
+| Media qualification classes still needed | ${mediaNeeds.length ? mediaNeeds.join(", ") : "none"} |
+| Media qualification release ready | ${mediaStatus.releaseReady ? "yes" : "no"} |
 | Vercel AI SDK package | ${packageRows["@aipowergrid/ai-sdk-provider"]} |
 | ElizaOS package | ${packageRows["@aipowergrid/plugin-aipg"]} |
 | n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]} |
@@ -187,18 +211,29 @@ ${posts.map((post, index) => `### ${index + 1}/${posts.length}\n\n${post}`).join
 - [LiteLLM provider PR](${LITELLM_PR_URL})
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
 - [Text-worker releases](${WORKER_RELEASES_URL})
+- [Media qualification status](${MEDIA_QUALIFICATION_STATUS_URL})
+- [Media qualification cohort](${MEDIA_QUALIFICATION_COHORT_URL})
 - [Worker onboarding](${RUN_URL})
 `;
 }
 
 export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
-  const [network, totals, payouts, litellm, workerRelease, ...packagePayloads] =
+  const [
+    network,
+    totals,
+    payouts,
+    litellm,
+    workerRelease,
+    mediaQualification,
+    ...packagePayloads
+  ] =
     await Promise.all([
       fetchJson(`${GRID_API}/v1/status/network`, fetcher),
       fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
       fetchJson(`${GRID_API}/v1/payouts/public?limit=200`, fetcher),
       fetchJson(LITELLM_PR_API, fetcher).catch(() => null),
       fetchJson(WORKER_RELEASE_API, fetcher),
+      fetchJson(MEDIA_QUALIFICATION_STATUS_URL, fetcher),
       ...NPM_PACKAGES.map((name) =>
         fetchJson(
           `https://registry.npmjs.org/${name.replace("/", "%2F")}/latest`,
@@ -210,7 +245,15 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
     NPM_PACKAGES.map((name, index) => [name, packagePayloads[index]]),
   );
   return buildWeeklyProof(
-    { network, totals, payouts, litellm, workerRelease, packages },
+    {
+      network,
+      totals,
+      payouts,
+      litellm,
+      workerRelease,
+      mediaQualification,
+      packages,
+    },
     now,
   );
 }
