@@ -9,6 +9,7 @@ import {
   FiMonitor,
   FiShield,
 } from "react-icons/fi";
+import { detectOperatorPlatform } from "./platformDetection.mjs";
 
 const PLATFORMS = {
   linux: { label: "Linux", detail: "Ubuntu 22.04+ x86_64" },
@@ -31,16 +32,12 @@ export default function RunDownloads({
   const [platform, setPlatform] = useState("linux");
 
   useEffect(() => {
-    const platformHint =
-      navigator.userAgentData?.platform || navigator.platform || "";
-    const userAgent = navigator.userAgent || "";
-    if (/^win/i.test(platformHint) || /windows/i.test(userAgent)) {
-      setPlatform("windows");
-    } else if (/mac/i.test(platformHint) || /macintosh/i.test(userAgent)) {
-      setPlatform("macos");
-    } else if (/aarch64|arm64/i.test(platformHint)) {
-      setPlatform("linuxArm64");
-    }
+    const detected = detectOperatorPlatform({
+      userAgentDataPlatform: navigator.userAgentData?.platform,
+      platform: navigator.platform,
+      userAgent: navigator.userAgent,
+    });
+    setPlatform(detected.downloadPlatform);
   }, []);
 
   useEffect(() => {
