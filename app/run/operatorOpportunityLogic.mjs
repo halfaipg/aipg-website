@@ -15,6 +15,7 @@ export function selectTextRoutePriority(
       name: item.name.trim(),
       workers: Number(item.workers),
       jobs30d: Number(item.jobs30d),
+      acceptedDen30d: Number(item.acceptedDen30d),
     }))
     .filter(
       (item) =>
@@ -23,7 +24,9 @@ export function selectTextRoutePriority(
         item.workers > 0 &&
         item.workers < target &&
         Number.isFinite(item.jobs30d) &&
-        item.jobs30d >= 0,
+        item.jobs30d >= 0 &&
+        Number.isFinite(item.acceptedDen30d) &&
+        item.acceptedDen30d >= 0,
     )
     .map((item) => ({
       ...item,
@@ -31,9 +34,10 @@ export function selectTextRoutePriority(
     }))
     .sort(
       (left, right) =>
-        right.jobs30d * right.missingReplicas -
-          left.jobs30d * left.missingReplicas ||
+        right.acceptedDen30d * right.missingReplicas -
+          left.acceptedDen30d * left.missingReplicas ||
         right.missingReplicas - left.missingReplicas ||
+        right.acceptedDen30d - left.acceptedDen30d ||
         right.jobs30d - left.jobs30d ||
         left.name.localeCompare(right.name),
     );
