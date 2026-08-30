@@ -24,8 +24,13 @@ function formatAipg(value) {
 function formatTime(value) {
   if (!value) return "Unavailable";
   return new Intl.DateTimeFormat("en-US", {
-    dateStyle: "medium",
-    timeStyle: "short",
+    timeZone: "UTC",
+    timeZoneName: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
   }).format(new Date(value));
 }
 

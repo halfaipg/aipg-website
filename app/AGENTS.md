@@ -37,10 +37,15 @@ with a scroll-reveal IntersectionObserver).
   coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
   expected/measured throughput inputs to recommend a worker path. The download
   panel and planner must derive their initial OS from the same conservative
-  browser-platform detector so a gated desktop build is never presented as
-  available through a mismatched Linux recommendation;
+  browser-platform detector through a hydration-safe external-store snapshot,
+  so a gated desktop build is never presented as available through a mismatched
+  Linux recommendation and desktop detection cannot replace the server tree;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
-  public worker counts with 30-day job and observed-performance telemetry.
+  public worker counts with 30-day job and observed-performance telemetry. The planner's
+  network-priority text route ranks under-target routes by observed 30-day work multiplied by
+  missing replicas; it is a supply-priority signal, not a hardware-compatibility verdict. An
+  operator must never advertise that route unless the detected backend genuinely serves the
+  named model.
   While the media release is gated, the download panel links to the public
   qualification cohort runbook. A complete `manager-qualification-v*`
   prerelease may expose a separately labelled benchmark-only binary, checksum,
@@ -58,7 +63,9 @@ with a scroll-reveal IntersectionObserver).
   The operator evidence panel may model a user-selected share of accepted den
   against the rolling 24-hour pool returned by `GET /v1/payouts/public`; it
   must label the result as same-window arithmetic, exclude token price and GPU
-  assumptions, and show nothing when evidence is invalid. Its worker check
+  assumptions, and show nothing when evidence is invalid. Server-rendered payout
+  timestamps must use an explicit UTC formatter so browser locale cannot break
+  hydration. Its worker check
   matches an exact name or ID against the public `GET /v1/workers` online feed;
   a missing match is not proof of a local failure.
   The recruitment section links first to the open paid Linux text-worker cohort

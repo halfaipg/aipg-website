@@ -34,10 +34,13 @@ onboarding, and staking-withdrawal surfaces.
   validator-caveat contracts for the weekly proof draft.
 - `unit/operator-evidence.test.mjs` - rolling payout-window validation,
   bounded den-share arithmetic, and exact online-worker matching.
+- `unit/operator-opportunity.test.mjs` - deterministic text-route priority
+  ranking that excludes media, offline, malformed, and fully redundant routes.
 - `unit/operator-intake.test.mjs` - public operator-interest form contract,
   required coarse planning fields, and forbidden sensitive-field boundary.
 - `unit/operator-platform.test.mjs` - shared conservative platform detection
-  that keeps download availability and planner recommendations synchronized.
+  that keeps download availability and planner recommendations synchronized;
+  the mobile `/run` smoke forces macOS and rejects hydration/page errors.
 - `unit/media-qualification-status.test.mjs` - strict normalization of the
   profile-bound public media qualification counts and trusted recruitment
   links.

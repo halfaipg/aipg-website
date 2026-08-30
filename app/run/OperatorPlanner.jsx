@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   FiActivity,
   FiAlertTriangle,
@@ -9,7 +9,11 @@ import {
   FiMonitor,
   FiServer,
 } from "react-icons/fi";
-import { detectOperatorPlatform } from "./platformDetection.mjs";
+import { selectTextRoutePriority } from "./operatorOpportunityLogic.mjs";
+import {
+  useDetectedOperatorPlatform,
+  useOperatorPlatformHydrated,
+} from "./operatorPlatformStore";
 
 const OPERATING_SYSTEMS = [
   ["linux", "Linux"],
@@ -138,29 +142,21 @@ export default function OperatorPlanner({
   mediaReady,
   textPlatforms,
 }) {
-  const [os, setOs] = useState("linux");
+  const [selectedOs, setSelectedOs] = useState(null);
   const [accelerator, setAccelerator] = useState("nvidia");
   const [gpuModel, setGpuModel] = useState("");
   const [vram, setVram] = useState(24);
   const [ram, setRam] = useState(64);
   const [disk, setDisk] = useState(100);
   const [throughput, setThroughput] = useState(0);
-  const [hydrated, setHydrated] = useState(false);
+  const detectedPlatform = useDetectedOperatorPlatform();
+  const hydrated = useOperatorPlatformHydrated();
+  const os = selectedOs || detectedPlatform.os;
   const textReady = Boolean(
     os === "linux"
       ? textPlatforms?.linux?.ready || textPlatforms?.linuxArm64?.ready
       : textPlatforms?.[os]?.ready,
   );
-
-  useEffect(() => {
-    const detected = detectOperatorPlatform({
-      userAgentDataPlatform: navigator.userAgentData?.platform,
-      platform: navigator.platform,
-      userAgent: navigator.userAgent,
-    });
-    setOs(detected.os);
-    setHydrated(true);
-  }, []);
 
   const result = useMemo(
     () =>
@@ -175,6 +171,10 @@ export default function OperatorPlanner({
         textReady,
       }),
     [accelerator, disk, mediaReady, os, ram, textReady, throughput, vram],
+  );
+  const textRoutePriority = useMemo(
+    () => selectTextRoutePriority(opportunities),
+    [opportunities],
   );
 
   return (
@@ -208,7 +208,7 @@ export default function OperatorPlanner({
                   <button
                     key={value}
                     type="button"
-                    onClick={() => setOs(value)}
+                    onClick={() => setSelectedOs(value)}
                     aria-pressed={os === value}
                     className={`min-h-11 px-2 text-sm font-semibold transition-colors ${
                       os === value
@@ -295,6 +295,31 @@ export default function OperatorPlanner({
             <p className="mt-5 border-t border-white/10 pt-5 text-sm leading-6 text-gray-400">
               {result.secondary}
             </p>
+            <div className="mt-5 border-t border-white/10 pt-5">
+              <p className="text-xs font-bold uppercase text-gray-500">
+                Network-priority text route
+              </p>
+              {textRoutePriority ? (
+                <>
+                  <p className="mt-2 break-words font-mono text-sm text-white">
+                    {textRoutePriority.name}
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-gray-400">
+                    {textRoutePriority.workers} serving worker
+                    {textRoutePriority.workers === 1 ? "" : "s"} and{" "}
+                    {formatCount(textRoutePriority.jobs30d)} jobs in 30 days.
+                    This ranks live network need, not hardware compatibility.
+                    Advertise it only when your backend genuinely serves that
+                    model.
+                  </p>
+                </>
+              ) : (
+                <p className="mt-2 text-xs leading-5 text-gray-400">
+                  No under-target text route has enough live evidence for a
+                  recommendation.
+                </p>
+              )}
+            </div>
             <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-5 text-xs">
               <div>
                 <dt className="text-gray-500">Entered accelerator</dt>
