@@ -91,10 +91,9 @@ const Hero = () => {
           </a>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all border border-white/20"
-            href="https://docs.aipowergrid.io"
-            target="_blank"
+            href="/use"
           >
-            Read the docs
+            Use AIPG in 60 seconds
           </a>
         </div>
 

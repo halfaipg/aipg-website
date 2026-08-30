@@ -29,8 +29,8 @@ const products = [
   {
     title: "Build with the API",
     description: "OpenAI and Anthropic compatible text plus Grid image, video, and audio endpoints. Community-powered backend with daily and prepaid credits.",
-    href: "https://docs.aipowergrid.io/streaming-api",
-    label: "API Docs",
+    href: "https://aipowergrid.io/use",
+    label: "Start in 60 seconds",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <polyline points="16 18 22 12 16 6" />

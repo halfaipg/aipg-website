@@ -12,7 +12,8 @@ with a scroll-reveal IntersectionObserver).
   `context/Providers` wrapper, Navbar/Footer.
   `globals.css` — global styles incl. the `fadeInSection`/`visible` reveal classes used by `page.js`.
 - `page.js` — home page; composes `components/` sections.
-- `about/page.js` — about page. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
+- `about/page.js` — about page. `use/page.js` — permanent redirect to the
+  canonical `/docs/integrations` guide. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
 - `run/` — worker download and onboarding surface. Text-worker downloads require
   an immutable, stable `v*` release whose exact four-platform binary set, SPDX
