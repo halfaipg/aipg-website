@@ -45,6 +45,59 @@ function fixture() {
         payouts: 2,
       })),
     },
+    pricing: {
+      schema: "aipg.pricing.v1",
+      currency: "USD",
+      price_book: {
+        version: "2026-08-29-a",
+        models: [
+          {
+            model: "gpt-oss-120b",
+            rates: { input_per_mtok_usd: 0.075, output_per_mtok_usd: 0.3 },
+          },
+          {
+            model: "z-image-turbo",
+            rates: { per_image_usd: 0.003 },
+          },
+        ],
+      },
+      comparison_evidence: {
+        status: "current",
+        as_of: "2026-08-29T00:00:00Z",
+        valid_until: "2026-09-29T00:00:00Z",
+        items: [
+          {
+            id: "gpt-oss-120b-standard-token-rates",
+            model: "gpt-oss-120b",
+            modality: "text",
+            provider: "Groq",
+            source_url: "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+            basis: "same model; 1M input tokens plus 1M output tokens",
+            workload: { input_tokens: 1_000_000, output_tokens: 1_000_000 },
+            competitor_rates: {
+              input_per_mtok_usd: 0.15,
+              output_per_mtok_usd: 0.6,
+            },
+            aipg_usd: 0.375,
+            competitor_usd: 0.75,
+            savings_percent: 50,
+          },
+          {
+            id: "z-image-turbo-one-megapixel",
+            model: "z-image-turbo",
+            modality: "image",
+            provider: "fal",
+            source_url: "https://fal.ai/models/fal-ai/z-image/turbo",
+            basis: "same model; one 1-megapixel image",
+            workload: { images: 1, megapixels: 1 },
+            competitor_rates: { per_megapixel_usd: 0.005 },
+            aipg_usd: 0.003,
+            competitor_usd: 0.005,
+            savings_percent: 40,
+          },
+        ],
+      },
+    },
     integrations: Object.fromEntries(
       INTEGRATION_PULL_REQUESTS.map((item) => [
         item.id,
@@ -100,7 +153,7 @@ function fixture() {
       },
       "@aipowergrid/n8n-nodes-aipg": {
         name: "@aipowergrid/n8n-nodes-aipg",
-        version: "0.1.2",
+        version: "0.1.3",
       },
       "@aipowergrid/mcp": {
         name: "@aipowergrid/mcp",
@@ -161,6 +214,16 @@ test("builds an evidence-linked thread without overstating validators", () => {
   assert.match(proof, /MCP package \| 0\.1\.1; 211 npm requests/);
   assert.match(
     proof,
+    /gpt-oss-120b AIPG \$0\.375 vs Groq \$0\.75 \(50% less\)/,
+  );
+  assert.match(
+    proof,
+    /z-image-turbo AIPG \$0\.003 vs fal \$0\.005 \(40% less\)/,
+  );
+  assert.match(proof, /Versioned Grid pricing and same-model comparisons/);
+  assert.match(proof, /gpt-oss-120b comparison source/);
+  assert.match(
+    proof,
     /npm download window \| 2026-08-22 through 2026-08-28; registry requests, not unique users/,
   );
   assert.match(proof, /verified Linux text worker v0\.3\.6/);
@@ -171,9 +234,40 @@ test("builds an evidence-linked thread without overstating validators", () => {
   );
   assert.match(proof, /the tool is benchmark-only and earns no rewards/);
   assert.match(proof, /Media qualification release ready \| no/);
-  const posts = [...proof.matchAll(/^### \d\/5\n\n(.+)$/gm)].map((match) => match[1]);
-  assert.equal(posts.length, 5);
+  const posts = [...proof.matchAll(/^### \d\/6\n\n(.+)$/gm)].map((match) => match[1]);
+  assert.equal(posts.length, 6);
   assert.ok(posts.every((post) => post.length <= 280));
+});
+
+test("fails closed when same-model pricing evidence is stale or drifts", () => {
+  const stale = fixture();
+  stale.pricing.comparison_evidence.valid_until = "2026-08-29T19:59:59Z";
+  assert.throws(
+    () => buildWeeklyProof(stale, NOW),
+    /pricing comparison evidence is stale/,
+  );
+
+  const arithmetic = fixture();
+  arithmetic.pricing.comparison_evidence.items[0].savings_percent = 49;
+  assert.throws(
+    () => buildWeeklyProof(arithmetic, NOW),
+    /comparison arithmetic drifted/,
+  );
+
+  const book = fixture();
+  book.pricing.price_book.models[0].rates.output_per_mtok_usd = 0.4;
+  assert.throws(
+    () => buildWeeklyProof(book, NOW),
+    /does not match the price book/,
+  );
+
+  const competitor = fixture();
+  competitor.pricing.comparison_evidence.items[0].competitor_rates.output_per_mtok_usd =
+    0.7;
+  assert.throws(
+    () => buildWeeklyProof(competitor, NOW),
+    /does not match competitor rates/,
+  );
 });
 
 test("fails closed when the payout response cannot prove a seven-day window", () => {

@@ -37,6 +37,8 @@ onboarding, and staking-withdrawal surfaces.
   immutable worker-release, exact npm-package/version plus fresh matching npm
   download windows that remain explicitly distinct from unique users, exact repository/number/URL and
   truthful state reporting for every current upstream integration submission,
+  fresh same-model pricing comparisons whose arithmetic and AIPG side match
+  Core's versioned public price book,
   media-qualification validation, social-length, and validator-caveat
   contracts for the weekly proof draft.
 - `unit/operator-evidence.test.mjs` - rolling payout-window validation,
