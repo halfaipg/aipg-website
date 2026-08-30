@@ -33,8 +33,8 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
   immutable worker-release, exact npm-package, exact repository/number/URL and
   truthful state reporting for every current upstream integration submission,
-  media-qualification validation, social-length, and validator-caveat
-  contracts for the weekly proof draft.
+  profile-bound media qualification, expiring same-model price evidence,
+  social-length, and validator-caveat contracts for the weekly proof draft.
 - `unit/operator-evidence.test.mjs` - rolling payout-window validation,
   bounded den-share arithmetic, and exact online-worker matching.
 - `unit/operator-opportunity.test.mjs` - deterministic text-route priority

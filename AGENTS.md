@@ -60,12 +60,13 @@ on Vercel.
   entry point for agents. **`*.csv`** at root are BTC price history read by the btc-chart API
   route. **Not** DOX boundaries.
 - **`scripts/weekly-proof.mjs`** — fail-closed public-evidence collector that
-  generates a five-post weekly thread draft, including immutable worker-release
-  and exact npm-package evidence, exact LiteLLM/Dify/Vercel AI SDK/ElizaOS/
-  LangChain upstream PR identity and state, plus the profile-bound media
-  qualification needs. Omission or identity drift in any required upstream
-  submission fails closed; the scheduled workflow opens one review issue and
-  never posts to social accounts automatically.
+  generates a six-post weekly thread draft, including immutable worker-release,
+  exact npm-package evidence, exact LiteLLM/Dify/Vercel AI SDK/ElizaOS/
+  LangChain upstream PR identity and state, profile-bound media qualification
+  needs, and current same-model price-comparison evidence. Omission or identity
+  drift in any required upstream submission fails closed; the scheduled
+  workflow opens one review issue and never posts to social accounts
+  automatically.
 - **`OPERATOR_OUTREACH.md`** — review-first worker and validator recruitment
   playbook. It defines channel boundaries, evidence requirements, approved
   claims, reusable drafts, and outcome metrics; it never authorizes automated
