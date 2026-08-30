@@ -88,6 +88,10 @@ on Vercel.
   It also exposes a fail-closed rolling payout scenario and an exact public
   worker-registry check; neither may turn hardware, job counts, or token price
   into an earnings promise.
+  The public operator-interest handoff is owned by
+  `.github/ISSUE_TEMPLATE/operator-interest.yml`; it collects coarse hardware,
+  region, and availability only and must reject credentials, wallet details,
+  network addresses, private logs, and account identifiers.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.

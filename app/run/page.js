@@ -1,6 +1,7 @@
 import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
 import OperatorEvidence from "./OperatorEvidence";
+import OperatorRecruitment from "./OperatorRecruitment";
 import { summarizePayoutEvidence } from "./operatorEvidenceLogic.mjs";
 import {
   decodeReleaseContract,
@@ -335,6 +336,8 @@ export default async function RunPage() {
         mediaReady={Boolean(mediaRelease)}
         textPlatforms={textRelease?.platforms || {}}
       />
+
+      <OperatorRecruitment />
 
       <OperatorEvidence payoutEvidence={payoutEvidence} />
 

@@ -52,6 +52,9 @@ with a scroll-reveal IntersectionObserver).
   assumptions, and show nothing when evidence is invalid. Its worker check
   matches an exact name or ID against the public `GET /v1/workers` online feed;
   a missing match is not proof of a local failure.
+  The recruitment CTA links to the repository's public operator-interest issue
+  form. The page and form must state that only coarse hardware and availability
+  belong there; private setup details stay out of public GitHub issues.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic

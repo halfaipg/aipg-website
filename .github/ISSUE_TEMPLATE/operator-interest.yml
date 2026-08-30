@@ -1,0 +1,115 @@
+name: Run a Grid worker
+description: Tell us about a GPU you may want to bring online.
+title: "[Operator interest]: "
+labels:
+  - help wanted
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. Share only coarse hardware and availability details.
+
+        **Do not include API keys, private keys, seed phrases, wallet addresses, IP addresses, hostnames, private logs, or account identifiers.** We will arrange any private setup details separately after reviewing the fit.
+
+  - type: dropdown
+    id: modalities
+    attributes:
+      label: Workloads you are interested in
+      options:
+        - Text inference
+        - Image generation
+        - Video generation
+        - Audio generation
+        - Multiple modalities
+    validations:
+      required: true
+
+  - type: input
+    id: gpu_model
+    attributes:
+      label: GPU or accelerator model
+      description: Model name only, for example RTX 3090, RTX 4090, A6000, or MI300X.
+      placeholder: RTX 3090
+    validations:
+      required: true
+
+  - type: dropdown
+    id: vram
+    attributes:
+      label: VRAM
+      options:
+        - Under 12 GB
+        - 12-15 GB
+        - 16-23 GB
+        - 24-47 GB
+        - 48-79 GB
+        - 80 GB or more
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operating_system
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - Windows
+        - macOS
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: availability
+    attributes:
+      label: Expected availability
+      options:
+        - Occasional testing
+        - Under 20 hours per week
+        - 20-80 hours per week
+        - Mostly online
+        - 24/7 dedicated
+    validations:
+      required: true
+
+  - type: dropdown
+    id: region
+    attributes:
+      label: Broad region
+      description: Used only to understand geographic supply. Do not post a street address or IP address.
+      options:
+        - North America
+        - South America
+        - Europe
+        - Africa
+        - Middle East
+        - Asia
+        - Oceania
+        - Prefer not to say
+    validations:
+      required: true
+
+  - type: input
+    id: backend
+    attributes:
+      label: Existing inference backend
+      description: Optional. Name the software only, such as Ollama, vLLM, SGLang, LM Studio, or ComfyUI.
+      placeholder: vLLM
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: What would you like to run?
+      description: Briefly describe the models or workload you want to contribute and whether the machine is already serving them locally.
+      placeholder: I have an RTX 3090 serving a text model locally and can keep it online most evenings.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: public_boundary
+    attributes:
+      label: Public information boundary
+      options:
+        - label: I have not included credentials, wallet details, network addresses, private logs, or other sensitive information.
+          required: true
