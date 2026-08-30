@@ -8,8 +8,12 @@ import {
   FiHardDrive,
   FiMonitor,
   FiServer,
+  FiShare2,
 } from "react-icons/fi";
-import { selectTextRoutePriority } from "./operatorOpportunityLogic.mjs";
+import {
+  buildTextRouteShare,
+  selectTextRoutePriority,
+} from "./operatorOpportunityLogic.mjs";
 import {
   useDetectedOperatorPlatform,
   useOperatorPlatformHydrated,
@@ -149,6 +153,7 @@ export default function OperatorPlanner({
   const [ram, setRam] = useState(64);
   const [disk, setDisk] = useState(100);
   const [throughput, setThroughput] = useState(0);
+  const [shareStatus, setShareStatus] = useState("idle");
   const detectedPlatform = useDetectedOperatorPlatform();
   const hydrated = useOperatorPlatformHydrated();
   const os = selectedOs || detectedPlatform.os;
@@ -176,6 +181,31 @@ export default function OperatorPlanner({
     () => selectTextRoutePriority(opportunities),
     [opportunities],
   );
+  const routeShareText = useMemo(
+    () => buildTextRouteShare(textRoutePriority),
+    [textRoutePriority],
+  );
+
+  async function shareRouteOpening() {
+    if (!routeShareText) return;
+    setShareStatus("idle");
+    try {
+      if (typeof navigator.share === "function") {
+        await navigator.share({
+          title: "AI Power Grid operator opening",
+          text: routeShareText,
+        });
+        setShareStatus("shared");
+        return;
+      }
+      if (!navigator.clipboard?.writeText) throw new Error("clipboard unavailable");
+      await navigator.clipboard.writeText(routeShareText);
+      setShareStatus("copied");
+    } catch (error) {
+      if (error?.name === "AbortError") return;
+      setShareStatus("failed");
+    }
+  }
 
   return (
     <section
@@ -313,6 +343,32 @@ export default function OperatorPlanner({
                     not raw request count or hardware compatibility. Advertise
                     it only when your backend genuinely serves that model.
                   </p>
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={shareRouteOpening}
+                      className="inline-flex min-h-10 items-center gap-2 border border-white/20 bg-white/5 px-3 text-xs font-semibold text-white transition-colors hover:border-cyan-400 hover:text-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                    >
+                      <FiShare2 aria-hidden="true" /> Share opening
+                    </button>
+                    <p
+                      className={`text-xs ${
+                        shareStatus === "failed"
+                          ? "text-orange-300"
+                          : "text-gray-400"
+                      }`}
+                      role="status"
+                      aria-live="polite"
+                    >
+                      {shareStatus === "shared"
+                        ? "Opening shared."
+                        : shareStatus === "copied"
+                          ? "Opening copied."
+                          : shareStatus === "failed"
+                            ? "Sharing is unavailable in this browser."
+                            : ""}
+                    </p>
+                  </div>
                 </>
               ) : (
                 <p className="mt-2 text-xs leading-5 text-gray-400">

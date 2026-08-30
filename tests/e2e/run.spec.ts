@@ -10,6 +10,13 @@ test.describe('/run smoke', () => {
     page.on('pageerror', (error) => {
       browserErrors.push(`pageerror: ${error.message}`);
     });
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'share', {
+        configurable: true,
+        value: undefined,
+      });
+    });
 
     await page.route('https://api.aipowergrid.io/v1/workers', async (route) => {
       await route.fulfill({
@@ -53,6 +60,13 @@ test.describe('/run smoke', () => {
     await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
     await expect(page.getByLabel('Expected text speed')).toHaveValue('0');
     await expect(page.getByText('Network-priority text route')).toBeVisible();
+    const shareOpening = page.getByRole('button', { name: 'Share opening' });
+    await expect(shareOpening).toBeVisible();
+    await shareOpening.click();
+    await expect(page.getByRole('status')).toHaveText('Opening copied.');
+    await expect
+      .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+      .toMatch(/Independent GPU operators wanted.*Historical workload is not an earnings forecast.*https:\/\/aipowergrid\.io\/run/);
     await expect(
       page.getByText(/Priority uses accepted den and missing replicas/i),
     ).toBeVisible();
