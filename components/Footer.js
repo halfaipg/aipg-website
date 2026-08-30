@@ -68,6 +68,18 @@ const Footer = () => {
                 </p>
                 <p>
                   <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    href="https://docs.aipowergrid.io/integrations" target="_blank">
+                    60-second setup
+                  </a>
+                </p>
+                <p>
+                  <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    href="https://docs.aipowergrid.io/builder-credits" target="_blank">
+                    Builder credits
+                  </a>
+                </p>
+                <p>
+                  <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
                     href="https://github.com/AIPowerGrid" target="_blank">
                     GitHub
                   </a>
