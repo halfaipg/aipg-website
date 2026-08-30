@@ -5,6 +5,7 @@ import {
   FiActivity,
   FiAlertTriangle,
   FiCpu,
+  FiDownload,
   FiHardDrive,
   FiMonitor,
   FiServer,
@@ -209,6 +210,7 @@ export default function OperatorPlanner({
 
   return (
     <section
+      id="hardware-planner"
       className="border-y border-white/10 bg-[#0b0c0e]"
       data-operator-planner-ready={hydrated ? "true" : "false"}
     >
@@ -325,6 +327,15 @@ export default function OperatorPlanner({
             <p className="mt-5 border-t border-white/10 pt-5 text-sm leading-6 text-gray-400">
               {result.secondary}
             </p>
+            <a
+              href={accelerator === "cpu" ? "/validate" : "#worker-downloads"}
+              className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 bg-cyan-400 px-4 text-sm font-bold text-black transition-colors hover:bg-cyan-300"
+            >
+              <FiDownload aria-hidden="true" />
+              {accelerator === "cpu"
+                ? "Open validator setup"
+                : "View worker downloads"}
+            </a>
             <div className="mt-5 border-t border-white/10 pt-5">
               <p className="text-xs font-bold uppercase text-gray-500">
                 Network-priority text route

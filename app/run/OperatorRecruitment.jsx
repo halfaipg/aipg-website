@@ -1,13 +1,15 @@
 import { FiArrowRight, FiCpu, FiShield } from "react-icons/fi";
-
-const OPERATOR_INTAKE_URL =
-  "https://github.com/halfaipg/aipg-website/issues/new?template=operator-interest.yml";
-const TEXT_OPERATOR_COHORT_URL =
-  "https://github.com/AIPowerGrid/grid-text-worker/issues/10";
+import {
+  OPERATOR_INTAKE_URL,
+  TEXT_OPERATOR_COHORT_URL,
+} from "./operatorLinks";
 
 export default function OperatorRecruitment() {
   return (
-    <section className="border-y border-white/10 bg-[#111214]">
+    <section
+      id="operator-cohort"
+      className="scroll-mt-20 border-y border-white/10 bg-[#111214]"
+    >
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1fr_auto] md:items-center md:px-8 lg:py-16">
         <div className="max-w-2xl">
           <p className="mb-3 flex items-center gap-2 text-sm font-bold uppercase text-orange-400">

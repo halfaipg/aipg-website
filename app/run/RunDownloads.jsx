@@ -10,6 +10,10 @@ import {
   FiShield,
 } from "react-icons/fi";
 import { useDetectedOperatorPlatform } from "./operatorPlatformStore";
+import {
+  OPERATOR_INTAKE_URL,
+  TEXT_OPERATOR_COHORT_URL,
+} from "./operatorLinks";
 
 const PLATFORMS = {
   linux: { label: "Linux", detail: "Ubuntu 22.04+ x86_64" },
@@ -66,7 +70,10 @@ export default function RunDownloads({
 
   return (
     <>
-      <section className="relative min-h-[620px] overflow-hidden border-b border-white/10 lg:min-h-[680px]">
+      <section
+        id="worker-downloads"
+        className="relative min-h-[620px] scroll-mt-20 overflow-hidden border-b border-white/10 lg:min-h-[680px]"
+      >
         <Image
           src="/Banner-Backgrounds/aipg Wallpaper V3 (67).png"
           alt="AI Power Grid network"
@@ -86,10 +93,13 @@ export default function RunDownloads({
               Run AI Power Grid
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
-              Put a supported GPU to work serving decentralized text, image,
-              video, and audio jobs. Downloads open only for immutable releases
-              whose manifests, checksums, SBOMs, and GitHub asset identities
-              pass the public release gate.
+              Connect a supported GPU to serve text, image, video, and audio
+              jobs. The verified Linux text worker is available now; other
+              platforms and media profiles can join qualification below.
+            </p>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-400">
+              Every download is checked against its immutable release manifest,
+              checksums, SBOM, and GitHub asset identity before it appears here.
             </p>
 
             <div className="mt-9 max-w-xl border border-white/15 bg-black/75 p-5 backdrop-blur-sm">
@@ -232,7 +242,28 @@ export default function RunDownloads({
                         </p>
                       ) : null}
                     </div>
-                  ) : null}
+                  ) : (
+                    <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                      {release?.linux && platform !== "linux" ? (
+                        <button
+                          type="button"
+                          onClick={() => setSelectedPlatform("linux")}
+                          className="flex min-h-11 items-center justify-center gap-2 border border-orange-400/60 px-4 text-sm font-semibold text-orange-200 hover:bg-orange-400/10"
+                        >
+                          Use verified Linux worker
+                        </button>
+                      ) : null}
+                      <a
+                        href={OPERATOR_INTAKE_URL}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex min-h-11 items-center justify-center gap-2 border border-white/15 px-4 text-sm font-semibold text-gray-300 hover:bg-white/10"
+                      >
+                        Register this hardware
+                        <FiExternalLink aria-hidden="true" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -294,11 +325,22 @@ export default function RunDownloads({
                   : "The unified media manager is still qualification-gated. Benchmark tools do not enroll a worker or advertise capabilities."}
               </p>
               {workerType === "text" && releaseReady ? (
-                <FirstRunSteps
-                  artifactName={selected.name}
-                  installerName={textInstaller?.name || null}
-                  version={release.version}
-                />
+                <>
+                  <a
+                    href={TEXT_OPERATOR_COHORT_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-4 flex min-h-11 items-center justify-center gap-2 border border-orange-400/50 px-4 text-sm font-semibold text-orange-200 hover:bg-orange-400/10"
+                  >
+                    Join the operator cohort for setup support
+                    <FiExternalLink aria-hidden="true" />
+                  </a>
+                  <FirstRunSteps
+                    artifactName={selected.name}
+                    installerName={textInstaller?.name || null}
+                    version={release.version}
+                  />
+                </>
               ) : null}
             </div>
           </div>
