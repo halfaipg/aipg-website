@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   FiCheck,
   FiDownload,
@@ -9,7 +9,7 @@ import {
   FiMonitor,
   FiShield,
 } from "react-icons/fi";
-import { detectOperatorPlatform } from "./platformDetection.mjs";
+import { useDetectedOperatorPlatform } from "./operatorPlatformStore";
 
 const PLATFORMS = {
   linux: { label: "Linux", detail: "Ubuntu 22.04+ x86_64" },
@@ -29,22 +29,14 @@ export default function RunDownloads({
   textRelease,
 }) {
   const [workerType, setWorkerType] = useState("text");
-  const [platform, setPlatform] = useState("linux");
-
-  useEffect(() => {
-    const detected = detectOperatorPlatform({
-      userAgentDataPlatform: navigator.userAgentData?.platform,
-      platform: navigator.platform,
-      userAgent: navigator.userAgent,
-    });
-    setPlatform(detected.downloadPlatform);
-  }, []);
-
-  useEffect(() => {
-    if (workerType === "media" && !["linux", "windows"].includes(platform)) {
-      setPlatform("linux");
-    }
-  }, [platform, workerType]);
+  const [selectedPlatform, setSelectedPlatform] = useState(null);
+  const detectedPlatform = useDetectedOperatorPlatform();
+  const requestedPlatform =
+    selectedPlatform || detectedPlatform.downloadPlatform;
+  const platform =
+    workerType === "media" && !["linux", "windows"].includes(requestedPlatform)
+      ? "linux"
+      : requestedPlatform;
 
   const release = workerType === "text" ? textRelease : mediaRelease;
   const platformStatus = release?.platforms?.[platform] || null;
@@ -138,7 +130,7 @@ export default function RunDownloads({
                   <button
                     key={value}
                     type="button"
-                    onClick={() => setPlatform(value)}
+                    onClick={() => setSelectedPlatform(value)}
                     className={`min-h-12 px-3 text-sm font-semibold transition-colors ${
                       platform === value
                         ? "bg-white text-black"

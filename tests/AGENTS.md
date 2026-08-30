@@ -39,7 +39,8 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/operator-intake.test.mjs` - public operator-interest form contract,
   required coarse planning fields, and forbidden sensitive-field boundary.
 - `unit/operator-platform.test.mjs` - shared conservative platform detection
-  that keeps download availability and planner recommendations synchronized.
+  that keeps download availability and planner recommendations synchronized;
+  the mobile `/run` smoke forces macOS and rejects hydration/page errors.
 - `unit/media-qualification-status.test.mjs` - strict normalization of the
   profile-bound public media qualification counts and trusted recruitment
   links.

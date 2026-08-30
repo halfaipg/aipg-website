@@ -37,8 +37,9 @@ with a scroll-reveal IntersectionObserver).
   coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
   expected/measured throughput inputs to recommend a worker path. The download
   panel and planner must derive their initial OS from the same conservative
-  browser-platform detector so a gated desktop build is never presented as
-  available through a mismatched Linux recommendation;
+  browser-platform detector through a hydration-safe external-store snapshot,
+  so a gated desktop build is never presented as available through a mismatched
+  Linux recommendation and desktop detection cannot replace the server tree;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
   public worker counts with 30-day job and observed-performance telemetry. The planner's
   network-priority text route ranks under-target routes by observed 30-day work multiplied by

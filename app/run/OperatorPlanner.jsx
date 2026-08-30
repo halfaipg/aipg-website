@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   FiActivity,
   FiAlertTriangle,
@@ -10,7 +10,10 @@ import {
   FiServer,
 } from "react-icons/fi";
 import { selectTextRoutePriority } from "./operatorOpportunityLogic.mjs";
-import { detectOperatorPlatform } from "./platformDetection.mjs";
+import {
+  useDetectedOperatorPlatform,
+  useOperatorPlatformHydrated,
+} from "./operatorPlatformStore";
 
 const OPERATING_SYSTEMS = [
   ["linux", "Linux"],
@@ -139,29 +142,21 @@ export default function OperatorPlanner({
   mediaReady,
   textPlatforms,
 }) {
-  const [os, setOs] = useState("linux");
+  const [selectedOs, setSelectedOs] = useState(null);
   const [accelerator, setAccelerator] = useState("nvidia");
   const [gpuModel, setGpuModel] = useState("");
   const [vram, setVram] = useState(24);
   const [ram, setRam] = useState(64);
   const [disk, setDisk] = useState(100);
   const [throughput, setThroughput] = useState(0);
-  const [hydrated, setHydrated] = useState(false);
+  const detectedPlatform = useDetectedOperatorPlatform();
+  const hydrated = useOperatorPlatformHydrated();
+  const os = selectedOs || detectedPlatform.os;
   const textReady = Boolean(
     os === "linux"
       ? textPlatforms?.linux?.ready || textPlatforms?.linuxArm64?.ready
       : textPlatforms?.[os]?.ready,
   );
-
-  useEffect(() => {
-    const detected = detectOperatorPlatform({
-      userAgentDataPlatform: navigator.userAgentData?.platform,
-      platform: navigator.platform,
-      userAgent: navigator.userAgent,
-    });
-    setOs(detected.os);
-    setHydrated(true);
-  }, []);
 
   const result = useMemo(
     () =>
@@ -213,7 +208,7 @@ export default function OperatorPlanner({
                   <button
                     key={value}
                     type="button"
-                    onClick={() => setOs(value)}
+                    onClick={() => setSelectedOs(value)}
                     aria-pressed={os === value}
                     className={`min-h-11 px-2 text-sm font-semibold transition-colors ${
                       os === value
