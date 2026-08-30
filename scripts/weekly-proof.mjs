@@ -262,7 +262,7 @@ export function buildWeeklyProof(
     `AIPG weekly proof: ${INTEGER.format(workers)} workers are serving ${INTEGER.format(models)} live models across ${modalities.join(", ")}. The public ledger recorded ${INTEGER.format(jobs24h)} jobs in 24h and ${INTEGER.format(jobs30d)} in 30d. Live status: ${network.status}. https://aipowergrid.io/status`,
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
-    `Integration proof: npm recorded ${INTEGER.format(downloadTotal)} downloads for our four packages in its ${shortDateRange(downloadStart, downloadEnd)} window (requests, not users). PRs: ${upstreamSummary}. https://aipowergrid.io/docs/integrations`,
+    `Integration proof: npm recorded ${INTEGER.format(downloadTotal)} downloads for our four packages in its ${shortDateRange(downloadStart, downloadEnd)} window (requests, not users). PRs: ${upstreamSummary}. $5-$20 builder credits: https://aipowergrid.io/docs/builder-credits`,
     `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
   ];
   for (const [index, post] of posts.entries()) {

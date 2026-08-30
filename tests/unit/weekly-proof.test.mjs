@@ -153,6 +153,10 @@ test("builds an evidence-linked thread without overstating validators", () => {
   }
   assert.match(proof, /npm recorded 475 downloads for our four packages/);
   assert.match(proof, /Aug 22-28 window \(requests, not users\)/);
+  assert.match(
+    proof,
+    /\$5-\$20 builder credits: https:\/\/aipowergrid\.io\/docs\/builder-credits/,
+  );
   assert.match(proof, /Vercel AI SDK package \| 0\.1\.0; 55 npm requests/);
   assert.match(proof, /MCP package \| 0\.1\.1; 211 npm requests/);
   assert.match(
