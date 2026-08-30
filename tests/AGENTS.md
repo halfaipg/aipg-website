@@ -34,6 +34,9 @@ onboarding, and staking-withdrawal surfaces.
   bounded den-share arithmetic, and exact online-worker matching.
 - `unit/operator-intake.test.mjs` - public operator-interest form contract,
   required coarse planning fields, and forbidden sensitive-field boundary.
+- `unit/media-qualification-status.test.mjs` - strict normalization of the
+  profile-bound public media qualification counts and trusted recruitment
+  links.
 
 ## Local Contracts
 

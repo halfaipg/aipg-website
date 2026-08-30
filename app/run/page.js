@@ -2,7 +2,9 @@ import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
 import OperatorEvidence from "./OperatorEvidence";
 import OperatorRecruitment from "./OperatorRecruitment";
+import MediaQualificationStatus from "./MediaQualificationStatus";
 import { summarizePayoutEvidence } from "./operatorEvidenceLogic.mjs";
+import { normalizeMediaQualificationStatus } from "./qualificationStatus.mjs";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
@@ -19,6 +21,8 @@ const MEDIA_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-media-worker/releases?per_page=20";
 const TEXT_RELEASES_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases?per_page=20";
+const MEDIA_QUALIFICATION_STATUS =
+  "https://raw.githubusercontent.com/AIPowerGrid/grid-media-worker/main/docs/qualification-status.json";
 const GRID_API = "https://api.aipowergrid.io";
 const MEDIA_REPOSITORY = "AIPowerGrid/grid-media-worker";
 const TEXT_REPOSITORY = "AIPowerGrid/grid-text-worker";
@@ -312,6 +316,18 @@ async function getPayoutEvidence() {
   }
 }
 
+async function getMediaQualificationStatus() {
+  try {
+    const response = await fetch(MEDIA_QUALIFICATION_STATUS, {
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) return null;
+    return normalizeMediaQualificationStatus(await response.json());
+  } catch {
+    return null;
+  }
+}
+
 export default async function RunPage() {
   const [
     mediaRelease,
@@ -319,12 +335,14 @@ export default async function RunPage() {
     textRelease,
     opportunities,
     payoutEvidence,
+    qualificationStatus,
   ] = await Promise.all([
     getManagerRelease(),
     getManagerQualificationRelease(),
     getTextRelease(),
     getOperatorOpportunities(),
     getPayoutEvidence(),
+    getMediaQualificationStatus(),
   ]);
 
   return (
@@ -340,6 +358,8 @@ export default async function RunPage() {
         mediaReady={Boolean(mediaRelease)}
         textPlatforms={textRelease?.platforms || {}}
       />
+
+      <MediaQualificationStatus status={qualificationStatus} />
 
       <OperatorRecruitment />
 

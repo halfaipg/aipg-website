@@ -41,6 +41,13 @@ test.describe('/run smoke', () => {
     await expect(
       page.getByRole('heading', { name: 'Find the useful path for your machine' }),
     ).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Help qualify the media worker.' }),
+    ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'View cohort status' })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-media-worker/issues/8',
+    );
     await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
     await expect(page.getByLabel('GPU or accelerator model')).toBeVisible();
     await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
