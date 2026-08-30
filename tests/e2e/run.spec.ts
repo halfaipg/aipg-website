@@ -52,6 +52,10 @@ test.describe('/run smoke', () => {
     await expect(page.getByLabel('GPU or accelerator model')).toBeVisible();
     await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
     await expect(page.getByLabel('Expected text speed')).toHaveValue('0');
+    await expect(page.getByText('Network-priority text route')).toBeVisible();
+    await expect(
+      page.getByText(/This ranks live network need, not hardware compatibility/i),
+    ).toBeVisible();
     await expect(
       page.getByText(/Jobs per worker is a rough workload-share signal, not a payout forecast/i),
     ).toBeVisible();

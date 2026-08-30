@@ -9,6 +9,7 @@ import {
   FiMonitor,
   FiServer,
 } from "react-icons/fi";
+import { selectTextRoutePriority } from "./operatorOpportunityLogic.mjs";
 import { detectOperatorPlatform } from "./platformDetection.mjs";
 
 const OPERATING_SYSTEMS = [
@@ -176,6 +177,10 @@ export default function OperatorPlanner({
       }),
     [accelerator, disk, mediaReady, os, ram, textReady, throughput, vram],
   );
+  const textRoutePriority = useMemo(
+    () => selectTextRoutePriority(opportunities),
+    [opportunities],
+  );
 
   return (
     <section
@@ -295,6 +300,31 @@ export default function OperatorPlanner({
             <p className="mt-5 border-t border-white/10 pt-5 text-sm leading-6 text-gray-400">
               {result.secondary}
             </p>
+            <div className="mt-5 border-t border-white/10 pt-5">
+              <p className="text-xs font-bold uppercase text-gray-500">
+                Network-priority text route
+              </p>
+              {textRoutePriority ? (
+                <>
+                  <p className="mt-2 break-words font-mono text-sm text-white">
+                    {textRoutePriority.name}
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-gray-400">
+                    {textRoutePriority.workers} serving worker
+                    {textRoutePriority.workers === 1 ? "" : "s"} and{" "}
+                    {formatCount(textRoutePriority.jobs30d)} jobs in 30 days.
+                    This ranks live network need, not hardware compatibility.
+                    Advertise it only when your backend genuinely serves that
+                    model.
+                  </p>
+                </>
+              ) : (
+                <p className="mt-2 text-xs leading-5 text-gray-400">
+                  No under-target text route has enough live evidence for a
+                  recommendation.
+                </p>
+              )}
+            </div>
             <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-5 text-xs">
               <div>
                 <dt className="text-gray-500">Entered accelerator</dt>
