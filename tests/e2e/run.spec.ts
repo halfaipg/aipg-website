@@ -58,7 +58,11 @@ test.describe('/run smoke', () => {
     await expect(page.getByRole('heading', { name: 'Check the rail before you commit a GPU' })).toBeVisible();
     await expect(page.getByText(/arithmetic on settled history, not a payout forecast/i)).toBeVisible();
     await expect(page.getByText(/One verified binary opens the local setup wizard/i)).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Register operator interest' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Join the text cohort' })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-text-worker/issues/10',
+    );
+    await expect(page.getByRole('link', { name: 'Register other hardware' })).toHaveAttribute(
       'href',
       'https://github.com/halfaipg/aipg-website/issues/new?template=operator-interest.yml',
     );
