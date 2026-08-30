@@ -63,6 +63,10 @@ on Vercel.
   generates a five-post weekly thread draft, including immutable worker-release
   and exact npm-package evidence; the scheduled workflow opens one review issue
   and never posts to social accounts automatically.
+- **`OPERATOR_OUTREACH.md`** — review-first worker and validator recruitment
+  playbook. It defines channel boundaries, evidence requirements, approved
+  claims, reusable drafts, and outcome metrics; it never authorizes automated
+  posting or earnings promises.
 
 ## Local Contracts
 
