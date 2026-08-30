@@ -307,10 +307,11 @@ export default function OperatorPlanner({
                   <p className="mt-2 text-xs leading-5 text-gray-400">
                     {textRoutePriority.workers} serving worker
                     {textRoutePriority.workers === 1 ? "" : "s"} and{" "}
-                    {formatCount(textRoutePriority.jobs30d)} jobs in 30 days.
-                    This ranks live network need, not hardware compatibility.
-                    Advertise it only when your backend genuinely serves that
-                    model.
+                    {formatCount(textRoutePriority.jobs30d)} jobs producing{" "}
+                    {formatCount(textRoutePriority.acceptedDen30d)} accepted den
+                    in 30 days. Priority uses accepted den and missing replicas,
+                    not raw request count or hardware compatibility. Advertise
+                    it only when your backend genuinely serves that model.
                   </p>
                 </>
               ) : (

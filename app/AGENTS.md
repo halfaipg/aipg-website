@@ -42,8 +42,9 @@ with a scroll-reveal IntersectionObserver).
   Linux recommendation and desktop detection cannot replace the server tree;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
   public worker counts with 30-day job and observed-performance telemetry. The planner's
-  network-priority text route ranks under-target routes by observed 30-day work multiplied by
-  missing replicas; it is a supply-priority signal, not a hardware-compatibility verdict. An
+  network-priority text route ranks under-target routes by accepted 30-day den multiplied by
+  missing replicas; raw request count remains display evidence, not the priority input. It is a
+  supply-priority signal, not a hardware-compatibility verdict. An
   operator must never advertise that route unless the detected backend genuinely serves the
   named model.
   While the media release is gated, the download panel links to the public
