@@ -63,7 +63,9 @@ with a scroll-reveal IntersectionObserver).
   The operator evidence panel may model a user-selected share of accepted den
   against the rolling 24-hour pool returned by `GET /v1/payouts/public`; it
   must label the result as same-window arithmetic, exclude token price and GPU
-  assumptions, and show nothing when evidence is invalid. Its worker check
+  assumptions, and show nothing when evidence is invalid. Server-rendered payout
+  timestamps must use an explicit UTC formatter so browser locale cannot break
+  hydration. Its worker check
   matches an exact name or ID against the public `GET /v1/workers` online feed;
   a missing match is not proof of a local failure.
   The recruitment section links first to the open paid Linux text-worker cohort
