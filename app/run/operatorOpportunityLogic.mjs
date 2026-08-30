@@ -1,4 +1,24 @@
 const DEFAULT_REDUNDANCY_TARGET = 3;
+const RUN_URL = "https://aipowergrid.io/run";
+
+export function buildTextRouteShare(route) {
+  const name = typeof route?.name === "string" ? route.name.trim() : "";
+  const workers = Number(route?.workers);
+  const missingReplicas = Number(route?.missingReplicas);
+  if (
+    !name ||
+    name.length > 80 ||
+    !Number.isInteger(workers) ||
+    workers < 1 ||
+    !Number.isInteger(missingReplicas) ||
+    missingReplicas < 1
+  ) {
+    return null;
+  }
+
+  const target = workers + missingReplicas;
+  return `Independent GPU operators wanted for AI Power Grid. Current text route: ${name} (${workers} serving, target ${target}). Historical workload is not an earnings forecast. Start: ${RUN_URL}`;
+}
 
 export function selectTextRoutePriority(
   opportunities,
