@@ -136,6 +136,13 @@ test.describe('/run mobile smoke', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
   test('keeps the download path readable without horizontal overflow', async ({ page }) => {
+    const browserErrors: string[] = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error') browserErrors.push(message.text());
+    });
+    page.on('pageerror', (error) => {
+      browserErrors.push(`pageerror: ${error.message}`);
+    });
     await page.addInitScript(() => {
       Object.defineProperty(navigator, 'userAgentData', {
         get: () => ({ platform: 'Darwin' }),
@@ -170,6 +177,7 @@ test.describe('/run mobile smoke', () => {
       window.innerWidth,
     );
     expect(overflow).toBe(false);
+    expect(browserErrors, `browser errors on mobile /run:\n${browserErrors.join('\n')}`).toEqual([]);
 
     await page.screenshot({ path: 'test-results/run-mobile.png', fullPage: true });
   });
