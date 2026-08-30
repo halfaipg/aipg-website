@@ -43,7 +43,7 @@ on Vercel.
 
 ## Ownership
 
-- **`app/`** — App Router routes (home, `/about`, `/run`, `/validate`, `/status`,
+- **`app/`** — App Router routes (home, `/about`, `/use`, `/run`, `/validate`, `/status`,
   `/staking`, `/wallet`) plus one API route
   (`/api/btc-chart`). Owned in its own AGENTS.md.
 - **`components/`** — page sections and the web3 staking UI. Owned in its own AGENTS.md.
@@ -114,6 +114,9 @@ on Vercel.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.
+- `/use` is the permanent short entry point for the canonical 60-second
+  integration guide at `/docs/integrations`. Builder CTAs should converge there
+  instead of copying client setup into the marketing repository.
 
 ## Work Guidance
 

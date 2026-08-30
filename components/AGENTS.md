@@ -33,6 +33,8 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 - The highlighted desktop navigation action points to the live `/run` operator
   funnel. The ended staking program remains reachable as an explicitly labelled
   legacy-withdrawal link in the footer, never as an earning opportunity.
+- Builder-facing hero, navigation, API-card, and footer actions converge on
+  `/use`, the short redirect to the canonical 60-second integration guide.
 - Marketing copy must distinguish the live text-worker download from the
   release-gated managed media installer. Do not claim universal GPU support,
   guaranteed earnings, confidential inference, autonomous Core operation, or

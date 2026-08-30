@@ -88,3 +88,26 @@ test("operator entry points match the live onboarding model", async () => {
     false,
   );
 });
+
+test("builder entry points converge on the canonical 60-second guide", async () => {
+  const [hero, products, navbar, footer, usePage] = await Promise.all([
+    readFile(new URL("components/Hero.js", ROOT), "utf8"),
+    readFile(new URL("components/Products.js", ROOT), "utf8"),
+    readFile(new URL("components/Navbar.js", ROOT), "utf8"),
+    readFile(new URL("components/Footer.js", ROOT), "utf8"),
+    readFile(new URL("app/use/page.js", ROOT), "utf8"),
+  ]);
+
+  assert.match(hero, /href="\/use"[\s\S]*Use AIPG in 60 seconds/);
+  assert.match(products, /href: "https:\/\/aipowergrid\.io\/use"/);
+  assert.match(navbar, /href="\/use"[\s\S]*?>\s*Build\s*<\/Link>/);
+  assert.match(footer, /href="\/use"[\s\S]*?>\s*60-second setup\s*<\/a>/);
+  assert.match(
+    usePage,
+    /permanentRedirect\(INTEGRATION_GUIDE\)/,
+  );
+  assert.match(
+    usePage,
+    /https:\/\/aipowergrid\.io\/docs\/integrations/,
+  );
+});

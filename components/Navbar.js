@@ -34,11 +34,10 @@ export default function Navbar() {
       </Link>
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
-        href="https://docs.aipowergrid.io"
-        target="_blank"
+        href="/use"
         onClick={() => setIsOpen(false)}
       >
-        Docs
+        Build
       </Link>
       <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
