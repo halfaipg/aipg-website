@@ -89,6 +89,10 @@ on Vercel.
   checksum-verified release without depending on unrelated desktop signing;
   macOS remains hidden until Developer ID notarization is verified and Windows
   remains hidden until Authenticode is verified.
+  Media-manager availability follows the same platform-scoped rule after its
+  signed profile, hardware qualification, RecipeVault, immutable payload,
+  SBOM, provenance, and supervised-staging gates pass: Linux may open while
+  Windows remains hidden until Authenticode is verified.
   It also exposes a fail-closed rolling payout scenario and an exact public
   worker-registry check; neither may turn hardware, job counts, or token price
   into an earnings promise.
