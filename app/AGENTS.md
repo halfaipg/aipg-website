@@ -46,6 +46,12 @@ with a scroll-reveal IntersectionObserver).
   Jobs per worker is only a historical workload-share signal; capacity risk and
   workload must remain separate and neither may be described as a hardware
   benchmark, payout forecast, or earnings promise.
+  The operator evidence panel may model a user-selected share of accepted den
+  against the rolling 24-hour pool returned by `GET /v1/payouts/public`; it
+  must label the result as same-window arithmetic, exclude token price and GPU
+  assumptions, and show nothing when evidence is invalid. Its worker check
+  matches an exact name or ID against the public `GET /v1/workers` online feed;
+  a missing match is not proof of a local failure.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
