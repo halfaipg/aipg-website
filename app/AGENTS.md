@@ -40,7 +40,11 @@ with a scroll-reveal IntersectionObserver).
   browser-platform detector so a gated desktop build is never presented as
   available through a mismatched Linux recommendation;
   exact capability approval remains local to signed profiles. Live opportunity rows combine
-  public worker counts with 30-day job and observed-performance telemetry.
+  public worker counts with 30-day job and observed-performance telemetry. The planner's
+  network-priority text route ranks under-target routes by observed 30-day work multiplied by
+  missing replicas; it is a supply-priority signal, not a hardware-compatibility verdict. An
+  operator must never advertise that route unless the detected backend genuinely serves the
+  named model.
   While the media release is gated, the download panel links to the public
   qualification cohort runbook. A complete `manager-qualification-v*`
   prerelease may expose a separately labelled benchmark-only binary, checksum,
