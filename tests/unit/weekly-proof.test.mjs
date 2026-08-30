@@ -49,6 +49,32 @@ function fixture() {
       immutable: true,
       tag_name: "v0.3.6",
     },
+    mediaQualification: {
+      schema: "aipg-media-manager-qualification-status-v1",
+      profile: {
+        id: "ace-step-v1.5-xl-turbo",
+        version: "0.2.4",
+        digest: "a".repeat(64),
+      },
+      qualification_release: {
+        tag: "manager-qualification-v0.1.0-preview.1",
+        url: "https://github.com/AIPowerGrid/grid-media-worker/releases/tag/manager-qualification-v0.1.0-preview.1",
+      },
+      runs_per_evidence_set: 3,
+      classes: ["minimum", "midrange", "datacenter"].map((id) => ({
+        id,
+        accepted_evidence_sets: 0,
+        required_evidence_sets: 1,
+        status: "needed",
+      })),
+      release_ready: false,
+      updated_at: "2026-08-29T19:00:00Z",
+      participation_url:
+        "https://github.com/AIPowerGrid/grid-media-worker/issues/new?template=media-manager-qualification.yml",
+      cohort_url: "https://github.com/AIPowerGrid/grid-media-worker/issues/8",
+      runbook_url:
+        "https://github.com/AIPowerGrid/grid-media-worker/blob/main/docs/MANAGER_QUALIFICATION.md",
+    },
     packages: {
       "@aipowergrid/ai-sdk-provider": {
         name: "@aipowergrid/ai-sdk-provider",
@@ -80,7 +106,13 @@ test("builds an evidence-linked thread without overstating validators", () => {
   assert.match(proof, /LiteLLM is open for maintainer review/);
   assert.match(proof, /AI SDK 0\.1\.0, ElizaOS 0\.1\.0, n8n 0\.1\.2, and MCP 0\.1\.1/);
   assert.match(proof, /verified Linux text worker v0\.3\.6/);
-  assert.match(proof, /2 online models are below the 3-worker redundancy target/);
+  assert.match(proof, /2 routes are below the 3-worker target/);
+  assert.match(
+    proof,
+    /Media qualification still needs minimum, midrange, datacenter evidence/,
+  );
+  assert.match(proof, /the tool is benchmark-only and earns no rewards/);
+  assert.match(proof, /Media qualification release ready \| no/);
   const posts = [...proof.matchAll(/^### \d\/5\n\n(.+)$/gm)].map((match) => match[1]);
   assert.equal(posts.length, 5);
   assert.ok(posts.every((post) => post.length <= 280));
@@ -114,5 +146,14 @@ test("rejects mutable worker releases and malformed npm evidence", () => {
   assert.throws(
     () => buildWeeklyProof(malformed, NOW),
     /@aipowergrid\/mcp npm release is invalid/,
+  );
+});
+
+test("rejects inconsistent media qualification evidence", () => {
+  const value = fixture();
+  value.mediaQualification.classes[0].accepted_evidence_sets = 1;
+  assert.throws(
+    () => buildWeeklyProof(value, NOW),
+    /media qualification status is invalid/,
   );
 });

@@ -17,6 +17,7 @@ Keep these two offers separate:
 | Offer | Current purpose | Hardware | Economic effect |
 | --- | --- | --- | --- |
 | Text worker | Serve real Grid inference jobs | Linux x64/ARM64 plus an existing Ollama or OpenAI-compatible GPU backend | Work is recorded and the current payout rail distributes AIPG; never promise a rate or return |
+| Media qualification | Prove the first managed media profile on one required GPU class | NVIDIA GPU in the manager-derived minimum, midrange, or datacenter class | Benchmark-only release testing; no enrollment, jobs, den, rewards, or future-earnings promise |
 | Validator preview | Receive assignments and sign worker-quality evidence | CPU and internet connection | No rewards, staking, slashing, routing authority, or worker penalties |
 
 Media workers remain qualification-gated. Do not advertise their benchmark
@@ -35,6 +36,8 @@ remove the claim instead of substituting an old number.
 | Worker payout totals and recent Base transfers | <https://api.aipowergrid.io/v1/payouts/public?limit=200> |
 | Human-readable network state | <https://aipowergrid.io/status> |
 | Verified worker artifact and current version | <https://github.com/AIPowerGrid/grid-text-worker/releases/latest> |
+| Accepted media qualification counts and required classes | <https://raw.githubusercontent.com/AIPowerGrid/grid-media-worker/main/docs/qualification-status.json> |
+| Media qualification cohort | <https://github.com/AIPowerGrid/grid-media-worker/issues/8> |
 | Worker onboarding | <https://aipowergrid.io/run> |
 | Validator onboarding and limitations | <https://aipowergrid.io/validate> |
 | Public payout verification | <https://console.aipowergrid.io/transparency> |
@@ -98,6 +101,17 @@ Replace bracketed evidence from the live sources above. Keep the disclosure.
 > Base payouts are public; I am not offering a fixed rate or income guarantee.
 > Setup and current gaps: https://aipowergrid.io/run
 
+### Media Qualification Cohort
+
+> We need independent NVIDIA GPU operators to help qualify AI Power Grid's
+> first managed media profile. Check the live status before posting: only name
+> classes still marked `needed`. The current qualification tool is
+> benchmark-only, cannot enroll a worker or advertise capabilities, and creates
+> no jobs, den, rewards, or promise of future earnings. It produces a
+> privacy-safe public report after three local canary runs; exact GPU inventory
+> stays private. Current requirements and verified tool:
+> https://aipowergrid.io/run
+
 ### Validator Preview Cohort
 
 > We are recruiting independent operators for AI Power Grid's CPU-only
@@ -110,12 +124,15 @@ Replace bracketed evidence from the live sources above. Keep the disclosure.
 ## Execution Order
 
 1. Publish one owned-channel GPU operator post with refreshed evidence.
-2. Personally onboard the first three new operators and record setup friction.
-3. Fix repeated onboarding failures before widening outreach.
-4. Ask Vast host-community moderators for permission to post the experienced-host draft.
-5. Publish a technical build report only from an account that already participates meaningfully in the target community.
-6. Recruit validator preview operators separately; never use worker payout language in validator outreach.
-7. Publish a weekly factual update showing net-new healthy operators, retention, and unresolved capacity gaps.
+2. Publish one separate media-qualification post naming only classes still
+   marked `needed` by the machine-readable status; never combine it with paid
+   worker language.
+3. Personally onboard the first three new operators and record setup friction.
+4. Fix repeated onboarding failures before widening outreach.
+5. Ask Vast host-community moderators for permission to post the experienced-host draft.
+6. Publish a technical build report only from an account that already participates meaningfully in the target community.
+7. Recruit validator preview operators separately; never use worker payout language in validator outreach.
+8. Publish a weekly factual update showing net-new healthy operators, retention, and unresolved capacity gaps.
 
 ## Outcome Tracking
 
