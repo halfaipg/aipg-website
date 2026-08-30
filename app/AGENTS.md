@@ -69,7 +69,10 @@ with a scroll-reveal IntersectionObserver).
   a separate, unshipped flow; never direct users to replace an existing identity.
   Recruitment links to the tracked public cohort issue for
   expressions of interest and the public cohort runbook for qualification;
-  neither surface collects secrets on the marketing site.
+  neither surface collects secrets on the marketing site. The page also
+  renders fail-soft public cohort counts from `GET /v1/status/network`, keeps
+  registration separate from reviewed operator independence, and tells stale
+  preview operators to upgrade in place without replacing their node identity.
   Keep the headline and download grid contained at 320px as well as standard
   mobile widths; grid children must be allowed to shrink around code snippets.
 - `status/` — public, read-only network posture. It renders Core's privacy-safe
