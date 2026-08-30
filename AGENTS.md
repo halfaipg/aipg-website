@@ -85,6 +85,9 @@ on Vercel.
   checksum-verified release without depending on unrelated desktop signing;
   macOS remains hidden until Developer ID notarization is verified and Windows
   remains hidden until Authenticode is verified.
+  It also exposes a fail-closed rolling payout scenario and an exact public
+  worker-registry check; neither may turn hardware, job counts, or token price
+  into an earnings promise.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.

@@ -1,5 +1,7 @@
 import RunDownloads from "./RunDownloads";
 import OperatorPlanner from "./OperatorPlanner";
+import OperatorEvidence from "./OperatorEvidence";
+import { summarizePayoutEvidence } from "./operatorEvidenceLogic.mjs";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
@@ -293,14 +295,32 @@ async function getOperatorOpportunities() {
   }
 }
 
+async function getPayoutEvidence() {
+  try {
+    const response = await fetch(`${GRID_API}/v1/payouts/public?limit=48`, {
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) return null;
+    return summarizePayoutEvidence(await response.json());
+  } catch {
+    return null;
+  }
+}
+
 export default async function RunPage() {
-  const [mediaRelease, mediaQualificationRelease, textRelease, opportunities] =
-    await Promise.all([
-      getManagerRelease(),
-      getManagerQualificationRelease(),
-      getTextRelease(),
-      getOperatorOpportunities(),
-    ]);
+  const [
+    mediaRelease,
+    mediaQualificationRelease,
+    textRelease,
+    opportunities,
+    payoutEvidence,
+  ] = await Promise.all([
+    getManagerRelease(),
+    getManagerQualificationRelease(),
+    getTextRelease(),
+    getOperatorOpportunities(),
+    getPayoutEvidence(),
+  ]);
 
   return (
     <main className="bg-black text-white">
@@ -315,6 +335,8 @@ export default async function RunPage() {
         mediaReady={Boolean(mediaRelease)}
         textPlatforms={textRelease?.platforms || {}}
       />
+
+      <OperatorEvidence payoutEvidence={payoutEvidence} />
 
       <section className="border-y border-white/10 bg-[#111214]">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-20">

@@ -13,8 +13,9 @@ onboarding, and staking-withdrawal surfaces.
   explicit exit behavior, and exact versioned downloads without personal
   private-key entry or Console key juggling, plus the
   public network-status surface, local hardware-path recommendation, telemetry
-  disclaimers, trust-boundary copy, browser-error, and horizontal-overflow
-  checks, including validator onboarding at 320px and 390px widths.
+  disclaimers, evidence-bound payout scenario, exact public worker-status
+  lookup, trust-boundary copy, browser-error, and horizontal-overflow checks,
+  including validator onboarding at 320px and 390px widths.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
@@ -29,6 +30,8 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
   immutable worker-release and exact npm-package validation, social-length,
   and validator-caveat contracts for the weekly proof draft.
+- `unit/operator-evidence.test.mjs` - rolling payout-window validation,
+  bounded den-share arithmetic, and exact online-worker matching.
 
 ## Local Contracts
 

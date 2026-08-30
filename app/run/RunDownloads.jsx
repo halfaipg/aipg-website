@@ -275,6 +275,11 @@ export default function RunDownloads({
                   </>
                 ) : null}
               </div>
+              <p className="mt-4 border-t border-white/10 pt-4 text-xs leading-5 text-gray-400">
+                {workerType === "text"
+                  ? "One verified binary opens the local setup wizard; no Python environment or separate Grid installer is required. Your inference backend remains a separate local service."
+                  : "The unified media manager is still qualification-gated. Benchmark tools do not enroll a worker or advertise capabilities."}
+              </p>
             </div>
           </div>
         </div>

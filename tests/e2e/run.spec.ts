@@ -11,6 +11,25 @@ test.describe('/run smoke', () => {
       browserErrors.push(`pageerror: ${error.message}`);
     });
 
+    await page.route('https://api.aipowergrid.io/v1/workers', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          count: 1,
+          workers: [
+            {
+              id: 'worker-e2e-123',
+              name: 'E2E Worker',
+              online: true,
+              models: ['gpt-oss-120b'],
+              job_types: ['text'],
+            },
+          ],
+        }),
+      });
+    });
+
     const response = await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
     expect(response?.ok()).toBeTruthy();
@@ -26,7 +45,17 @@ test.describe('/run smoke', () => {
     await expect(page.getByLabel('GPU or accelerator model')).toBeVisible();
     await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
     await expect(page.getByLabel('Expected text speed')).toHaveValue('0');
-    await expect(page.getByText(/not a payout forecast/i)).toBeVisible();
+    await expect(
+      page.getByText(/Jobs per worker is a rough workload-share signal, not a payout forecast/i),
+    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Check the rail before you commit a GPU' })).toBeVisible();
+    await expect(page.getByText(/arithmetic on settled history, not a payout forecast/i)).toBeVisible();
+    await expect(page.getByText(/One verified binary opens the local setup wizard/i)).toBeVisible();
+
+    await page.getByPlaceholder('Worker name or ID').fill('E2E Worker');
+    await page.getByRole('button', { name: 'Check now' }).click();
+    await expect(page.getByText('Online in the public registry')).toBeVisible();
+    await expect(page.getByText('Models: gpt-oss-120b')).toBeVisible();
 
     await page.getByLabel('GPU or accelerator model').fill('RTX 3090');
     await page.getByLabel('Expected text speed').fill('42');
