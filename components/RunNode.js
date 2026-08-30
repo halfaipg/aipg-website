@@ -97,7 +97,7 @@ const RunNode = () => {
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>
-                <span>Sign evidence with a wallet linked to your Grid account</span>
+                <span>Setup creates a dedicated local signing identity; no funded wallet or account login</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <span className="text-blue-400">◇</span>

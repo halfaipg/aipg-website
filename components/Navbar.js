@@ -77,10 +77,10 @@ export default function Navbar() {
       </Link>
       <Link
         className="font-medium text-orange-400 hover:text-orange-300 sm:py-6 md:py-6 pb-2 dark:hover:text-orange-300 text-center sm:text-left"
-        href="/staking"
+        href="/run"
         onClick={() => setIsOpen(false)}
       >
-        Earn
+        Run
       </Link>
       {/* <Link
         className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
@@ -189,4 +189,3 @@ export default function Navbar() {
     </header>
   );
 }
-

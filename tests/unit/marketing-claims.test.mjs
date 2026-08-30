@@ -68,3 +68,23 @@ test("marketing copy preserves explicit launch boundaries", async () => {
     assert.equal(copy.includes(boundary), true, `missing boundary: ${boundary}`);
   }
 });
+
+test("operator entry points match the live onboarding model", async () => {
+  const [navbar, footer, runNode] = await Promise.all([
+    readFile(new URL("components/Navbar.js", ROOT), "utf8"),
+    readFile(new URL("components/Footer.js", ROOT), "utf8"),
+    readFile(new URL("components/RunNode.js", ROOT), "utf8"),
+  ]);
+
+  assert.match(navbar, /href="\/run"[\s\S]*?>\s*Run\s*<\/Link>/);
+  assert.doesNotMatch(navbar, /href="\/staking"[\s\S]*?>\s*Earn\s*<\/Link>/);
+  assert.match(footer, /href="\/staking"[\s\S]*?>\s*Withdraw Legacy Stake\s*<\/a>/);
+  assert.match(
+    runNode,
+    /dedicated local signing identity; no funded wallet or account login/,
+  );
+  assert.equal(
+    runNode.includes("Sign evidence with a wallet linked to your Grid account"),
+    false,
+  );
+});

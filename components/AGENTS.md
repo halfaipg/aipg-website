@@ -27,7 +27,12 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 - Contract addresses/ABIs come from `lib/stakingContracts.js`; do not hardcode them here.
 - `RunNode` must distinguish live paid workers from the validator preview:
   validators are CPU-only evidence nodes with no stake, rewards, slashing, or
-  routing authority until real probe-group quorum ships.
+  routing authority until real probe-group quorum ships. Current validator
+  setup creates a dedicated local signing identity and does not require a
+  funded wallet, wallet extension, or account login.
+- The highlighted desktop navigation action points to the live `/run` operator
+  funnel. The ended staking program remains reachable as an explicitly labelled
+  legacy-withdrawal link in the footer, never as an earning opportunity.
 - Marketing copy must distinguish the live text-worker download from the
   release-gated managed media installer. Do not claim universal GPU support,
   guaranteed earnings, confidential inference, autonomous Core operation, or

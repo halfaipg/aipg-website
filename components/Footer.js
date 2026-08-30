@@ -48,6 +48,12 @@ const Footer = () => {
                     Dashboard
                   </a>
                 </p>
+                <p>
+                  <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    href="/staking">
+                    Withdraw Legacy Stake
+                  </a>
+                </p>
               </div>
             </div>
 
