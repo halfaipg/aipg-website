@@ -107,6 +107,32 @@ function fixture() {
         version: "0.1.1",
       },
     },
+    packageDownloads: {
+      "@aipowergrid/ai-sdk-provider": {
+        package: "@aipowergrid/ai-sdk-provider",
+        downloads: 55,
+        start: "2026-08-22",
+        end: "2026-08-28",
+      },
+      "@aipowergrid/plugin-aipg": {
+        package: "@aipowergrid/plugin-aipg",
+        downloads: 60,
+        start: "2026-08-22",
+        end: "2026-08-28",
+      },
+      "@aipowergrid/n8n-nodes-aipg": {
+        package: "@aipowergrid/n8n-nodes-aipg",
+        downloads: 149,
+        start: "2026-08-22",
+        end: "2026-08-28",
+      },
+      "@aipowergrid/mcp": {
+        package: "@aipowergrid/mcp",
+        downloads: 211,
+        start: "2026-08-22",
+        end: "2026-08-28",
+      },
+    },
   };
 }
 
@@ -119,13 +145,20 @@ test("builds an evidence-linked thread without overstating validators", () => {
   assert.match(proof, /no routing, reward, strike, or slashing authority yet/);
   assert.match(
     proof,
-    /Upstream PRs: LiteLLM, Dify, Vercel AI SDK, ElizaOS, and LangChain open/,
+    /PRs: LiteLLM, Dify, Vercel AI SDK, ElizaOS, and LangChain open/,
   );
   for (const item of INTEGRATION_PULL_REQUESTS) {
     assert.match(proof, new RegExp(`\\| ${item.name} upstream PR \\| open for maintainer review \\|`));
     assert.match(proof, new RegExp(`\\[${item.name} upstream PR\\]\\(${item.url}\\)`));
   }
-  assert.match(proof, /AI SDK 0\.1\.0, ElizaOS 0\.1\.0, n8n 0\.1\.2, and MCP 0\.1\.1/);
+  assert.match(proof, /npm recorded 475 downloads for our four packages/);
+  assert.match(proof, /Aug 22-28 window \(requests, not users\)/);
+  assert.match(proof, /Vercel AI SDK package \| 0\.1\.0; 55 npm requests/);
+  assert.match(proof, /MCP package \| 0\.1\.1; 211 npm requests/);
+  assert.match(
+    proof,
+    /npm download window \| 2026-08-22 through 2026-08-28; registry requests, not unique users/,
+  );
   assert.match(proof, /verified Linux text worker v0\.3\.6/);
   assert.match(proof, /2 routes are below the 3-worker target/);
   assert.match(
@@ -168,6 +201,22 @@ test("rejects mutable worker releases and malformed npm evidence", () => {
     () => buildWeeklyProof(malformed, NOW),
     /@aipowergrid\/mcp npm release is invalid/,
   );
+
+  const staleDownloads = fixture();
+  staleDownloads.packageDownloads["@aipowergrid/mcp"].start = "2026-08-01";
+  staleDownloads.packageDownloads["@aipowergrid/mcp"].end = "2026-08-07";
+  assert.throws(
+    () => buildWeeklyProof(staleDownloads, NOW),
+    /@aipowergrid\/mcp npm download window is invalid or stale/,
+  );
+
+  const mismatchedDownloads = fixture();
+  mismatchedDownloads.packageDownloads["@aipowergrid/mcp"].start = "2026-08-21";
+  mismatchedDownloads.packageDownloads["@aipowergrid/mcp"].end = "2026-08-27";
+  assert.throws(
+    () => buildWeeklyProof(mismatchedDownloads, NOW),
+    /npm download windows do not match/,
+  );
 });
 
 test("binds every upstream submission to its exact repository, PR, and URL", () => {
@@ -196,7 +245,7 @@ test("reports mixed upstream states without calling a closed PR open", () => {
   value.integrations.litellm.merged_at = "2026-08-30T10:00:00Z";
   value.integrations.langchain.state = "closed";
   const proof = buildWeeklyProof(value, NOW);
-  assert.match(proof, /Upstream PRs: LiteLLM merged; Dify, Vercel AI SDK, and ElizaOS open; LangChain closed without merge/);
+  assert.match(proof, /PRs: LiteLLM merged; Dify, Vercel AI SDK, and ElizaOS open; LangChain closed without merge/);
 });
 
 test("rejects inconsistent media qualification evidence", () => {
