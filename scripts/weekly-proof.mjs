@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { normalizeMediaQualificationStatus } from "../app/run/qualificationStatus.mjs";
 
 const GRID_API = "https://api.aipowergrid.io";
+const PRICING_URL = `${GRID_API}/v1/pricing`;
 export const INTEGRATION_PULL_REQUESTS = [
   { id: "litellm", name: "LiteLLM", repo: "BerriAI/litellm", number: 38725 },
   { id: "dify", name: "Dify", repo: "langgenius/dify-plugins", number: 2986 },
@@ -179,6 +180,141 @@ function workerReleaseTag(release) {
   return release.tag_name;
 }
 
+function priceComparisons(pricing, now) {
+  if (
+    pricing?.schema !== "aipg.pricing.v1" ||
+    pricing?.currency !== "USD" ||
+    typeof pricing?.price_book?.version !== "string" ||
+    !pricing.price_book.version.trim() ||
+    !Array.isArray(pricing?.price_book?.models) ||
+    pricing?.comparison_evidence?.status !== "current" ||
+    !Array.isArray(pricing?.comparison_evidence?.items)
+  ) {
+    throw new Error("public pricing evidence is invalid");
+  }
+  const asOf = Date.parse(pricing.comparison_evidence.as_of || "");
+  const validUntil = Date.parse(pricing.comparison_evidence.valid_until || "");
+  if (
+    !Number.isFinite(asOf) ||
+    !Number.isFinite(validUntil) ||
+    asOf > now.getTime() ||
+    validUntil <= now.getTime()
+  ) {
+    throw new Error("public pricing comparison evidence is stale");
+  }
+  const ids = new Set();
+  return pricing.comparison_evidence.items.map((item) => {
+    if (
+      !item ||
+      typeof item.id !== "string" ||
+      !item.id.trim() ||
+      ids.has(item.id) ||
+      typeof item.model !== "string" ||
+      !item.model.trim() ||
+      typeof item.provider !== "string" ||
+      !item.provider.trim() ||
+      typeof item.basis !== "string" ||
+      !item.basis ||
+      !item.workload ||
+      !item.competitor_rates
+    ) {
+      throw new Error("public pricing comparison item is invalid");
+    }
+    ids.add(item.id);
+    let source;
+    try {
+      source = new URL(item.source_url);
+    } catch {
+      throw new Error("public pricing comparison source is invalid");
+    }
+    if (source.protocol !== "https:") {
+      throw new Error("public pricing comparison source must use HTTPS");
+    }
+    const aipg = finite(item.aipg_usd, `${item.id} AIPG price`);
+    const competitor = finite(
+      item.competitor_usd,
+      `${item.id} competitor price`,
+    );
+    const savings = finite(item.savings_percent, `${item.id} savings`);
+    if (aipg <= 0 || competitor <= 0 || aipg >= competitor || savings > 100) {
+      throw new Error("public pricing comparison is not a positive saving");
+    }
+    const calculatedSavings = (1 - aipg / competitor) * 100;
+    if (Math.abs(calculatedSavings - savings) > 0.05) {
+      throw new Error("public pricing comparison arithmetic drifted");
+    }
+    const priceRow = pricing.price_book.models.find(
+      (row) => row?.model?.toLowerCase() === item.model.toLowerCase(),
+    );
+    if (!priceRow?.rates) {
+      throw new Error("public pricing comparison model is missing from the price book");
+    }
+    let bookQuote;
+    let competitorQuote;
+    if (item.modality === "text") {
+      const inputTokens = finite(item.workload.input_tokens, `${item.id} input tokens`);
+      const outputTokens = finite(item.workload.output_tokens, `${item.id} output tokens`);
+      const inputRate = finite(
+        priceRow.rates.input_per_mtok_usd,
+        `${item.id} input rate`,
+      );
+      const outputRate = finite(
+        priceRow.rates.output_per_mtok_usd,
+        `${item.id} output rate`,
+      );
+      bookQuote =
+        (inputTokens * inputRate + outputTokens * outputRate) / 1_000_000;
+      competitorQuote =
+        (inputTokens *
+          finite(
+            item.competitor_rates.input_per_mtok_usd,
+            `${item.id} competitor input rate`,
+          ) +
+          outputTokens *
+            finite(
+              item.competitor_rates.output_per_mtok_usd,
+              `${item.id} competitor output rate`,
+            )) /
+        1_000_000;
+    } else if (item.modality === "image") {
+      const images = finite(item.workload.images, `${item.id} images`);
+      bookQuote = images * finite(priceRow.rates.per_image_usd, `${item.id} image rate`);
+      if (item.competitor_rates.per_image_usd != null) {
+        competitorQuote =
+          images *
+          finite(
+            item.competitor_rates.per_image_usd,
+            `${item.id} competitor image rate`,
+          );
+      } else {
+        competitorQuote =
+          images *
+          finite(item.workload.megapixels, `${item.id} megapixels`) *
+          finite(
+            item.competitor_rates.per_megapixel_usd,
+            `${item.id} competitor megapixel rate`,
+          );
+      }
+    } else {
+      throw new Error("public pricing comparison modality is unsupported");
+    }
+    if (Math.abs(bookQuote - aipg) > 0.0000005) {
+      throw new Error("public pricing comparison does not match the price book");
+    }
+    if (Math.abs(competitorQuote - competitor) > 0.0000005) {
+      throw new Error("public pricing comparison does not match competitor rates");
+    }
+    return { ...item, aipg, competitor, savings };
+  });
+}
+
+function formatUsd(value) {
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 6,
+  }).format(value);
+}
+
 export function buildWeeklyProof(
   {
     network,
@@ -187,6 +323,7 @@ export function buildWeeklyProof(
     integrations,
     workerRelease,
     mediaQualification,
+    pricing,
     packages,
     packageDownloads,
   },
@@ -227,6 +364,8 @@ export function buildWeeklyProof(
   const workerTag = workerReleaseTag(workerRelease);
   const mediaStatus = normalizeMediaQualificationStatus(mediaQualification);
   if (!mediaStatus) throw new Error("media qualification status is invalid");
+  const comparisonRows = priceComparisons(pricing, now);
+  if (!comparisonRows.length) throw new Error("public pricing comparisons are empty");
   const mediaNeeds = mediaStatus.classes
     .filter((item) => item.status === "needed")
     .map((item) => item.id);
@@ -263,6 +402,7 @@ export function buildWeeklyProof(
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
     `Integration proof: npm recorded ${INTEGER.format(downloadTotal)} downloads for our four packages in its ${shortDateRange(downloadStart, downloadEnd)} window (requests, not users). PRs: ${upstreamSummary}. $5-$20 builder credits: https://aipowergrid.io/docs/builder-credits`,
+    `Same-model price proof: ${comparisonRows.map((row) => `${row.model} AIPG $${formatUsd(row.aipg)} vs ${row.provider} $${formatUsd(row.competitor)} (${DECIMAL.format(row.savings)}% less)`).join("; ")}. Sources and workloads: ${PRICING_URL}`,
     `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
   ];
   for (const [index, post] of posts.entries()) {
@@ -304,12 +444,15 @@ ${integrationRows.map((row) => `| ${row.name} upstream PR | ${row.state.label} |
 | n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]}; ${INTEGER.format(downloadRows["@aipowergrid/n8n-nodes-aipg"].downloads)} npm requests |
 | MCP package | ${packageRows["@aipowergrid/mcp"]}; ${INTEGER.format(downloadRows["@aipowergrid/mcp"].downloads)} npm requests |
 | npm download window | ${downloadStart} through ${downloadEnd}; registry requests, not unique users |
+${comparisonRows.map((row) => `| ${row.model} same-model price | AIPG $${formatUsd(row.aipg)} vs ${row.provider} $${formatUsd(row.competitor)}; ${DECIMAL.format(row.savings)}% less; ${row.basis} |`).join("\n")}
 
 ## Sources
 
 - [Network status](${GRID_API}/v1/status/network)
 - [Generation totals](${GRID_API}/v1/stats/totals)
 - [Public Base payouts](${GRID_API}/v1/payouts/public?limit=200)
+- [Versioned Grid pricing and same-model comparisons](${PRICING_URL})
+${comparisonRows.map((row) => `- [${row.model} comparison source](${row.source_url})`).join("\n")}
 ${integrationRows.map((row) => `- [${row.name} upstream PR](${row.url})`).join("\n")}
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
 ${NPM_PACKAGES.map((name) => `- [${name} npm download evidence](https://api.npmjs.org/downloads/point/last-week/${name.replace("/", "%2F")})`).join("\n")}
@@ -325,6 +468,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
     network,
     totals,
     payouts,
+    pricing,
     workerRelease,
     mediaQualification,
     integrationPayloads,
@@ -334,6 +478,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       fetchJson(`${GRID_API}/v1/status/network`, fetcher),
       fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
       fetchJson(`${GRID_API}/v1/payouts/public?limit=200`, fetcher),
+      fetchJson(PRICING_URL, fetcher),
       fetchJson(WORKER_RELEASE_API, fetcher),
       fetchJson(MEDIA_QUALIFICATION_STATUS_URL, fetcher),
       Promise.all(
@@ -366,6 +511,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       network,
       totals,
       payouts,
+      pricing,
       integrations,
       workerRelease,
       mediaQualification,
