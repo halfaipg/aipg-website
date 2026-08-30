@@ -51,6 +51,10 @@ test.describe('/run smoke', () => {
     await expect(page.getByRole('heading', { name: 'Check the rail before you commit a GPU' })).toBeVisible();
     await expect(page.getByText(/arithmetic on settled history, not a payout forecast/i)).toBeVisible();
     await expect(page.getByText(/One verified binary opens the local setup wizard/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Register operator interest' })).toHaveAttribute(
+      'href',
+      'https://github.com/halfaipg/aipg-website/issues/new?template=operator-interest.yml',
+    );
 
     await page.getByPlaceholder('Worker name or ID').fill('E2E Worker');
     await page.getByRole('button', { name: 'Check now' }).click();
