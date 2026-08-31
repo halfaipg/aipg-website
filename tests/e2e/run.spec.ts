@@ -107,15 +107,22 @@ test.describe('/run smoke', () => {
 
     await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
     await expect(
-      page.getByRole('link', { name: /Download text worker for Linux/ }),
+      page.getByRole('link', { name: /Download verified Linux installer/ }),
     ).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.6\/grid-inference-worker-linux-x64$/,
+      /grid-text-worker\/releases\/download\/v0\.3\.7\/install-worker\.sh$/,
+    );
+    await expect(
+      page.getByRole('link', { name: /Download Linux binary directly/ }),
+    ).toHaveAttribute(
+      'href',
+      /grid-text-worker\/releases\/download\/v0\.3\.7\/grid-inference-worker-linux-x64$/,
     );
     await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
     await expect(
-      page.getByText(/chmod \+x grid-inference-worker-linux-x64/),
+      page.getByText(/chmod \+x install-worker\.sh/),
     ).toBeVisible();
+    await expect(page.getByText(/grid-inference-worker --verify-runtime/)).toBeVisible();
     await expect(page.getByText(/Enter it only in the local wizard/)).toBeVisible();
     await expect(page.getByText(/never needs a wallet private key/i)).toBeVisible();
 

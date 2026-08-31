@@ -75,14 +75,14 @@ export default function RunDownloads({
         className="relative min-h-[620px] scroll-mt-20 overflow-hidden border-b border-white/10 lg:min-h-[680px]"
       >
         <Image
-          src="/Banner-Backgrounds/aipg Wallpaper V3 (67).png"
-          alt="AI Power Grid network"
+          src="/operator-worker-hero.png"
+          alt="Open-frame GPU servers contributing compute to AI Power Grid"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-45"
+          className="object-cover object-[68%_center] opacity-90 md:object-center"
         />
-        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/55 md:bg-black/45" aria-hidden="true" />
         <div className="relative mx-auto flex min-h-[620px] max-w-6xl items-start px-6 pb-16 pt-28 md:items-center md:px-8 md:py-20 lg:min-h-[680px]">
           <div className="w-full max-w-3xl">
             <div className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-orange-300">
@@ -425,7 +425,7 @@ function FirstRunSteps({ artifactName, installerName, version }) {
             http://localhost:7861
           </code>
           .{" "}
-          {version === "0.3.6" ? (
+          {["0.3.6", "0.3.7"].includes(version) ? (
             <>
               Version {version} uses a scoped Grid API key from the developer
               Console. Enter it only in the local wizard, never in a shell
