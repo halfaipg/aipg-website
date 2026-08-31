@@ -47,6 +47,14 @@ export function normalizePublicValidatorStatus(payload, requestedId) {
 
   const lastHeartbeat = boundedString(payload.last_heartbeat, 40);
   if (lastHeartbeat && Number.isNaN(Date.parse(lastHeartbeat))) return null;
+  const requiredSoftwareVersion = boundedString(
+    payload.required_software_version,
+    64,
+  );
+  const softwareVersionSupported =
+    typeof payload.software_version_supported === "boolean"
+      ? payload.software_version_supported
+      : null;
 
   return {
     schema: PUBLIC_STATUS_SCHEMA,
@@ -57,6 +65,8 @@ export function normalizePublicValidatorStatus(payload, requestedId) {
     online: payload.online,
     lastHeartbeat,
     softwareVersion: boundedString(payload.software_version, 64) || "unknown",
+    requiredSoftwareVersion,
+    softwareVersionSupported,
     activity: {
       assigned: count(payload.activity?.assigned),
       completed: count(payload.activity?.completed),
