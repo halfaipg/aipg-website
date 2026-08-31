@@ -228,9 +228,8 @@ test.describe('/validate smoke', () => {
     );
     await expect(page.getByText('aipg-validator app', { exact: true })).toBeVisible();
     await expect(page.getByText(/Choose 8 to open the local operator app/)).toBeVisible();
-    await expect(page.getByText(/confirm with Set up and start/)).toBeVisible();
-    await expect(page.getByText(/starts automatically after enrollment/)).toBeVisible();
-    await expect(page.getByText(/registration, heartbeat, assignment, and accepted evidence/)).toBeVisible();
+    await expect(page.getByText(/confirm Create node account/)).toBeVisible();
+    await expect(page.getByText(/preview\.13 keeps setup and start as separate actions/)).toBeVisible();
     await expect(page.getByText(/Exit app stops its node and closes the local server/)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Full setup and headless server guide' })).toHaveAttribute(
       'href', 'https://aipowergrid.io/docs/validator-node',
