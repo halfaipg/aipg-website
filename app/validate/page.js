@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import { normalizeValidatorCohortStatus } from "./cohortStatus.mjs";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
+import ValidatorStatusLookup from "./ValidatorStatusLookup";
 
 const RELEASE_TAG = "v0.1.0-preview.13";
 const RELEASE_API =
@@ -302,6 +303,7 @@ export default async function ValidatePage() {
               </p>
             )}
           </div>
+          <ValidatorStatusLookup currentVersion={RELEASE_TAG} />
         </div>
       </section>
 

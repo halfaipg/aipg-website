@@ -44,8 +44,8 @@ on Vercel.
 ## Ownership
 
 - **`app/`** — App Router routes (home, `/about`, `/use`, `/run`, `/validate`, `/status`,
-  `/staking`, `/wallet`) plus one API route
-  (`/api/btc-chart`). Owned in its own AGENTS.md.
+  `/staking`, `/wallet`) plus public proxy routes for the BTC chart and the
+  redacted validator-status lookup. Owned in its own AGENTS.md.
 - **`components/`** — page sections and the web3 staking UI. Owned in its own AGENTS.md.
 - **`lib/`** — web3 config + on-chain contract addresses/ABIs (Base). Owned in its own AGENTS.md.
 - **`hooks/useStaking.js`** — the single staking read/write hook (wagmi/viem); reads contracts
@@ -150,7 +150,7 @@ on Vercel.
 
 ## Child DOX Index
 
-- [app/AGENTS.md](app/AGENTS.md) — App Router routes + the btc-chart API route.
+- [app/AGENTS.md](app/AGENTS.md) — App Router routes and public proxy routes.
 - [components/AGENTS.md](components/AGENTS.md) — page sections + web3 staking UI.
 - [lib/AGENTS.md](lib/AGENTS.md) — wagmi config + on-chain contract addresses/ABIs.
 - [tests/AGENTS.md](tests/AGENTS.md) — Playwright production-build smoke tests.
