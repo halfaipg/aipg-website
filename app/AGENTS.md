@@ -100,7 +100,8 @@ with a scroll-reveal IntersectionObserver).
   tag for Linux x64/ARM64; GitHub artifacts alone must never
   unlock downloads.
   Its desktop onboarding uses the local operator app (Windows menu option 8)
-  for consent-based dedicated-account setup, start/stop, and acknowledged status.
+  for one-confirmation dedicated-account setup-and-start, later start/stop, and
+  a registration-through-accepted-evidence readiness checklist.
   The linked runbook retains `enroll` and headless commands. No private keys are pasted
   into setup or handled on the marketing site. Existing-account pairing remains
   a separate, unshipped flow; never direct users to replace an existing identity.

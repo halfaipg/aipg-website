@@ -375,8 +375,10 @@ export default async function ValidatePage() {
                 <p className="mt-2 font-sans text-xs text-gray-400">
                   On Windows, extract the download and double-click
                   aipg-validator.exe. Choose 8 to open the local operator app,
-                  then Set up node, confirm, and Start validator. Existing
-                  operators skip setup and keep their configuration.
+                  choose Set up node, then confirm with Set up and start. The
+                  validator starts automatically after enrollment. Existing
+                  operators skip setup, keep their configuration, and use
+                  Start validator.
                 </p>
                 <p className="my-3 font-sans text-xs text-gray-400">
                   Setup creates a dedicated node account and saves its signing
@@ -386,10 +388,10 @@ export default async function ValidatePage() {
                   already run a validator.
                 </p>
                 <p className="font-sans text-xs leading-6 text-gray-400">
-                  Confirm acknowledged heartbeats and accepted evidence in the
-                  app. Closing the browser tab leaves it running; Exit app
-                  stops its node and closes the local server. Never share its
-                  private localhost URL.
+                  Follow the app checklist through registration, heartbeat,
+                  assignment, and accepted evidence. Closing the browser tab
+                  leaves it running; Exit app stops its node and closes the
+                  local server. Never share its private localhost URL.
                 </p>
                 <a
                   href="https://aipowergrid.io/docs/validator-node"
