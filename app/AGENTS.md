@@ -114,6 +114,10 @@ with a scroll-reveal IntersectionObserver).
   imagery so the page remains visually distinct from GPU worker onboarding.
   Keep the headline and download grid contained at 320px as well as standard
   mobile widths; grid children must be allowed to shrink around code snippets.
+- `api/validator-status/[validatorId]/` — unauthenticated same-origin proxy for
+  Core's redacted public validator lookup. It accepts only bounded `val_...`
+  identifiers and allowlists the normalized response; no account, wallet,
+  signing, operator-control, assignment, or evidence data may pass through.
 - `status/` — public, read-only network posture. It renders Core's privacy-safe
   `aipg.network.status.v1` contract and distinguishes current incidents from
   non-outage decentralization advisories; an unavailable feed must not be
@@ -130,6 +134,8 @@ with a scroll-reveal IntersectionObserver).
 - `staking/page.js` is **withdrawal-only** — no stake/approve UI (see root contract).
 - `api/btc-chart` must degrade gracefully: if CoinGecko fails, still return CSV history; never throw
   past the structured `{ error }` 500. CSV is read from `process.cwd()` (repo-root `*.csv`).
+- `api/validator-status` must fail closed on malformed IDs, upstream errors, or
+  response-contract drift and must never cache one operator's live status.
 
 ## Work Guidance
 

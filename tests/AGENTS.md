@@ -20,6 +20,9 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
+- `unit/validator-public-status.test.mjs` - strict public-ID and response
+  normalization that prevents the `/validate` lookup from forwarding malformed,
+  mismatched, or economically authoritative validator data.
 - `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
   checksum, manifest, SBOM, GitHub digest, and size contract, including the
   versioned `v0.3.7+` installer requirement without invalidating older exact
