@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FiActivity,
   FiAlertCircle,
@@ -62,6 +62,71 @@ export default function ValidatorStatusLookup({ currentVersion }) {
   const coverageProgress = qualification
     ? Math.min(100, qualification.sampleCoverage * 100)
     : 0;
+  const requiredVersion = status?.requiredSoftwareVersion || currentVersion;
+  const versionSupported = status
+    ? status.softwareVersionSupported ??
+      status.softwareVersion === requiredVersion
+    : false;
+  const setupChecks = status
+    ? [
+        {
+          label: "Registered",
+          complete: status.registrationStatus === "active",
+          detail: "Core recognizes this validator ID",
+        },
+        {
+          label: "Current release",
+          complete: versionSupported,
+          detail: versionSupported
+            ? requiredVersion
+            : `${status.softwareVersion} · requires ${requiredVersion}`,
+        },
+        {
+          label: "Heartbeat",
+          complete: qualification.heartbeatFresh,
+          detail: qualification.heartbeatFresh
+            ? "Grid acknowledged"
+            : "Start the validator and keep the app open",
+        },
+        {
+          label: "Assignment received",
+          complete: status.activity.assigned > 0,
+          detail: `${status.activity.assigned.toLocaleString("en-US")} received`,
+        },
+        {
+          label: "Evidence accepted",
+          complete: status.activity.attested > 0,
+          detail: `${status.activity.attested.toLocaleString("en-US")} accepted`,
+        },
+      ]
+    : [];
+  const setupVerified =
+    setupChecks.length > 0 && setupChecks.every((check) => check.complete);
+  const statusValidatorId = status?.validatorId;
+
+  useEffect(() => {
+    if (!statusValidatorId || setupVerified) return undefined;
+
+    let active = true;
+    const refreshStatus = async () => {
+      try {
+        const response = await fetch(
+          `/api/validator-status/${encodeURIComponent(statusValidatorId)}`,
+          { cache: "no-store" },
+        );
+        if (!response.ok) return;
+        const body = await response.json();
+        if (active) setStatus(body);
+      } catch {
+        // Keep the last valid view across a transient refresh fault.
+      }
+    };
+    const timer = window.setInterval(refreshStatus, 15_000);
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, [setupVerified, statusValidatorId]);
 
   return (
     <div className="mt-8 border border-white/10 bg-[#111214]">
@@ -160,6 +225,47 @@ export default function ValidatorStatusLookup({ currentVersion }) {
               </div>
             ))}
           </dl>
+
+          <div className="border-t border-white/10 p-5">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase text-cyan-300">
+                  Post-setup verification
+                </p>
+                <h4 className="mt-1 text-lg font-bold text-white">
+                  {setupVerified
+                    ? "This node is working end to end"
+                    : "Waiting for every node check"}
+                </h4>
+              </div>
+              <p className="text-xs text-gray-500">
+                Refreshes automatically every 15 seconds
+              </p>
+            </div>
+            <ul className="mt-4 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
+              {setupChecks.map((check) => (
+                <li key={check.label} className="min-w-0 bg-[#0b0c0e] p-4">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-white">
+                    {check.complete ? (
+                      <FiCheckCircle
+                        className="shrink-0 text-green-400"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <FiClock
+                        className="shrink-0 text-orange-300"
+                        aria-hidden="true"
+                      />
+                    )}
+                    {check.label}
+                  </p>
+                  <p className="mt-2 break-words text-xs leading-5 text-gray-500">
+                    {check.detail}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <div className="grid gap-6 p-5 lg:grid-cols-2">
             <div>

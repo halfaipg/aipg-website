@@ -111,6 +111,11 @@ with a scroll-reveal IntersectionObserver).
   renders fail-soft public cohort counts from `GET /v1/status/network`, keeps
   registration separate from reviewed operator independence, and tells stale
   preview operators to upgrade in place without replacing their node identity.
+  After one public-ID lookup, the redacted post-setup verifier polls every 15
+  seconds until Core confirms active registration, the frozen release, a fresh
+  heartbeat, at least one assignment, and accepted authoritative evidence. It
+  may retain the last valid view across transient refresh faults, but it must
+  never infer success from local browser state or expose private operator data.
   Its full-bleed hero uses purpose-specific CPU/network validator hardware
   imagery so the page remains visually distinct from GPU worker onboarding.
   Keep the headline and download grid contained at 320px as well as standard

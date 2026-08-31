@@ -17,6 +17,8 @@ function payload(overrides = {}) {
     online: true,
     last_heartbeat: "2026-08-31T14:27:00+00:00",
     software_version: "v0.1.0-preview.13",
+    required_software_version: "v0.1.0-preview.13",
+    software_version_supported: true,
     activity: { assigned: 137, completed: 136, attested: 126 },
     qualification: {
       status: "candidate",
@@ -46,6 +48,8 @@ test("normalizes the redacted public validator contract", () => {
     online: true,
     lastHeartbeat: "2026-08-31T14:27:00+00:00",
     softwareVersion: "v0.1.0-preview.13",
+    requiredSoftwareVersion: "v0.1.0-preview.13",
+    softwareVersionSupported: true,
     activity: { assigned: 137, completed: 136, attested: 126 },
     qualification: {
       status: "candidate",
@@ -63,6 +67,17 @@ test("normalizes the redacted public validator contract", () => {
     nextAction: "Keep this validator online.",
     economicEffect: "none",
   });
+});
+
+test("keeps old Core responses compatible without inventing version support", () => {
+  const legacy = payload();
+  delete legacy.required_software_version;
+  delete legacy.software_version_supported;
+
+  const normalized = normalizePublicValidatorStatus(legacy, VALIDATOR_ID);
+
+  assert.equal(normalized.requiredSoftwareVersion, null);
+  assert.equal(normalized.softwareVersionSupported, null);
 });
 
 test("rejects mismatched IDs, economic authority, and invalid timestamps", () => {
