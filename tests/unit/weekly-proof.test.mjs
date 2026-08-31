@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   buildWeeklyProof,
+  generateWeeklyProof,
   INTEGRATION_PULL_REQUESTS,
 } from "../../scripts/weekly-proof.mjs";
 
@@ -186,8 +187,71 @@ function fixture() {
         end: "2026-08-28",
       },
     },
+    pythonSdk: {
+      info: {
+        name: "grid-sdk",
+        version: "0.1.2",
+        project_urls: {
+          Repository: "https://github.com/AIPowerGrid/grid-sdk-python",
+        },
+      },
+      urls: [
+        {
+          filename: "grid_sdk-0.1.2-py3-none-any.whl",
+          packagetype: "bdist_wheel",
+          yanked: false,
+          digests: { sha256: "a".repeat(64) },
+        },
+        {
+          filename: "grid_sdk-0.1.2.tar.gz",
+          packagetype: "sdist",
+          yanked: false,
+          digests: { sha256: "b".repeat(64) },
+        },
+      ],
+    },
   };
 }
+
+test("fetches npm download and PyPI evidence into their matching slots", async () => {
+  const data = fixture();
+  const fetcher = async (url) => {
+    let payload;
+    if (url.endsWith("/v1/status/network")) payload = data.network;
+    else if (url.endsWith("/v1/stats/totals")) payload = data.totals;
+    else if (url.includes("/v1/payouts/public")) payload = data.payouts;
+    else if (url.endsWith("/v1/pricing")) payload = data.pricing;
+    else if (url.endsWith("/grid-text-worker/releases/latest")) {
+      payload = data.workerRelease;
+    } else if (url.includes("qualification-status.json")) {
+      payload = data.mediaQualification;
+    } else if (url === "https://pypi.org/pypi/grid-sdk/json") {
+      payload = data.pythonSdk;
+    } else {
+      const integration = INTEGRATION_PULL_REQUESTS.find(
+        (item) => item.apiUrl === url,
+      );
+      if (integration) payload = data.integrations[integration.id];
+      else if (url.startsWith("https://registry.npmjs.org/")) {
+        const name = decodeURIComponent(
+          url.slice("https://registry.npmjs.org/".length, -"/latest".length),
+        );
+        payload = data.packages[name];
+      } else if (url.startsWith("https://api.npmjs.org/downloads/point/last-week/")) {
+        const name = decodeURIComponent(
+          url.slice("https://api.npmjs.org/downloads/point/last-week/".length),
+        );
+        payload = data.packageDownloads[name];
+      }
+    }
+    assert.ok(payload, `unexpected proof URL: ${url}`);
+    return { ok: true, json: async () => payload };
+  };
+
+  const proof = await generateWeeklyProof(fetcher, NOW);
+  assert.match(proof, /Python grid-sdk 0\.1\.2 \+ four npm packages live/);
+  assert.match(proof, /npm: 475 requests/);
+});
 
 test("builds an evidence-linked thread without overstating validators", () => {
   const proof = buildWeeklyProof(fixture(), NOW);
@@ -204,14 +268,19 @@ test("builds an evidence-linked thread without overstating validators", () => {
     assert.match(proof, new RegExp(`\\| ${item.name} upstream PR \\| open for maintainer review \\|`));
     assert.match(proof, new RegExp(`\\[${item.name} upstream PR\\]\\(${item.url}\\)`));
   }
-  assert.match(proof, /npm recorded 475 downloads for our four packages/);
-  assert.match(proof, /Aug 22-28 window \(requests, not users\)/);
+  assert.match(proof, /Python grid-sdk 0\.1\.2 \+ four npm packages live/);
+  assert.match(proof, /npm: 475 requests, Aug 22-28 \(not users\)/);
   assert.match(
     proof,
     /\$5-\$20 builder credits: https:\/\/aipowergrid\.io\/docs\/builder-credits/,
   );
   assert.match(proof, /Vercel AI SDK package \| 0\.1\.0; 55 npm requests/);
   assert.match(proof, /MCP package \| 0\.1\.1; 211 npm requests/);
+  assert.match(
+    proof,
+    /Python SDK \| grid-sdk 0\.1\.2; active wheel and source distribution on PyPI/,
+  );
+  assert.match(proof, /\[grid-sdk Python release\]\(https:\/\/pypi\.org\/project\/grid-sdk\/\)/);
   assert.match(
     proof,
     /gpt-oss-120b AIPG \$0\.375 vs Groq \$0\.75 \(50% less\)/,
@@ -314,6 +383,21 @@ test("rejects mutable worker releases and malformed npm evidence", () => {
   assert.throws(
     () => buildWeeklyProof(mismatchedDownloads, NOW),
     /npm download windows do not match/,
+  );
+
+  const yankedPythonSdk = fixture();
+  yankedPythonSdk.pythonSdk.urls[0].yanked = true;
+  assert.throws(
+    () => buildWeeklyProof(yankedPythonSdk, NOW),
+    /grid-sdk PyPI distribution is invalid or yanked/,
+  );
+
+  const wrongPythonRepository = fixture();
+  wrongPythonRepository.pythonSdk.info.project_urls.Repository =
+    "https://github.com/example/lookalike";
+  assert.throws(
+    () => buildWeeklyProof(wrongPythonRepository, NOW),
+    /grid-sdk PyPI release is invalid/,
   );
 });
 

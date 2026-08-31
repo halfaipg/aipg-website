@@ -35,7 +35,8 @@ onboarding, and staking-withdrawal surfaces.
   described as a funded or account-linked wallet requirement.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
   immutable worker-release, exact npm-package/version plus fresh matching npm
-  download windows that remain explicitly distinct from unique users, exact repository/number/URL and
+  download windows that remain explicitly distinct from unique users, active
+  PyPI Python SDK wheel/source identity bound to the canonical repository, exact repository/number/URL and
   truthful state reporting for every current upstream integration submission,
   fresh same-model pricing comparisons whose arithmetic and AIPG side match
   Core's versioned public price book,
