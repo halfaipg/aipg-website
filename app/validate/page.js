@@ -113,14 +113,14 @@ export default async function ValidatePage() {
     <main className="bg-black text-white">
       <section className="relative min-h-[600px] overflow-hidden border-b border-white/10">
         <Image
-          src="/Banner-Backgrounds/aipg Wallpaper V3 (67).png"
-          alt="AI Power Grid network"
+          src="/operator-validator-hero.png"
+          alt="Independent network appliances running AI Power Grid validators"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-40"
+          className="object-cover object-[70%_center] opacity-90 md:object-center"
         />
-        <div className="absolute inset-0 bg-black/65" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/55 md:bg-black/45" aria-hidden="true" />
         <div className="relative mx-auto flex min-h-[600px] max-w-6xl items-center px-6 py-20 md:px-8">
           <div className="min-w-0 max-w-3xl">
             <p className="mb-5 flex items-center gap-2 text-sm font-semibold text-cyan-300">

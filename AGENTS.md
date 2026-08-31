@@ -61,7 +61,8 @@ on Vercel.
   route. **Not** DOX boundaries.
 - **`scripts/weekly-proof.mjs`** — fail-closed public-evidence collector that
   generates a six-post weekly thread draft, including immutable worker-release
-  and exact npm-package/version evidence plus one matching, recent seven-day
+  and exact npm-package/version evidence, the active canonical-repository PyPI
+  Python SDK wheel/source release, plus one matching, recent seven-day
   npm download window labelled as registry requests rather than unique users;
   fresh, source-linked same-model pricing comparisons from Core's public,
   versioned price-book contract;

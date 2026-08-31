@@ -21,6 +21,10 @@ const WORKER_RELEASE_API =
   "https://api.github.com/repos/AIPowerGrid/grid-text-worker/releases/latest";
 const WORKER_RELEASES_URL =
   "https://github.com/AIPowerGrid/grid-text-worker/releases";
+const PYTHON_SDK_API = "https://pypi.org/pypi/grid-sdk/json";
+const PYTHON_SDK_URL = "https://pypi.org/project/grid-sdk/";
+const PYTHON_SDK_REPOSITORY =
+  "https://github.com/AIPowerGrid/grid-sdk-python";
 const MEDIA_QUALIFICATION_STATUS_URL =
   "https://raw.githubusercontent.com/AIPowerGrid/grid-media-worker/main/docs/qualification-status.json";
 const MEDIA_QUALIFICATION_COHORT_URL =
@@ -153,6 +157,38 @@ function packageDownloadWindow(payload, expectedName, now) {
     throw new Error(`${expectedName} npm download window is invalid or stale`);
   }
   return { downloads, start: payload.start, end: payload.end };
+}
+
+function pythonSdkVersion(payload) {
+  const version = payload?.info?.version;
+  const files = payload?.urls;
+  const repository = payload?.info?.project_urls?.Repository;
+  if (
+    payload?.info?.name !== "grid-sdk" ||
+    typeof version !== "string" ||
+    !/^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$/.test(version) ||
+    repository !== PYTHON_SDK_REPOSITORY ||
+    !Array.isArray(files) ||
+    files.length < 2
+  ) {
+    throw new Error("grid-sdk PyPI release is invalid");
+  }
+  const types = new Set();
+  for (const file of files) {
+    if (
+      file?.yanked !== false ||
+      typeof file?.filename !== "string" ||
+      !/^[0-9a-f]{64}$/.test(file?.digests?.sha256 || "") ||
+      !["bdist_wheel", "sdist"].includes(file?.packagetype)
+    ) {
+      throw new Error("grid-sdk PyPI distribution is invalid or yanked");
+    }
+    types.add(file.packagetype);
+  }
+  if (!types.has("bdist_wheel") || !types.has("sdist")) {
+    throw new Error("grid-sdk PyPI release is missing wheel or source distribution");
+  }
+  return version;
 }
 
 function shortDateRange(start, end) {
@@ -326,6 +362,7 @@ export function buildWeeklyProof(
     pricing,
     packages,
     packageDownloads,
+    pythonSdk,
   },
   now = new Date(),
 ) {
@@ -390,6 +427,7 @@ export function buildWeeklyProof(
     0,
   );
   const [{ start: downloadStart, end: downloadEnd }] = Object.values(downloadRows);
+  const pythonSdkRelease = pythonSdkVersion(pythonSdk);
   const integrationRows = INTEGRATION_PULL_REQUESTS.map((expected) => ({
     ...expected,
     state: integrationState(integrations?.[expected.id], expected),
@@ -401,7 +439,7 @@ export function buildWeeklyProof(
     `AIPG weekly proof: ${INTEGER.format(workers)} workers are serving ${INTEGER.format(models)} live models across ${modalities.join(", ")}. The public ledger recorded ${INTEGER.format(jobs24h)} jobs in 24h and ${INTEGER.format(jobs30d)} in 30d. Live status: ${network.status}. https://aipowergrid.io/status`,
     `Worker payouts: ${DECIMAL.format(week.aipg)} AIPG across ${INTEGER.format(week.transfers)} Base transfers in the past 7 days. All time: ${DECIMAL.format(allAipg)} AIPG, ${INTEGER.format(allTransfers)} transfers, ${INTEGER.format(paidWallets)} payout wallets. Verify: https://console.aipowergrid.io/transparency`,
     `Validator preview: ${INTEGER.format(fresh)}/${INTEGER.format(registered)} active validators are fresh, with ${INTEGER.format(assignments)} completed assignments and ${DECIMAL.format(agreement)}% agreement. Honest caveat: ${INTEGER.format(independent)} independently verified operators and no routing, reward, strike, or slashing authority yet.`,
-    `Integration proof: npm recorded ${INTEGER.format(downloadTotal)} downloads for our four packages in its ${shortDateRange(downloadStart, downloadEnd)} window (requests, not users). PRs: ${upstreamSummary}. $5-$20 builder credits: https://aipowergrid.io/docs/builder-credits`,
+    `Packages: Python grid-sdk ${pythonSdkRelease} + four npm packages live. npm: ${INTEGER.format(downloadTotal)} requests, ${shortDateRange(downloadStart, downloadEnd)} (not users). PRs: ${upstreamSummary}. $5-$20 builder credits: https://aipowergrid.io/docs/builder-credits`,
     `Same-model price proof: ${comparisonRows.map((row) => `${row.model} AIPG $${formatUsd(row.aipg)} vs ${row.provider} $${formatUsd(row.competitor)} (${DECIMAL.format(row.savings)}% less)`).join("; ")}. Sources and workloads: ${PRICING_URL}`,
     `GPU supply: verified Linux text worker ${workerTag} is live; ${INTEGER.format(belowTarget)} routes are below the 3-worker target. ${mediaSupply} ${RUN_URL}`,
   ];
@@ -443,6 +481,7 @@ ${integrationRows.map((row) => `| ${row.name} upstream PR | ${row.state.label} |
 | ElizaOS package | ${packageRows["@aipowergrid/plugin-aipg"]}; ${INTEGER.format(downloadRows["@aipowergrid/plugin-aipg"].downloads)} npm requests |
 | n8n package | ${packageRows["@aipowergrid/n8n-nodes-aipg"]}; ${INTEGER.format(downloadRows["@aipowergrid/n8n-nodes-aipg"].downloads)} npm requests |
 | MCP package | ${packageRows["@aipowergrid/mcp"]}; ${INTEGER.format(downloadRows["@aipowergrid/mcp"].downloads)} npm requests |
+| Python SDK | grid-sdk ${pythonSdkRelease}; active wheel and source distribution on PyPI |
 | npm download window | ${downloadStart} through ${downloadEnd}; registry requests, not unique users |
 ${comparisonRows.map((row) => `| ${row.model} same-model price | AIPG $${formatUsd(row.aipg)} vs ${row.provider} $${formatUsd(row.competitor)}; ${DECIMAL.format(row.savings)}% less; ${row.basis} |`).join("\n")}
 
@@ -456,6 +495,7 @@ ${comparisonRows.map((row) => `- [${row.model} comparison source](${row.source_u
 ${integrationRows.map((row) => `- [${row.name} upstream PR](${row.url})`).join("\n")}
 - [Integration quickstarts](https://aipowergrid.io/docs/integrations)
 ${NPM_PACKAGES.map((name) => `- [${name} npm download evidence](https://api.npmjs.org/downloads/point/last-week/${name.replace("/", "%2F")})`).join("\n")}
+- [grid-sdk Python release](${PYTHON_SDK_URL})
 - [Text-worker releases](${WORKER_RELEASES_URL})
 - [Media qualification status](${MEDIA_QUALIFICATION_STATUS_URL})
 - [Media qualification cohort](${MEDIA_QUALIFICATION_COHORT_URL})
@@ -474,6 +514,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
     integrationPayloads,
     packagePayloads,
     packageDownloadPayloads,
+    pythonSdk,
   ] = await Promise.all([
       fetchJson(`${GRID_API}/v1/status/network`, fetcher),
       fetchJson(`${GRID_API}/v1/stats/totals`, fetcher),
@@ -496,6 +537,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
           fetcher,
         ),
       )),
+      fetchJson(PYTHON_SDK_API, fetcher),
     ]);
   const integrations = Object.fromEntries(
     INTEGRATION_PULL_REQUESTS.map((item, index) => [item.id, integrationPayloads[index]]),
@@ -517,6 +559,7 @@ export async function generateWeeklyProof(fetcher = fetch, now = new Date()) {
       mediaQualification,
       packages,
       packageDownloads,
+      pythonSdk,
     },
     now,
   );

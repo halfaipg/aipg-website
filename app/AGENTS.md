@@ -89,7 +89,9 @@ with a scroll-reveal IntersectionObserver).
   A verified Linux text download must be followed immediately by the exact
   artifact-specific first-run commands, local wizard URL, scoped-key boundary,
   and online/public-worker verification steps. Never teach operators to place a
-  Grid key or wallet secret in a shell command.
+  Grid key or wallet secret in a shell command. Its full-bleed hero uses
+  purpose-specific GPU-worker hardware imagery; do not replace it with the
+  generic network wallpaper or validator imagery.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
@@ -108,6 +110,8 @@ with a scroll-reveal IntersectionObserver).
   renders fail-soft public cohort counts from `GET /v1/status/network`, keeps
   registration separate from reviewed operator independence, and tells stale
   preview operators to upgrade in place without replacing their node identity.
+  Its full-bleed hero uses purpose-specific CPU/network validator hardware
+  imagery so the page remains visually distinct from GPU worker onboarding.
   Keep the headline and download grid contained at 320px as well as standard
   mobile widths; grid children must be allowed to shrink around code snippets.
 - `status/` — public, read-only network posture. It renders Core's privacy-safe
