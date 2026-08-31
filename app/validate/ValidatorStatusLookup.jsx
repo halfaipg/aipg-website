@@ -125,7 +125,13 @@ export default function ValidatorStatusLookup({ currentVersion }) {
                 ) : (
                   <FiAlertCircle className="text-orange-300" aria-hidden="true" />
                 )}
-                {status.summary.replaceAll("_", " ")}
+                <span>
+                  {status.online ? "Online" : "Offline"}
+                  <span className="text-gray-500"> · </span>
+                  <span className="capitalize">
+                    {status.summary.replaceAll("_", " ")}
+                  </span>
+                </span>
               </p>
             </div>
             <p className="text-sm text-gray-400">
