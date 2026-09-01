@@ -30,6 +30,8 @@ const COHORT_ISSUE_URL =
   "https://github.com/AIPowerGrid/grid-validator/issues/5";
 const COHORT_RUNBOOK_URL =
   "https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md";
+const DOCKER_QUICKSTART_URL =
+  "https://github.com/AIPowerGrid/grid-validator/blob/master/QUICKSTART.md#docker";
 
 export const metadata = {
   title: "Run an AI Power Grid Validator",
@@ -479,8 +481,23 @@ export default async function ValidatePage() {
                   docker pull ghcr.io/aipowergrid/validator:{RELEASE_TAG}
                 </code>
                 <p className="mt-3 leading-6 text-gray-400">
-                  The preview image is public and version-pinned. Prereleases do
-                  not publish <code>latest</code>.
+                  The public, version-pinned image can create a new node without
+                  a source checkout. The Docker guide enrolls it as your host
+                  user, mounts credentials read-only after setup, and preserves
+                  the assignment and evidence journal across restarts.
+                </p>
+                <a
+                  href={DOCKER_QUICKSTART_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-cyan-300 hover:text-white"
+                >
+                  Open Docker quickstart <FiExternalLink aria-hidden="true" />
+                </a>
+                <p className="mt-2 text-xs leading-5 text-gray-500">
+                  Keep the same private config directory and <code>val_*</code>
+                  identity for the full qualification. Prereleases never publish
+                  or replace <code>latest</code>.
                 </p>
               </div>
             </div>

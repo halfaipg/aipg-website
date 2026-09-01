@@ -12,6 +12,8 @@ onboarding, and staking-withdrawal surfaces.
   the preview.13 operator app, consent-based setup, Windows menu option 8,
   explicit exit behavior, and exact versioned downloads without personal
   private-key entry or Console key juggling, plus the
+  canonical persistent Docker enrollment handoff, read-only credential mount,
+  durable evidence-journal requirement, and
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, evidence-bound payout scenario, exact public worker-status
   lookup, artifact-specific Linux first-run and secret-boundary guidance,
