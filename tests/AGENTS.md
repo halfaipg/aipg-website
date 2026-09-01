@@ -34,8 +34,10 @@ onboarding, and staking-withdrawal surfaces.
   Core, blanket open-source, permanent-free, permissionless-Core, and live
   multi-asset/worker-claim payout claims from being marketed as current. It
   also keeps the highlighted operator action on `/run`, labels ended staking as
-  legacy withdrawal, and prevents the dedicated validator identity from being
-  described as a funded or account-linked wallet requirement.
+  legacy withdrawal, keeps validator recruitment discoverable in the footer
+  without duplicating it into the primary navbar, and prevents the dedicated
+  validator identity from being described as a funded or account-linked wallet
+  requirement.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,
   immutable worker-release, exact npm-package/version plus fresh matching npm
   download windows that remain explicitly distinct from unique users, active

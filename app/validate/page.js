@@ -338,7 +338,7 @@ export default async function ValidatePage() {
                     href={release.installer}
                     className="mb-2 flex min-h-12 items-center justify-between bg-cyan-400 px-4 text-sm font-bold text-black hover:bg-cyan-300"
                   >
-                    Download verified installer{" "}
+                    Download Linux installer{" "}
                     <FiDownload aria-hidden="true" />
                   </a>
                   <div className="grid gap-2 sm:grid-cols-2">
@@ -371,6 +371,14 @@ export default async function ValidatePage() {
                     </a>
                     <a href={release.releaseUrl} className="hover:text-white">
                       Release notes
+                    </a>
+                    <a
+                      href="https://github.com/AIPowerGrid/grid-validator/blob/master/QUICKSTART.md#systemd"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-white"
+                    >
+                      Linux systemd guide
                     </a>
                   </>
                 ) : null}
