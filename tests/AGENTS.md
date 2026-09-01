@@ -67,6 +67,9 @@ onboarding, and staking-withdrawal surfaces.
 - Tests must never sign or broadcast a real transaction, use private keys, or
   depend on a funded wallet.
 - Fail on uncaught page errors and unexpected console errors, not only HTTP 200.
+- CI release lookups use the ephemeral read-only Actions token server-side so
+  smoke results do not depend on GitHub's anonymous shared-runner rate limit.
+  Tests must never expose that token to browser code or output.
 - Cover disconnected and read-only states; wallet-provider mocks stay explicit.
 - Prefer route-specific readiness assertions over global network idleness for
   pages that keep wallet-provider background connections open.

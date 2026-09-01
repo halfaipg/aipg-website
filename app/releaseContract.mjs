@@ -6,6 +6,17 @@ const MAX_MANIFEST_BYTES = 256 * 1024;
 const MAX_CHECKSUM_BYTES = 64 * 1024;
 export const IMMUTABLE_RELEASE_REVALIDATE_SECONDS = 24 * 60 * 60;
 
+export function githubApiHeaders(token = process.env.GITHUB_TOKEN) {
+  const normalizedToken = typeof token === "string" ? token.trim() : "";
+  return {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    ...(normalizedToken
+      ? { Authorization: `Bearer ${normalizedToken}` }
+      : {}),
+  };
+}
+
 export function releaseContractAssetSizesAllowed(manifestAsset, checksumAsset) {
   return (
     Number.isSafeInteger(manifestAsset?.size) &&
@@ -24,10 +35,7 @@ export async function getReleaseTagCommit(repository, tag, fetcher = fetch) {
   const response = await fetcher(
     `https://api.github.com/repos/${repository}/commits/${encodeURIComponent(tag)}`,
     {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
+      headers: githubApiHeaders(),
       next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
     },
   );

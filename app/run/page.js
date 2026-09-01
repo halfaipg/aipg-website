@@ -8,6 +8,7 @@ import { normalizeMediaQualificationStatus } from "./qualificationStatus.mjs";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
+  githubApiHeaders,
   IMMUTABLE_RELEASE_REVALIDATE_SECONDS,
   releaseContractAssetSizesAllowed,
 } from "../releaseContract.mjs";
@@ -35,10 +36,7 @@ export const metadata = {
 
 async function getReleaseList(url) {
   const response = await fetch(url, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
+    headers: githubApiHeaders(),
     next: { revalidate: 300 },
   });
   if (!response.ok) return [];

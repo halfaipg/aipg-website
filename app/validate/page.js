@@ -9,6 +9,7 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { normalizeValidatorCohortStatus } from "./cohortStatus.mjs";
+import { githubApiHeaders } from "../releaseContract.mjs";
 import {
   linuxCohortCommands,
   SYSTEMD_HELPER_COMMIT,
@@ -38,10 +39,7 @@ export const metadata = {
 async function getValidatorRelease() {
   try {
     const response = await fetch(RELEASE_API, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
+      headers: githubApiHeaders(),
       next: { revalidate: 300 },
     });
     if (!response.ok) return null;
