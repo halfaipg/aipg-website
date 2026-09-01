@@ -117,6 +117,10 @@ with a scroll-reveal IntersectionObserver).
   the page. It pins the service helper to a reviewed immutable commit and
   verifies its SHA-256 separately from the frozen preview.13 binary; never use
   a mutable branch download, curl-to-shell, or credentials in command arguments.
+  Its versioned Docker card links to the canonical first-run enrollment path,
+  which runs as the host user, mounts credentials read-only after setup, and
+  persists the assignment/evidence journal and existing identity across
+  container recreation.
   Label the shell installer as Linux-specific, keep desktop archives separate,
   and link directly to the systemd guide. The global footer links to `/validate`
   so recruitment does not require another crowded primary-navigation item.

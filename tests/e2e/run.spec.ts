@@ -263,6 +263,12 @@ test.describe('/validate smoke', () => {
     await expect(
       page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.13'),
     ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Open Docker quickstart' })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-validator/blob/master/QUICKSTART.md#docker',
+    );
+    await expect(page.getByText(/mounts credentials read-only after setup/)).toBeVisible();
+    await expect(page.getByText(/preserves the assignment and evidence journal across restarts/)).toBeVisible();
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
