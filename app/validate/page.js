@@ -9,10 +9,15 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { normalizeValidatorCohortStatus } from "./cohortStatus.mjs";
+import {
+  linuxCohortCommands,
+  SYSTEMD_HELPER_COMMIT,
+  VALIDATOR_RELEASE_TAG,
+} from "./linuxServiceContract.mjs";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
 import ValidatorStatusLookup from "./ValidatorStatusLookup";
 
-const RELEASE_TAG = "v0.1.0-preview.13";
+const RELEASE_TAG = VALIDATOR_RELEASE_TAG;
 const RELEASE_API =
   `https://api.github.com/repos/AIPowerGrid/grid-validator/releases/tags/${RELEASE_TAG}`;
 const VALIDATOR_CAPABILITIES_API =
@@ -109,6 +114,7 @@ export default async function ValidatePage() {
     getValidatorCohortStatus(),
   ]);
   const release = coreReadiness.ready ? releaseCandidate : null;
+  const linuxCommands = linuxCohortCommands();
 
   return (
     <main className="bg-black text-white">
@@ -369,13 +375,70 @@ export default async function ValidatePage() {
                   </>
                 ) : null}
               </div>
+              <div className="min-w-0 border border-cyan-400/30 bg-cyan-400/5 p-5">
+                <p className="flex items-center gap-2 font-semibold text-white">
+                  <FiTerminal aria-hidden="true" /> Linux server: keep it alive
+                  for 72 hours
+                </p>
+                <p className="mt-2 text-sm leading-6 text-gray-400">
+                  This is the recommended cohort path. It installs the frozen
+                  preview.13 binary, creates a dedicated validator identity,
+                  and runs it as a hardened systemd service. Setup prompts
+                  locally; no private key belongs in these commands.
+                </p>
+                <ol className="mt-5 space-y-5 text-sm text-gray-300">
+                  <li>
+                    <p className="mb-2 font-semibold text-white">
+                      1. Install, enroll, and check the node
+                    </p>
+                    <pre className="max-w-full overflow-x-auto border border-white/10 bg-black p-4 text-xs leading-6 text-cyan-200">
+                      <code>{linuxCommands.install}</code>
+                    </pre>
+                  </li>
+                  <li>
+                    <p className="mb-2 font-semibold text-white">
+                      2. Verify and install the pinned service helper
+                    </p>
+                    <pre className="max-w-full overflow-x-auto border border-white/10 bg-black p-4 text-xs leading-6 text-cyan-200">
+                      <code>{linuxCommands.service}</code>
+                    </pre>
+                    <p className="mt-2 text-xs leading-5 text-gray-500">
+                      Helper source is pinned to reviewed commit{" "}
+                      <a
+                        href={`https://github.com/AIPowerGrid/grid-validator/commit/${SYSTEMD_HELPER_COMMIT}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-mono text-cyan-300 hover:text-white"
+                      >
+                        {SYSTEMD_HELPER_COMMIT.slice(0, 7)}
+                      </a>
+                      {" "}and checked before execution. It never follows a
+                      moving branch or pipes a download into a shell.
+                    </p>
+                  </li>
+                  <li>
+                    <p className="mb-2 font-semibold text-white">
+                      3. Confirm the service and accepted evidence
+                    </p>
+                    <pre className="max-w-full overflow-x-auto border border-white/10 bg-black p-4 text-xs leading-6 text-cyan-200">
+                      <code>{linuxCommands.verify}</code>
+                    </pre>
+                  </li>
+                </ol>
+                <p className="mt-4 text-xs leading-5 text-gray-400">
+                  Stop any validator child started by the local app before
+                  enabling systemd. Keep the same <code>.env</code> and validator
+                  ID for the entire qualification; do not re-enroll during an
+                  upgrade or restart.
+                </p>
+              </div>
               <div className="border border-white/10 bg-[#101113] p-5 font-mono text-sm text-gray-200">
                 <p className="mb-3 flex items-center gap-2 font-sans font-semibold text-white">
                   <FiTerminal /> First-time setup
                 </p>
                 <p>aipg-validator app</p>
                 <p className="mt-2 font-sans text-xs text-gray-400">
-                  On Windows, extract the download and double-click
+                  Desktop path: on Windows, extract the download and double-click
                   aipg-validator.exe. Choose 8 to open the local operator app,
                   then choose Set up node, confirm Create node account, and
                   choose Start validator. Published preview.13 keeps setup and
