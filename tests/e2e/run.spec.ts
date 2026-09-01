@@ -206,6 +206,13 @@ test.describe('/run mobile smoke', () => {
 
 test.describe('/validate smoke', () => {
   test('states the preview trust boundary and renders verified preview downloads', async ({ page }) => {
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'share', {
+        configurable: true,
+        value: undefined,
+      });
+    });
     const response = await page.goto('/validate', { waitUntil: 'networkidle' });
 
     expect(response?.ok()).toBeTruthy();
@@ -226,6 +233,11 @@ test.describe('/validate smoke', () => {
       'href',
       'https://github.com/AIPowerGrid/grid-validator/blob/master/PREVIEW_COHORT.md',
     );
+    await page.getByRole('button', { name: 'Share opening' }).click();
+    await expect(page.getByRole('status')).toHaveText('Opening copied.');
+    await expect
+      .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+      .toMatch(/two independently controlled Linux\/systemd operators.*72-hour CPU-only.*No GPU, stake, rewards, routing authority, slashing.*https:\/\/aipowergrid\.io\/validate/);
     await expect(page.getByText('aipg-validator app', { exact: true })).toBeVisible();
     await expect(page.getByText(/Choose 8 to open the local operator app/)).toBeVisible();
     await expect(page.getByText(/confirm Create node account/)).toBeVisible();

@@ -110,6 +110,8 @@ with a scroll-reveal IntersectionObserver).
   neither surface collects secrets on the marketing site. Recruitment is framed
   around the initial three-independent-operator gate instead
   of conflating registrations, machines, or the longer-term operator target.
+  Its share action carries the same bounded opening, links only to `/validate`,
+  and must not promise rewards, authority, or qualification.
   The Linux cohort path must show the complete headless install, enrollment,
   no-probe check, systemd persistence, and service-health sequence directly on
   the page. It pins the service helper to a reviewed immutable commit and
