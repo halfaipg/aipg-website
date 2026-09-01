@@ -6,8 +6,12 @@ import {
   FiAlertCircle,
   FiCheckCircle,
   FiClock,
+  FiExternalLink,
   FiSearch,
 } from "react-icons/fi";
+
+const COHORT_ISSUE_URL =
+  "https://github.com/AIPowerGrid/grid-validator/issues/5";
 
 function duration(seconds) {
   if (!Number.isFinite(seconds) || seconds <= 0) return "Complete";
@@ -314,6 +318,30 @@ export default function ValidatorStatusLookup({ currentVersion }) {
               {status.nextAction}
             </p>
           </div>
+
+          {qualification.status === "unreviewed" ? (
+            <div className="border-t border-cyan-300/20 bg-cyan-300/[0.06] p-5">
+              <p className="text-sm font-bold uppercase text-cyan-200">
+                Join the independent cohort
+              </p>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-300">
+                Your node is registered, but registration alone does not prove
+                independent control. Request a review with this public validator
+                ID plus only your platform, broad region, hosting class, and
+                expected online hours. Never post an API key, private key,
+                wallet address, IP address, config file, or raw diagnostics.
+              </p>
+              <a
+                href={COHORT_ISSUE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 border border-cyan-300/50 bg-cyan-300 px-4 text-sm font-bold text-black hover:bg-cyan-200"
+              >
+                Request cohort review
+                <FiExternalLink aria-hidden="true" />
+              </a>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>
