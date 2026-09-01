@@ -16,7 +16,8 @@ onboarding, and staking-withdrawal surfaces.
   durable evidence-journal requirement, and
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, evidence-bound payout scenario, exact public worker-status
-  lookup, artifact-specific Linux first-run and secret-boundary guidance,
+  lookup, unreviewed-validator cohort-review handoff, artifact-specific Linux
+  first-run and secret-boundary guidance,
   trust-boundary copy, bounded validator-opening share text, browser-error, and
   horizontal-overflow checks, including validator onboarding at 320px and
   390px widths.
@@ -26,6 +27,9 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/validator-public-status.test.mjs` - strict public-ID and response
   normalization that prevents the `/validate` lookup from forwarding malformed,
   mismatched, or economically authoritative validator data.
+- `unit/validator-review-handoff.test.mjs` - keeps the cohort-review action
+  limited to unreviewed validators, bound to the tracked public issue, and
+  explicit about which credentials and private diagnostics must not be posted.
 - `unit/text-release-gate.test.mjs` - exact immutable text-worker release,
   checksum, manifest, SBOM, GitHub digest, and size contract, including the
   versioned `v0.3.7+` installer requirement without invalidating older exact

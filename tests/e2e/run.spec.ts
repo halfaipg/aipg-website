@@ -206,11 +206,43 @@ test.describe('/run mobile smoke', () => {
 
 test.describe('/validate smoke', () => {
   test('states the preview trust boundary and renders verified preview downloads', async ({ page }) => {
+    const validatorId = 'val_06a1567ccc3b46a48515cb47e6fdd8cb';
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.addInitScript(() => {
       Object.defineProperty(navigator, 'share', {
         configurable: true,
         value: undefined,
+      });
+    });
+    await page.route(`**/api/validator-status/${validatorId}`, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          schema: 'aipg.validator.public-status.v1',
+          validatorId,
+          summary: 'online',
+          registrationStatus: 'active',
+          online: true,
+          lastHeartbeat: '2026-09-01T23:34:00+00:00',
+          softwareVersion: 'v0.1.0-preview.13',
+          activity: { assigned: 267, completed: 261, attested: 240 },
+          qualification: {
+            status: 'unreviewed',
+            elapsedSeconds: 0,
+            minimumSeconds: 259200,
+            remainingSeconds: 259200,
+            sampleCoverage: 0,
+            minimumSampleCoverage: 0.8,
+            timeReady: false,
+            coverageReady: false,
+            heartbeatFresh: true,
+            reviewCurrent: false,
+            independentVoteEligible: false,
+          },
+          nextAction: 'Request cohort review using only this public validator ID.',
+          economicEffect: 'none',
+        }),
       });
     });
     const response = await page.goto('/validate', { waitUntil: 'networkidle' });
@@ -269,6 +301,15 @@ test.describe('/validate smoke', () => {
     );
     await expect(page.getByText(/mounts credentials read-only after setup/)).toBeVisible();
     await expect(page.getByText(/preserves the assignment and evidence journal across restarts/)).toBeVisible();
+
+    await page.getByPlaceholder('val_...').fill(validatorId);
+    await page.getByRole('button', { name: 'Check status' }).click();
+    await expect(page.getByText('Join the independent cohort', { exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Request cohort review' })).toHaveAttribute(
+      'href',
+      'https://github.com/AIPowerGrid/grid-validator/issues/5',
+    );
+    await expect(page.getByText(/registration alone does not prove independent control/i)).toBeVisible();
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
