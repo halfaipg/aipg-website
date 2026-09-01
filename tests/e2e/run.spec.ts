@@ -236,7 +236,7 @@ test.describe('/validate smoke', () => {
     );
     await expect(page.getByText(/Existing-account pairing is not available yet/)).toBeVisible();
     await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toHaveCount(0);
-    await expect(page.getByRole('link', { name: 'Download verified installer' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Download Linux installer' })).toHaveAttribute(
       'href',
       /releases\/download\/v0\.1\.0-preview\.13\/install-validator\.sh$/,
     );
