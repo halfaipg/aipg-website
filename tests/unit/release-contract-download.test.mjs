@@ -5,6 +5,7 @@ import test from "node:test";
 import {
   decodeReleaseContract,
   getReleaseTagCommit,
+  githubApiHeaders,
   releaseContractAssetSizesAllowed,
 } from "../../app/releaseContract.mjs";
 
@@ -132,12 +133,23 @@ test("resolves only a valid GitHub tag commit", async () => {
       "AIPowerGrid/grid-text-worker",
       "v0.3.5",
       fetcher,
+      "",
     ),
     commit,
   );
   assert.match(calls[0].url, /\/commits\/v0\.3\.5$/);
+  assert.equal(calls[0].options.headers.Authorization, undefined);
   assert.equal(
     await getReleaseTagCommit("invalid repository", "v0.3.5", fetcher),
     null,
   );
+});
+
+test("uses a server-only GitHub token when one is supplied", () => {
+  assert.deepEqual(githubApiHeaders("  test-token  "), {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    Authorization: "Bearer test-token",
+  });
+  assert.equal(githubApiHeaders("").Authorization, undefined);
 });

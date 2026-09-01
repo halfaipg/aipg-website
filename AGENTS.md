@@ -129,6 +129,10 @@ on Vercel.
 - Public env vars must be `NEXT_PUBLIC_*` (see `wagmiConfig.js` WalletConnect projectId).
 - A blank-screen crash from an undefined reference passes `next build` but fails on real `next start`
   — add/keep a Playwright smoke assertion when touching a page's mount path.
+- The smoke workflow passes GitHub Actions' ephemeral, read-only `GITHUB_TOKEN`
+  only to server-side release API requests so shared-runner rate limits cannot
+  hide otherwise valid downloads. Never rename it to `NEXT_PUBLIC_*`, log it,
+  or expose it to browser code.
 
 ## Verification
 

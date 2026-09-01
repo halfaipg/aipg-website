@@ -109,6 +109,12 @@ const Footer = () => {
                     Network Status
                   </a>
                 </p>
+                <p>
+                  <a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    href="/validate">
+                    Run a validator
+                  </a>
+                </p>
               </div>
             </div>
 

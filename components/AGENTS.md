@@ -33,6 +33,8 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 - The highlighted desktop navigation action points to the live `/run` operator
   funnel. The ended staking program remains reachable as an explicitly labelled
   legacy-withdrawal link in the footer, never as an earning opportunity.
+- The footer links directly to `/validate` as the durable validator-recruitment
+  entry point; do not crowd the primary navbar with a duplicate validator item.
 - Builder-facing hero, navigation, API-card, and footer actions converge on
   `/use`, the short redirect to the canonical 60-second integration guide.
 - Marketing copy must distinguish the live text-worker download from the

@@ -77,8 +77,10 @@ test("operator entry points match the live onboarding model", async () => {
   ]);
 
   assert.match(navbar, /href="\/run"[\s\S]*?>\s*Run\s*<\/Link>/);
+  assert.doesNotMatch(navbar, /href="\/validate"/);
   assert.doesNotMatch(navbar, /href="\/staking"[\s\S]*?>\s*Earn\s*<\/Link>/);
   assert.match(footer, /href="\/staking"[\s\S]*?>\s*Withdraw Legacy Stake\s*<\/a>/);
+  assert.match(footer, /href="\/validate"[\s\S]*?>\s*Run a validator\s*<\/a>/);
   assert.match(
     runNode,
     /dedicated local signing identity; no funded wallet or account login/,
