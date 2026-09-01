@@ -28,14 +28,19 @@ export function releaseContractAssetSizesAllowed(manifestAsset, checksumAsset) {
   );
 }
 
-export async function getReleaseTagCommit(repository, tag, fetcher = fetch) {
+export async function getReleaseTagCommit(
+  repository,
+  tag,
+  fetcher = fetch,
+  token = process.env.GITHUB_TOKEN,
+) {
   if (!REPOSITORY.test(repository) || typeof tag !== "string" || !tag) {
     return null;
   }
   const response = await fetcher(
     `https://api.github.com/repos/${repository}/commits/${encodeURIComponent(tag)}`,
     {
-      headers: githubApiHeaders(),
+      headers: githubApiHeaders(token),
       next: { revalidate: IMMUTABLE_RELEASE_REVALIDATE_SECONDS },
     },
   );

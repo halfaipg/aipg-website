@@ -133,6 +133,7 @@ test("resolves only a valid GitHub tag commit", async () => {
       "AIPowerGrid/grid-text-worker",
       "v0.3.5",
       fetcher,
+      "",
     ),
     commit,
   );
