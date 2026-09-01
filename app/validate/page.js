@@ -16,6 +16,7 @@ import {
   VALIDATOR_RELEASE_TAG,
 } from "./linuxServiceContract.mjs";
 import { assessValidatorCoreCapability } from "./releaseGate.mjs";
+import ValidatorRecruitmentShare from "./ValidatorRecruitmentShare";
 import ValidatorStatusLookup from "./ValidatorStatusLookup";
 
 const RELEASE_TAG = VALIDATOR_RELEASE_TAG;
@@ -227,6 +228,7 @@ export default async function ValidatePage() {
               >
                 Cohort runbook <FiExternalLink aria-hidden="true" />
               </a>
+              <ValidatorRecruitmentShare />
             </div>
           </div>
           <div className="mt-8 border border-white/10 bg-[#111214]">

@@ -15,8 +15,9 @@ onboarding, and staking-withdrawal surfaces.
   public network-status surface, local hardware-path recommendation, telemetry
   disclaimers, evidence-bound payout scenario, exact public worker-status
   lookup, artifact-specific Linux first-run and secret-boundary guidance,
-  trust-boundary copy, browser-error, and horizontal-overflow checks, including
-  validator onboarding at 320px and 390px widths.
+  trust-boundary copy, bounded validator-opening share text, browser-error, and
+  horizontal-overflow checks, including validator onboarding at 320px and
+  390px widths.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
