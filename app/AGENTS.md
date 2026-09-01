@@ -107,7 +107,10 @@ with a scroll-reveal IntersectionObserver).
   a separate, unshipped flow; never direct users to replace an existing identity.
   Recruitment links to the tracked public cohort issue for
   expressions of interest and the public cohort runbook for qualification;
-  neither surface collects secrets on the marketing site. The page also
+  neither surface collects secrets on the marketing site. Recruitment is framed
+  around the initial three-independent-operator gate instead
+  of conflating registrations, machines, or the longer-term operator target.
+  Current campaign counts must match the tracked cohort issue. The page also
   renders fail-soft public cohort counts from `GET /v1/status/network`, keeps
   registration separate from reviewed operator independence, and tells stale
   preview operators to upgrade in place without replacing their node identity.

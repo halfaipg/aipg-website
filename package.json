@@ -53,6 +53,7 @@
     "tailwindcss": "^3.3.0"
   },
   "overrides": {
+    "browserslist": "4.28.8",
     "axios": "1.18.0",
     "@walletconnect/core": "2.23.10",
     "@walletconnect/ethereum-provider": "2.23.10",

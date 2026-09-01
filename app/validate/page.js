@@ -196,12 +196,14 @@ export default async function ValidatePage() {
           <div className="mt-8 flex flex-col gap-4 border-l-2 border-cyan-400 bg-[#111214] p-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h3 className="font-bold text-white">
-                We are recruiting 5-10 independent operators
+                Two Linux operators needed for the initial gate
               </h3>
               <p className="mt-1 text-sm leading-6 text-gray-400">
-                One person or organization counts once, even if it runs several
-                nodes. Volunteer through the tracked cohort issue, then complete
-                a 72-hour no-reward qualification.
+                One independent candidate is qualifying now. The first gate
+                requires three unrelated operators, and one person or
+                organization counts once even if it runs several nodes. Volunteer
+                through the tracked cohort issue, then complete a 72-hour
+                no-reward qualification.
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
