@@ -422,7 +422,7 @@ function DownloadFacts({
     ["Backend", text ? "Ollama or a tested compatible API" : "Reviewed ComfyUI or direct-runtime profile"],
     ["Platform", `${PLATFORMS[platform].label} · ${releaseReady ? "verified artifact" : platformReason || "release gated"}`],
     ["Compatibility", text ? "The selected model must be served by your backend" : "Exact model, recipe, dependencies, and canary must pass"],
-    ["Controls", text ? "Model, limits, concurrency, schedule, pause" : "Profile capabilities, output bounds, start and stop; serial today"],
+    ["Controls", text ? "Model, limits, concurrency, schedule, pause" : "Profile capabilities, output bounds, schedule, pause and drain; one job at a time"],
     ["Worker sees", "Plaintext request inputs and outputs"],
     ["Rewards", text ? "Accepted work contributes to the current AIPG period split" : "Qualification benchmarks are unpaid; approved worker jobs use the current split"],
     ["Maturity", text ? "Public text worker" : "Managed media qualification"],
@@ -485,7 +485,7 @@ function FirstRunSteps({ artifactName, installerName, version }) {
             http://localhost:7861
           </code>
           .{" "}
-          {["0.3.6", "0.3.7"].includes(version) ? (
+          {["0.3.6", "0.3.7", "0.3.8"].includes(version) ? (
             <>
               Version {version} uses a scoped Grid API key from the developer
               Console. Enter it only in the local wizard, never in a shell

@@ -110,13 +110,13 @@ test.describe('/run smoke', () => {
       page.getByRole('link', { name: /Download verified Linux installer/ }),
     ).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.7\/install-worker\.sh$/,
+      /grid-text-worker\/releases\/download\/v0\.3\.8\/install-worker\.sh$/,
     );
     await expect(
       page.getByRole('link', { name: /Download Linux binary directly/ }),
     ).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.7\/grid-inference-worker-linux-x64$/,
+      /grid-text-worker\/releases\/download\/v0\.3\.8\/grid-inference-worker-linux-x64$/,
     );
     await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
     await expect(

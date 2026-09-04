@@ -127,5 +127,5 @@ test("operator onboarding preserves sidecar and maturity boundaries", async () =
   assert.match(paths, /ComfyUI[\s\S]*Qualification/);
   assert.match(downloads, /Before you download/);
   assert.match(downloads, /Qualification benchmarks are unpaid/);
-  assert.match(downloads, /serial today/);
+  assert.match(downloads, /one job at a time/);
 });
