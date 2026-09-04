@@ -115,6 +115,10 @@ on Vercel.
   An auto-detected gated desktop platform must never leave the visitor at a
   disabled control: offer the verified Linux path when available and the safe
   generic hardware intake immediately beside the gate.
+  The page leads with two operator paths: connect an already-running backend or
+  start from hardware guidance. Its compatibility matrix must keep the public
+  text-worker path distinct from qualification-gated media profiles, and its
+  security copy must state that community workers receive plaintext workloads.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.

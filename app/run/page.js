@@ -1,4 +1,5 @@
 import RunDownloads from "./RunDownloads";
+import OperatorPaths from "./OperatorPaths";
 import OperatorPlanner from "./OperatorPlanner";
 import OperatorEvidence from "./OperatorEvidence";
 import OperatorRecruitment from "./OperatorRecruitment";
@@ -353,6 +354,8 @@ export default async function RunPage() {
         textRelease={textRelease}
       />
 
+      <OperatorPaths />
+
       <OperatorRecruitment />
 
       <OperatorPlanner
@@ -404,10 +407,10 @@ export default async function RunPage() {
         <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
           <div className="mb-10 max-w-2xl">
             <p className="mb-3 text-sm font-bold uppercase text-orange-400">
-              One path
+              Operator flow
             </p>
             <h2 className="text-3xl font-bold md:text-4xl">
-              From download to paid work
+              From your backend to Grid work
             </h2>
           </div>
           <ol className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-3">
@@ -415,30 +418,30 @@ export default async function RunPage() {
               <span className="mb-5 block text-sm font-bold text-orange-400">
                 01
               </span>
-              <h3 className="mb-2 text-xl font-semibold">Verify and install</h3>
+              <h3 className="mb-2 text-xl font-semibold">Connect locally</h3>
               <p className="text-sm leading-6 text-gray-400">
-                The manager chooses a supported signed profile, resumes
-                downloads, and verifies every committed byte.
+                Start the runtime you already use, or install one separately.
+                The worker detects its endpoint and available models locally.
               </p>
             </li>
             <li className="bg-[#101113] p-7">
               <span className="mb-5 block text-sm font-bold text-cyan-400">
                 02
               </span>
-              <h3 className="mb-2 text-xl font-semibold">Test and connect</h3>
+              <h3 className="mb-2 text-xl font-semibold">Choose and test</h3>
               <p className="text-sm leading-6 text-gray-400">
-                A real local generation proves the profile works. Then Google or
-                wallet sign-in links the rig to a payout wallet delegation.
+                Select what to advertise, set capacity limits, and run a real
+                local generation before the worker connects to the Grid.
               </p>
             </li>
             <li className="bg-[#101113] p-7">
               <span className="mb-5 block text-sm font-bold text-green-400">
                 03
               </span>
-              <h3 className="mb-2 text-xl font-semibold">Serve and earn</h3>
+              <h3 className="mb-2 text-xl font-semibold">Verify and serve</h3>
               <p className="text-sm leading-6 text-gray-400">
-                The worker accepts compatible Grid jobs, signs output receipts,
-                and earns through the public Base payout rail.
+                Confirm the worker appears online, then serve compatible jobs.
+                Completed accepted work contributes to the current payout split.
               </p>
             </li>
           </ol>

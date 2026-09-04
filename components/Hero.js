@@ -80,25 +80,26 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* CTA Buttons */}
+        {/* Primary paths */}
         <div className={`mt-10 flex flex-wrap justify-center gap-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-orange-500/50"
-            href="https://console.aipowergrid.io"
-            target="_blank"
+            href="/use"
           >
-            Get your free API key
+            Use the Grid
           </a>
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all border border-white/20"
-            href="/use"
+            href="/run"
           >
-            Use AIPG in 60 seconds
+            Provide compute
           </a>
         </div>
 
         <p className={`mt-4 text-center text-sm text-gray-400 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
-          Agents welcome — OpenAI-compatible <span className="text-gray-300">/v1</span> for text, image, and video generation. Point any OpenAI SDK at it and go.
+          <a href="https://console.aipowergrid.io" target="_blank" className="text-orange-300 hover:text-orange-200">Get an API key</a>
+          <span aria-hidden="true"> · </span>
+          OpenAI-compatible <span className="text-gray-300">/v1</span> for text, image, and video generation.
         </p>
 
         <div className={`mt-12 flex flex-wrap justify-center gap-3 mb-4 ${contentVisible ? 'fade-in' : 'hidden-initially'}`}>
