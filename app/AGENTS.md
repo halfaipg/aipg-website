@@ -92,6 +92,10 @@ with a scroll-reveal IntersectionObserver).
   Grid key or wallet secret in a shell command. Its full-bleed hero uses
   purpose-specific GPU-worker hardware imagery; do not replace it with the
   generic network wallpaper or validator imagery.
+  The operator story is sidecar-first: keep the operator's existing runtime and
+  connect only explicitly selected capabilities. Show the existing-stack and
+  start-fresh paths, backend maturity, capacity controls, local model custody,
+  and plaintext-workload boundary before making broad media availability claims.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic

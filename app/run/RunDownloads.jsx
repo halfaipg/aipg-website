@@ -90,19 +90,35 @@ export default function RunDownloads({
               Worker software
             </div>
             <h1 className="max-w-3xl text-5xl font-black leading-[1.04] sm:text-6xl lg:text-7xl">
-              Run AI Power Grid
+              Put your AI stack to work
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
-              Connect a supported GPU to serve text, image, video, and audio
-              jobs. The verified Linux text worker is available now; other
-              platforms and media profiles can join qualification below.
+              Keep the models and runtime you already operate. Add a Grid
+              worker beside them, choose what capacity to expose, and serve
+              compatible jobs from the network.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-400">
-              Every download is checked against its immutable release manifest,
-              checksums, SBOM, and GitHub asset identity before it appears here.
+              The verified Linux text worker is open now. Media runtimes join
+              through reviewed profile qualification; every downloadable
+              artifact is checked before it appears here.
             </p>
 
             <div className="mt-9 max-w-xl border border-white/15 bg-black/75 p-5 backdrop-blur-sm">
+              <div className="mb-4 grid grid-cols-2 gap-px bg-white/15 text-xs font-semibold">
+                <a
+                  href="#worker-downloads"
+                  className="flex min-h-10 items-center justify-center bg-[#17181a] px-3 text-orange-200"
+                >
+                  I already run AI
+                </a>
+                <a
+                  href="#hardware-planner"
+                  className="flex min-h-10 items-center justify-center bg-[#111214] px-3 text-gray-300 hover:bg-white/10"
+                >
+                  I&apos;m starting fresh
+                </a>
+              </div>
+
               <div className="mb-4 grid grid-cols-2 border border-white/15 bg-[#111214] p-1">
                 {[
                   ["text", "Text worker"],
@@ -157,6 +173,13 @@ export default function RunDownloads({
                   </button>
                 ))}
               </div>
+
+              <DownloadFacts
+                workerType={workerType}
+                platform={platform}
+                releaseReady={releaseReady}
+                platformReason={platformStatus?.reason}
+              />
 
               {releaseReady ? (
                 <div className="grid gap-2">
@@ -385,6 +408,43 @@ export default function RunDownloads({
         </div>
       </section>
     </>
+  );
+}
+
+function DownloadFacts({
+  workerType,
+  platform,
+  releaseReady,
+  platformReason,
+}) {
+  const text = workerType === "text";
+  const facts = [
+    ["Backend", text ? "Ollama or a tested compatible API" : "Reviewed ComfyUI or direct-runtime profile"],
+    ["Platform", `${PLATFORMS[platform].label} · ${releaseReady ? "verified artifact" : platformReason || "release gated"}`],
+    ["Compatibility", text ? "The selected model must be served by your backend" : "Exact model, recipe, dependencies, and canary must pass"],
+    ["Controls", text ? "Model, limits, concurrency, schedule, pause" : "Profile capabilities, output bounds, start and stop; serial today"],
+    ["Worker sees", "Plaintext request inputs and outputs"],
+    ["Rewards", text ? "Accepted work contributes to the current AIPG period split" : "Qualification benchmarks are unpaid; approved worker jobs use the current split"],
+    ["Maturity", text ? "Public text worker" : "Managed media qualification"],
+  ];
+
+  return (
+    <div className="mb-4 border border-white/10 bg-black/55">
+      <p className="border-b border-white/10 px-3 py-2 text-[11px] font-bold uppercase text-gray-400">
+        Before you download
+      </p>
+      <dl className="grid text-[11px] leading-4">
+        {facts.map(([label, value]) => (
+          <div
+            key={label}
+            className="grid grid-cols-[92px_1fr] gap-3 border-b border-white/5 px-3 py-2 last:border-b-0"
+          >
+            <dt className="font-semibold text-gray-500">{label}</dt>
+            <dd className="min-w-0 text-gray-300">{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
   );
 }
 

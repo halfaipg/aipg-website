@@ -100,7 +100,8 @@ test("builder entry points converge on the canonical 60-second guide", async () 
     readFile(new URL("app/use/page.js", ROOT), "utf8"),
   ]);
 
-  assert.match(hero, /href="\/use"[\s\S]*Use AIPG in 60 seconds/);
+  assert.match(hero, /href="\/use"[\s\S]*Use the Grid/);
+  assert.match(hero, /href="\/run"[\s\S]*Provide compute/);
   assert.match(products, /href: "https:\/\/aipowergrid\.io\/use"/);
   assert.match(navbar, /href="\/use"[\s\S]*?>\s*Build\s*<\/Link>/);
   assert.match(footer, /href="\/use"[\s\S]*?>\s*60-second setup\s*<\/a>/);
@@ -112,4 +113,19 @@ test("builder entry points converge on the canonical 60-second guide", async () 
     usePage,
     /https:\/\/aipowergrid\.io\/docs\/integrations/,
   );
+});
+
+test("operator onboarding preserves sidecar and maturity boundaries", async () => {
+  const [paths, downloads] = await Promise.all([
+    readFile(new URL("app/run/OperatorPaths.jsx", ROOT), "utf8"),
+    readFile(new URL("app/run/RunDownloads.jsx", ROOT), "utf8"),
+  ]);
+
+  assert.match(paths, /Keep the AI stack you already run/);
+  assert.match(paths, /does not replace[\s\S]*upload your model files/);
+  assert.match(paths, /Community workers process plaintext prompts and outputs/);
+  assert.match(paths, /ComfyUI[\s\S]*Qualification/);
+  assert.match(downloads, /Before you download/);
+  assert.match(downloads, /Qualification benchmarks are unpaid/);
+  assert.match(downloads, /serial today/);
 });

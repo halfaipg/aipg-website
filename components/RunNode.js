@@ -8,11 +8,11 @@ const RunNode = () => {
         {/* Header */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <h2 className="text-3xl text-white font-bold lg:text-5xl mb-4 leading-tight">
-            Plug in your GPU. Power the Grid. Earn.
+            Keep your stack. Connect its spare capacity.
           </h2>
           <p className="text-xl text-gray-300">
-            The network runs on real hardware that real people plug in. Two ways to take part:
-            run a <span className="text-white font-semibold">Generator</span> to contribute compute
+            Already running Ollama, vLLM, SGLang, LM Studio, KoboldCpp, or ComfyUI?
+            Two ways to take part: run a <span className="text-white font-semibold">Worker</span> to contribute compute
             and earn, or a <span className="text-white font-semibold">Validator</span> to independently test
             it. The text worker is live today; the managed media installer stays gated until
             signed hardware profiles qualify.
@@ -35,10 +35,10 @@ const RunNode = () => {
                 </svg>
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Generator</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">Provide compute</h3>
             <p className="text-gray-300 mb-6">
-              Connect an existing text backend to the current AIPG worker payout rail. Experienced
-              media operators can run reviewed workflows, while managed media setup remains gated.
+              The worker runs beside your existing service. You choose the model,
+              limits, and schedule; model files remain in your runtime.
             </p>
 
             <div className="space-y-3 mb-6">
@@ -60,15 +60,26 @@ const RunNode = () => {
               </div>
             </div>
 
-            <a
-              href="/run"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-xl transition-all"
-            >
-              Run the Text Worker
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="/run#worker-downloads"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-5 py-3 rounded-lg transition-all"
+              >
+                Connect text backend
+              </a>
+              <a
+                href="/run#media-qualification"
+                className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 rounded-lg font-semibold text-white hover:bg-white/10"
+              >
+                Qualify media backend
+              </a>
+              <a
+                href="/run#hardware-planner"
+                className="inline-flex items-center gap-2 px-1 py-3 font-semibold text-orange-300 hover:text-orange-200"
+              >
+                See capacity needs
+              </a>
+            </div>
           </div>
 
           {/* Validator */}

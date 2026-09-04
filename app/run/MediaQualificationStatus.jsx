@@ -18,7 +18,7 @@ export default function MediaQualificationStatus({ status }) {
   const cohortUrl = status?.cohortUrl || FALLBACK_COHORT;
 
   return (
-    <section className="border-y border-white/10 bg-black">
+    <section id="media-qualification" className="scroll-mt-20 border-y border-white/10 bg-black">
       <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div className="max-w-2xl">
