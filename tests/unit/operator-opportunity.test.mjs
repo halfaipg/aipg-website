@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   buildTextRouteShare,
   selectTextRoutePriority,
+  summarizeRouteCoverage,
 } from "../../app/run/operatorOpportunityLogic.mjs";
 
 test("balances accepted den against missing text-route replicas", () => {
@@ -79,4 +80,47 @@ test("builds a bounded, non-promissory operator opening", () => {
   assert.ok([...copy].length <= 280);
   assert.equal(buildTextRouteShare({ name: "offline", workers: 0, missingReplicas: 3 }), null);
   assert.equal(buildTextRouteShare({ name: "covered", workers: 3, missingReplicas: 0 }), null);
+});
+
+test("summarizes live route coverage before an operator downloads", () => {
+  const opportunities = [
+    {
+      name: "gpt-oss-120b",
+      type: "text",
+      workers: 2,
+      jobs30d: 3900,
+      acceptedDen30d: 1050000,
+    },
+    {
+      name: "Krea 2 Turbo",
+      type: "image",
+      workers: 1,
+      jobs30d: 120,
+      acceptedDen30d: 500,
+    },
+    {
+      name: "LTX-2.3",
+      type: "video",
+      workers: 3,
+      jobs30d: 20,
+      acceptedDen30d: 200,
+    },
+  ];
+
+  assert.equal(
+    summarizeRouteCoverage(opportunities, "text"),
+    "gpt-oss-120b: 2 serving, target 3; 3,900 completed jobs in the last 30 days.",
+  );
+  assert.equal(
+    summarizeRouteCoverage(opportunities, "media"),
+    "2 active media routes; 1 below the 3-worker redundancy target.",
+  );
+  assert.match(
+    summarizeRouteCoverage([], "text"),
+    /No active compatible routes/,
+  );
+  assert.match(
+    summarizeRouteCoverage(null, "text"),
+    /coverage is unavailable/,
+  );
 });

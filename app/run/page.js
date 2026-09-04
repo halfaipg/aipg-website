@@ -351,6 +351,7 @@ export default async function RunPage() {
       <RunDownloads
         mediaRelease={mediaRelease}
         mediaQualificationRelease={mediaQualificationRelease}
+        opportunities={opportunities}
         textRelease={textRelease}
       />
 
