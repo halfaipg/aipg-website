@@ -40,7 +40,7 @@ test.describe('/run smoke', () => {
     const response = await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
     expect(response?.ok()).toBeTruthy();
-    await expect(page.getByRole('heading', { name: 'Run AI Power Grid' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Put your AI stack to work' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Text worker' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Media manager' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Linux', exact: true }).first()).toBeVisible();
@@ -175,7 +175,7 @@ test.describe('/run mobile smoke', () => {
     });
     await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
-    await expect(page.getByRole('heading', { name: 'Run AI Power Grid' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Put your AI stack to work' })).toBeVisible();
     await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
     await expect(page.getByRole('button', { name: 'macOS' }).first()).toHaveAttribute(
       'aria-pressed',

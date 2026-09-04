@@ -14,7 +14,8 @@ onboarding, and staking-withdrawal surfaces.
   private-key entry or Console key juggling, plus the
   canonical persistent Docker enrollment handoff, read-only credential mount,
   durable evidence-journal requirement, and
-  public network-status surface, local hardware-path recommendation, telemetry
+  public network-status surface, existing-stack worker onramp, pre-download
+  compatibility and maturity facts, local hardware-path recommendation, telemetry
   disclaimers, evidence-bound payout scenario, exact public worker-status
   lookup, unreviewed-validator cohort-review handoff, artifact-specific Linux
   first-run and secret-boundary guidance,
