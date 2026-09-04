@@ -125,6 +125,16 @@ test("operator onboarding preserves sidecar and maturity boundaries", async () =
   assert.match(paths, /does not replace[\s\S]*upload your model files/);
   assert.match(paths, /Community workers process plaintext prompts and outputs/);
   assert.match(paths, /ComfyUI[\s\S]*Qualification/);
+  for (const guide of [
+    "ollama",
+    "vllm",
+    "lm-studio",
+    "openai-compatible",
+    "comfyui",
+    "ace-step",
+  ]) {
+    assert.match(paths, new RegExp(`/docs/backends/${guide}`));
+  }
   assert.match(downloads, /Before you download/);
   assert.match(downloads, /Qualification benchmarks are unpaid/);
   assert.match(downloads, /one job at a time/);

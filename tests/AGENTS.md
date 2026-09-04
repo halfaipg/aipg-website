@@ -43,7 +43,8 @@ onboarding, and staking-withdrawal surfaces.
   multi-asset/worker-claim payout claims from being marketed as current. It
   also keeps the highlighted operator action on `/run`, labels ended staking as
   legacy withdrawal, keeps validator recruitment discoverable in the footer
-  without duplicating it into the primary navbar, and prevents the dedicated
+  without duplicating it into the primary navbar, keeps runtime rows linked to
+  their backend-specific quickstarts, and prevents the dedicated
   validator identity from being described as a funded or account-linked wallet
   requirement.
 - `unit/weekly-proof.test.mjs` - evidence-shape, seven-day payout coverage,

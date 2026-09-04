@@ -96,6 +96,8 @@ with a scroll-reveal IntersectionObserver).
   connect only explicitly selected capabilities. Show the existing-stack and
   start-fresh paths, backend maturity, capacity controls, local model custody,
   and plaintext-workload boundary before making broad media availability claims.
+  Compatibility rows link to the matching `/docs/backends/*` quickstart so a
+  runtime choice leads directly to its verified setup and limitations.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic

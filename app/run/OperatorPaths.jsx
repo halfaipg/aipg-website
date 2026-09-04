@@ -12,36 +12,42 @@ const backends = [
     workload: "Text",
     path: "Detected automatically",
     status: "Open",
+    guide: "/docs/backends/ollama",
   },
   {
     runtime: "vLLM / SGLang / LMDeploy",
     workload: "Text",
     path: "OpenAI-compatible endpoint",
     status: "Open",
+    guide: "/docs/backends/vllm",
   },
   {
     runtime: "LM Studio / KoboldCpp",
     workload: "Text",
     path: "Detected or entered locally",
     status: "Open",
+    guide: "/docs/backends/lm-studio",
   },
   {
     runtime: "Other OpenAI-compatible APIs",
     workload: "Text",
     path: "Operator-entered endpoint",
     status: "Advanced",
+    guide: "/docs/backends/openai-compatible",
   },
   {
     runtime: "ComfyUI",
     workload: "Image / video",
     path: "Reviewed model and recipe profiles",
     status: "Qualification",
+    guide: "/docs/backends/comfyui",
   },
   {
     runtime: "ACE-Step",
     workload: "Audio",
     path: "Reviewed direct-runtime profile",
     status: "Qualification",
+    guide: "/docs/backends/ace-step",
   },
 ];
 
@@ -150,7 +156,13 @@ export default function OperatorPaths() {
                 {backends.map((backend) => (
                   <tr key={backend.runtime}>
                     <td className="px-4 py-4 font-semibold text-white">
-                      {backend.runtime}
+                      <a
+                        href={backend.guide}
+                        className="inline-flex items-center gap-1.5 hover:text-orange-300"
+                      >
+                        {backend.runtime}
+                        <FiExternalLink className="text-xs" aria-hidden="true" />
+                      </a>
                     </td>
                     <td className="px-4 py-4 text-gray-300">
                       {backend.workload}
