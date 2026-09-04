@@ -14,6 +14,7 @@ import {
   OPERATOR_INTAKE_URL,
   TEXT_OPERATOR_COHORT_URL,
 } from "./operatorLinks";
+import { summarizeRouteCoverage } from "./operatorOpportunityLogic.mjs";
 
 const PLATFORMS = {
   linux: { label: "Linux", detail: "Ubuntu 22.04+ x86_64" },
@@ -30,6 +31,7 @@ function formatBytes(value) {
 export default function RunDownloads({
   mediaRelease,
   mediaQualificationRelease,
+  opportunities,
   textRelease,
 }) {
   const [workerType, setWorkerType] = useState("text");
@@ -66,6 +68,10 @@ export default function RunDownloads({
       : null;
   const platformEntries = Object.entries(PLATFORMS).filter(
     ([value]) => workerType === "text" || ["linux", "windows"].includes(value),
+  );
+  const networkSnapshot = useMemo(
+    () => summarizeRouteCoverage(opportunities, workerType),
+    [opportunities, workerType],
   );
 
   return (
@@ -179,6 +185,7 @@ export default function RunDownloads({
                 platform={platform}
                 releaseReady={releaseReady}
                 platformReason={platformStatus?.reason}
+                networkSnapshot={networkSnapshot}
               />
 
               {releaseReady ? (
@@ -416,6 +423,7 @@ function DownloadFacts({
   platform,
   releaseReady,
   platformReason,
+  networkSnapshot,
 }) {
   const text = workerType === "text";
   const facts = [
@@ -423,6 +431,7 @@ function DownloadFacts({
     ["Platform", `${PLATFORMS[platform].label} · ${releaseReady ? "verified artifact" : platformReason || "release gated"}`],
     ["Compatibility", text ? "The selected model must be served by your backend" : "Exact model, recipe, dependencies, and canary must pass"],
     ["Controls", text ? "Model, limits, concurrency, schedule, pause" : "Profile capabilities, output bounds, schedule, pause and drain; one job at a time"],
+    ["Network need", networkSnapshot],
     ["Worker sees", "Plaintext request inputs and outputs"],
     ["Rewards", text ? "Accepted work contributes to the current AIPG period split" : "Qualification benchmarks are unpaid; approved worker jobs use the current split"],
     ["Maturity", text ? "Public text worker" : "Managed media qualification"],

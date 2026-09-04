@@ -55,6 +55,9 @@ with a scroll-reveal IntersectionObserver).
   Its share action derives a bounded operator-opening message from that same
   normalized priority row, preserves the redundancy target, links only to
   `/run`, and explicitly refuses an earnings forecast.
+  The download facts use that same normalized opportunity data to show a
+  current route/redundancy snapshot before the download action. Missing or
+  malformed data must say that coverage is unavailable, never fabricate demand.
   While the media release is gated, the download panel links to the public
   qualification cohort runbook. A complete `manager-qualification-v*`
   prerelease may expose a separately labelled benchmark-only binary, checksum,
