@@ -60,18 +60,24 @@ account; no automatic top-up exists. Replenishment is a deliberate operator acti
 ## Experience
 
 `Try the Grid` scrolls to the inline chat. Images, Video, and Music have direct
-product links. Guests get up to three submitted turns per UTC day, subject to
+product links. Guests get up to 15 submitted turns per UTC day, subject to
 shared availability and anti-abuse limits. Replies stream, expose the returned
 model name, and support stopping. Clear conversation does not reset the quota.
 The full Chat link opens the product; it does not transfer the demo transcript.
 The empty state is a single-line, growing composer. Enter submits and Shift+Enter
-adds a newline. The latest AI reply replaces the verification area beneath it;
+adds a newline. The latest AI reply is inside the same panel above the input;
 completed conversation history remains in memory for follow-ups. Short answers
-use their natural height; longer ones scroll within a bounded area.
-Turnstile uses `interaction-only` appearance and remains mounted. If it requires
-a human check, that check temporarily occupies the reply slot without erasing
-the answer. Success restores the reply; reset and server token validation remain
-mandatory between submissions. See [Cloudflare's appearance configuration](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/#appearance-modes).
+use natural height; longer ones scroll within 256px/40svh. The compact empty
+state reserves no transcript space. Normal 15-turn conversations retain their
+full history; above 48 KB UTF-8, whole oldest exchanges are recycled, preserving
+the newest question and recent context. This is a rolling window, not a summary
+or permanent memory. Failed/partial exchanges are excluded from later requests.
+Turnstile uses `interaction-only` appearance with `execution: execute`. A fresh
+widget runs only on Send and is removed after verification or cancellation;
+there is no automatic reset after a response. Required human checks appear
+separately beneath the controls, never in place of a reply. Failed verification
+preserves the draft and completed history. Every POST still requires a fresh,
+server-validated token. See [Cloudflare's execution configuration](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/#execution-modes).
 A completed answer displays its model,
 public worker name, generation time, first-token time, decode tokens/second and
 output tokens when supplied by Core. Speeds/times are rounded to one decimal.
@@ -87,9 +93,10 @@ chrome. It is not a fresh generation or performance claim.
 
 `GET /api/demo/chat`: no-cache availability, public Turnstile site key, remaining
 allowance, and a signed HttpOnly SameSite=Strict day-bound guest cookie.
-`POST`: same-origin JSON `{messages, token}` only. At most five alternating
-user/assistant messages, 1,000 characters per user message, 12 KB total content,
-16 KB body. No browser-selected models, system messages, URLs, tools, or uploads.
+`POST`: same-origin JSON `{messages, token}` only. At most 29 alternating
+user/assistant messages, 1,000 characters per user message, 5,000 per assistant,
+48 KB UTF-8 content, 320 KB raw body (allowing JSON escapes). Other JSON reads
+remain bounded to 16 KB. No browser-selected models, system messages, tools, or uploads.
 Fixed upstream: Grid `/v1/chat/completions`, `model=auto`, 1,024 maximum output
 tokens, low reasoning effort. Only answer deltas, model names and allowlisted
 completed-response public worker/timing/usage metadata reach clients;
@@ -98,8 +105,8 @@ frame is required for a success state. Request timeout is 45 seconds inside
 the hosting plan's 60-second function limit, leaving time for limiter cleanup; aborting
 the browser cancels the upstream request, but is not a promise of a Core refund.
 
-The Redis Lua reservation atomically enforces guest turns (3/day), IP or IPv6
-/64 turns (6/day), shared exposure budget, four active requests globally and one
+The Redis Lua reservation atomically enforces guest turns (15/day), IP or IPv6
+/64 turns (30/day), shared exposure budget, four active requests globally and one
 per IP. Ten POST attempts/minute/IP are allowed before bot verification.
 Limits work across instances. Keys share the `{chat}` Redis hash tag, expire,
 and contain only day-bucketed guest IDs and HMAC IP identifiers, never prompts.

@@ -44,16 +44,19 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   stay absent, and metadata must never be described as independently verified
   hardware, cryptographic provenance, or a benchmark. Display at most one
   decimal place for timing/throughput, with wrapping for long public names.
-  Show the latest AI reply unframed below the composer, without message bubbles
-  or a duplicate user-prompt block. Keep completed conversation history in
-  memory for follow-up requests. Short replies use their natural height; long
-  replies scroll within a 320px/50svh cap, keeping the input stationary.
-  Turnstile uses its supported `interaction-only` appearance. Verification and
-  replies occupy the same grid slot under the composer, with no permanently
-  reserved CAPTCHA gap or extra reply-panel border. Required interactive
-  challenges remain visible and temporarily replace (not erase) the transcript;
-  success restores it. The widget stays mounted, resets between submissions,
-  and token checks remain mandatory on both client and server.
+  Show the latest AI reply inside the same panel above the composer, without
+  message bubbles or a duplicate user-prompt block. Short replies use natural
+  height; long replies scroll within a 256px/40svh cap. Keep completed history
+  in memory for follow-ups; `lib/demoChatPolicy.mjs` bounds outgoing context
+  to 29 messages/48 KB, recycling only whole oldest exchanges when needed.
+  Failed/partial turns never enter follow-up context. The allowance is 15/day,
+  still subject to shared anti-abuse and spending ceilings.
+  Turnstile uses `interaction-only` appearance and explicit execution on Send.
+  Mount/execute a fresh widget per submission and remove it after verification
+  or cancellation, never automatically reset after a reply. Required challenges
+  have their own area beneath controls and must never replace/hide the answer.
+  Verification failure preserves the draft and completed history; no API POST
+  occurs until a fresh token is obtained. Server token checks remain mandatory.
   Follow new output only while the reader is near the bottom; scrolling up
   must let them read earlier text undisturbed. Answers render Markdown with raw HTML skipped,
   no model-supplied images, and the renderer's default safe URL transform.

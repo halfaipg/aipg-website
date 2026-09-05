@@ -25,16 +25,23 @@ test("real isolated Redis proves atomic guest, IP, budget, concurrency and lease
     const budgetRace = await Promise.all(Array.from({ length: 25 }, (_, i) => reserve("budget", i, i, `r${i}`, 20)));
     assert.equal(budgetRace.filter(r => r[0] === "ok").length, 2);
     assert.equal(await command("GET", "budget:budget"), "20");
-    const guestRace = await Promise.all(Array.from({ length: 25 }, (_, i) => reserve("guest", "same", i, `r${i}`, 1000)));
-    assert.equal(guestRace.filter(r => r[0] === "ok").length, 3);
+    // Expired global leases keep the separate concurrency cap from masking the guest cap.
+    const guestRace = [];
+    for (let wave = 0; wave < 7; wave++) {
+      guestRace.push(...await Promise.all(Array.from({ length: 4 }, (_, i) => reserve("guest", "same", wave * 4 + i, `r${wave}-${i}`, 1000, 1000 + wave * 80000))));
+    }
+    assert.equal(guestRace.filter(r => r[0] === "ok").length, 15);
+    assert.equal(await command("GET", "guest:g:same"), "15");
     const activeRace = await Promise.all(Array.from({ length: 25 }, (_, i) => reserve("active", i, i, `r${i}`, 1000)));
     assert.equal(activeRace.filter(r => r[0] === "ok").length, 4);
-    for (let i = 0; i < 6; i++) {
-      assert.equal((await reserve("ip", i, "same", `r${i}`))[0], "ok");
+    for (let i = 0; i < 30; i++) {
+      const result = await reserve("ip", i, "same", `r${i}`, 1000);
+      assert.equal(result[0], "ok");
+      assert.equal(result[1], Math.min(14, 29 - i));
       await release("ip", "same", `r${i}`);
     }
-    assert.equal((await reserve("ip", "new-cookie", "same", "r7"))[0], "quota");
-    assert.equal(await command("GET", "ip:budget"), "60");
+    assert.equal((await reserve("ip", "new-cookie", "same", "r31", 1000))[0], "quota");
+    assert.equal(await command("GET", "ip:budget"), "300");
     assert.equal((await reserve("lease", 1, 1, "first"))[0], "ok");
     assert.equal((await reserve("lease", 2, 1, "second"))[0], "busy");
     await release("lease", 1, "wrong-id");

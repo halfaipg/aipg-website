@@ -14,6 +14,10 @@ the site reads/writes.
 - `stakingContracts.js` — `STAKING_VAULT_ADDRESS`, `AIPG_TOKEN_ADDRESS` (Base mainnet) + minimal
   `ERC20_ABI` and `STAKING_VAULT_ABI`. Consumed by `hooks/useStaking.js`.
 - `utils.js` — `cn()` Tailwind class-merge helper.
+- `demoChatPolicy.mjs` - public shared limits: 15 guest turns/day, 30 IP turns/day,
+  29 alternating messages, 48 KB UTF-8 context. The browser recycles whole oldest
+  exchanges only when bounds require it; server validation independently rejects
+  oversized/non-alternating context. No secrets or server imports in this module.
 - `demoChat.mjs` - server-only homepage demo configuration, signed day cookies,
   trusted client-IP normalization, atomic shared limits, bot verification,
   bounded text-only Grid requests and sanitized streaming. Imported only by
@@ -31,6 +35,11 @@ the site reads/writes.
   Stream metadata is a strict allowlist of public worker name, generation time,
   first-token time, decode speed, and bounded completion tokens. It reaches the
   browser only with a successful terminal frame; internal routing/IDs never do.
+  Request JSON is capped at 320 KB to allow JSON escaping of bounded text;
+  decoded context remains capped at 48 KB. Other JSON reads retain a 16 KB cap.
+  Existing Redis counters are preserved across allowance increases; guest/IP
+  remaining values reflect the smaller allowance. Spending and concurrency caps
+  are independent of the turn count and must not be widened implicitly.
 
 ## Local Contracts
 
