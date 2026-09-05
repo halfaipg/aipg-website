@@ -44,10 +44,18 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   stay absent, and metadata must never be described as independently verified
   hardware, cryptographic provenance, or a benchmark. Display at most one
   decimal place for timing/throughput, with wrapping for long public names.
-  Conversation turns are unframed and use page scrolling, not nested transcript
-  scrolling or message bubbles. Answers render Markdown with raw HTML skipped,
+  Conversation turns are unframed, without message bubbles. After the first
+  submission, replies open below the composer in a fixed-height, responsive
+  scroll area so streaming never displaces the input or grows the page.
+  Follow new output only while the reader is near the bottom; scrolling up
+  must let them read earlier text undisturbed. Answers render Markdown with raw HTML skipped,
   no model-supplied images, and the renderer's default safe URL transform.
   Keep the model beside the response label and terminal worker metrics below it.
+  The composer starts at one line and grows with wrapped or multiline input,
+  up to 192px before internal scrolling. Enter submits; Shift+Enter inserts a
+  newline, and IME composition must never submit. After a response finishes,
+  fails, or is stopped, restore input focus without scrolling, unless quota or
+  availability has disabled it. Never autofocus on initial page load.
 
 - Components using wallet/hooks/framer-motion/scroll must be `"use client"`.
 - `StakingInterface.jsx` must NOT expose stake/approve actions (program wound down) even though

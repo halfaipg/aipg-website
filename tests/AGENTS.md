@@ -14,8 +14,10 @@ onboarding, and staking-withdrawal surfaces.
   and unavailable states, compact empty composer, plus long worker/model names
   and rounded per-response statistics on mobile/desktop. These fixtures are
   not evidence of live inference.
-  It also verifies unframed, page-scrolling Markdown answers, HTML/image/unsafe
+  It also verifies unframed, bounded Markdown answers below the composer, HTML/image/unsafe
   URL rejection, and identical versioned/fallback favicon assets.
+  Composer coverage includes auto-growth/shrink, viewport reflow, Enter versus
+  Shift+Enter/IME, submit guards, and focus restoration after terminal responses.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
