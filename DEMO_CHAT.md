@@ -164,6 +164,8 @@ All names are server-only; **none** use `NEXT_PUBLIC_`.
 | Variable | Value / boundary |
 | --- | --- |
 | `DEMO_CHAT_ENABLED` | `0` by default; explicit `1` enables the configured route |
+| `DEMO_IMAGES_ENABLED` | `0` by default; enable only after the image canary below |
+| `DEMO_IMAGE_MODEL` | Default `z-image-turbo`; only alternative `FLUX.2 Klein 4B FP8` |
 | `DEMO_CHAT_ORIGIN` | Exact canonical origin, no trailing slash; loopback for local testing |
 | `DEMO_GRID_KEY` | Dedicated bounded Core service credential |
 | `DEMO_COOKIE_SECRET` | Cryptographically random secret, at least 32 characters |
@@ -185,6 +187,41 @@ a managed URL with a manually copied token. Manual `DEMO_REDIS_URL` and
 managed REST pair is absent.
 
 ## Verification
+
+### Optional Image Tool
+
+Implementation is opt-in, not evidence of public activation. With images enabled,
+the server offers `auto` exactly one structured tool: `generate_image(prompt)`.
+The model selects whether to call it; normal answers remain text. There is no
+keyword matcher, executable prose, browser-supplied tool or arbitrary URL fetch.
+A complete `tool_calls` terminal response and strict arguments are required.
+The server checks the selected model is online, then sends one fixed 1024x1024
+WebP request to Core's existing image endpoint. No Krea or other model fallback,
+automatic retry, upload, image inspection or image editing is supported.
+
+An image turn consumes one of the 15 text turns AND one of two guest image
+attempts/day (four per IP/IPv6 /64). The extra image operation reserves another
+full $0.01 exposure from the existing shared $0.50/day ceiling, not a new budget.
+Both Core operations remain subject to the dedicated service's independent
+hard caps. Image reservations retain the existing owned request lease and
+45-second total timeout; failed/uncertain dispatched jobs are not refunded by
+the website or retried. Exhausting images does not disable remaining text turns.
+The quota is an attempt allowance, not a guarantee of two successful images.
+
+Only a single result with the exact configured model and a canonical HTTPS
+`media.aipg.art/image/<job>/<index>.<raster-extension>` URL is rendered. Asset URLs
+are public, not private storage. The chat does not persist prompts or transcripts
+in browser storage; generated assets follow Core's media retention policy.
+Follow-ups include the generated description, not image bytes or visual access.
+
+Before setting `DEMO_IMAGES_ENABLED=1` in production, prove real `auto` tool
+selection (and ordinary text with the same tool available), one selected-model
+image result with valid metadata/URL, charged usage within the existing caps,
+and desktop/mobile display. Unit/Redis/browser fixtures are necessary but do
+not substitute for that live canary. Roll back images alone by setting the flag
+to `0`; leave the existing text demo, credentials and limits intact.
+
+### Commands
 
 `npm run test:unit`, `npm run lint`, `npm run build`, Playwright homepage and
 chat smoke. The real Lua concurrency test starts its own temporary UNIX-socket

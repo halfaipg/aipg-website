@@ -20,7 +20,7 @@ the site reads/writes.
   oversized/non-alternating context. No secrets or server imports in this module.
 - `demoChat.mjs` - server-only homepage demo configuration, signed day cookies,
   trusted client-IP normalization, atomic shared limits, bot verification,
-  bounded text-only Grid requests and sanitized streaming. Imported only by
+  bounded Grid requests and sanitized streaming. Imported only by
   the API route and tests, never a client component. Core ceilings and live
   activation are mandatory prerequisites in `DEMO_CHAT.md`.
   Auto dispatch requires Core's version-1 authenticated `service_budget` with
@@ -40,6 +40,16 @@ the site reads/writes.
   Existing Redis counters are preserved across allowance increases; guest/IP
   remaining values reflect the smaller allowance. Spending and concurrency caps
   are independent of the turn count and must not be widened implicitly.
+- `demoImagePolicy.mjs` - public-safe structured `generate_image(prompt)` schema,
+  strict Z-Image Turbo/Klein allowlist, canonical Grid raster-URL validation,
+  and atomic image reservations. Images are off unless `DEMO_IMAGES_ENABLED=1`.
+  One completed tool call may dispatch one 1024px image, with no retries or model
+  fallback. Reserve a second full per-operation exposure from the SAME daily
+  budget under the existing owned lease; cap images at two/guest and four/IP/day.
+  Text-generated Markdown or prose never triggers generation. Browser-supplied
+  tool calls, models and generation settings remain forbidden. Only sanitized
+  Core-returned image URLs reach clients. Verify real auto tool selection and
+  the selected image model before public activation; see `DEMO_CHAT.md`.
 
 ## Local Contracts
 
