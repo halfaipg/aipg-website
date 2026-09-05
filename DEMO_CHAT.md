@@ -2,22 +2,20 @@
 
 ## Status
 
-Implemented on the reviewed preview branch, **off by default**. No production
-Grid key, funding, or live inference has been provisioned.
+Live at `https://aipowergrid.io/#try-grid` as of September 5, 2026. The source
+default remains off; production explicitly enables the dedicated capped demo.
 The page explicitly says when the demo is unavailable and links to AIPG Chat;
 it never substitutes simulated answers. Browser tests use labelled fixtures only.
 
-Production preflight on September 5 found Core in `allowlist` charging mode,
-with only `z-image-turbo` in its model allowlist and the proposed demo service
-absent. Do not activate this auto-text demo under that configuration: resolved
-text models bypass charging and therefore the service ceilings. The route
+Production Core remains in `allowlist` charging mode, with only `z-image-turbo`
+in the ordinary model cohort. Only `website-homepage-demo` is opted into the
+separate bounded all-model direct-service cohort. The route
 requires Core's version-1 authenticated `service_budget`: all models charged,
 positive per-request/day ceilings no larger than the website's own limits, and
 active `on` or scoped `allowlist` charging. Account-level eligibility alone is
 insufficient. Core's default-empty `GRID_CHARGING_ALL_MODEL_SERVICES` JSON list
 selects only exact bounded direct services; delegated users retain their current
-policy. Never globally enable charging just to satisfy this demo. Deploy and
-verify that Core contract before activating the website.
+policy. Never globally enable charging just to satisfy this demo.
 
 Cloudflare widget `AIPG homepage demo - production` was created September 5
 for `aipowergrid.io`, with Managed verification and pre-clearance disabled.
@@ -28,12 +26,36 @@ The dedicated `aipg-homepage-demo-prod` Upstash database is provisioned on the
 Free plan (500,000 monthly commands), primary region `iad1`, no read replicas,
 eviction disabled. It is connected only to website production with sensitive
 variables and the `DEMO` prefix. No existing database was reused or changed.
-The dedicated Core service remains pending. Provisioning is not a verified
-server-side Siteverify integration or a live quota/billing canary.
-The database's hosted REPL returned `PONG` to a read-only connectivity check.
-Production has an explicit `DEMO_CHAT_ENABLED=0`, canonical origin, generated
-cookie secret, and the $0.01/request and $0.50/day website exposure settings.
-Those settings are not evidence that Core's service limits are configured.
+The dedicated Core service key is stored only in production secrets, with
+`account.read`, `inference.submit`, and `inference.service_submit` scopes.
+Production has `DEMO_CHAT_ENABLED=1`, canonical origin, generated cookie secret,
+and $0.01/request and $0.50/day limits in both Core and the website. A one-time
+$0.03 canary credit plus a finite $0.50 operator-sponsored launch grant fund the
+account; no automatic top-up exists. Replenishment is a deliberate operator action.
+
+## Deployment Evidence
+
+- Website: `277697c2f2b593bffd34ef114f2d6acc5fd3103c` (PR #65), enabled Vercel
+  deployment `dpl_F4iyqhHKLfLXqMwjhQcmDYunfu9p`. Prior disabled deployment:
+  `dpl_71oo29GHdArj1CjinDRHFpBvz5kD`. Validator preview.15 changes are preserved.
+- Core: `8380dfdf7ed3ac92ab32bac72a6999dc0183513a` (PR #114), schema `0034`,
+  PostgreSQL backup/restore and parity passed; rollback `6f12de6f`. No global
+  charging, existing user cohort, validator authority, or payout settings changed.
+- Core CI: 965 tests passed, 6 skipped; focused policy/auth/billing tests passed.
+  Website: 98 local unit tests including real Redis, 23 browser tests, CI and
+  hosted builds passed. Hosted builds lack Redis tooling; that proof ran locally
+  and Core limits were separately exercised on production Redis.
+- Real Core limit proof: 51 concurrent $0.01 exposure reservations admitted 50,
+  rejected one; oversized reservation rejected. All proof-only holds released;
+  no inference ran for those reservations.
+- Real `auto` API canary: `qwen3-27b`, successful SSE `stop` and `[DONE]`,
+  held 155 micro-USD, refunded 121, settled 34. Public homepage browser canary:
+  real Turnstile success, streamed answer with worker/model/statistics,
+  held 157 micro-USD, refunded 142, settled 15. Both reservations are settled.
+- Browser allowance went from 3 to 2 and remained 2 after reopening the page.
+  Public cross-origin and invalid-Turnstile POSTs returned 403 without dispatch.
+- Hosting reports Node 20 deprecation ahead of October 1, 2026. Upgrade to a
+  supported Node version in a separately tested runtime change before then.
 
 ## Experience
 
