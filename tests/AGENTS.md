@@ -23,6 +23,9 @@ onboarding, and staking-withdrawal surfaces.
   and no challenge reset/reappearance after success. Fifteen-turn browser and
   handler tests prove context forwarding; UTF-8 tests prove whole-pair recycling.
   Real Redis tests prove 15-guest/30-IP limits independently of concurrency caps.
+  Streaming-scroll fixtures check stable input/document positions across chunks,
+  scroll-up auto-follow suspension, and Jump to latest restoring following.
+  Opening near either viewport edge must fit the expanded panel below navigation.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including

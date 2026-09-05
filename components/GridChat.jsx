@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Script from "next/script";
 import Markdown from "react-markdown";
 import { GUEST_TURNS, conversationWindow } from "@/lib/demoChatPolicy.mjs";
-import { FiArrowUp, FiArrowUpRight, FiImage, FiFilm, FiMusic, FiSquare, FiRotateCcw, FiCpu, FiServer } from "react-icons/fi";
+import { FiArrowUp, FiArrowDown, FiArrowUpRight, FiImage, FiFilm, FiMusic, FiSquare, FiRotateCcw, FiCpu, FiServer } from "react-icons/fi";
 
 function ResponseDetails({ message }) {
   const stats = message.stats || {};
@@ -30,7 +30,8 @@ function resizeComposer(node) {
   node.style.overflowY = node.scrollHeight > 192 ? "auto" : "hidden";
 }
 
-export default function GridChat() {
+export default function GridChat({ preview = null }) {
+  const request = preview?.request || fetch;
   const [config, setConfig] = useState(null);
   const [remaining, setRemaining] = useState(GUEST_TURNS);
   const [messages, setMessages] = useState([]);
@@ -38,8 +39,11 @@ export default function GridChat() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [model, setModel] = useState("Auto");
-  const [scriptReady, setScriptReady] = useState(false);
+  const [scriptReady, setScriptReady] = useState(Boolean(preview));
   const [verifying, setVerifying] = useState(false);
+  const [stageActive, setStageActive] = useState(false);
+  const [showLatest, setShowLatest] = useState(false);
+  const initialAnchor = useRef(null);
   const widget = useRef(null);
   const widgetId = useRef(null);
   const abort = useRef(null);
@@ -51,6 +55,22 @@ export default function GridChat() {
   useEffect(() => {
     if (followReply.current && transcript.current) transcript.current.scrollTop = transcript.current.scrollHeight;
   }, [messages]);
+
+  useLayoutEffect(() => {
+    if (!stageActive || initialAnchor.current === null) return;
+    // Preserve the input position where possible, but never open behind the sticky header.
+    const input = composer.current;
+    const panel = input.form.getBoundingClientRect();
+    const viewport = window.visualViewport;
+    const top = Math.max(viewport?.offsetTop || 0, document.querySelector("header")?.getBoundingClientRect().bottom || 0) + 16;
+    const bottom = (viewport?.offsetTop || 0) + (viewport?.height || window.innerHeight) - 16;
+    const preferred = input.getBoundingClientRect().top - initialAnchor.current;
+    const minimum = panel.bottom - bottom;
+    const maximum = panel.top - top;
+    const delta = minimum <= maximum ? Math.min(maximum, Math.max(minimum, preferred)) : minimum;
+    initialAnchor.current = null;
+    window.scrollBy({ top: delta, behavior: "instant" });
+  }, [stageActive]);
 
   useEffect(() => { resizeComposer(composer.current); }, [input]);
 
@@ -76,7 +96,7 @@ export default function GridChat() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/api/demo/chat", { cache: "no-store", signal: controller.signal })
+    request("/api/demo/chat", { cache: "no-store", signal: controller.signal })
       .then(async response => {
         const data = await response.json();
         if (!response.ok) throw new Error("Unavailable");
@@ -86,9 +106,10 @@ export default function GridChat() {
       })
       .catch(err => { if (err.name !== "AbortError") { setConfig({ available: false }); setError("The demo is unavailable right now. Please open Chat."); } });
     return () => { controller.abort(); abort.current?.abort(); };
-  }, []);
+  }, [request]);
 
   function verify(signal) {
+    if (preview) return preview.verify(signal);
     setVerifying(true);
     return new Promise((resolve, reject) => {
       let settled = false;
@@ -129,9 +150,15 @@ export default function GridChat() {
     // Failed/partial answers are visible, but never replayed as completed turns.
     const history = messages.filter(m => !m.failed);
     const outgoing = [...history, { role: "user", content: input.trim() }];
+    if (!stageActive) {
+      const top = composer.current.getBoundingClientRect().top;
+      initialAnchor.current = top >= 0 && top < window.innerHeight ? top : null;
+      setStageActive(true);
+    }
     setBusy(true); setError(""); setModel("Auto");
     restoreFocus.current = true;
     followReply.current = true;
+    setShowLatest(false);
     const controller = new AbortController(); abort.current = controller;
     let completed = false;
     let dispatched = false;
@@ -142,7 +169,7 @@ export default function GridChat() {
       dispatched = true;
       setMessages([...outgoing, { role: "assistant", content: "" }]);
       setInput("");
-      const response = await fetch("/api/demo/chat", { method: "POST", headers: { "Content-Type": "application/json" },
+      const response = await request("/api/demo/chat", { method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: conversationWindow(outgoing), token }), signal: controller.signal });
       if (!response.ok) {
         const data = await response.json();
@@ -199,12 +226,14 @@ export default function GridChat() {
           </div>
         </div>
           <form onSubmit={send} className="mt-5 overflow-hidden rounded-[8px] border border-white/20 bg-[#17181b] shadow-[0_12px_40px_rgba(0,0,0,0.25)] transition-colors focus-within:border-orange-300/60">
+            <div className="relative">
             <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy && !verifying} tabIndex={messages.length ? 0 : -1}
               onScroll={event => {
                 const node = event.currentTarget;
-                followReply.current = node.scrollHeight - node.scrollTop - node.clientHeight < 64;
+                followReply.current = node.scrollHeight - node.scrollTop - node.clientHeight < 32;
+                setShowLatest(!followReply.current);
               }}
-              className={`min-w-0 ${messages.length ? "max-h-[min(16rem,40svh)] overflow-y-auto overscroll-contain border-b border-white/10 px-4 [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:px-5" : ""}`}>
+              className={`min-w-0 ${stageActive ? "h-[min(16rem,40svh)] overflow-y-auto overscroll-contain border-b border-white/10 px-4 [overflow-anchor:none] [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:px-5" : ""}`}>
               {messages.filter(m => m.role === "assistant").slice(-1).map(m => (
                 <article key={messages.length} aria-label="Grid response" className="py-4">
                   <div className="mb-3 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
@@ -218,6 +247,12 @@ export default function GridChat() {
                   {m.completed && !m.failed && <ResponseDetails message={m} />}
                 </article>
               ))}
+            </div>
+            {showLatest && <button type="button" aria-label="Jump to latest" title="Jump to latest" onClick={() => {
+              followReply.current = true;
+              transcript.current.scrollTop = transcript.current.scrollHeight;
+              setShowLatest(false);
+            }} className="absolute bottom-3 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#26272b] text-white shadow-md hover:bg-[#36373b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300"><FiArrowDown aria-hidden="true" /></button>}
             </div>
             <label htmlFor="grid-message" className="sr-only">Your message</label>
               <textarea ref={composer} id="grid-message" rows={1} maxLength={1000} value={input} disabled={busy || !config?.available || remaining === 0}
@@ -239,14 +274,14 @@ export default function GridChat() {
             </div>
             {config?.available && <div ref={widget} aria-label="Message verification" className={verifying ? "px-4 pb-3 sm:px-5" : ""} />}
           </form>
-        {config?.available && <>
+        {config?.available && !preview && <>
           <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" onReady={() => setScriptReady(true)} onError={() => setError("Verification could not load. Please open Chat.")} />
         </>}
         {error && <p role="status" className={`mt-3 text-xs leading-relaxed ${config?.available ? "text-amber-200" : "text-gray-400"}`}>{error}</p>}
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-md text-xs leading-relaxed text-gray-500">Community workers can read your prompts. Don&apos;t share secrets or personal information.</p>
           <div className="flex items-center gap-3">
-            {messages.length > 0 && <button type="button" disabled={busy} title="Clear conversation" aria-label="Clear conversation" onClick={() => { setMessages([]); setError(""); }} className="p-2 text-gray-400 hover:text-white disabled:opacity-40"><FiRotateCcw /></button>}
+            {messages.length > 0 && <button type="button" disabled={busy} title="Clear conversation" aria-label="Clear conversation" onClick={() => { setMessages([]); setError(""); setStageActive(false); setShowLatest(false); followReply.current = true; }} className="p-2 text-gray-400 hover:text-white disabled:opacity-40"><FiRotateCcw /></button>}
             <a href="https://aipg.chat" className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-gray-200 hover:text-orange-300">Continue in Chat <FiArrowUpRight aria-hidden="true" /></a>
           </div>
         </div>

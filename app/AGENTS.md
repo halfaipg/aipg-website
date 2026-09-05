@@ -16,6 +16,9 @@ with server-visible product, worker, and API entry points).
   when replacing the icon so returning browsers do not reuse the old artwork.
   `globals.css` — global styles incl. the `fadeInSection`/`visible` reveal classes used by `page.js`.
 - `page.js` — home page; composes `components/` sections.
+- `chat-preview/page.js` - development-only interactive scrolling demo using
+  `GridChatPreview` simulated streams. Production returns notFound; no real
+  inference, keys, budget changes, or verification bypass at the server.
 - `api/demo/chat/route.js` - Node-only, no-cache GET/POST for the opt-in
   sponsored homepage demo. `lib/demoChat.mjs` owns validation, signed guest
   cookies, shared Redis limits, Turnstile verification, fixed Grid `auto`
