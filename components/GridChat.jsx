@@ -3,16 +3,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
+import Markdown from "react-markdown";
 import { FiArrowUp, FiArrowUpRight, FiImage, FiFilm, FiMusic, FiSquare, FiRotateCcw, FiCpu, FiServer } from "react-icons/fi";
 
 function ResponseDetails({ message }) {
   const stats = message.stats || {};
   const number = value => new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 }).format(value);
   return (
-    <div className="mt-4 border-t border-white/10 pt-3 text-xs text-gray-400" aria-label="Response details">
+    <div className="mt-5 text-xs text-gray-400" aria-label="Response details">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <span className="inline-flex min-w-0 items-center gap-2 text-gray-300"><FiServer aria-hidden="true" className="shrink-0 text-orange-300" /><span className="sr-only">Served by </span><span className="break-all">{stats.worker || "Worker not reported"}</span></span>
-        {message.model && <span className="break-all">{message.model}</span>}
+        <span className="inline-flex min-w-0 items-center gap-2"><FiServer aria-hidden="true" className="shrink-0" /><span className="sr-only">Served by </span><span className="break-all">{stats.worker || "Worker not reported"}</span></span>
       </div>
       <dl className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
         {[["tokens_per_s", "tok/s", "Grid-reported decode speed, excluding time to first token"], ["gen_time", "s generation", "Grid-reported generation time, including time to first token"], ["ttft", "s first token", "Grid-reported time to first token"], ["output_tokens", "output tokens", "Output token usage returned by Grid; may include reasoning tokens"]].map(([key, label, title]) =>
@@ -35,7 +35,6 @@ export default function GridChat() {
   const widget = useRef(null);
   const widgetId = useRef(null);
   const abort = useRef(null);
-  const transcript = useRef(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -62,11 +61,6 @@ export default function GridChat() {
     });
     return () => { window.turnstile?.remove(widgetId.current); widgetId.current = null; };
   }, [config, scriptReady]);
-
-  useEffect(() => {
-    const node = transcript.current;
-    if (node && node.scrollHeight - node.scrollTop - node.clientHeight < 160) node.scrollTop = node.scrollHeight;
-  }, [messages]);
 
   async function send(event) {
     event.preventDefault();
@@ -135,13 +129,24 @@ export default function GridChat() {
             <a href="https://aipg.music" className="inline-flex items-center gap-1.5 hover:text-white"><FiMusic aria-hidden="true" /> Music</a>
           </div>
         </div>
-        <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} className={messages.length ? "my-5 max-h-[420px] overflow-y-auto overscroll-contain pr-2 sm:pr-3" : ""}>
+        <div role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} className={messages.length ? "mt-7" : ""}>
             {messages.map((m, i) => (
-              <div key={i} className={`mb-6 last:mb-0 ${m.role === "user" ? "ml-auto max-w-[90%] rounded-[8px] bg-white/[0.06] px-4 py-3 sm:max-w-[80%]" : "px-1 py-2"}`}>
-                <p className={`mb-2 text-xs font-medium ${m.role === "user" ? "text-gray-400" : "text-orange-300"}`}>{m.role === "user" ? "You" : "Grid"}</p>
-                <p className="whitespace-pre-wrap break-words text-sm leading-7 text-gray-100 [overflow-wrap:anywhere]">{m.content || (busy ? "Thinking..." : "No response received.")}</p>
+              <article key={i} aria-label={m.role === "user" ? "Your message" : "Grid response"} className={m.role === "user" ? "border-t border-white/10 pb-6 pt-5" : "pb-8"}>
+                {m.role === "user" ? <>
+                  <p className="mb-2 text-xs text-gray-500">You</p>
+                  <p className="whitespace-pre-wrap text-base font-medium leading-7 text-gray-200 [overflow-wrap:anywhere] sm:text-lg">{m.content}</p>
+                </> : <>
+                  <div className="mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+                    <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
+                    {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
+                    {busy && i === messages.length - 1 && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
+                  </div>
+                  {m.content ? <div className="grid-chat-answer text-base leading-7 text-gray-200 [overflow-wrap:anywhere] sm:leading-8">
+                    <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
+                  </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
+                </>}
                 {m.completed && !m.failed && <ResponseDetails message={m} />}
-              </div>
+              </article>
             ))}
         </div>
           <form onSubmit={send} className="mt-5 overflow-hidden rounded-[8px] border border-white/20 bg-[#17181b] shadow-[0_12px_40px_rgba(0,0,0,0.25)] transition-colors focus-within:border-orange-300/60">

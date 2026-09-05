@@ -14,6 +14,8 @@ onboarding, and staking-withdrawal surfaces.
   and unavailable states, compact empty composer, plus long worker/model names
   and rounded per-response statistics on mobile/desktop. These fixtures are
   not evidence of live inference.
+  It also verifies unframed, page-scrolling Markdown answers, HTML/image/unsafe
+  URL rejection, and identical versioned/fallback favicon assets.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including

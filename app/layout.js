@@ -11,8 +11,9 @@ export const metadata = {
   title: "AI Power Grid - Community-Powered AI Generation",
   description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: [{ url: '/aipg-favicon-v2.ico', type: 'image/x-icon', sizes: '16x16 32x32 48x48' }],
+    shortcut: '/aipg-favicon-v2.ico',
+    apple: '/favicon.png?v=2',
   },
   openGraph: {
     title: "AI Power Grid - Community-Powered AI Generation",

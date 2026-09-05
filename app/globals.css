@@ -3,6 +3,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.grid-chat-answer > * + * { margin-top: 1rem; }
+.grid-chat-answer :is(h1, h2, h3, h4, h5, h6) { font-size: 1rem; font-weight: 600; color: #fafafa; }
+.grid-chat-answer strong { font-weight: 600; color: #fafafa; }
+.grid-chat-answer ul { list-style: disc; padding-left: 1.5rem; }
+.grid-chat-answer ol { list-style: decimal; padding-left: 1.5rem; }
+.grid-chat-answer li + li { margin-top: 0.375rem; }
+.grid-chat-answer li > p + p { margin-top: 0.5rem; }
+.grid-chat-answer :is(ul, ol) :is(ul, ol) { margin-top: 0.375rem; }
+.grid-chat-answer a { color: #fdba74; text-decoration: underline; text-underline-offset: 3px; }
+.grid-chat-answer a:focus-visible { outline: 2px solid #fdba74; outline-offset: 3px; }
+.grid-chat-answer blockquote { border-left: 2px solid #52525b; padding-left: 1rem; color: #a1a1aa; }
+.grid-chat-answer pre { max-width: 100%; overflow-x: auto; border: 1px solid #27272a; border-radius: 6px; background: #141416; padding: 1rem; font-size: 0.8125rem; line-height: 1.75; }
+.grid-chat-answer :not(pre) > code { border-radius: 3px; background: #202023; padding: 0.125rem 0.25rem; font-size: 0.875em; }
+.grid-chat-answer hr { border-color: #27272a; }
  
 @layer base {
   .dark :root {
