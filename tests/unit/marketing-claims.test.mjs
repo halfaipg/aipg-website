@@ -8,6 +8,8 @@ const MARKETING_FILES = [
   "components/GridStatement.js",
   "components/Problem.js",
   "components/Products.js",
+  "components/GridParticipation.js",
+  "components/GridChat.jsx",
   "components/RunNode.js",
   "components/Infrastructure.js",
   "components/Features.js",
@@ -44,6 +46,8 @@ test("marketing copy does not promote gated capabilities as live", async () => {
     "permissionless AI generation layer",
     "<span>Worker-claimed rewards through audited smart contracts</span>",
     "earn USDC and AIPG",
+    "Every paid generation funds free access",
+    "no corporate worldview baked in",
   ];
 
   for (const claim of retiredClaims) {
@@ -100,7 +104,8 @@ test("builder entry points converge on the canonical 60-second guide", async () 
     readFile(new URL("app/use/page.js", ROOT), "utf8"),
   ]);
 
-  assert.match(hero, /href="\/use"[\s\S]*Use the Grid/);
+  assert.match(hero, /href="\/use"[\s\S]*Build with the API/);
+  assert.match(hero, /href="#try-grid"[\s\S]*Try the Grid/);
   assert.match(hero, /href="\/run"[\s\S]*Provide compute/);
   assert.match(products, /href: "https:\/\/aipowergrid\.io\/use"/);
   assert.match(navbar, /href="\/use"[\s\S]*?>\s*Build\s*<\/Link>/);
@@ -128,7 +133,9 @@ test("operator onboarding preserves sidecar and maturity boundaries", async () =
   for (const guide of [
     "ollama",
     "vllm",
+    "sglang",
     "lm-studio",
+    "koboldcpp",
     "openai-compatible",
     "comfyui",
     "ace-step",

@@ -18,7 +18,7 @@ export default function Navbar() {
   const renderMainOptions = () => (
     <>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="/"
         aria-current="page"
         onClick={() => setIsOpen(false)}
@@ -26,21 +26,21 @@ export default function Navbar() {
         Home
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="/about"
         onClick={() => setIsOpen(false)}
       >
         About
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="/use"
         onClick={() => setIsOpen(false)}
       >
         Build
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="https://console.aipowergrid.io"
         target="_blank"
         rel="noopener noreferrer"
@@ -49,7 +49,7 @@ export default function Navbar() {
         Console
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="https://docs.aipowergrid.io/whitepaper"
         target="_blank"
         rel="noopener noreferrer"
@@ -58,7 +58,7 @@ export default function Navbar() {
         Whitepaper
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="https://basescan.org/token/0xa1c0deCaFE3E9Bf06A5F29B7015CD373a9854608"
         target="_blank"
         onClick={() => setIsOpen(false)}
@@ -66,7 +66,7 @@ export default function Navbar() {
         Explorer
       </Link>
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="https://console.aipowergrid.io/payouts"
         target="_blank"
         rel="noopener noreferrer"
@@ -75,24 +75,24 @@ export default function Navbar() {
         Payouts
       </Link>
       <Link
-        className="font-medium text-orange-400 hover:text-orange-300 sm:py-6 md:py-6 pb-2 dark:hover:text-orange-300 text-center sm:text-left"
+        className="font-medium text-orange-400 hover:text-orange-300 xl:py-6 pb-2 dark:hover:text-orange-300 text-center xl:text-left"
         href="/run"
         onClick={() => setIsOpen(false)}
       >
         Run
       </Link>
       {/* <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="/strategic-reserve"
         onClick={() => setIsOpen(false)}
       >
         Autonomous Fund
       </Link> */}
-      {/* <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">
+      {/* <button onClick={() => setShowDropdown('exchanges')} className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center xl:text-left">
         Exchanges
       </button> */}
       <Link
-        className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 dark:hover:text-gray-300 text-center sm:text-left"
+        className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="https://docs.aipowergrid.io/tokenomics"
         target="_blank"
         onClick={() => setIsOpen(false)}
@@ -110,9 +110,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 w-full mx-auto text-sm py-1 sm:py-0 md:py-0 backdrop-filter backdrop-blur-lg bg-black bg-opacity-70 rounded-b-lg">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full mx-auto text-sm py-1 xl:py-0 backdrop-filter backdrop-blur-lg bg-black bg-opacity-70 rounded-b-lg">
       <nav
-        className="relative px-4 sm:flex md:flex sm:items-center md:items-center sm:justify-between md:justify-between sm:px-6 md:px-6 lg:px-8"
+        className="relative px-4 xl:flex xl:items-center xl:justify-between xl:px-6 lg:px-8"
         aria-label="Global"
       >
         <div className="flex items-center justify-between">
@@ -136,7 +136,7 @@ export default function Navbar() {
           />
         </Link>
           </div>
-          <div className="sm:hidden md:hidden">
+          <div className="xl:hidden">
             <button
               type="button"
               onClick={toggleMenu}
@@ -171,12 +171,12 @@ export default function Navbar() {
         </div>
         <div
           id="navbar-collapse-with-animation"
-          className={`hs-collapse ${isOpen ? 'block' : 'hidden'} transition-all duration-150 basis-full grow sm:block md:block`}
+          className={`hs-collapse ${isOpen ? 'block' : 'hidden'} transition-all duration-150 basis-full grow xl:block`}
         >
-          <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row md:flex-row sm:items-center md:items-center sm:justify-end md:justify-end sm:gap-y-0 md:gap-y-0 sm:gap-x-7 md:gap-x-7 sm:mt-0 md:mt-0 sm:ps-7 md:ps-7">
+          <div className="flex flex-col gap-y-4 gap-x-0 mt-5 xl:flex-row xl:items-center xl:justify-end xl:gap-y-0 xl:gap-x-7 xl:mt-0 xl:ps-7">
             {showDropdown ? (
               <>
-                <button onClick={() => setShowDropdown(null)} className="font-medium text-white hover:text-gray-200 sm:py-6 md:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center sm:text-left">&#x2190; Back</button>
+                <button onClick={() => setShowDropdown(null)} className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 border-b-2 border-transparent dark:hover:text-gray-300 text-center xl:text-left">&#x2190; Back</button>
                 {renderDropdownOptions(showDropdown)}
               </>
             ) : (

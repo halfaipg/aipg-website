@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { recommendWorker } from "./operatorRecommendation.mjs";
 import {
   FiActivity,
   FiAlertTriangle,
@@ -55,99 +56,14 @@ function formatCount(value) {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
-function recommendation({
-  os,
-  accelerator,
-  vram,
-  ram,
-  disk,
-  throughput,
-  mediaReady,
-  textReady,
-}) {
-  const nvidia = accelerator === "nvidia";
-  const managerPlatform = os === "linux" || os === "windows";
-  const audioCandidate =
-    managerPlatform && nvidia && vram >= 12 && ram >= 32 && disk >= 49;
-  const manualMediaCandidate =
-    managerPlatform && nvidia && vram >= 24 && ram >= 32;
-
-  if (throughput > 0) {
-    return {
-      title: textReady
-        ? "Start with the verified text worker"
-        : "Prepare for the hardened text-worker release",
-      body: textReady
-        ? "You already have an expected or measured text-generation speed, so the verified worker is the shortest path to useful Grid work. Confirm the same backend, model, and context settings with the local worker check."
-        : "You already have an expected or measured text-generation speed. Keep that backend ready, but wait for the immutable hardened release rather than installing the older mutable binary.",
-      accent: "border-green-400/50 bg-green-400/5",
-      secondary:
-        mediaReady && manualMediaCandidate
-          ? "This machine also looks like a media-manager candidate; the downloaded manager still makes the final capability decision."
-          : "Your throughput entry is planning data, not a Grid benchmark or a promise of jobs, den, or payout.",
-    };
-  }
-
-  if (audioCandidate) {
-    return {
-      title: mediaReady
-        ? "Managed audio is your clearest profile match"
-        : textReady
-          ? "Media candidate; use the verified text path today"
-          : "Media candidate; both public worker paths remain gated",
-      body: mediaReady
-        ? "Your entered hardware clears the draft ACE-Step minimums. The downloaded manager still has to verify the signed profile and pass its local canary before serving."
-        : "Your entered hardware clears the draft ACE-Step minimums, but the public media manager is still qualification-gated. This is a candidate result, not permission to serve yet.",
-      accent: "border-cyan-400/50 bg-cyan-400/5",
-      secondary: manualMediaCandidate
-        ? "You are also a strong candidate for the operator-managed ComfyUI image/video path; exact workflows and checkpoints still need a local test."
-        : textReady
-          ? "The verified text worker remains available when you already have a compatible local inference backend."
-          : "A compatible local inference backend is useful preparation, but the hardened text release is not public yet.",
-    };
-  }
-
-  if (manualMediaCandidate) {
-    return {
-      title: "Start with the operator-managed media worker",
-      body: "This looks like a capable NVIDIA media host, but image and video compatibility is workflow-specific. The local ComfyUI bridge must verify the exact checkpoints before advertising them.",
-      accent: "border-orange-400/50 bg-orange-400/5",
-      secondary:
-        "The text worker is another option when this machine already exposes a supported OpenAI-compatible or Ollama backend.",
-    };
-  }
-
-  if (accelerator === "cpu") {
-    return {
-      title: "Run a validator preview, not a GPU worker",
-      body: "A CPU-only host is useful for independent validator evidence. The current flagship generation models need an accelerator-backed runtime.",
-      accent: "border-white/20 bg-white/5",
-      secondary:
-        "Validator rewards are not live, and the preview cannot affect routing, payouts, strikes, or slashing.",
-    };
-  }
-
-  return {
-    title: textReady
-      ? "Start with the text worker and your existing backend"
-      : "Prepare an existing backend for the text-worker candidate",
-    body: textReady
-      ? "The text worker can connect to Ollama or an OpenAI-compatible local server. Model fit depends on the backend, quantization, context length, and topology, so this browser does not claim an exact model match."
-      : "The hardened text-worker release is still in validation. You can prepare Ollama or an OpenAI-compatible local server now, but do not install the older mutable release.",
-    accent: "border-white/20 bg-white/5",
-    secondary:
-      accelerator === "nvidia"
-        ? "For the managed ACE-Step profile, enter at least 12 GB VRAM, 32 GB RAM, and 49 GB free disk on Linux or Windows."
-        : "The first managed media profile is NVIDIA-only; AMD and Apple profiles need separate qualification evidence.",
-  };
-}
 
 export default function OperatorPlanner({
   opportunities,
-  mediaReady,
+  mediaPlatforms,
   textPlatforms,
 }) {
   const [selectedOs, setSelectedOs] = useState(null);
+  const [workload, setWorkload] = useState("text");
   const [accelerator, setAccelerator] = useState("nvidia");
   const [gpuModel, setGpuModel] = useState("");
   const [vram, setVram] = useState(24);
@@ -158,6 +74,7 @@ export default function OperatorPlanner({
   const detectedPlatform = useDetectedOperatorPlatform();
   const hydrated = useOperatorPlatformHydrated();
   const os = selectedOs || detectedPlatform.os;
+  const mediaReady = Boolean(mediaPlatforms?.[os]?.ready);
   const textReady = Boolean(
     os === "linux"
       ? textPlatforms?.linux?.ready || textPlatforms?.linuxArm64?.ready
@@ -166,17 +83,17 @@ export default function OperatorPlanner({
 
   const result = useMemo(
     () =>
-      recommendation({
+      recommendWorker({
         os,
         accelerator,
         vram,
         ram,
         disk,
-        throughput,
+        workload,
         mediaReady,
         textReady,
       }),
-    [accelerator, disk, mediaReady, os, ram, textReady, throughput, vram],
+    [accelerator, disk, mediaReady, os, ram, textReady, workload, vram],
   );
   const textRoutePriority = useMemo(
     () => selectTextRoutePriority(opportunities),
@@ -211,7 +128,7 @@ export default function OperatorPlanner({
   return (
     <section
       id="hardware-planner"
-      className="border-y border-white/10 bg-[#0b0c0e]"
+      className="scroll-mt-20 border-y border-white/10 bg-[#0b0c0e]"
       data-operator-planner-ready={hydrated ? "true" : "false"}
     >
       <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 lg:py-20">
@@ -223,14 +140,22 @@ export default function OperatorPlanner({
             Find the useful path for your machine
           </h2>
           <p className="mt-4 leading-7 text-gray-400">
-            Enter coarse hardware details locally. Nothing is submitted. This
-            planner narrows the worker path; only a signed profile and local
-            canary can approve an exact capability.
+            Choose the workload you want to offer and adjust the example specs
+            to match your machine. Nothing is submitted. Your local backend
+            must still pass a generation test.
           </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
           <div className="space-y-6">
+            <label className="block text-sm font-semibold">
+              What do you want to run?
+              <select value={workload} onChange={(event) => setWorkload(event.target.value)} className="mt-3 min-h-11 w-full border border-white/15 bg-[#111214] px-3 text-white">
+                <option value="text">Text generation</option>
+                <option value="media">Image and video</option>
+                <option value="audio">Music and audio</option>
+              </select>
+            </label>
             <fieldset>
               <legend className="mb-3 flex items-center gap-2 text-sm font-semibold">
                 <FiMonitor aria-hidden="true" /> Operating system
@@ -316,7 +241,7 @@ export default function OperatorPlanner({
             </div>
           </div>
 
-          <div className={`border p-6 ${result.accent}`} aria-live="polite">
+          <div className="min-w-0 border-l-2 border-cyan-400 pl-6" aria-live="polite">
             <p className="text-xs font-bold uppercase text-gray-400">
               Likely starting point
             </p>
@@ -328,13 +253,11 @@ export default function OperatorPlanner({
               {result.secondary}
             </p>
             <a
-              href={accelerator === "cpu" ? "/validate" : "#worker-downloads"}
+              href={result.href}
               className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 bg-cyan-400 px-4 text-sm font-bold text-black transition-colors hover:bg-cyan-300"
             >
               <FiDownload aria-hidden="true" />
-              {accelerator === "cpu"
-                ? "Open validator setup"
-                : "View worker downloads"}
+              {result.action}
             </a>
             <div className="mt-5 border-t border-white/10 pt-5">
               <p className="text-xs font-bold uppercase text-gray-500">
@@ -406,7 +329,9 @@ export default function OperatorPlanner({
           </div>
         </div>
 
-        <div className="mt-16">
+        <details className="mt-12 border-t border-white/15 pt-5">
+          <summary className="cursor-pointer py-3 text-lg font-semibold">See current capacity needs and workload history</summary>
+        <div className="mt-6">
           <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-2 flex items-center gap-2 text-sm font-bold uppercase text-orange-400">
@@ -548,6 +473,7 @@ export default function OperatorPlanner({
             </div>
           )}
         </div>
+        </details>
       </div>
     </section>
   );

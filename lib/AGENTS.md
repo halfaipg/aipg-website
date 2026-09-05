@@ -14,6 +14,23 @@ the site reads/writes.
 - `stakingContracts.js` — `STAKING_VAULT_ADDRESS`, `AIPG_TOKEN_ADDRESS` (Base mainnet) + minimal
   `ERC20_ABI` and `STAKING_VAULT_ABI`. Consumed by `hooks/useStaking.js`.
 - `utils.js` — `cn()` Tailwind class-merge helper.
+- `demoChat.mjs` - server-only homepage demo configuration, signed day cookies,
+  trusted client-IP normalization, atomic shared limits, bot verification,
+  bounded text-only Grid requests and sanitized streaming. Imported only by
+  the API route and tests, never a client component. Core ceilings and live
+  activation are mandatory prerequisites in `DEMO_CHAT.md`.
+  Auto dispatch requires Core's version-1 authenticated `service_budget` with
+  `all_models_charged=true` and positive request/day caps no larger than the
+  website's exposure reservations. Both `on` and scoped `allowlist` are accepted;
+  account-only eligibility never proves resolved models enforce budgets.
+  Never widen global charging to satisfy the demo activation gate.
+  Prefer Vercel's managed `DEMO_KV_REST_API_URL`/`DEMO_KV_REST_API_TOKEN`
+  pair. Reject incomplete managed pairs; never substitute TCP or read-only
+  credentials. Manual REST configuration is only used when neither managed
+  variable exists.
+  Stream metadata is a strict allowlist of public worker name, generation time,
+  first-token time, decode speed, and bounded completion tokens. It reaches the
+  browser only with a successful terminal frame; internal routing/IDs never do.
 
 ## Local Contracts
 

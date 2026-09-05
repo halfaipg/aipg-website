@@ -51,10 +51,7 @@ test.describe('/staking smoke', () => {
 
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
-    // Hero headline ("AI shouldn't have a doorman.") implies React tree mounted.
-    // We match the most stable substring rather than the full sentence in case
-    // it gets edited.
-    await expect(page.getByRole('heading', { name: /doorman|free ai/i }).first()).toBeVisible({
+    await expect(page.getByRole('heading', { name: 'AI Power Grid', exact: true })).toBeVisible({
       timeout: 15_000,
     });
 

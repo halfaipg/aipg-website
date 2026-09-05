@@ -20,6 +20,31 @@ Reusable React components: the marketing page sections composed by `app/page.js`
 
 ## Local Contracts
 
+- The homepage composes `Hero`, `GridChat`, `Products`, and `GridParticipation`: direct
+  product use, existing-backend worker onboarding, developer integration, and
+  current trust boundaries. Older long-form sections stay in source rather
+  than being stacked into the acquisition page.
+- The primary consumer hero action is `Try the Grid`, anchored to inline chat.
+  Music and chat have direct product links. The gallery screenshot is a
+  labelled preview, not proof of a fresh generation, benchmark, or cost.
+- Homepage content is visible on server render without scroll-triggered or
+  timed reveals. User, worker, and builder actions must fit in standard mobile
+  and desktop first viewports. Navigation collapses before its links crowd.
+- Preserve the logo-led, centered black/orange homepage identity. No server-rack
+  hero or hosting-provider treatment. Worker/user clarity must not erase the
+  established brand. `GridChat` uses only the same-origin bounded demo route,
+  with an explicit unavailable state until server configuration is ready.
+  Never fabricate streamed answers or expose the dedicated service credential.
+  Images/video/music remain adjacent product options. No prompts in telemetry
+  or browser persistence; clear transcript never resets server allowance.
+  Gallery browser-window chrome is decorative around a real public screenshot.
+  The chat starts as a compact composer, not an empty transcript panel; the
+  conversation expands only after a submission. Completed replies retain their
+  own model and Core-reported public worker/timing/usage details. Missing fields
+  stay absent, and metadata must never be described as independently verified
+  hardware, cryptographic provenance, or a benchmark. Display at most one
+  decimal place for timing/throughput, with wrapping for long public names.
+
 - Components using wallet/hooks/framer-motion/scroll must be `"use client"`.
 - `StakingInterface.jsx` must NOT expose stake/approve actions (program wound down) even though
   `useStaking` still exports `stake`/`approveToken`. On-chain reads/writes go through `useStaking`
