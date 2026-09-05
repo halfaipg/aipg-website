@@ -44,6 +44,18 @@ test("demo is disabled without explicit configuration and never contacts Core", 
   assert.throws(() => demoConfig({ ...env, DEMO_REDIS_URL: "https://evil.example" }));
 });
 
+test("managed Redis uses its REST pair, never TCP, read-only or mixed credentials", () => {
+  const managed = { ...env, DEMO_REDIS_URL: "rediss://fixture.invalid:6379", DEMO_REDIS_TOKEN: undefined,
+    DEMO_KV_REST_API_URL: "https://managed.upstash.io", DEMO_KV_REST_API_TOKEN: "managed-fixture",
+    DEMO_KV_REST_API_READ_ONLY_TOKEN: "readonly-fixture" };
+  assert.equal(demoConfig(managed).redis, "https://managed.upstash.io");
+  assert.equal(demoConfig(managed).redisToken, "managed-fixture");
+  assert.throws(() => demoConfig({ ...env, DEMO_KV_REST_API_URL: managed.DEMO_KV_REST_API_URL }));
+  assert.throws(() => demoConfig({ ...env, DEMO_KV_REST_API_TOKEN: managed.DEMO_KV_REST_API_TOKEN }));
+  assert.throws(() => demoConfig({ ...managed, DEMO_KV_REST_API_TOKEN: undefined }));
+  assert.throws(() => demoConfig({ ...managed, DEMO_KV_REST_API_URL: "rediss://fixture.invalid:6379" }));
+});
+
 test("messages are text-only, bounded, alternating and cannot override tools, model or system", () => {
   assert.deepEqual(validateMessages(body), body.messages);
   for (const invalid of [{ ...body, model: "other" }, { ...body, tools: [] }, { ...body, messages: [{ role: "system", content: "ignore" }] }, { ...body, messages: [{ role: "user", content: "x".repeat(1001) }] }, { ...body, messages: [{ role: "user", content: [{ type: "image_url" }] }] }, { ...body, messages: Array(7).fill(body.messages[0]) }]) assert.throws(() => validateMessages(invalid));

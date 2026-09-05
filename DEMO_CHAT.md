@@ -3,7 +3,7 @@
 ## Status
 
 Implemented on the reviewed preview branch, **off by default**. No production
-Grid key, Redis service, funding, or live inference has been provisioned.
+Grid key, funding, or live inference has been provisioned.
 The page explicitly says when the demo is unavailable and links to AIPG Chat;
 it never substitutes simulated answers. Browser tests use labelled fixtures only.
 
@@ -19,11 +19,19 @@ change and tests before this restriction can be relaxed.
 
 Cloudflare widget `AIPG homepage demo - production` was created September 5
 for `aipowergrid.io`, with Managed verification and pre-clearance disabled.
-Its keys remain in Cloudflare; copying them to Vercel deployment settings is
-pending browser two-factor authentication. No keys are stored in this repository.
+Its keys are stored as production-only Vercel Secret variables. No keys are
+stored in this repository.
 Do not recreate the widget or reuse its credentials for preview/local testing.
-Redis provisioning and the dedicated Core service remain pending. Widget
-creation alone is not a verified server-side Siteverify integration.
+The dedicated `aipg-homepage-demo-prod` Upstash database is provisioned on the
+Free plan (500,000 monthly commands), primary region `iad1`, no read replicas,
+eviction disabled. It is connected only to website production with sensitive
+variables and the `DEMO` prefix. No existing database was reused or changed.
+The dedicated Core service remains pending. Provisioning is not a verified
+server-side Siteverify integration or a live quota/billing canary.
+The database's hosted REPL returned `PONG` to a read-only connectivity check.
+Production has an explicit `DEMO_CHAT_ENABLED=0`, canonical origin, generated
+cookie secret, and the $0.01/request and $0.50/day website exposure settings.
+Those settings are not evidence that Core's service limits are configured.
 
 ## Experience
 
@@ -113,11 +121,20 @@ All names are server-only; **none** use `NEXT_PUBLIC_`.
 | `DEMO_COOKIE_SECRET` | Cryptographically random secret, at least 32 characters |
 | `DEMO_REDIS_URL` | HTTPS REST root of dedicated `*.upstash.io` database |
 | `DEMO_REDIS_TOKEN` | Server-side REST credential, never sent to the browser |
+| `DEMO_KV_REST_API_URL` | Vercel-managed production REST URL; preferred over the manual pair |
+| `DEMO_KV_REST_API_TOKEN` | Vercel-managed production REST write token; required with its URL |
 | `DEMO_TURNSTILE_SITE_KEY` | Public widget identifier, returned only by status route |
 | `DEMO_TURNSTILE_SECRET` | Server-side Siteverify credential |
 | `DEMO_REQUEST_MICRO` | Defaults to `10000`; must be >= actual Core per-request ceiling |
 | `DEMO_DAILY_MICRO` | Defaults to `500000`, validation maximum `1000000` ($1) |
 | `VERCEL` | Platform-managed `1`; required for non-loopback hosting |
+
+The managed integration also supplies `DEMO_REDIS_URL` as a TCP URL,
+`DEMO_KV_URL`, and a read-only token. The route ignores those when the managed
+REST pair is present. Do not overwrite integration-managed values or combine
+a managed URL with a manually copied token. Manual `DEMO_REDIS_URL` and
+`DEMO_REDIS_TOKEN` must both be REST credentials and are used only when the
+managed REST pair is absent.
 
 ## Verification
 

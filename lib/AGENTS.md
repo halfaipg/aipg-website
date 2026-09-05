@@ -22,6 +22,10 @@ the site reads/writes.
   Auto dispatch requires the Core summary's `charging_mode=on`; account-only
   allowlist eligibility does not prove all resolved models enforce budgets.
   Never widen global charging to satisfy the demo activation gate.
+  Prefer Vercel's managed `DEMO_KV_REST_API_URL`/`DEMO_KV_REST_API_TOKEN`
+  pair. Reject incomplete managed pairs; never substitute TCP or read-only
+  credentials. Manual REST configuration is only used when neither managed
+  variable exists.
   Stream metadata is a strict allowlist of public worker name, generation time,
   first-token time, decode speed, and bounded completion tokens. It reaches the
   browser only with a successful terminal frame; internal routing/IDs never do.
