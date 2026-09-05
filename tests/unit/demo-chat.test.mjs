@@ -2,10 +2,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { randomBytes } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { createDemoHandler, demoConfig, guestIdentity, clientIdentity, validateMessages, readBounded, chatEvents, responseStats, RESERVE_LUA, RELEASE_LUA } from "../../lib/demoChat.mjs";
 
 const env = { DEMO_CHAT_ENABLED: "1", DEMO_CHAT_ORIGIN: "http://127.0.0.1:8844", DEMO_REDIS_URL: "https://test.upstash.io", DEMO_GRID_KEY: "fixture-only", DEMO_REDIS_TOKEN: "fixture-only", DEMO_COOKIE_SECRET: randomBytes(32).toString("hex"), DEMO_TURNSTILE_SITE_KEY: "fixture", DEMO_TURNSTILE_SECRET: "fixture" };
 const body = { messages: [{ role: "user", content: "Hello" }], token: "fixture-token" };
+
+test("demo function fits the hosting plan and leaves cleanup time", () => {
+  const route = readFileSync(new URL("../../app/api/demo/chat/route.js", import.meta.url), "utf8");
+  const handler = readFileSync(new URL("../../lib/demoChat.mjs", import.meta.url), "utf8");
+  assert.match(route, /maxDuration = 60;/);
+  assert.match(handler, /setTimeout\(\(\) => control.abort\(\), 45000\)/);
+});
 const frame = data => `data: ${typeof data === "string" ? data : JSON.stringify(data)}\n\n`;
 const answer = frame({ model: "actual-worker-model", choices: [{ delta: { content: "Hello!", reasoning_content: "private reasoning" } }] }) + frame({ choices: [{ delta: {}, finish_reason: "stop" }] }) + frame("[DONE]");
 const request = (options = {}) => new Request(`${env.DEMO_CHAT_ORIGIN}/api/demo/chat`, { method: "POST", headers: { origin: env.DEMO_CHAT_ORIGIN, "content-type": "application/json", ...options.headers }, body: JSON.stringify(options.body || body) });

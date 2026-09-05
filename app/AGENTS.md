@@ -17,6 +17,8 @@ with server-visible product, worker, and API entry points).
   cookies, shared Redis limits, Turnstile verification, fixed Grid `auto`
   requests, and sanitized answer streaming. `DEMO_CHAT.md` is the activation
   contract. Off by default; no existing app credential may be repurposed.
+  Its 60-second function duration fits the current Vercel plan; upstream work
+  aborts after 45 seconds to leave room for shared-limit cleanup.
 - `about/page.js` — about page. `use/page.js` — permanent redirect to the
   canonical `/docs/integrations` guide. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.

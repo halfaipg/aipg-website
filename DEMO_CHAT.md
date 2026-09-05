@@ -49,7 +49,8 @@ Fixed upstream: Grid `/v1/chat/completions`, `model=auto`, 1,024 maximum output
 tokens, low reasoning effort. Only answer deltas, model names and allowlisted
 completed-response public worker/timing/usage metadata reach clients;
 reasoning fields, upstream diagnostics and credentials do not. A valid terminal
-frame is required for a success state. Request timeout is 60 seconds; aborting
+frame is required for a success state. Request timeout is 45 seconds inside
+the hosting plan's 60-second function limit, leaving time for limiter cleanup; aborting
 the browser cancels the upstream request, but is not a promise of a Core refund.
 
 The Redis Lua reservation atomically enforces guest turns (3/day), IP or IPv6
