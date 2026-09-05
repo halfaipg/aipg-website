@@ -65,7 +65,7 @@ for (const width of [320, 390, 768, 1280, 1920]) {
     expect(await page.getByRole('log').evaluate(el => getComputedStyle(el).overflowY)).toBe('auto');
     const composerBox = (await page.getByRole('textbox', { name: 'Your message' }).boundingBox())!;
     expect((await page.getByRole('log').boundingBox())!.y).toBeGreaterThan(composerBox.y + composerBox.height);
-    expect(await page.getByRole('article', { name: 'Your message' }).evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+    await expect(page.getByRole('article', { name: 'Your message' })).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     await page.getByRole('log').evaluate(el => { el.scrollTop = 0; });
     await section.screenshot({ path: `test-results/chat-response-${width}.png` });
@@ -189,6 +189,8 @@ for (const width of [320, 1280]) {
     await input.press('Enter');
     await expect.poll(() => payloads.length).toBe(2);
     await expect(input).toBeFocused();
+    expect(payloads[1].messages.map(m => m.role)).toEqual(['user', 'assistant', 'user']);
+    await expect(page.getByRole('article', { name: 'Grid response' })).toHaveCount(1);
     expect((await log.boundingBox())!.height).toBe(stageHeight);
     expect((await input.boundingBox())!.y).toBe(inputY);
   });
@@ -202,3 +204,63 @@ test('unconfigured demo is honest and offers a working product link', async ({ p
   await expect(page.getByRole('link', { name: 'Continue in Chat' })).toHaveAttribute('href', 'https://aipg.chat');
   await expect(page.getByRole('link', { name: 'Video', exact: true })).toHaveAttribute('href', 'https://aipg.art/create/director');
 });
+
+for (const width of [320, 1280]) {
+  test(`verification yields its slot to replies without bypassing token checks at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    let submissions = 0;
+    await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*', route => route.fulfill({
+      contentType: 'application/javascript',
+      body: `window.turnstile={render(el,o){
+        if(o.appearance!=="interaction-only")throw Error("Expected supported appearance mode");
+        window.__fixtureSolve=()=>{el.replaceChildren();o["after-interactive-callback"]();o.callback("fixture-token");};
+        window.__fixtureChallenge=()=>{o["before-interactive-callback"]();const b=document.createElement("button");b.textContent="Complete verification (fixture)";b.onclick=window.__fixtureSolve;el.replaceChildren(b);};
+        window.__fixtureExpire=()=>o["expired-callback"]();
+        window.__fixtureChallenge();return "fixture";
+      },reset(){window.__fixtureSolve();},remove(){}};`,
+    }));
+    await page.route('**/api/demo/chat', route => {
+      if (route.request().method() === 'GET') return route.fulfill({ json: { available: true, remaining: 3, siteKey: 'fixture' } });
+      submissions++;
+      expect(route.request().postDataJSON().token).toBe('fixture-token');
+      return route.fulfill({ contentType: 'application/x-ndjson', body: [
+        { type: 'meta', remaining: 2 }, { type: 'delta', text: 'Explicit fixture: the reply replaces the verification area.' }, { type: 'done' },
+      ].map(e => JSON.stringify(e) + '\n').join('') });
+    });
+    await page.goto('/');
+    const input = page.getByRole('textbox', { name: 'Your message' });
+    const verify = page.getByRole('button', { name: 'Complete verification (fixture)' });
+    const log = page.locator('[role="log"]');
+    const slot = page.locator('[aria-label="Verification and reply area"]');
+    await expect(verify).toBeVisible();
+    await input.fill('A test prompt');
+    await input.press('Enter');
+    expect(submissions).toBe(0);
+    await expect(page.getByRole('button', { name: 'Send message' })).toBeDisabled();
+    await verify.click();
+    await expect(verify).toHaveCount(0);
+    await expect.poll(async () => (await slot.boundingBox())!.height).toBe(0);
+    await input.press('Enter');
+    await expect(page.getByText('Explicit fixture: the reply replaces the verification area.')).toBeVisible();
+    await expect(input).toBeFocused();
+    const slotBox = (await slot.boundingBox())!;
+    expect(slotBox.height).toBeLessThan(280);
+    expect((await log.boundingBox())!.y).toBe(slotBox.y);
+    const formBox = (await page.locator('#try-grid form').boundingBox())!;
+    expect(Math.round(slotBox.y - formBox.y - formBox.height)).toBe(12);
+    await page.getByRole('region', { name: 'Chat with the Grid' }).screenshot({ path: `test-results/chat-shared-slot-${width}.png` });
+    // These callbacks belong only to the explicitly mocked Turnstile script.
+    await page.evaluate(() => (window as unknown as { __fixtureChallenge: () => void }).__fixtureChallenge());
+    await expect(verify).toBeVisible();
+    await expect(log).toBeHidden();
+    expect((await slot.boundingBox())!.height).toBe(slotBox.height);
+    await verify.click();
+    await expect(log).toBeVisible();
+    await expect(page.getByText('Explicit fixture: the reply replaces the verification area.')).toBeVisible();
+    await input.fill('Another test prompt');
+    await page.evaluate(() => (window as unknown as { __fixtureExpire: () => void }).__fixtureExpire());
+    await expect(page.getByRole('button', { name: 'Send message' })).toBeDisabled();
+    await input.press('Enter');
+    expect(submissions).toBe(1);
+  });
+}
