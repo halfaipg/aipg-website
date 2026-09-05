@@ -2,9 +2,9 @@
 
 ## Purpose
 
-The site's routes (Next.js App Router) and the single API route. `layout.js` wraps every page in
+The site's routes (Next.js App Router) and public API routes. `layout.js` wraps every page in
 the global providers + Navbar/Footer; `page.js` is the marketing home (stacked section components
-with a scroll-reveal IntersectionObserver).
+with server-visible product, worker, and API entry points).
 
 ## Ownership
 
@@ -12,6 +12,13 @@ with a scroll-reveal IntersectionObserver).
   `context/Providers` wrapper, Navbar/Footer.
   `globals.css` — global styles incl. the `fadeInSection`/`visible` reveal classes used by `page.js`.
 - `page.js` — home page; composes `components/` sections.
+- `api/demo/chat/route.js` - Node-only, no-cache GET/POST for the opt-in
+  sponsored homepage demo. `lib/demoChat.mjs` owns validation, signed guest
+  cookies, shared Redis limits, Turnstile verification, fixed Grid `auto`
+  requests, and sanitized answer streaming. `DEMO_CHAT.md` is the activation
+  contract. Off by default; no existing app credential may be repurposed.
+  Its 60-second function duration fits the current Vercel plan; upstream work
+  aborts after 45 seconds to leave room for shared-limit cleanup.
 - `about/page.js` — about page. `use/page.js` — permanent redirect to the
   canonical `/docs/integrations` guide. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
@@ -101,6 +108,15 @@ with a scroll-reveal IntersectionObserver).
   and plaintext-workload boundary before making broad media availability claims.
   Compatibility rows link to the matching `/docs/backends/*` quickstart so a
   runtime choice leads directly to its verified setup and limitations.
+  Keep the hero compact and its existing-backend CTA anchored to the separate
+  download section, not back to the hero itself. On desktop, first-run steps
+  sit beside downloads; on phones they follow them. Runtime availability must
+  remain readable without horizontally scrolling the compatibility table.
+  The planner respects the chosen text/image-video/audio workload; media
+  readiness is platform-specific. Missing desktop artifacts must not imply
+  that all text releases are unpublished. Detailed network telemetry, media
+  qualification counts, and background connection explanations are disclosures,
+  not mandatory steps before downloading.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic

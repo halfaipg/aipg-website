@@ -361,14 +361,19 @@ export default async function RunPage() {
 
       <OperatorPlanner
         opportunities={opportunities}
-        mediaReady={Boolean(mediaRelease)}
+        mediaPlatforms={mediaRelease?.platforms || {}}
         textPlatforms={textRelease?.platforms || {}}
       />
 
-      <MediaQualificationStatus status={qualificationStatus} />
+      <details className="border-y border-white/10">
+        <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-xl font-semibold md:px-8">Media qualification progress</summary>
+        <MediaQualificationStatus status={qualificationStatus} />
+      </details>
 
       <OperatorEvidence payoutEvidence={payoutEvidence} />
 
+      <details className="border-y border-white/10">
+        <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-xl font-semibold md:px-8">How local checks and Grid connection work</summary>
       <section className="border-y border-white/10 bg-[#111214]">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-20">
           <div>
@@ -448,6 +453,7 @@ export default async function RunPage() {
           </ol>
         </div>
       </section>
+      </details>
     </main>
   );
 }

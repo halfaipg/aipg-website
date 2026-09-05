@@ -1,6 +1,4 @@
 import {
-  FiArrowRight,
-  FiCpu,
   FiExternalLink,
   FiLock,
   FiSliders,
@@ -15,18 +13,32 @@ const backends = [
     guide: "/docs/backends/ollama",
   },
   {
-    runtime: "vLLM / SGLang / LMDeploy",
+    runtime: "vLLM / LMDeploy",
     workload: "Text",
     path: "OpenAI-compatible endpoint",
     status: "Open",
     guide: "/docs/backends/vllm",
   },
   {
-    runtime: "LM Studio / KoboldCpp",
+    runtime: "SGLang",
+    workload: "Text",
+    path: "OpenAI-compatible endpoint",
+    status: "Open",
+    guide: "/docs/backends/sglang",
+  },
+  {
+    runtime: "LM Studio",
     workload: "Text",
     path: "Detected or entered locally",
     status: "Open",
     guide: "/docs/backends/lm-studio",
+  },
+  {
+    runtime: "KoboldCpp",
+    workload: "Text",
+    path: "Detected or entered locally",
+    status: "Open",
+    guide: "/docs/backends/koboldcpp",
   },
   {
     runtime: "Other OpenAI-compatible APIs",
@@ -86,44 +98,6 @@ export default function OperatorPaths() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 lg:grid-cols-2">
-          <div className="bg-[#111214] p-7 md:p-8">
-            <div className="mb-5 flex h-11 w-11 items-center justify-center border border-orange-400/40 bg-orange-400/10 text-orange-300">
-              <FiCpu aria-hidden="true" />
-            </div>
-            <h3 className="text-2xl font-bold">I already run AI models</h3>
-            <p className="mt-3 text-sm leading-6 text-gray-400">
-              Start your existing backend, let the local worker detect it or
-              enter its endpoint, choose the model you want to expose, test it,
-              and connect.
-            </p>
-            <a
-              href="#worker-downloads"
-              className="mt-6 inline-flex min-h-11 items-center gap-2 bg-orange-500 px-5 font-bold text-black hover:bg-orange-400"
-            >
-              Connect a text backend <FiArrowRight aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="bg-[#111214] p-7 md:p-8">
-            <div className="mb-5 flex h-11 w-11 items-center justify-center border border-cyan-400/40 bg-cyan-400/10 text-cyan-300">
-              <FiSliders aria-hidden="true" />
-            </div>
-            <h3 className="text-2xl font-bold">I&apos;m starting fresh</h3>
-            <p className="mt-3 text-sm leading-6 text-gray-400">
-              Enter your operating system, GPU, VRAM, and availability. The
-              planner recommends a path, while the downloaded worker makes the
-              final compatibility decision locally.
-            </p>
-            <a
-              href="#hardware-planner"
-              className="mt-6 inline-flex min-h-11 items-center gap-2 border border-white/20 px-5 font-semibold text-white hover:bg-white/10"
-            >
-              Check my hardware <FiArrowRight aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-
         <div className="mt-14">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -142,7 +116,20 @@ export default function OperatorPaths() {
             </a>
           </div>
 
-          <div className="mt-6 overflow-x-auto border border-white/10">
+          <div className="mt-6 divide-y divide-white/10 md:hidden">
+            {backends.map((backend) => (
+              <div key={backend.runtime} className="py-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <a href={backend.guide} className="font-semibold text-white hover:text-cyan-300">
+                    {backend.runtime}
+                  </a>
+                  <Status>{backend.status}</Status>
+                </div>
+                <p className="mt-2 text-sm text-gray-400">{backend.workload} · {backend.path}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 hidden overflow-x-auto border border-white/10 md:block">
             <table className="w-full min-w-[720px] border-collapse text-left text-sm">
               <thead className="bg-black/60 text-xs uppercase text-gray-500">
                 <tr>

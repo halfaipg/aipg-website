@@ -34,8 +34,8 @@ const nextConfig = {
           {
             key: 'Content-Security-Policy',
             value: process.env.NODE_ENV === 'development'
-              ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://omnivox.io https://cdn.jsdelivr.net; media-src 'self' blob: https://omnivox.io;"
-              : "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://omnivox.io https://cdn.jsdelivr.net; media-src 'self' blob: https://omnivox.io;",
+              ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com https://omnivox.io https://cdn.jsdelivr.net; media-src 'self' blob: https://omnivox.io;"
+              : "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://omnivox.io https://cdn.jsdelivr.net; media-src 'self' blob: https://omnivox.io;",
           },
           {
             key: 'X-Frame-Options',

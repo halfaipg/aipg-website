@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import {
-  FiCheck,
   FiDownload,
   FiExternalLink,
   FiMonitor,
@@ -25,6 +24,7 @@ const PLATFORMS = {
 
 function formatBytes(value) {
   if (!value) return null;
+  if (value < 1024 * 1024) return `${Math.max(1, Math.round(value / 1024))} KB`;
   return `${(value / 1024 / 1024).toFixed(1)} MB`;
 }
 
@@ -77,8 +77,7 @@ export default function RunDownloads({
   return (
     <>
       <section
-        id="worker-downloads"
-        className="relative min-h-[620px] scroll-mt-20 overflow-hidden border-b border-white/10 lg:min-h-[680px]"
+        className="relative overflow-hidden border-b border-white/10"
       >
         <Image
           src="/operator-worker-hero.png"
@@ -89,42 +88,48 @@ export default function RunDownloads({
           className="object-cover object-[68%_center] opacity-90 md:object-center"
         />
         <div className="absolute inset-0 bg-black/55 md:bg-black/45" aria-hidden="true" />
-        <div className="relative mx-auto flex min-h-[620px] max-w-6xl items-start px-6 pb-16 pt-28 md:items-center md:px-8 md:py-20 lg:min-h-[680px]">
+        <div className="relative mx-auto max-w-6xl px-6 py-12 md:px-8 md:py-16">
           <div className="w-full max-w-3xl">
             <div className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-orange-300">
               <FiShield aria-hidden="true" />
               Worker software
             </div>
-            <h1 className="max-w-3xl text-5xl font-black leading-[1.04] sm:text-6xl lg:text-7xl">
-              Put your AI stack to work
+            <h1 className="max-w-3xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+              AI Power Grid Workers
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
               Keep the models and runtime you already operate. Add a Grid
               worker beside them, choose what capacity to expose, and serve
               compatible jobs from the network.
             </p>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-400">
-              The verified Linux text worker is open now. Media runtimes join
-              through reviewed profile qualification; every downloadable
-              artifact is checked before it appears here.
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
+              {textRelease ? "Linux text workers are available now." : "Text downloads are temporarily unavailable."}
+              {" "}Image, video, and audio onboarding is in qualification.
             </p>
 
-            <div className="mt-9 max-w-xl border border-white/15 bg-black/75 p-5 backdrop-blur-sm">
-              <div className="mb-4 grid grid-cols-2 gap-px bg-white/15 text-xs font-semibold">
+              <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold">
                 <a
                   href="#worker-downloads"
-                  className="flex min-h-10 items-center justify-center bg-[#17181a] px-3 text-orange-200"
+                  className="flex min-h-11 items-center justify-center bg-orange-500 px-5 text-black hover:bg-orange-400"
                 >
                   I already run AI
                 </a>
                 <a
                   href="#hardware-planner"
-                  className="flex min-h-10 items-center justify-center bg-[#111214] px-3 text-gray-300 hover:bg-white/10"
+                  className="flex min-h-11 items-center justify-center border border-white/40 bg-black/40 px-5 text-white hover:bg-black/60"
                 >
                   I&apos;m starting fresh
                 </a>
               </div>
+          </div>
+        </div>
+      </section>
 
+      <section id="worker-downloads" className="scroll-mt-20 border-b border-white/10 bg-[#0c0d0f]">
+        <div className="mx-auto max-w-6xl px-6 py-10 md:px-8 md:py-14">
+          <h2 className="mb-6 text-2xl font-bold">Connect your backend</h2>
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+            <div className="min-w-0">
               <div className="mb-4 grid grid-cols-2 border border-white/15 bg-[#111214] p-1">
                 {[
                   ["text", "Text worker"],
@@ -192,7 +197,7 @@ export default function RunDownloads({
                 <div className="grid gap-2">
                   <a
                     href={primaryDownload.url}
-                    className="flex min-h-12 w-full items-center justify-center gap-2 bg-orange-500 px-5 font-bold text-black transition-colors hover:bg-orange-400"
+                    className="flex min-h-12 w-full flex-wrap items-center justify-center gap-2 bg-orange-500 px-4 py-3 text-center font-bold text-black transition-colors hover:bg-orange-400"
                   >
                     <FiDownload aria-hidden="true" />
                     {textInstaller ? (
@@ -365,53 +370,31 @@ export default function RunDownloads({
                     Join the operator cohort for setup support
                     <FiExternalLink aria-hidden="true" />
                   </a>
-                  <FirstRunSteps
-                    artifactName={selected.name}
-                    installerName={textInstaller?.name || null}
-                    version={release.version}
-                  />
                 </>
               ) : null}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#090a0c]">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 md:grid-cols-[1fr_auto] md:items-center md:px-8">
-          <div>
-            <h2 className="text-xl font-bold">
-              {textRelease
-                ? "Verified Linux text worker · desktop signing pending"
-                : "Text candidate in validation · qualified media next"}
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-gray-400">
-              The verified Linux worker connects to an existing Ollama, vLLM,
-              SGLang, LMDeploy, LM Studio, or KoboldCpp backend. macOS remains
-              blocked until Developer ID notarization and Windows remains
-              blocked until Authenticode signing. The first managed media
-              profile targets ACE-Step audio and stays unavailable until its
-              signed qualification evidence is complete.
-            </p>
-          </div>
-          <ul className="grid gap-2 text-sm text-gray-300 sm:grid-cols-3 md:grid-cols-1">
-            <li className="flex items-center gap-2">
-              {textRelease ? (
-                <FiCheck className="text-green-400" />
+            <div className="min-w-0 border-t border-white/10 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              {workerType === "text" && releaseReady ? (
+                <FirstRunSteps
+                  artifactName={selected.name}
+                  installerName={textInstaller?.name || null}
+                  version={release.version}
+                />
               ) : (
-                <FiShield className="text-gray-400" />
+                <>
+                  <h3 className="text-xl font-bold">Keep your existing setup</h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-300">
+                    {workerType === "text"
+                      ? "Your backend stays separate. Choose a supported worker platform, then follow the local setup wizard to select and test your model."
+                      : "An existing ComfyUI or ACE-Step installation needs a reviewed model and workflow profile before serving Grid jobs. A qualification download tests compatibility; it does not start earning rewards."}
+                  </p>
+                </>
               )}
-              {textRelease ? "Linux release verified" : "Text release gated"}
-            </li>
-            <li className="flex items-center gap-2">
-              <FiCheck className="text-green-400" />
-              WebSocket dispatch
-            </li>
-            <li className="flex items-center gap-2">
-              <FiCheck className="text-green-400" />
-              Media fail-closed
-            </li>
-          </ul>
+              <a href="/docs/connect-existing-stack" className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200">
+                Backend setup guides <FiExternalLink aria-hidden="true" />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </>
@@ -438,17 +421,17 @@ function DownloadFacts({
   ];
 
   return (
-    <div className="mb-4 border border-white/10 bg-black/55">
-      <p className="border-b border-white/10 px-3 py-2 text-[11px] font-bold uppercase text-gray-400">
+    <div className="mb-4">
+      <p className="border-b border-white/10 py-2 text-xs font-bold uppercase text-gray-400">
         Before you download
       </p>
-      <dl className="grid text-[11px] leading-4">
+      <dl className="grid text-sm leading-5">
         {facts.map(([label, value]) => (
           <div
             key={label}
-            className="grid grid-cols-[92px_1fr] gap-3 border-b border-white/5 px-3 py-2 last:border-b-0"
+            className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 border-b border-white/5 py-2 last:border-b-0"
           >
-            <dt className="font-semibold text-gray-500">{label}</dt>
+            <dt className="font-semibold text-gray-400">{label}</dt>
             <dd className="min-w-0 text-gray-300">{value}</dd>
           </div>
         ))}
@@ -459,9 +442,9 @@ function DownloadFacts({
 
 function FirstRunSteps({ artifactName, installerName, version }) {
   return (
-    <div className="mt-5 border-t border-white/10 pt-5">
-      <h2 className="text-sm font-bold text-white">First run on Linux</h2>
-      <ol className="mt-3 grid gap-3 text-xs leading-5 text-gray-300">
+    <div>
+      <h2 className="text-xl font-bold text-white">First run on Linux</h2>
+      <ol className="mt-4 grid grid-cols-1 gap-5 text-sm leading-6 text-gray-300">
         <li>
           <span className="mr-2 font-mono text-orange-300">1.</span>
           Start the Ollama or OpenAI-compatible backend that already serves
@@ -497,7 +480,7 @@ function FirstRunSteps({ artifactName, installerName, version }) {
           {["0.3.6", "0.3.7", "0.3.8"].includes(version) ? (
             <>
               Version {version} uses a scoped Grid API key from the developer
-              Console. Enter it only in the local wizard, never in a shell
+              <a href="https://console.aipowergrid.io/dashboard/api-key" className="text-cyan-300 underline">Console</a>. Enter it only in the local wizard, never in a shell
               command or public issue.
             </>
           ) : (
