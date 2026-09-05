@@ -4,6 +4,7 @@ import test from "node:test";
 import { randomBytes } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { createDemoHandler, demoConfig, guestIdentity, clientIdentity, validateMessages, readBounded, chatEvents, responseStats, RESERVE_LUA, RELEASE_LUA } from "../../lib/demoChat.mjs";
+import { GUEST_TURNS, MAX_CONTEXT_BYTES, conversationWindow } from "../../lib/demoChatPolicy.mjs";
 
 const env = { DEMO_CHAT_ENABLED: "1", DEMO_CHAT_ORIGIN: "http://127.0.0.1:8844", DEMO_REDIS_URL: "https://test.upstash.io", DEMO_GRID_KEY: "fixture-only", DEMO_REDIS_TOKEN: "fixture-only", DEMO_COOKIE_SECRET: randomBytes(32).toString("hex"), DEMO_TURNSTILE_SITE_KEY: "fixture", DEMO_TURNSTILE_SECRET: "fixture" };
 const body = { messages: [{ role: "user", content: "Hello" }], token: "fixture-token" };
@@ -17,7 +18,7 @@ test("demo function fits the hosting plan and leaves cleanup time", () => {
 const frame = data => `data: ${typeof data === "string" ? data : JSON.stringify(data)}\n\n`;
 const answer = frame({ model: "actual-worker-model", choices: [{ delta: { content: "Hello!", reasoning_content: "private reasoning" } }] }) + frame({ choices: [{ delta: {}, finish_reason: "stop" }] }) + frame("[DONE]");
 const request = (options = {}) => new Request(`${env.DEMO_CHAT_ORIGIN}/api/demo/chat`, { method: "POST", headers: { origin: env.DEMO_CHAT_ORIGIN, "content-type": "application/json", ...options.headers }, body: JSON.stringify(options.body || body) });
-function fixture({ reservation = ["ok", 2], charging = true, chargingMode = "on", policy = { version: 1, all_models_charged: true, per_request_micro: 10000, daily_micro: 500000 }, verification, stream = answer, redisFailure = false } = {}) {
+function fixture({ reservation = ["ok", 14], charging = true, chargingMode = "on", policy = { version: 1, all_models_charged: true, per_request_micro: 10000, daily_micro: 500000 }, verification, stream = answer, redisFailure = false } = {}) {
   const calls = [];
   const fetcher = async (url, init) => {
     calls.push({ url, init });
@@ -67,6 +68,45 @@ test("body byte bounds apply without a content-length header and stalled reads a
   const reading = readBounded(new ReadableStream({}), 100, control.signal);
   control.abort();
   await assert.rejects(reading);
+});
+
+test("fifteen follow-ups reach auto with the complete short conversation; turn sixteen is rejected", async () => {
+  const messages = [];
+  for (let turn = 0; turn < GUEST_TURNS; turn++) {
+    messages.push({ role: "user", content: `Question ${turn}: remember the first question` });
+    const outgoing = conversationWindow(messages);
+    assert.deepEqual(outgoing, messages);
+    const { calls, handle } = fixture();
+    const response = await handle(request({ body: { ...body, messages: outgoing } }));
+    assert.equal(response.status, 200);
+    await response.text();
+    const payload = JSON.parse(calls.find(c => c.url.endsWith("completions")).init.body);
+    assert.equal(payload.model, "auto");
+    assert.deepEqual(payload.messages.slice(1), messages);
+    messages.push({ role: "assistant", content: `Answer ${turn}` });
+  }
+  messages.push({ role: "user", content: "Sixteenth" });
+  assert.throws(() => validateMessages({ ...body, messages }));
+});
+
+test("long UTF-8 context recycles whole oldest pairs and remains server-valid", () => {
+  const messages = Array.from({ length: 29 }, (_, i) => ({ role: i % 2 ? "assistant" : "user", content: (i % 2 ? "\u754c".repeat(5000) : "\u754c".repeat(1000)) }));
+  assert.throws(() => validateMessages({ ...body, messages }), { status: 413 });
+  const outgoing = conversationWindow(messages);
+  assert.ok(outgoing.length < messages.length);
+  assert.ok(outgoing.reduce((n, m) => n + Buffer.byteLength(m.content), 0) <= MAX_CONTEXT_BYTES);
+  assert.deepEqual(outgoing.at(-1), messages.at(-1));
+  assert.deepEqual(outgoing, messages.slice(-outgoing.length));
+  assert.deepEqual(validateMessages({ ...body, messages: outgoing }), outgoing);
+});
+
+test("availability reports fifteen turns and the public limit without issuing inference", async () => {
+  const { calls, handle } = fixture();
+  const response = await handle(new Request(`${env.DEMO_CHAT_ORIGIN}/api/demo/chat`));
+  const data = await response.json();
+  assert.equal(data.remaining, 15);
+  assert.equal(data.limit, 15);
+  assert.equal(calls.some(c => c.url.includes("api.aipowergrid")), false);
 });
 
 test("guest cookie survives refresh, rejects forgery and expires on UTC day change", () => {

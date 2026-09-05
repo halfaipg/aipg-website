@@ -14,13 +14,15 @@ onboarding, and staking-withdrawal surfaces.
   and unavailable states, compact empty composer, plus long worker/model names
   and rounded per-response statistics on mobile/desktop. These fixtures are
   not evidence of live inference.
-  It also verifies unframed, bounded Markdown answers below the composer, HTML/image/unsafe
+  It also verifies bounded Markdown answers inside the panel above the composer, HTML/image/unsafe
   URL rejection, and identical versioned/fallback favicon assets.
   Composer coverage includes auto-growth/shrink, viewport reflow, Enter versus
   Shift+Enter/IME, submit guards, and focus restoration after terminal responses.
-  Turnstile fixtures also exercise the shared verification/reply slot, mandatory
-  interactive challenges, callback restoration, expired tokens, and no blank
-  CAPTCHA space after success.
+  Turnstile fixtures exercise execution only on Send, mandatory interactive
+  challenges separate from replies, expiry/cancellation without losing drafts,
+  and no challenge reset/reappearance after success. Fifteen-turn browser and
+  handler tests prove context forwarding; UTF-8 tests prove whole-pair recycling.
+  Real Redis tests prove 15-guest/30-IP limits independently of concurrency caps.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including

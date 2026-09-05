@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import Markdown from "react-markdown";
+import { GUEST_TURNS, conversationWindow } from "@/lib/demoChatPolicy.mjs";
 import { FiArrowUp, FiArrowUpRight, FiImage, FiFilm, FiMusic, FiSquare, FiRotateCcw, FiCpu, FiServer } from "react-icons/fi";
 
 function ResponseDetails({ message }) {
@@ -31,15 +32,14 @@ function resizeComposer(node) {
 
 export default function GridChat() {
   const [config, setConfig] = useState(null);
-  const [remaining, setRemaining] = useState(3);
+  const [remaining, setRemaining] = useState(GUEST_TURNS);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [model, setModel] = useState("Auto");
-  const [token, setToken] = useState("");
   const [scriptReady, setScriptReady] = useState(false);
-  const [challengeVisible, setChallengeVisible] = useState(false);
+  const [verifying, setVerifying] = useState(false);
   const widget = useRef(null);
   const widgetId = useRef(null);
   const abort = useRef(null);
@@ -88,35 +88,62 @@ export default function GridChat() {
     return () => { controller.abort(); abort.current?.abort(); };
   }, []);
 
-  useEffect(() => {
-    if (!config?.available || !scriptReady || !widget.current || !window.turnstile) return;
-    widgetId.current = window.turnstile.render(widget.current, {
-      sitekey: config.siteKey, action: "homepage_chat", theme: "dark", appearance: "interaction-only",
-      size: window.matchMedia("(max-width: 359px)").matches ? "compact" : "flexible",
-      callback: value => { setToken(value); setChallengeVisible(false); },
-      "before-interactive-callback": () => { setToken(""); setChallengeVisible(true); },
-      "after-interactive-callback": () => setChallengeVisible(false),
-      "expired-callback": () => setToken(""),
-      "error-callback": () => { setToken(""); setError("Verification could not load. Retry or open Chat."); },
+  function verify(signal) {
+    setVerifying(true);
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      const finish = (error, value) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        signal.removeEventListener("abort", cancel);
+        error ? reject(error) : resolve(value);
+      };
+      const cancel = () => finish(new DOMException("Aborted", "AbortError"));
+      const timer = setTimeout(() => finish(new Error("Verification timed out. Please try again.")), 60000);
+      signal.addEventListener("abort", cancel, { once: true });
+      try {
+        widgetId.current = window.turnstile.render(widget.current, {
+          sitekey: config.siteKey, action: "homepage_chat", theme: "dark",
+          appearance: "interaction-only", execution: "execute", retry: "never", "refresh-expired": "manual",
+          size: window.matchMedia("(max-width: 359px)").matches ? "compact" : "flexible",
+          callback: value => finish(null, value),
+          "expired-callback": () => finish(new Error("Verification expired. Please try again.")),
+          "timeout-callback": () => finish(new Error("Verification timed out. Please try again.")),
+          "error-callback": () => finish(new Error("Verification could not load. Retry or open Chat.")),
+        });
+        window.turnstile.execute(widgetId.current);
+      } catch { finish(new Error("Verification could not load. Retry or open Chat.")); }
     });
-    return () => { window.turnstile?.remove(widgetId.current); widgetId.current = null; };
-  }, [config, scriptReady]);
+  }
+
+  function removeVerification() {
+    if (widgetId.current !== null) window.turnstile?.remove(widgetId.current);
+    widgetId.current = null;
+    setVerifying(false);
+  }
 
   async function send(event) {
     event.preventDefault();
-    if (busy || abort.current || !input.trim() || !token || remaining < 1 || !config?.available) return;
+    if (busy || abort.current || !input.trim() || !scriptReady || remaining < 1 || !config?.available) return;
     // Failed/partial answers are visible, but never replayed as completed turns.
     const history = messages.filter(m => !m.failed);
     const outgoing = [...history, { role: "user", content: input.trim() }];
-    setMessages([...outgoing, { role: "assistant", content: "" }]);
-    setInput(""); setBusy(true); setError(""); setModel("Auto");
+    setBusy(true); setError(""); setModel("Auto");
     restoreFocus.current = true;
     followReply.current = true;
     const controller = new AbortController(); abort.current = controller;
     let completed = false;
+    let dispatched = false;
     try {
+      const token = await verify(controller.signal);
+      controller.signal.throwIfAborted();
+      removeVerification();
+      dispatched = true;
+      setMessages([...outgoing, { role: "assistant", content: "" }]);
+      setInput("");
       const response = await fetch("/api/demo/chat", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: outgoing.map(({ role, content }) => ({ role, content })), token }), signal: controller.signal });
+        body: JSON.stringify({ messages: conversationWindow(outgoing), token }), signal: controller.signal });
       if (!response.ok) {
         const data = await response.json();
         if (data.error?.code === "quota") setRemaining(0);
@@ -153,10 +180,10 @@ export default function GridChat() {
       if (!completed) throw new Error("The response was interrupted. Please try again or open Chat.");
     } catch (err) {
       setError(err.name === "AbortError" ? "Response stopped." : err.message);
-      setMessages(current => current.map((m, i) => i >= current.length - 2 ? { ...m, failed: true } : m));
+      if (dispatched) setMessages(current => current.map((m, i) => i >= current.length - 2 ? { ...m, failed: true } : m));
     } finally {
-      setBusy(false); setToken(""); abort.current = null;
-      if (widgetId.current !== null) window.turnstile?.reset(widgetId.current);
+      removeVerification();
+      setBusy(false); abort.current = null;
     }
   }
 
@@ -172,6 +199,26 @@ export default function GridChat() {
           </div>
         </div>
           <form onSubmit={send} className="mt-5 overflow-hidden rounded-[8px] border border-white/20 bg-[#17181b] shadow-[0_12px_40px_rgba(0,0,0,0.25)] transition-colors focus-within:border-orange-300/60">
+            <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy && !verifying} tabIndex={messages.length ? 0 : -1}
+              onScroll={event => {
+                const node = event.currentTarget;
+                followReply.current = node.scrollHeight - node.scrollTop - node.clientHeight < 64;
+              }}
+              className={`min-w-0 ${messages.length ? "max-h-[min(16rem,40svh)] overflow-y-auto overscroll-contain border-b border-white/10 px-4 [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:px-5" : ""}`}>
+              {messages.filter(m => m.role === "assistant").slice(-1).map(m => (
+                <article key={messages.length} aria-label="Grid response" className="py-4">
+                  <div className="mb-3 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+                    <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
+                    {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
+                    {busy && !verifying && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
+                  </div>
+                  {m.content ? <div className="grid-chat-answer text-sm leading-6 text-gray-200 [overflow-wrap:anywhere] sm:text-base sm:leading-7">
+                    <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
+                  </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
+                  {m.completed && !m.failed && <ResponseDetails message={m} />}
+                </article>
+              ))}
+            </div>
             <label htmlFor="grid-message" className="sr-only">Your message</label>
               <textarea ref={composer} id="grid-message" rows={1} maxLength={1000} value={input} disabled={busy || !config?.available || remaining === 0}
                 onChange={e => setInput(e.target.value)} placeholder={messages.length ? "Ask a follow-up..." : "What are you curious about?"}
@@ -184,39 +231,17 @@ export default function GridChat() {
                 className="block max-h-48 min-h-12 w-full min-w-0 resize-none overflow-y-hidden bg-transparent px-4 py-3 text-base leading-6 text-white placeholder:text-gray-400 focus:outline-none disabled:cursor-not-allowed sm:px-5" />
             <div className="flex min-h-14 items-center justify-between gap-3 px-4 pb-3 sm:px-5">
               <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400">
-                <span className="inline-flex min-w-0 items-center gap-2 text-gray-200"><FiCpu aria-hidden="true" className="h-4 w-4 shrink-0 text-orange-300" /><span className="break-all">{busy ? model : "Auto"}</span></span>
-                <span>{config?.available ? `${remaining} / 3 free turns left today` : config === null ? "Connecting..." : "Demo not open yet"}</span>
+                <span className="inline-flex min-w-0 items-center gap-2 text-gray-200"><FiCpu aria-hidden="true" className="h-4 w-4 shrink-0 text-orange-300" /><span className="break-all">{verifying ? "Verifying..." : busy ? model : "Auto"}</span></span>
+                <span>{config?.available ? `${remaining} / ${config.limit || GUEST_TURNS} free turns left today` : config === null ? "Connecting..." : "Demo not open yet"}</span>
               </div>
-              {busy ? <button type="button" onClick={() => abort.current?.abort()} aria-label="Stop response" title="Stop response" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300"><FiSquare /></button> :
-                <button type="submit" disabled={!input.trim() || !token || !config?.available || remaining === 0} aria-label="Send message" title="Send message" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black transition-colors hover:bg-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300 disabled:bg-white/10 disabled:text-gray-500"><FiArrowUp className="h-5 w-5" /></button>}
+              {busy ? <button key="stop" type="button" onClick={event => { event.preventDefault(); abort.current?.abort(); }} aria-label="Stop response" title="Stop response" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300"><FiSquare /></button> :
+                <button key="send" type="submit" disabled={!input.trim() || !scriptReady || !config?.available || remaining === 0} aria-label="Send message" title="Send message" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black transition-colors hover:bg-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300 disabled:bg-white/10 disabled:text-gray-500"><FiArrowUp className="h-5 w-5" /></button>}
             </div>
+            {config?.available && <div ref={widget} aria-label="Message verification" className={verifying ? "px-4 pb-3 sm:px-5" : ""} />}
           </form>
         {config?.available && <>
           <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" onReady={() => setScriptReady(true)} onError={() => setError("Verification could not load. Please open Chat.")} />
         </>}
-        <div className="mt-3 grid min-w-0 grid-cols-1" aria-label="Verification and reply area">
-          {config?.available && <div ref={widget} className="col-start-1 row-start-1 min-w-0 self-start" />}
-        <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} aria-hidden={challengeVisible} tabIndex={messages.length && !challengeVisible ? 0 : -1}
-          onScroll={event => {
-            const node = event.currentTarget;
-            followReply.current = node.scrollHeight - node.scrollTop - node.clientHeight < 64;
-          }}
-          className={`col-start-1 row-start-1 min-w-0 ${challengeVisible ? "invisible" : ""} ${messages.length ? "max-h-[min(20rem,50svh)] min-h-[65px] overflow-y-auto overscroll-contain pr-3 [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:pr-5" : ""}`}>
-          {messages.filter(m => m.role === "assistant").slice(-1).map(m => (
-            <article key={messages.length} aria-label="Grid response" className="py-3">
-                <div className="mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-                  <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
-                  {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
-                  {busy && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
-                </div>
-                {m.content ? <div className="grid-chat-answer text-base leading-7 text-gray-200 [overflow-wrap:anywhere] sm:leading-8">
-                  <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
-                </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
-              {m.completed && !m.failed && <ResponseDetails message={m} />}
-            </article>
-          ))}
-        </div>
-        </div>
         {error && <p role="status" className={`mt-3 text-xs leading-relaxed ${config?.available ? "text-amber-200" : "text-gray-400"}`}>{error}</p>}
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-md text-xs leading-relaxed text-gray-500">Community workers can read your prompts. Don&apos;t share secrets or personal information.</p>
