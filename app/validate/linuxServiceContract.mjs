@@ -1,4 +1,4 @@
-export const VALIDATOR_RELEASE_TAG = "v0.1.0-preview.13";
+export const VALIDATOR_RELEASE_TAG = "v0.1.0-preview.15";
 export const SYSTEMD_HELPER_COMMIT =
   "778e9a1f2263094918998954c62678dba6b90334";
 export const SYSTEMD_HELPER_SHA256 =

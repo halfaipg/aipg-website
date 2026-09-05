@@ -299,7 +299,7 @@ test.describe('/validate smoke', () => {
     await expect(page.getByText('aipg-validator app', { exact: true })).toBeVisible();
     await expect(page.getByText(/Choose 8 to open the local operator app/)).toBeVisible();
     await expect(page.getByText(/confirm Create node account/)).toBeVisible();
-    await expect(page.getByText(/preview\.13 keeps setup and start as separate actions/)).toBeVisible();
+    await expect(page.getByText(/Preview\.15 starts automatically with the saved configuration/)).toBeVisible();
     await expect(page.getByText(/Exit app stops its node and closes the local server/)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Full setup and headless server guide' })).toHaveAttribute(
       'href', 'https://aipowergrid.io/docs/validator-node',
@@ -308,18 +308,18 @@ test.describe('/validate smoke', () => {
     await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Download Linux installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.13\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.15\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.13\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.15\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.13\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.15\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
-      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.13'),
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.15'),
     ).toBeVisible();
     await expect(page.getByRole('link', { name: 'Open Docker quickstart' })).toHaveAttribute(
       'href',
