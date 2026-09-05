@@ -199,15 +199,62 @@ test('waiting response has a stable unframed label and a working stop control', 
     await page.goto('/');
     await page.getByRole('textbox', { name: 'Your message' }).fill('Waiting-state fixture');
     await page.getByRole('button', { name: 'Send message' }).click();
-    await expect(page.getByText('Connecting to a Grid worker...', { exact: true })).toBeVisible();
+    await expect(page.getByRole('status').filter({ hasText: 'Thinking...' })).toBeVisible();
+    await expect(page.getByText('Connecting to a Grid worker...', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('No response received.', { exact: true })).toHaveCount(0);
     await expect(page.getByRole('log')).toHaveAttribute('aria-busy', 'true');
     await page.getByRole('region', { name: 'Chat with the Grid' }).screenshot({ path: 'test-results/chat-waiting.png' });
     await page.getByRole('button', { name: 'Stop response' }).click();
     await expect(page.getByText('Response stopped.', { exact: true })).toBeVisible();
+    await expect(page.getByText('Thinking...', { exact: true })).toHaveCount(0);
     await expect(page.getByRole('log')).toHaveAttribute('aria-busy', 'false');
     await expect(page.getByRole('textbox', { name: 'Your message' })).toBeFocused();
   } finally { release(); }
 });
+
+for (const width of [320, 1280]) {
+  test(`follow-up thinking stays quiet and keeps the composer anchored at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    let release!: () => void;
+    const gate = new Promise<void>(resolve => { release = resolve; });
+    let requests = 0;
+    await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*', route => route.fulfill({ contentType: 'application/javascript', body: automaticVerification }));
+    await page.route('**/api/demo/chat', async route => {
+      if (route.request().method() === 'GET') return route.fulfill({ json: { available: true, remaining: 15, siteKey: 'fixture' } });
+      requests++;
+      if (requests === 2) {
+        expect(route.request().postDataJSON().messages).toHaveLength(3);
+        await gate;
+      }
+      return route.fulfill({ contentType: 'application/x-ndjson', body: [
+        { type: 'model', model: 'fixture-model' },
+        { type: 'delta', text: `Fixture answer ${requests}` },
+        { type: 'done' },
+      ].map(item => JSON.stringify(item) + '\n').join('') });
+    });
+    try {
+      await page.goto('/');
+      const input = page.getByRole('textbox', { name: 'Your message' });
+      await input.fill('First question');
+      await input.press('Enter');
+      await expect(input).toBeEnabled();
+      await expect(page.getByText('Fixture answer 1', { exact: true })).toBeVisible();
+      await input.fill('Follow-up question');
+      const position = () => input.evaluate(el => ({ y: el.getBoundingClientRect().top, scroll: window.scrollY }));
+      const before = await position();
+      await input.press('Enter');
+      await expect(page.getByText('Thinking...', { exact: true })).toBeVisible();
+      await expect(page.getByRole('article', { name: 'Grid response' })).toHaveText('GridThinking...');
+      expect(await position()).toEqual(before);
+      await page.screenshot({ path: `test-results/chat-thinking-${width}.png` });
+      release();
+      await expect(page.getByText('Fixture answer 2', { exact: true })).toBeVisible();
+      await expect(page.getByText('Thinking...', { exact: true })).toHaveCount(0);
+      await expect(input).toBeFocused();
+      expect(await position()).toEqual(before);
+    } finally { release(); }
+  });
+}
 
 test('demo reports interrupted output and never replays a failed turn', async ({ page }) => {
   const payloads: { messages: { role: string; content: string }[] }[] = [];

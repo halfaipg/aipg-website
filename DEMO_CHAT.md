@@ -72,6 +72,9 @@ expansion preserves the input position where possible, scrolling the page enough
 to fit the panel below navigation and inside the viewport (prioritizing controls
 when the viewport is too short); subsequent chunks scroll only
 inside the transcript. Scroll up to suspend following; Jump to latest resumes.
+Pending replies use a single subtle Thinking indicator rather than a connection
+message on every turn. Verification, failures, and cancellation remain explicit;
+the UI does not invent queue or worker-assignment status from a timer.
 The compact empty state reserves no transcript space. `/chat-preview` is a
 development-only simulated streaming demo, not a live inference route.
 Normal 15-turn conversations retain their
