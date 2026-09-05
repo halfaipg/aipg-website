@@ -190,7 +190,9 @@ for (const width of [320, 1280]) {
     const log = page.getByRole('log');
     const stageHeight = (await log.boundingBox())!.height;
     expect(await log.evaluate(el => el.scrollHeight > el.clientHeight)).toBeTruthy();
-    const inputY = (await input.boundingBox())!.y;
+    // Compare panel coordinates; Playwright's scroll-into-view may still settle.
+    const inputOffset = () => input.evaluate(el => el.getBoundingClientRect().top - el.closest('form')!.getBoundingClientRect().top);
+    const inputY = await inputOffset();
     await input.press('Enter');
     expect(payloads).toHaveLength(1);
     await input.fill('Another question');
@@ -200,7 +202,7 @@ for (const width of [320, 1280]) {
     expect(payloads[1].messages.map(m => m.role)).toEqual(['user', 'assistant', 'user']);
     await expect(page.getByRole('article', { name: 'Grid response' })).toHaveCount(1);
     expect((await log.boundingBox())!.height).toBe(stageHeight);
-    expect(Math.abs((await input.boundingBox())!.y - inputY)).toBeLessThanOrEqual(2);
+    expect(await inputOffset()).toBe(inputY);
   });
 }
 
