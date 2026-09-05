@@ -45,8 +45,14 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   hardware, cryptographic provenance, or a benchmark. Display at most one
   decimal place for timing/throughput, with wrapping for long public names.
   Show the latest AI reply inside the same panel above the composer, without
-  message bubbles or a duplicate user-prompt block. Short replies use natural
-  height; long replies scroll within a 256px/40svh cap. Keep completed history
+  message bubbles or a duplicate user-prompt block. After the first submission,
+  keep a fixed 256px/40svh reply area for short, long, and subsequent replies.
+  Compensate the one-time expansion before paint, preserving the input position
+  only where the expanded panel fits below the sticky header and inside the
+  visible viewport. On a viewport too short for the panel, prioritize the input
+  and controls. Streamed text must only scroll the transcript, not the document.
+  Scrolling up pauses following and exposes an overlaid Jump to latest button.
+  Clear returns to the compact empty composer. Keep completed history
   in memory for follow-ups; `lib/demoChatPolicy.mjs` bounds outgoing context
   to 29 messages/48 KB, recycling only whole oldest exchanges when needed.
   Failed/partial turns never enter follow-up context. The allowance is 15/day,
@@ -66,6 +72,10 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   newline, and IME composition must never submit. After a response finishes,
   fails, or is stopped, restore input focus without scrolling, unless quota or
   availability has disabled it. Never autofocus on initial page load.
+  `GridChatPreview` supplies a local-only simulated streaming transport to the
+  same component at development-only `/chat-preview`. Label fixtures explicitly;
+  never call Core or use service credentials there. Production chat uses the
+  default real fetch/Turnstile path; its server verification is unchanged.
 
 - Components using wallet/hooks/framer-motion/scroll must be `"use client"`.
 - `StakingInterface.jsx` must NOT expose stake/approve actions (program wound down) even though

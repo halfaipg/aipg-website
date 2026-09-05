@@ -3,6 +3,85 @@ import { test, expect } from '@playwright/test';
 
 const automaticVerification = `window.turnstile={render(el,o){window.__verify=o.callback;return "fixture"},execute(){window.__verify("browser-test-only")},remove(){}};`;
 
+test('simulated chat preview is unavailable in production', async ({ request }) => {
+  const response = await request.get('/chat-preview');
+  expect(response.status()).toBe(404);
+});
+
+for (const width of [320, 1280]) {
+  for (const edge of ['top', 'bottom']) {
+    test(`opening near the ${edge} keeps the expanded chat visible at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 720 });
+      await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*', route => route.fulfill({ contentType: 'application/javascript', body: automaticVerification }));
+      await page.route('**/api/demo/chat', route => route.request().method() === 'GET'
+        ? route.fulfill({ json: { available: true, remaining: 15, limit: 15 } })
+        : route.fulfill({ contentType: 'application/x-ndjson', body: '{"type":"delta","text":"Local fixture reply"}\n{"type":"done"}\n' }));
+      await page.goto('/');
+      const input = page.getByRole('textbox', { name: 'Your message' });
+      await input.fill('Test opening the chat');
+      await input.evaluate((el, edge) => {
+        window.scrollBy({ top: el.getBoundingClientRect().top - (edge === 'top' ? 120 : window.innerHeight - 150), behavior: 'instant' });
+      }, edge);
+      await input.press('Enter');
+      await expect(page.getByText('Local fixture reply')).toBeVisible();
+      const bounds = await input.evaluate(el => ({
+        top: el.closest('form')!.getBoundingClientRect().top,
+        bottom: el.closest('form')!.getBoundingClientRect().bottom,
+        header: document.querySelector('header')!.getBoundingClientRect().bottom,
+        viewport: window.innerHeight,
+      }));
+      expect(bounds.top).toBeGreaterThanOrEqual(bounds.header + 15);
+      expect(bounds.bottom).toBeLessThanOrEqual(bounds.viewport - 15);
+    });
+  }
+}
+
+for (const width of [320, 1280]) {
+  test(`streaming holds the input still and respects scroll-up at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*', route => route.fulfill({ contentType: 'application/javascript', body: automaticVerification }));
+    await page.route('**/api/demo/chat', route => route.fulfill({ json: { available: true, remaining: 15, limit: 15 } }));
+    await page.addInitScript(() => {
+      const original = window.fetch.bind(window);
+      window.fetch = (url, options) => {
+        if (url !== '/api/demo/chat' || options?.method !== 'POST') return original(url, options);
+        return Promise.resolve(new Response(new ReadableStream({ start(controller) {
+          const encode = (value: object) => new TextEncoder().encode(JSON.stringify(value) + '\n');
+          (window as unknown as { chatFixture: { append: (text: string) => void; finish: () => void } }).chatFixture = {
+            append: text => controller.enqueue(encode({ type: 'delta', text })),
+            finish: () => { controller.enqueue(encode({ type: 'done' })); controller.close(); },
+          };
+          controller.enqueue(encode({ type: 'meta', remaining: 14 }));
+        } }), { headers: { 'content-type': 'application/x-ndjson' } }));
+      };
+    });
+    await page.goto('/');
+    const input = page.getByRole('textbox', { name: 'Your message' });
+    await input.fill('A controlled streaming fixture');
+    await input.press('Enter');
+    await expect(page.getByText('14 / 15 free turns left today')).toBeVisible();
+    const position = () => input.evaluate(el => ({ y: el.getBoundingClientRect().top, scroll: window.scrollY }));
+    const initial = await position();
+    const append = (text: string) => page.evaluate(text => (window as unknown as { chatFixture: { append: (text: string) => void } }).chatFixture.append(text), text);
+    await append('Explicit streaming fixture.\n\n'.repeat(50));
+    const log = page.getByRole('log');
+    await expect.poll(() => log.evaluate(el => el.scrollHeight - el.clientHeight - el.scrollTop)).toBeLessThan(2);
+    expect(await position()).toEqual(initial);
+    await log.evaluate(el => { el.scrollTop = 0; });
+    const jump = page.getByRole('button', { name: 'Jump to latest' });
+    await expect(jump).toBeVisible();
+    await append('More fixture output.\n\n'.repeat(10));
+    await expect.poll(() => log.evaluate(el => el.scrollTop)).toBe(0);
+    expect(await position()).toEqual(initial);
+    await jump.click();
+    await expect(jump).toHaveCount(0);
+    await expect.poll(() => log.evaluate(el => el.scrollHeight - el.clientHeight - el.scrollTop)).toBeLessThan(2);
+    await page.evaluate(() => (window as unknown as { chatFixture: { finish: () => void } }).chatFixture.finish());
+    await expect(input).toBeFocused();
+    await page.getByRole('region', { name: 'Chat with the Grid' }).screenshot({ path: `test-results/chat-anchored-${width}.png` });
+  });
+}
+
 test('fifteen turns preserve context and quota survives clearing and refresh', async ({ page }) => {
   let remaining = 15;
   await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*', route => route.fulfill({
@@ -254,7 +333,7 @@ for (const width of [320, 1280]) {
     await expect(page.getByText('Explicit fixture: the reply stays inside the composer.')).toBeVisible();
     await expect(input).toBeFocused();
     const logBox = (await log.boundingBox())!;
-    expect(logBox.height).toBeLessThan(256);
+    expect(logBox.height).toBeLessThanOrEqual(256);
     const formBox = (await page.locator('#try-grid form').boundingBox())!;
     expect(logBox.y).toBeGreaterThan(formBox.y);
     expect(logBox.y + logBox.height).toBeLessThanOrEqual((await input.boundingBox())!.y);

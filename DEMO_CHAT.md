@@ -67,8 +67,14 @@ The full Chat link opens the product; it does not transfer the demo transcript.
 The empty state is a single-line, growing composer. Enter submits and Shift+Enter
 adds a newline. The latest AI reply is inside the same panel above the input;
 completed conversation history remains in memory for follow-ups. Short answers
-use natural height; longer ones scroll within 256px/40svh. The compact empty
-state reserves no transcript space. Normal 15-turn conversations retain their
+share a stable 256px/40svh reply area after the first submission. The initial
+expansion preserves the input position where possible, scrolling the page enough
+to fit the panel below navigation and inside the viewport (prioritizing controls
+when the viewport is too short); subsequent chunks scroll only
+inside the transcript. Scroll up to suspend following; Jump to latest resumes.
+The compact empty state reserves no transcript space. `/chat-preview` is a
+development-only simulated streaming demo, not a live inference route.
+Normal 15-turn conversations retain their
 full history; above 48 KB UTF-8, whole oldest exchanges are recycled, preserving
 the newest question and recent context. This is a rolling window, not a summary
 or permanent memory. Failed/partial exchanges are excluded from later requests.
