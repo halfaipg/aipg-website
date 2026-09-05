@@ -10,6 +10,10 @@ with server-visible product, worker, and API entry points).
 
 - `layout.js` — root layout: metadata/OpenGraph, agent-discovery links, fonts,
   `context/Providers` wrapper, Navbar/Footer.
+  Favicon sources (`app/favicon.ico`, `public/favicon.ico`, and the versioned
+  metadata icon) must match the deployed aipg.chat favicon bytes. The PNG
+  touch icon is the largest embedded PNG from that ICO. Bump the metadata URL
+  when replacing the icon so returning browsers do not reuse the old artwork.
   `globals.css` — global styles incl. the `fadeInSection`/`visible` reveal classes used by `page.js`.
 - `page.js` — home page; composes `components/` sections.
 - `api/demo/chat/route.js` - Node-only, no-cache GET/POST for the opt-in

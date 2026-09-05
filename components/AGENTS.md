@@ -44,6 +44,10 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   stay absent, and metadata must never be described as independently verified
   hardware, cryptographic provenance, or a benchmark. Display at most one
   decimal place for timing/throughput, with wrapping for long public names.
+  Conversation turns are unframed and use page scrolling, not nested transcript
+  scrolling or message bubbles. Answers render Markdown with raw HTML skipped,
+  no model-supplied images, and the renderer's default safe URL transform.
+  Keep the model beside the response label and terminal worker metrics below it.
 
 - Components using wallet/hooks/framer-motion/scroll must be `"use client"`.
 - `StakingInterface.jsx` must NOT expose stake/approve actions (program wound down) even though
