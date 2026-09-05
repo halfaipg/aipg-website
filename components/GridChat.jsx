@@ -239,11 +239,11 @@ export default function GridChat({ preview = null }) {
                   <div className="mb-3 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                     <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
                     {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
-                    {busy && !verifying && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
+                    {busy && !verifying && <span role="status" className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking..."}</span>}
                   </div>
                   {m.content ? <div className="grid-chat-answer text-sm leading-6 text-gray-200 [overflow-wrap:anywhere] sm:text-base sm:leading-7">
                     <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
-                  </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
+                  </div> : !busy && <p className="text-sm leading-7 text-gray-400">No response received.</p>}
                   {m.completed && !m.failed && <ResponseDetails message={m} />}
                 </article>
               ))}

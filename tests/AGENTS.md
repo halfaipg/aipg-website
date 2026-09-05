@@ -26,6 +26,8 @@ onboarding, and staking-withdrawal surfaces.
   Streaming-scroll fixtures check stable input/document positions across chunks,
   scroll-up auto-follow suspension, and Jump to latest restoring following.
   Opening near either viewport edge must fit the expanded panel below navigation.
+  Delayed follow-up fixtures verify one Thinking status, preserved context,
+  stable composer position, and removal of pending status on completion/stop.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including

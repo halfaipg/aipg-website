@@ -52,6 +52,10 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   visible viewport. On a viewport too short for the panel, prioritize the input
   and controls. Streamed text must only scroll the transcript, not the document.
   Scrolling up pauses following and exposes an overlaid Jump to latest button.
+  Pending inference uses one subtle Thinking status in the response header,
+  not duplicate connection messages. Never infer queuing or worker assignment
+  from elapsed time; only display details actually returned by Core. Stop and
+  failure states remain explicit, and verification stays separately labelled.
   Clear returns to the compact empty composer. Keep completed history
   in memory for follow-ups; `lib/demoChatPolicy.mjs` bounds outgoing context
   to 29 messages/48 KB, recycling only whole oldest exchanges when needed.
