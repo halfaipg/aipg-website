@@ -2,8 +2,8 @@
 
 ## Status
 
-Implemented locally, **off by default**. No production key, Redis service,
-Turnstile widget, funding, or live inference has been provisioned by this change.
+Implemented on the reviewed preview branch, **off by default**. No production
+Grid key, Redis service, funding, or live inference has been provisioned.
 The page explicitly says when the demo is unavailable and links to AIPG Chat;
 it never substitutes simulated answers. Browser tests use labelled fixtures only.
 
@@ -17,8 +17,13 @@ to satisfy this demo. A scoped Core contract that guarantees charging and
 ceilings for every model routed by this service needs a separate reviewed
 change and tests before this restriction can be relaxed.
 
-Provisioning also awaits Cloudflare sign-in and Vercel browser two-factor
-authentication. No production account, funded balance or secret has been created.
+Cloudflare widget `AIPG homepage demo - production` was created September 5
+for `aipowergrid.io`, with Managed verification and pre-clearance disabled.
+Its keys remain in Cloudflare; copying them to Vercel deployment settings is
+pending browser two-factor authentication. No keys are stored in this repository.
+Do not recreate the widget or reuse its credentials for preview/local testing.
+Redis provisioning and the dedicated Core service remain pending. Widget
+creation alone is not a verified server-side Siteverify integration.
 
 ## Experience
 
