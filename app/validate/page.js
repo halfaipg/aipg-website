@@ -392,7 +392,7 @@ export default async function ValidatePage() {
                 </p>
                 <p className="mt-2 text-sm leading-6 text-gray-400">
                   This is the recommended cohort path. It installs the frozen
-                  preview.14 binary, creates a dedicated validator identity,
+                  preview.15 binary, creates a dedicated validator identity,
                   and runs it as a hardened systemd service. Setup prompts
                   locally; no private key belongs in these commands.
                 </p>
@@ -450,10 +450,9 @@ export default async function ValidatePage() {
                 <p className="mt-2 font-sans text-xs text-gray-400">
                   Desktop path: on Windows, extract the download and double-click
                   aipg-validator.exe. Choose 8 to open the local operator app,
-                  then choose Set up node, confirm Create node account, and
-                  choose Start validator. Published preview.14 keeps setup and
-                  start as separate actions. Existing operators skip setup and
-                  keep their configuration.
+                  then choose Set up and start and confirm Create node account.
+                  Preview.15 starts automatically with the saved configuration.
+                  Existing operators keep their configuration and choose Start validator.
                 </p>
                 <p className="my-3 font-sans text-xs text-gray-400">
                   Setup creates a dedicated node account and saves its signing

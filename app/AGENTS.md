@@ -105,12 +105,12 @@ with a scroll-reveal IntersectionObserver).
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
   capability contract with exact validator-purpose endpoint scopes. It targets
-  the immutable `v0.1.0-preview.13` release and exposes its exact public GHCR
+  the immutable `v0.1.0-preview.15` release and exposes its exact public GHCR
   tag for Linux x64/ARM64; GitHub artifacts alone must never
   unlock downloads.
   Its desktop onboarding uses the local operator app (Windows menu option 8)
-  for consent-based dedicated-account setup followed by a separate start/stop
-  action and acknowledged status in the preview.14 release. Promote the pinned
+  for consent-based dedicated-account setup and automatic start in a fresh child,
+  plus explicit stop/start and acknowledged status in preview.15. Promote the pinned
   download only after immutable artifacts and a first-party canary are verified;
   qualification may continue to accept preview.13 during the reviewed overlap.
   The linked runbook retains `enroll` and headless commands. No private keys are pasted
@@ -126,7 +126,7 @@ with a scroll-reveal IntersectionObserver).
   The Linux cohort path must show the complete headless install, enrollment,
   no-probe check, systemd persistence, and service-health sequence directly on
   the page. It pins the service helper to a reviewed immutable commit and
-  verifies its SHA-256 separately from the frozen preview.14 binary; never use
+  verifies its SHA-256 separately from the frozen preview.15 binary; never use
   a mutable branch download, curl-to-shell, or credentials in command arguments.
   Its versioned Docker card links to the canonical first-run enrollment path,
   which runs as the host user, mounts credentials read-only after setup, and

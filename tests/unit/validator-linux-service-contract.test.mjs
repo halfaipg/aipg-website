@@ -10,7 +10,7 @@ import {
 } from "../../app/validate/linuxServiceContract.mjs";
 
 test("pins the cohort binary and systemd helper independently", () => {
-  assert.equal(VALIDATOR_RELEASE_TAG, "v0.1.0-preview.14");
+  assert.equal(VALIDATOR_RELEASE_TAG, "v0.1.0-preview.15");
   assert.match(SYSTEMD_HELPER_COMMIT, /^[0-9a-f]{40}$/);
   assert.match(SYSTEMD_HELPER_SHA256, /^[0-9a-f]{64}$/);
   assert.equal(
