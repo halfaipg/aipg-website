@@ -22,6 +22,13 @@ function ResponseDetails({ message }) {
   );
 }
 
+function resizeComposer(node) {
+  if (!node) return;
+  node.style.height = "auto";
+  node.style.height = `${Math.min(node.scrollHeight, 192)}px`;
+  node.style.overflowY = node.scrollHeight > 192 ? "auto" : "hidden";
+}
+
 export default function GridChat() {
   const [config, setConfig] = useState(null);
   const [remaining, setRemaining] = useState(3);
@@ -35,6 +42,36 @@ export default function GridChat() {
   const widget = useRef(null);
   const widgetId = useRef(null);
   const abort = useRef(null);
+  const composer = useRef(null);
+  const restoreFocus = useRef(false);
+  const transcript = useRef(null);
+  const followReply = useRef(true);
+
+  useEffect(() => {
+    if (followReply.current && transcript.current) transcript.current.scrollTop = transcript.current.scrollHeight;
+  }, [messages]);
+
+  useEffect(() => { resizeComposer(composer.current); }, [input]);
+
+  useEffect(() => {
+    const node = composer.current;
+    let width = 0;
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry.contentRect.width !== width) {
+        width = entry.contentRect.width;
+        resizeComposer(node);
+      }
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!busy && restoreFocus.current) {
+      restoreFocus.current = false;
+      if (!composer.current?.disabled) composer.current?.focus({ preventScroll: true });
+    }
+  }, [busy]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -64,12 +101,14 @@ export default function GridChat() {
 
   async function send(event) {
     event.preventDefault();
-    if (busy || !input.trim() || !token || remaining < 1 || !config?.available) return;
+    if (busy || abort.current || !input.trim() || !token || remaining < 1 || !config?.available) return;
     // Failed/partial answers are visible, but never replayed as completed turns.
     const history = messages.filter(m => !m.failed);
     const outgoing = [...history, { role: "user", content: input.trim() }];
     setMessages([...outgoing, { role: "assistant", content: "" }]);
     setInput(""); setBusy(true); setError(""); setModel("Auto");
+    restoreFocus.current = true;
+    followReply.current = true;
     const controller = new AbortController(); abort.current = controller;
     let completed = false;
     try {
@@ -129,32 +168,18 @@ export default function GridChat() {
             <a href="https://aipg.music" className="inline-flex items-center gap-1.5 hover:text-white"><FiMusic aria-hidden="true" /> Music</a>
           </div>
         </div>
-        <div role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} className={messages.length ? "mt-7" : ""}>
-            {messages.map((m, i) => (
-              <article key={i} aria-label={m.role === "user" ? "Your message" : "Grid response"} className={m.role === "user" ? "border-t border-white/10 pb-6 pt-5" : "pb-8"}>
-                {m.role === "user" ? <>
-                  <p className="mb-2 text-xs text-gray-500">You</p>
-                  <p className="whitespace-pre-wrap text-base font-medium leading-7 text-gray-200 [overflow-wrap:anywhere] sm:text-lg">{m.content}</p>
-                </> : <>
-                  <div className="mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-                    <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
-                    {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
-                    {busy && i === messages.length - 1 && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
-                  </div>
-                  {m.content ? <div className="grid-chat-answer text-base leading-7 text-gray-200 [overflow-wrap:anywhere] sm:leading-8">
-                    <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
-                  </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
-                </>}
-                {m.completed && !m.failed && <ResponseDetails message={m} />}
-              </article>
-            ))}
-        </div>
           <form onSubmit={send} className="mt-5 overflow-hidden rounded-[8px] border border-white/20 bg-[#17181b] shadow-[0_12px_40px_rgba(0,0,0,0.25)] transition-colors focus-within:border-orange-300/60">
             <label htmlFor="grid-message" className="sr-only">Your message</label>
-              <textarea id="grid-message" rows={3} maxLength={1000} value={input} disabled={busy || !config?.available || remaining === 0}
-                onChange={e => setInput(e.target.value)} placeholder={messages.length ? "Keep the conversation going..." : "What are you curious about?"}
-                className="block h-28 w-full min-w-0 resize-none bg-transparent px-5 pb-3 pt-5 text-base leading-relaxed text-white placeholder:text-gray-400 focus:outline-none disabled:cursor-not-allowed sm:px-6 sm:text-lg" />
-            <div className="flex min-h-16 items-center justify-between gap-3 px-4 pb-4 sm:px-5">
+              <textarea ref={composer} id="grid-message" rows={1} maxLength={1000} value={input} disabled={busy || !config?.available || remaining === 0}
+                onChange={e => setInput(e.target.value)} placeholder={messages.length ? "Ask a follow-up..." : "What are you curious about?"}
+                onKeyDown={event => {
+                  if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing && event.nativeEvent.keyCode !== 229) {
+                    event.preventDefault();
+                    if (!event.repeat) event.currentTarget.form?.requestSubmit();
+                  }
+                }}
+                className="block max-h-48 min-h-12 w-full min-w-0 resize-none overflow-y-hidden bg-transparent px-4 py-3 text-base leading-6 text-white placeholder:text-gray-400 focus:outline-none disabled:cursor-not-allowed sm:px-5" />
+            <div className="flex min-h-14 items-center justify-between gap-3 px-4 pb-3 sm:px-5">
               <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400">
                 <span className="inline-flex min-w-0 items-center gap-2 text-gray-200"><FiCpu aria-hidden="true" className="h-4 w-4 shrink-0 text-orange-300" /><span className="break-all">{busy ? model : "Auto"}</span></span>
                 <span>{config?.available ? `${remaining} / 3 free turns left today` : config === null ? "Connecting..." : "Demo not open yet"}</span>
@@ -168,6 +193,31 @@ export default function GridChat() {
           <div ref={widget} className="mt-3 min-h-[65px] min-w-0" />
         </>}
         {error && <p role="status" className={`mt-3 text-xs leading-relaxed ${config?.available ? "text-amber-200" : "text-gray-400"}`}>{error}</p>}
+        <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} tabIndex={messages.length ? 0 : -1}
+          onScroll={event => {
+            const node = event.currentTarget;
+            followReply.current = node.scrollHeight - node.scrollTop - node.clientHeight < 64;
+          }}
+          className={messages.length ? "mt-4 h-[min(28rem,55svh)] min-h-64 overflow-y-auto overscroll-contain border-y border-white/10 pr-3 [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:pr-5" : ""}>
+          {messages.map((m, i) => (
+            <article key={i} aria-label={m.role === "user" ? "Your message" : "Grid response"} className={m.role === "user" ? "border-t border-white/10 pb-5 pt-5 first:border-t-0" : "pb-7"}>
+              {m.role === "user" ? <>
+                <p className="mb-2 text-xs text-gray-500">You</p>
+                <p className="whitespace-pre-wrap text-base font-medium leading-7 text-gray-200 [overflow-wrap:anywhere] sm:text-lg">{m.content}</p>
+              </> : <>
+                <div className="mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+                  <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
+                  {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
+                  {busy && i === messages.length - 1 && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
+                </div>
+                {m.content ? <div className="grid-chat-answer text-base leading-7 text-gray-200 [overflow-wrap:anywhere] sm:leading-8">
+                  <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
+                </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
+              </>}
+              {m.completed && !m.failed && <ResponseDetails message={m} />}
+            </article>
+          ))}
+        </div>
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-md text-xs leading-relaxed text-gray-500">Community workers can read your prompts. Don&apos;t share secrets or personal information.</p>
           <div className="flex items-center gap-3">
