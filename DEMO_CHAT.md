@@ -10,12 +10,14 @@ it never substitutes simulated answers. Browser tests use labelled fixtures only
 Production preflight on September 5 found Core in `allowlist` charging mode,
 with only `z-image-turbo` in its model allowlist and the proposed demo service
 absent. Do not activate this auto-text demo under that configuration: resolved
-text models bypass charging and therefore the service ceilings. The route now
-rejects any credit summary whose `charging_mode` is not `on`, even when the
-account-level `charging_enabled` is true. Never globally enable charging just
-to satisfy this demo. A scoped Core contract that guarantees charging and
-ceilings for every model routed by this service needs a separate reviewed
-change and tests before this restriction can be relaxed.
+text models bypass charging and therefore the service ceilings. The route
+requires Core's version-1 authenticated `service_budget`: all models charged,
+positive per-request/day ceilings no larger than the website's own limits, and
+active `on` or scoped `allowlist` charging. Account-level eligibility alone is
+insufficient. Core's default-empty `GRID_CHARGING_ALL_MODEL_SERVICES` JSON list
+selects only exact bounded direct services; delegated users retain their current
+policy. Never globally enable charging just to satisfy this demo. Deploy and
+verify that Core contract before activating the website.
 
 Cloudflare widget `AIPG homepage demo - production` was created September 5
 for `aipowergrid.io`, with Managed verification and pre-clearance disabled.
@@ -92,10 +94,10 @@ An upstream proxy may group users under its IP, reducing allowance, not safety.
    and its daily ceiling **at or below 500,000 micro-USD ($0.50)**. Enable charging
    for this service account and every text model eligible for `auto`. Verify
    real cap rejection, concurrency and model routing before public activation.
-   The route checks `charging_enabled` and requires `charging_mode=on` before
-   each submission; an allowlisted summary cannot prove auto-model coverage.
-   That summary does
-   **not** attest to the service's configured ceilings. Core must enforce them.
+   The route checks `charging_enabled` and the versioned `service_budget` before
+   each submission. The latter must attest to model-independent charging and
+   the actual positive direct-service ceilings. It is not remaining capacity;
+   Core still atomically enforces the limits at request authorization.
    The website's exposure counter is only an upper bound when this per-request
    ceiling is configured correctly. Account-wide charging alone is insufficient.
 3. Provide a dedicated non-evicting Upstash Redis database and a Turnstile widget

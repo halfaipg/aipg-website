@@ -19,8 +19,10 @@ the site reads/writes.
   bounded text-only Grid requests and sanitized streaming. Imported only by
   the API route and tests, never a client component. Core ceilings and live
   activation are mandatory prerequisites in `DEMO_CHAT.md`.
-  Auto dispatch requires the Core summary's `charging_mode=on`; account-only
-  allowlist eligibility does not prove all resolved models enforce budgets.
+  Auto dispatch requires Core's version-1 authenticated `service_budget` with
+  `all_models_charged=true` and positive request/day caps no larger than the
+  website's exposure reservations. Both `on` and scoped `allowlist` are accepted;
+  account-only eligibility never proves resolved models enforce budgets.
   Never widen global charging to satisfy the demo activation gate.
   Prefer Vercel's managed `DEMO_KV_REST_API_URL`/`DEMO_KV_REST_API_TOKEN`
   pair. Reject incomplete managed pairs; never substitute TCP or read-only

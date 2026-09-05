@@ -17,7 +17,7 @@ test("demo function fits the hosting plan and leaves cleanup time", () => {
 const frame = data => `data: ${typeof data === "string" ? data : JSON.stringify(data)}\n\n`;
 const answer = frame({ model: "actual-worker-model", choices: [{ delta: { content: "Hello!", reasoning_content: "private reasoning" } }] }) + frame({ choices: [{ delta: {}, finish_reason: "stop" }] }) + frame("[DONE]");
 const request = (options = {}) => new Request(`${env.DEMO_CHAT_ORIGIN}/api/demo/chat`, { method: "POST", headers: { origin: env.DEMO_CHAT_ORIGIN, "content-type": "application/json", ...options.headers }, body: JSON.stringify(options.body || body) });
-function fixture({ reservation = ["ok", 2], charging = true, chargingMode = "on", verification, stream = answer, redisFailure = false } = {}) {
+function fixture({ reservation = ["ok", 2], charging = true, chargingMode = "on", policy = { version: 1, all_models_charged: true, per_request_micro: 10000, daily_micro: 500000 }, verification, stream = answer, redisFailure = false } = {}) {
   const calls = [];
   const fetcher = async (url, init) => {
     calls.push({ url, init });
@@ -27,7 +27,7 @@ function fixture({ reservation = ["ok", 2], charging = true, chargingMode = "on"
       return Response.json({ result: cmd[0] === "MGET" ? [null, null] : cmd[1] === RESERVE_LUA ? reservation : 1 });
     }
     if (url.includes("siteverify")) return Response.json(verification || { success: true, hostname: "127.0.0.1", action: "homepage_chat" });
-    if (url.endsWith("/credits")) return Response.json({ charging_enabled: charging, charging_mode: chargingMode });
+    if (url.endsWith("/credits")) return Response.json({ charging_enabled: charging, charging_mode: chargingMode, service_budget: policy });
     return new Response(stream, { headers: { "content-type": "text/event-stream" } });
   };
   return { calls, handle: createDemoHandler({ env, fetcher }) };
@@ -115,13 +115,24 @@ test("quota, budget and in-flight rejection never dispatch inference", async () 
 });
 
 test("disabled, model-allowlisted or unknown charging and unavailable Redis fail closed", async () => {
-  for (const options of [{ charging: false }, { chargingMode: "allowlist" }, { chargingMode: "off" }, { chargingMode: null }, { redisFailure: true }]) {
+  for (const options of [{ charging: false }, { chargingMode: "allowlist", policy: null }, { chargingMode: "off" }, { chargingMode: null }, { redisFailure: true },
+    ...[null, {}, { version: 1, all_models_charged: false, per_request_micro: 10000, daily_micro: 500000 },
+      { version: 1, all_models_charged: true, per_request_micro: 10001, daily_micro: 500000 },
+      { version: 1, all_models_charged: true, per_request_micro: 10000, daily_micro: 500001 },
+      { version: 1, all_models_charged: true, per_request_micro: 0, daily_micro: 500000 }].map(policy => ({ policy }))]) {
     const { calls, handle } = fixture(options);
     const response = await handle(request());
     assert.equal(response.status, 503);
     assert.doesNotMatch(await response.text(), /secret|fixture-only/);
     assert.equal(calls.some(c => c.url.endsWith("completions")), false);
   }
+});
+
+test("scoped all-model service charging works without enabling charging for other users", async () => {
+  const { handle } = fixture({ chargingMode: "allowlist" });
+  const response = await handle(request());
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /"type":"done"/);
 });
 
 test("successful stream uses fixed auto, no tools, strips reasoning, releases only the lease", async () => {
