@@ -110,7 +110,9 @@ with a scroll-reveal IntersectionObserver).
   unlock downloads.
   Its desktop onboarding uses the local operator app (Windows menu option 8)
   for consent-based dedicated-account setup followed by a separate start/stop
-  action and acknowledged status in the published preview.13 release.
+  action and acknowledged status in the preview.14 release. Promote the pinned
+  download only after immutable artifacts and a first-party canary are verified;
+  qualification may continue to accept preview.13 during the reviewed overlap.
   The linked runbook retains `enroll` and headless commands. No private keys are pasted
   into setup or handled on the marketing site. Existing-account pairing remains
   a separate, unshipped flow; never direct users to replace an existing identity.
@@ -124,7 +126,7 @@ with a scroll-reveal IntersectionObserver).
   The Linux cohort path must show the complete headless install, enrollment,
   no-probe check, systemd persistence, and service-health sequence directly on
   the page. It pins the service helper to a reviewed immutable commit and
-  verifies its SHA-256 separately from the frozen preview.13 binary; never use
+  verifies its SHA-256 separately from the frozen preview.14 binary; never use
   a mutable branch download, curl-to-shell, or credentials in command arguments.
   Its versioned Docker card links to the canonical first-run enrollment path,
   which runs as the host user, mounts credentials read-only after setup, and
