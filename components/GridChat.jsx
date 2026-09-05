@@ -39,6 +39,7 @@ export default function GridChat() {
   const [model, setModel] = useState("Auto");
   const [token, setToken] = useState("");
   const [scriptReady, setScriptReady] = useState(false);
+  const [challengeVisible, setChallengeVisible] = useState(false);
   const widget = useRef(null);
   const widgetId = useRef(null);
   const abort = useRef(null);
@@ -90,9 +91,11 @@ export default function GridChat() {
   useEffect(() => {
     if (!config?.available || !scriptReady || !widget.current || !window.turnstile) return;
     widgetId.current = window.turnstile.render(widget.current, {
-      sitekey: config.siteKey, action: "homepage_chat", theme: "dark",
+      sitekey: config.siteKey, action: "homepage_chat", theme: "dark", appearance: "interaction-only",
       size: window.matchMedia("(max-width: 359px)").matches ? "compact" : "flexible",
-      callback: value => setToken(value),
+      callback: value => { setToken(value); setChallengeVisible(false); },
+      "before-interactive-callback": () => { setToken(""); setChallengeVisible(true); },
+      "after-interactive-callback": () => setChallengeVisible(false),
       "expired-callback": () => setToken(""),
       "error-callback": () => { setToken(""); setError("Verification could not load. Retry or open Chat."); },
     });
@@ -190,34 +193,31 @@ export default function GridChat() {
           </form>
         {config?.available && <>
           <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" onReady={() => setScriptReady(true)} onError={() => setError("Verification could not load. Please open Chat.")} />
-          <div ref={widget} className="mt-3 min-h-[65px] min-w-0" />
         </>}
-        {error && <p role="status" className={`mt-3 text-xs leading-relaxed ${config?.available ? "text-amber-200" : "text-gray-400"}`}>{error}</p>}
-        <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} tabIndex={messages.length ? 0 : -1}
+        <div className="mt-3 grid min-w-0 grid-cols-1" aria-label="Verification and reply area">
+          {config?.available && <div ref={widget} className="col-start-1 row-start-1 min-w-0 self-start" />}
+        <div ref={transcript} role="log" aria-label="Chat conversation" aria-live="polite" aria-busy={busy} aria-hidden={challengeVisible} tabIndex={messages.length && !challengeVisible ? 0 : -1}
           onScroll={event => {
             const node = event.currentTarget;
             followReply.current = node.scrollHeight - node.scrollTop - node.clientHeight < 64;
           }}
-          className={messages.length ? "mt-4 h-[min(28rem,55svh)] min-h-64 overflow-y-auto overscroll-contain border-y border-white/10 pr-3 [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:pr-5" : ""}>
-          {messages.map((m, i) => (
-            <article key={i} aria-label={m.role === "user" ? "Your message" : "Grid response"} className={m.role === "user" ? "border-t border-white/10 pb-5 pt-5 first:border-t-0" : "pb-7"}>
-              {m.role === "user" ? <>
-                <p className="mb-2 text-xs text-gray-500">You</p>
-                <p className="whitespace-pre-wrap text-base font-medium leading-7 text-gray-200 [overflow-wrap:anywhere] sm:text-lg">{m.content}</p>
-              </> : <>
+          className={`col-start-1 row-start-1 min-w-0 ${challengeVisible ? "invisible" : ""} ${messages.length ? "max-h-[min(20rem,50svh)] min-h-[65px] overflow-y-auto overscroll-contain pr-3 [scrollbar-gutter:stable] focus-visible:outline focus-visible:outline-1 focus-visible:outline-orange-300/60 sm:pr-5" : ""}`}>
+          {messages.filter(m => m.role === "assistant").slice(-1).map(m => (
+            <article key={messages.length} aria-label="Grid response" className="py-3">
                 <div className="mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                   <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
                   {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
-                  {busy && i === messages.length - 1 && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
+                  {busy && <span className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking"}</span>}
                 </div>
                 {m.content ? <div className="grid-chat-answer text-base leading-7 text-gray-200 [overflow-wrap:anywhere] sm:leading-8">
                   <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
                 </div> : <p className="text-sm leading-7 text-gray-400">{busy ? "Connecting to a Grid worker..." : "No response received."}</p>}
-              </>}
               {m.completed && !m.failed && <ResponseDetails message={m} />}
             </article>
           ))}
         </div>
+        </div>
+        {error && <p role="status" className={`mt-3 text-xs leading-relaxed ${config?.available ? "text-amber-200" : "text-gray-400"}`}>{error}</p>}
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-md text-xs leading-relaxed text-gray-500">Community workers can read your prompts. Don&apos;t share secrets or personal information.</p>
           <div className="flex items-center gap-3">

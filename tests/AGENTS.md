@@ -18,6 +18,9 @@ onboarding, and staking-withdrawal surfaces.
   URL rejection, and identical versioned/fallback favicon assets.
   Composer coverage includes auto-growth/shrink, viewport reflow, Enter versus
   Shift+Enter/IME, submit guards, and focus restoration after terminal responses.
+  Turnstile fixtures also exercise the shared verification/reply slot, mandatory
+  interactive challenges, callback restoration, expired tokens, and no blank
+  CAPTCHA space after success.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including

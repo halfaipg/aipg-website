@@ -64,7 +64,15 @@ product links. Guests get up to three submitted turns per UTC day, subject to
 shared availability and anti-abuse limits. Replies stream, expose the returned
 model name, and support stopping. Clear conversation does not reset the quota.
 The full Chat link opens the product; it does not transfer the demo transcript.
-The empty state is a compact composer. A completed answer displays its model,
+The empty state is a single-line, growing composer. Enter submits and Shift+Enter
+adds a newline. The latest AI reply replaces the verification area beneath it;
+completed conversation history remains in memory for follow-ups. Short answers
+use their natural height; longer ones scroll within a bounded area.
+Turnstile uses `interaction-only` appearance and remains mounted. If it requires
+a human check, that check temporarily occupies the reply slot without erasing
+the answer. Success restores the reply; reset and server token validation remain
+mandatory between submissions. See [Cloudflare's appearance configuration](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/#appearance-modes).
+A completed answer displays its model,
 public worker name, generation time, first-token time, decode tokens/second and
 output tokens when supplied by Core. Speeds/times are rounded to one decimal.
 These are reported request statistics, not independent hardware attestation or
