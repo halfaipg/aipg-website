@@ -40,7 +40,9 @@ test.describe('/run smoke', () => {
     const response = await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
     expect(response?.ok()).toBeTruthy();
-    await expect(page.getByRole('heading', { name: 'Put your AI stack to work' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'AI Power Grid Workers' })).toBeVisible();
+    await page.getByText('Media qualification progress', { exact: true }).click();
+    await page.getByText('See current capacity needs and workload history', { exact: true }).click();
     await expect(page.getByRole('button', { name: 'Text worker' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Media manager' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Linux', exact: true }).first()).toBeVisible();
@@ -94,7 +96,7 @@ test.describe('/run smoke', () => {
     await page.getByLabel('Expected text speed').fill('42');
     await expect(
       page.getByRole('heading', {
-        name: /Start with the verified text worker|Prepare for the hardened text-worker release/,
+        name: /Start with the text worker and your existing backend|Prepare your backend on/,
       }),
     ).toBeVisible();
     await expect(page.getByText('RTX 3090', { exact: true })).toBeVisible();
@@ -141,7 +143,7 @@ test.describe('/run smoke', () => {
       .getByRole('button', { name: 'Linux' })
       .click();
     await expect(
-      page.getByRole('heading', { name: 'Start with the verified text worker' }),
+      page.getByRole('heading', { name: 'Start with the text worker and your existing backend' }),
     ).toBeVisible();
 
     const overflow = await page.evaluate(() =>
@@ -175,7 +177,10 @@ test.describe('/run mobile smoke', () => {
     });
     await page.goto('/run', { waitUntil: 'domcontentloaded' });
 
-    await expect(page.getByRole('heading', { name: 'Put your AI stack to work' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'AI Power Grid Workers' })).toBeVisible();
+    await page.getByRole('link', { name: 'I already run AI', exact: true }).click();
+    await expect(page).toHaveURL(/#worker-downloads$/);
+    await expect.poll(() => page.locator('#worker-downloads').evaluate(el => el.getBoundingClientRect().top)).toBeLessThan(150);
     await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
     await expect(page.getByRole('button', { name: 'macOS' }).first()).toHaveAttribute(
       'aria-pressed',
@@ -189,9 +194,16 @@ test.describe('/run mobile smoke', () => {
     await page.getByLabel('Accelerator type', { exact: true }).selectOption('apple');
     await expect(
       page.getByRole('heading', {
-        name: /Start with the text worker and your existing backend|Prepare an existing backend for the text-worker candidate/,
+        name: /Prepare your backend on macOS/,
       }),
     ).toBeVisible();
+
+    await page.getByLabel('What do you want to run?').selectOption('audio');
+    await expect(page.getByRole('link', { name: 'Read the ACE-Step setup guide' })).toHaveAttribute('href', '/docs/backends/ace-step');
+    await page.getByLabel('What do you want to run?').selectOption('media');
+    await expect(page.getByRole('link', { name: 'Read the ComfyUI setup guide' })).toHaveAttribute('href', '/docs/backends/comfyui');
+    await page.getByLabel('Accelerator type', { exact: true }).selectOption('cpu');
+    await expect(page.getByRole('link', { name: 'Open validator setup' })).toHaveAttribute('href', '/validate');
 
     const overflow = await page.evaluate(() =>
       Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
@@ -203,6 +215,20 @@ test.describe('/run mobile smoke', () => {
     await page.screenshot({ path: 'test-results/run-mobile.png', fullPage: true });
   });
 });
+
+for (const width of [320, 768, 1440]) {
+  test(`/run layout at ${width}px contains Linux setup and media controls`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/run');
+    await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
+    await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    await page.screenshot({ path: `test-results/run-linux-${width}.png`, fullPage: true });
+    await page.getByRole('button', { name: 'Media manager', exact: true }).click();
+    await expect(page.getByRole('link', { name: 'Qualification instructions', exact: true })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  });
+}
 
 test.describe('/validate smoke', () => {
   test('states the preview trust boundary and renders verified preview downloads', async ({ page }) => {

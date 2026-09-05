@@ -1,133 +1,43 @@
-"use client";
+import Image from "next/image";
+import { FiArrowUpRight, FiMessageSquare, FiMusic, FiCode, FiLock } from "react-icons/fi";
 
 const products = [
-  {
-    title: "Generate Images",
-    description: "Create AI art with z-image-turbo, FLUX.2 Klein, and Krea 2 Turbo. Curated open image models.",
-    href: "https://aipg.art",
-    label: "aipg.art",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <circle cx="8.5" cy="8.5" r="1.5" />
-        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-      </svg>
-    ),
-  },
-  {
-    title: "Run Agents & Workflows",
-    description: "Open-source LLMs powering your agents, automations, and AI workflows. gpt-oss, Qwen3, DeepSeek — no corporate worldview baked in.",
-    href: "https://aipg.chat",
-    label: "aipg.chat",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M12 1v6m0 10v6m11-11h-6m-10 0H1m17.07-7.07l-4.24 4.24M7.17 16.83l-4.24 4.24m0-18.14l4.24 4.24m9.66 9.66l4.24 4.24"/>
-      </svg>
-    ),
-  },
-  {
-    title: "Build with the API",
-    description: "OpenAI and Anthropic compatible text plus Grid image, video, and audio endpoints. Community-powered backend with daily and prepaid credits.",
-    href: "https://aipowergrid.io/use",
-    label: "Start in 60 seconds",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-  },
-  {
-    title: "Earn with your GPU",
-    description: "Run an LLM, image, or video worker. Earn from the current hourly AIPG payout rail. No bond required to start; future bonding policy is not finalized.",
-    href: "https://docs.aipowergrid.io/run-a-node",
-    label: "Run a Worker",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8" />
-        <path d="M12 17v4" />
-      </svg>
-    ),
-  },
+  { title: "Talk it through", description: "Write, explore ideas, and work with open language models.", href: "https://aipg.chat", label: "Open chat", icon: FiMessageSquare },
+  { title: "Make a soundtrack", description: "Turn a musical idea and your lyrics into a track.", href: "https://aipg.music", label: "Open music studio", icon: FiMusic },
+  { title: "Build it into your app", description: "Compatible text APIs plus native Grid image, video, and audio endpoints.", href: "https://aipowergrid.io/use", label: "Start in 60 seconds", icon: FiCode },
 ];
 
-const Products = () => {
+export default function Products() {
   return (
-    <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-2xl sm:text-4xl font-semibold text-white">
-          Build on The Grid
-        </h2>
-        <p className="mt-3 text-gray-400 text-lg">
-          Agents, automations, art, video, workflows — running on community GPUs today. Pick one and ship.
-        </p>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product, i) => (
-          <a
-            key={i}
-            href={product.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block p-6 rounded-2xl bg-[#1F1F1F] border border-white/10 hover:border-[#f8991d]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(248,153,29,0.1)]"
-          >
-            <div className="text-[#f8991d] mb-4 group-hover:scale-110 transition-transform duration-300">
-              {product.icon}
-            </div>
-            <h3 className="text-white font-semibold text-lg mb-2">
-              {product.title}
-            </h3>
-            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              {product.description}
-            </p>
-            <span className="text-[#f8991d] text-sm font-medium group-hover:underline">
-              {product.label} →
-            </span>
-          </a>
-        ))}
-      </div>
-
-      {/* Code snippet */}
-      <div className="mt-12 max-w-2xl mx-auto">
-        <p className="text-center text-gray-400 text-sm mb-4">
-          Text, image, and video generation through familiar APIs. Three lines to get started:
-        </p>
-        <div className="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 font-mono text-sm leading-relaxed overflow-x-auto">
-          <div className="text-gray-500">
-            <span className="text-[#c586c0]">from</span>{" "}
-            <span className="text-[#4ec9b0]">openai</span>{" "}
-            <span className="text-[#c586c0]">import</span>{" "}
-            <span className="text-white">OpenAI</span>
+    <section aria-labelledby="products-title" className="bg-[#101114] py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 id="products-title" className="text-2xl font-semibold text-white sm:text-3xl">From an idea to something you can share.</h2>
+            <p className="mt-3 max-w-2xl leading-relaxed text-gray-300">Start with an image. Explore video in the Director, or find your next idea in the gallery.</p>
           </div>
-          <div className="mt-2 text-gray-500">
-            <span className="text-white">client</span>{" "}
-            <span className="text-gray-500">=</span>{" "}
-            <span className="text-[#4ec9b0]">OpenAI</span>
-            <span className="text-gray-400">(</span>
-          </div>
-          <div className="text-gray-500 pl-8">
-            <span className="text-[#9cdcfe]">base_url</span>
-            <span className="text-gray-500">=</span>
-            <span className="text-[#ce9178]">"https://api.aipowergrid.io/v1"</span>
-            <span className="text-gray-400">,</span>
-          </div>
-          <div className="text-gray-500 pl-8">
-            <span className="text-[#9cdcfe]">api_key</span>
-            <span className="text-gray-500">=</span>
-            <span className="text-[#ce9178]">"your-key"</span>
-          </div>
-          <div className="text-gray-400">)</div>
+          <a href="https://aipg.art/create" className="inline-flex items-center gap-2 py-2 font-semibold text-orange-300 hover:text-orange-200">Open image studio <FiArrowUpRight aria-hidden="true" /></a>
         </div>
-        <p className="text-center mt-4">
-          <a href="https://console.aipowergrid.io" target="_blank" className="text-[#f8991d] text-sm font-medium hover:underline">
-            Create an API key →
-          </a>
-        </p>
+        <a href="https://aipg.art" aria-label="Explore the AIPG art gallery" className="block overflow-hidden rounded-lg border border-white/20">
+          <div aria-hidden="true" className="flex h-10 items-center gap-4 border-b border-white/10 bg-[#202125] px-3 sm:px-4">
+            <div className="flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#f27770]" /><span className="h-2.5 w-2.5 rounded-full bg-[#e8c15c]" /><span className="h-2.5 w-2.5 rounded-full bg-[#69bf82]" /></div>
+            <span className="flex flex-1 items-center justify-center gap-2 text-xs text-gray-300"><FiLock /> aipg.art</span>
+            <FiArrowUpRight className="text-gray-400" />
+          </div>
+          <Image src="/gallery-preview.png" alt="AIPG gallery preview showing the live gallery and landscape search results" width={1440} height={900} sizes="(max-width: 1280px) 100vw, 1280px" className="h-auto w-full" />
+        </a>
+        <p className="mt-2 text-sm text-gray-400">Gallery preview. Model availability and generation settings vary.</p>
+        <div className="mt-8 grid divide-y divide-white/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {products.map(({ title, description, href, label, icon: Icon }) => (
+            <div key={href} className="flex min-w-0 flex-col py-6 first:pt-0 sm:px-6 sm:py-0 sm:first:pl-0 sm:first:pt-0 sm:last:pr-0">
+              <Icon aria-hidden="true" className="mb-3 h-6 w-6 text-cyan-300" />
+              <h3 className="text-xl font-semibold text-white">{title}</h3>
+              <p className="mb-4 mt-2 leading-relaxed text-gray-300">{description}</p>
+              <a href={href} className="mt-auto inline-flex items-center gap-2 py-2 font-medium text-orange-300 hover:text-orange-200">{label} <FiArrowUpRight aria-hidden="true" /></a>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Products;
+}

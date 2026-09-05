@@ -14,6 +14,17 @@ the site reads/writes.
 - `stakingContracts.js` — `STAKING_VAULT_ADDRESS`, `AIPG_TOKEN_ADDRESS` (Base mainnet) + minimal
   `ERC20_ABI` and `STAKING_VAULT_ABI`. Consumed by `hooks/useStaking.js`.
 - `utils.js` — `cn()` Tailwind class-merge helper.
+- `demoChat.mjs` - server-only homepage demo configuration, signed day cookies,
+  trusted client-IP normalization, atomic shared limits, bot verification,
+  bounded text-only Grid requests and sanitized streaming. Imported only by
+  the API route and tests, never a client component. Core ceilings and live
+  activation are mandatory prerequisites in `DEMO_CHAT.md`.
+  Auto dispatch requires the Core summary's `charging_mode=on`; account-only
+  allowlist eligibility does not prove all resolved models enforce budgets.
+  Never widen global charging to satisfy the demo activation gate.
+  Stream metadata is a strict allowlist of public worker name, generation time,
+  first-token time, decode speed, and bounded completion tokens. It reaches the
+  browser only with a successful terminal frame; internal routing/IDs never do.
 
 ## Local Contracts
 

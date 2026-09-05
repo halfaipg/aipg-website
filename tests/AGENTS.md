@@ -7,6 +7,14 @@ onboarding, and staking-withdrawal surfaces.
 
 ## Ownership
 
+- `unit/demo-chat*.test.mjs` - disabled/configuration gates, request bounds,
+  cookies, trusted IPs, bot checks, cap rejection, sanitized terminal streaming,
+  and real isolated Redis Lua concurrency when Redis tools are installed.
+- `e2e/chat.spec.ts` - explicitly mocked streaming, allowance, clearing, error
+  and unavailable states, compact empty composer, plus long worker/model names
+  and rounded per-response statistics on mobile/desktop. These fixtures are
+  not evidence of live inference.
+
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
   the preview.13 operator app, consent-based setup, Windows menu option 8,
@@ -67,11 +75,19 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/operator-platform.test.mjs` - shared conservative platform detection
   that keeps download availability and planner recommendations synchronized;
   the mobile `/run` smoke forces macOS and rejects hydration/page errors.
+- `unit/operator-recommendation.test.mjs` - workload-directed recommendations,
+  platform-local availability, and separate hardware/profile qualification.
+  `/run` smoke also checks the hero anchor, disclosure controls, and the
+  audio, image/video, and CPU-only guide handoffs.
 - `unit/media-qualification-status.test.mjs` - strict normalization of the
   profile-bound public media qualification counts and trusted recruitment
   links.
 
 ## Local Contracts
+
+- Homepage acquisition tests cover 320/390/768/1280/1920px, direct consumer
+  handoffs, first-screen user/worker/API actions, a visible next-section hint,
+  gallery asset loading, no horizontal overflow, and no-JavaScript readability.
 
 - Tests must never sign or broadcast a real transaction, use private keys, or
   depend on a funded wallet.

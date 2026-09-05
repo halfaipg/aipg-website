@@ -45,7 +45,8 @@ on Vercel.
 
 - **`app/`** — App Router routes (home, `/about`, `/use`, `/run`, `/validate`, `/status`,
   `/staking`, `/wallet`) plus public proxy routes for the BTC chart and the
-  redacted validator-status lookup. Owned in its own AGENTS.md.
+  redacted validator-status lookup, and the bounded sponsored homepage chat.
+  Owned in its own AGENTS.md.
 - **`components/`** — page sections and the web3 staking UI. Owned in its own AGENTS.md.
 - **`lib/`** — web3 config + on-chain contract addresses/ABIs (Base). Owned in its own AGENTS.md.
 - **`hooks/useStaking.js`** — the single staking read/write hook (wagmi/viem); reads contracts
@@ -80,10 +81,12 @@ on Vercel.
 
 - **Inherit org engineering standards:** `aipg-documentation/engineering-standards/`
   (core + git + the matching language file).
-- This is primarily a marketing site, but `/staking` is a real withdrawal product surface. No
-  private keys, secrets, or local server state belong here. The only application backend route
-  is btc-chart (public CoinGecko + bundled CSV); wallet writes go directly to reviewed Base
-  contracts through wagmi/viem.
+- This is primarily a marketing site, but `/staking` is a real withdrawal product surface.
+  Wallet writes go directly to reviewed Base contracts through wagmi/viem.
+  Server-only deployment credentials for the explicitly bounded homepage demo
+  must never enter source, logs, public env vars, or client bundles. Demo quotas
+  belong in shared durable Redis, never process memory. See `DEMO_CHAT.md` for
+  configuration, Core service-budget prerequisites and public activation gates.
 - **Chain = Base mainnet only** (`wagmi/chains` `base`, id 8453). On-chain addresses live ONLY in
   `lib/stakingContracts.js` — never hardcode contract addresses in components/pages.
 - **Staking is withdrawal-only.** The staking program has wound down; the UI must not offer new
