@@ -35,7 +35,12 @@ Reusable React components: the marketing page sections composed by `app/page.js`
   established brand. `GridChat` uses only the same-origin bounded demo route,
   with an explicit unavailable state until server configuration is ready.
   Never fabricate streamed answers or expose the dedicated service credential.
-  Images/video/music remain adjacent product options. No prompts in telemetry
+  Video/music remain adjacent product options. Opt-in image tools render one
+  validated Core raster inline with an original-image link and image-studio
+  handoff. The independent image allowance never disables ordinary text turns.
+  Preserve only the generated description in follow-up context, not the image
+  URL or bytes; the assistant cannot see or edit past images. Model-generated
+  Markdown images remain forbidden. No prompts in telemetry
   or browser persistence; clear transcript never resets server allowance.
   Gallery browser-window chrome is decorative around a real public screenshot.
   The chat starts as a compact composer, not an empty transcript panel; the

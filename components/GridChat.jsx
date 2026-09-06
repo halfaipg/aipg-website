@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Script from "next/script";
 import Markdown from "react-markdown";
 import { GUEST_TURNS, conversationWindow } from "@/lib/demoChatPolicy.mjs";
+import { IMAGE_LIMIT, IMAGE_MODELS, safeImageUrl } from "@/lib/demoImagePolicy.mjs";
 import { FiArrowUp, FiArrowDown, FiArrowUpRight, FiImage, FiFilm, FiMusic, FiSquare, FiRotateCcw, FiCpu, FiServer } from "react-icons/fi";
 
 function ResponseDetails({ message }) {
@@ -34,6 +35,7 @@ export default function GridChat({ preview = null }) {
   const request = preview?.request || fetch;
   const [config, setConfig] = useState(null);
   const [remaining, setRemaining] = useState(GUEST_TURNS);
+  const [imageRemaining, setImageRemaining] = useState(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -102,6 +104,7 @@ export default function GridChat({ preview = null }) {
         if (!response.ok) throw new Error("Unavailable");
         setConfig(data);
         if (Number.isInteger(data.remaining)) setRemaining(data.remaining);
+        if (data.images && Number.isInteger(data.images.remaining)) setImageRemaining(data.images.remaining);
         if (!data.available) setError(data.error?.message || "The demo is unavailable. Please open Chat.");
       })
       .catch(err => { if (err.name !== "AbortError") { setConfig({ available: false }); setError("The demo is unavailable right now. Please open Chat."); } });
@@ -189,6 +192,18 @@ export default function GridChat({ preview = null }) {
             const line = buffer.slice(0, index); buffer = buffer.slice(index + 1);
             if (!line.trim()) continue;
             const item = JSON.parse(line);
+            if (item.type === "image_quota") setImageRemaining(item.remaining);
+            if (item.type === "image_start") {
+              if (!IMAGE_MODELS.includes(item.model)) throw new Error("Image model unavailable.");
+              setImageRemaining(item.remaining);
+              setModel(item.model);
+              setMessages(current => current.map((m, i) => i === current.length - 1 ? { ...m, content: "", model: item.model, generatingImage: true } : m));
+            }
+            if (item.type === "image") {
+              const url = safeImageUrl(item.url);
+              if (!url || !IMAGE_MODELS.includes(item.model) || typeof item.prompt !== "string" || item.prompt.length > 1000) throw new Error("The image could not be displayed.");
+              setMessages(current => current.map((m, i) => i === current.length - 1 ? { ...m, content: `Generated a new image with ${item.model}. Image description: ${item.prompt}`, image: { url, prompt: item.prompt }, model: item.model, generatingImage: false } : m));
+            }
             if (item.type === "meta") setRemaining(item.remaining);
             if (item.type === "model") {
               setModel(item.model);
@@ -239,12 +254,23 @@ export default function GridChat({ preview = null }) {
                   <div className="mb-3 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                     <span className="inline-flex shrink-0 items-center gap-2 font-medium text-orange-300"><FiCpu aria-hidden="true" className="h-4 w-4" /> Grid</span>
                     {m.model && <span className="min-w-0 break-all text-gray-500">{m.model}</span>}
-                    {busy && !verifying && <span role="status" className="text-gray-400 motion-safe:animate-pulse">{m.content ? "Responding" : "Thinking..."}</span>}
+                    {busy && !verifying && <span role="status" className="text-gray-400 motion-safe:animate-pulse">{m.generatingImage ? "Generating image..." : m.content ? "Responding" : "Thinking..."}</span>}
                   </div>
-                  {m.content ? <div className="grid-chat-answer text-sm leading-6 text-gray-200 [overflow-wrap:anywhere] sm:text-base sm:leading-7">
+                  {m.image ? <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-5">
+                    {/* Only validated, Core-returned asset URLs may render as images. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={m.image.url} alt={m.image.prompt} width={1024} height={1024} referrerPolicy="no-referrer" className="aspect-square max-h-44 w-full max-w-full rounded object-contain" onLoad={() => { if (followReply.current && transcript.current) transcript.current.scrollTop = transcript.current.scrollHeight; }} onError={event => { event.currentTarget.hidden = true; setError("The image could not load. Open the image link to try viewing it."); }} />
+                    <div className="min-w-0">
+                    <div className="flex flex-wrap gap-3 text-xs text-orange-300">
+                      <a href={m.image.url} download target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1" title="Open or download the generated image">Open image <FiArrowUpRight aria-hidden="true" /></a>
+                      <a href="https://aipg.art/create" target="_blank" rel="noopener noreferrer">Image studio</a>
+                    </div>
+                    {m.completed && !m.failed && <ResponseDetails message={m} />}
+                    </div>
+                  </div> : m.content ? <div className="grid-chat-answer text-sm leading-6 text-gray-200 [overflow-wrap:anywhere] sm:text-base sm:leading-7">
                     <Markdown skipHtml allowedElements={["p", "strong", "em", "del", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "h5", "h6", "a", "br", "hr"]} components={{ a: ({ children, href }) => <a href={href} target="_blank" rel="noopener noreferrer nofollow">{children}</a> }}>{m.content}</Markdown>
                   </div> : !busy && <p className="text-sm leading-7 text-gray-400">No response received.</p>}
-                  {m.completed && !m.failed && <ResponseDetails message={m} />}
+                  {!m.image && m.completed && !m.failed && <ResponseDetails message={m} />}
                 </article>
               ))}
             </div>
@@ -268,6 +294,7 @@ export default function GridChat({ preview = null }) {
               <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400">
                 <span className="inline-flex min-w-0 items-center gap-2 text-gray-200"><FiCpu aria-hidden="true" className="h-4 w-4 shrink-0 text-orange-300" /><span className="break-all">{verifying ? "Verifying..." : busy ? model : "Auto"}</span></span>
                 <span>{config?.available ? `${remaining} / ${config.limit || GUEST_TURNS} free turns left today` : config === null ? "Connecting..." : "Demo not open yet"}</span>
+                {imageRemaining !== null && <span>{imageRemaining} / {IMAGE_LIMIT} images left today</span>}
               </div>
               {busy ? <button key="stop" type="button" onClick={event => { event.preventDefault(); abort.current?.abort(); }} aria-label="Stop response" title="Stop response" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300"><FiSquare /></button> :
                 <button key="send" type="submit" disabled={!input.trim() || !scriptReady || !config?.available || remaining === 0} aria-label="Send message" title="Send message" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange-400 text-black transition-colors hover:bg-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-300 disabled:bg-white/10 disabled:text-gray-500"><FiArrowUp className="h-5 w-5" /></button>}

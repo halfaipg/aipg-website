@@ -7,6 +7,7 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { RESERVE_LUA, RELEASE_LUA } from "../../lib/demoChat.mjs";
+import { IMAGE_RESERVE_LUA } from "../../lib/demoImagePolicy.mjs";
 
 const available = spawnSync("redis-server", ["--version"]).status === 0 && spawnSync("redis-cli", ["--version"]).status === 0;
 test("real isolated Redis proves atomic guest, IP, budget, concurrency and lease limits", { skip: available ? false : "Install redis-server and redis-cli for the real Lua concurrency proof" }, async () => {
@@ -50,6 +51,25 @@ test("real isolated Redis proves atomic guest, IP, budget, concurrency and lease
     await release("lease", 1, "first");
     assert.equal((await reserve("lease", 2, 1, "second"))[0], "ok");
     assert.equal(await command("GET", "lease:budget"), "20");
+    const image = (prefix, guest, ip, budget = 1000, lease = "live") => command("EVAL", IMAGE_RESERVE_LUA, 4,
+      `${prefix}:g:${guest}:images`, `${prefix}:ip:${ip}:images`, `${prefix}:budget`, `${prefix}:lease:${ip}`, 10, budget, 86400, lease);
+    await command("SET", "image-guest:lease:1", "live", "EX", 75);
+    const imageGuestRace = await Promise.all(Array.from({ length: 25 }, () => image("image-guest", "same", 1)));
+    assert.equal(imageGuestRace.filter(r => r[0] === "ok").length, 2);
+    assert.equal(await command("GET", "image-guest:budget"), "20");
+    await command("SET", "image-ip:lease:1", "live", "EX", 75);
+    const imageIpRace = await Promise.all(Array.from({ length: 25 }, (_, i) => image("image-ip", i, 1)));
+    assert.equal(imageIpRace.filter(r => r[0] === "ok").length, 4);
+    assert.equal(await command("GET", "image-ip:budget"), "40");
+    // Text and image reservations share one daily ceiling, not separate budgets.
+    assert.equal((await reserve("shared", 1, 1, "live", 20))[0], "ok");
+    assert.equal((await image("shared", 1, 1, 20))[0], "ok");
+    assert.equal((await image("shared", 2, 1, 20))[0], "budget");
+    assert.equal(await command("GET", "shared:budget"), "20");
+    assert.equal(await command("GET", "shared:g:2:images"), null);
+    await release("shared", 1, "live");
+    assert.equal((await image("shared", 1, 1))[0], "expired");
+    assert.equal(await command("GET", "shared:g:1:images"), "1");
   } finally {
     server.kill("SIGTERM"); await ended; await rm(dir, { recursive: true, force: true });
   }

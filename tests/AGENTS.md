@@ -10,6 +10,13 @@ onboarding, and staking-withdrawal surfaces.
 - `unit/demo-chat*.test.mjs` - disabled/configuration gates, request bounds,
   cookies, trusted IPs, bot checks, cap rejection, sanitized terminal streaming,
   and real isolated Redis Lua concurrency when Redis tools are installed.
+  Image tests cover structured-only calls, strict model/argument/asset bounds,
+  owned leases, separate guest/IP quotas sharing the text exposure ceiling,
+  cancellation, offline models and uncertain outcomes without retries.
+- `e2e/chat-images.spec.ts` - labelled local raster fixtures for inline results,
+  mobile/desktop fit, image allowance persistence, description-only follow-ups,
+  unsafe URL rejection and continued text access after image failure/exhaustion.
+  These do not prove live auto tool support or image generation.
 - `e2e/chat.spec.ts` - explicitly mocked streaming, allowance, clearing, error
   and unavailable states, compact empty composer, plus long worker/model names
   and rounded per-response statistics on mobile/desktop. These fixtures are
