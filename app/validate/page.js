@@ -291,9 +291,8 @@ export default async function ValidatePage() {
                     </p>
                     {cohortStatus.olderVersionCount > 0 ? (
                       <p className="mt-2 text-sm leading-6 text-orange-200">
-                        Existing operators should replace the executable with
-                        the current release and keep their configuration and
-                        node identity. Do not re-enroll to upgrade.
+                        Upgrade in place and keep your configuration and node
+                        identity. Do not re-enroll to upgrade.
                       </p>
                     ) : null}
                   </div>
@@ -384,6 +383,29 @@ export default async function ValidatePage() {
                     </a>
                   </>
                 ) : null}
+              </div>
+              <div className="border-t border-white/10 pt-5 text-sm leading-6 text-gray-400">
+                <p className="font-semibold text-white">Already running a node?</p>
+                <p className="mt-2">
+                  In the preview.17 or newer operator app, choose Check for
+                  updates, then Update and restart for {RELEASE_TAG}. The app
+                  verifies the release and preserves your configuration, node
+                  identity and pending evidence.
+                </p>
+                <p className="mt-2">
+                  Older apps need one manual executable replacement. For
+                  systemd or Docker, update your managed installation instead;
+                  the app does not restart external services. Keep the same
+                  private configuration and state directory. Do not re-enroll.
+                </p>
+                <a
+                  href="https://github.com/AIPowerGrid/grid-validator/blob/master/UPDATES.md"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-2 inline-flex min-h-11 items-center text-cyan-300 hover:text-white"
+                >
+                  Upgrade and recovery guide
+                </a>
               </div>
               <div className="min-w-0 border border-cyan-400/30 bg-cyan-400/5 p-5">
                 <p className="flex items-center gap-2 font-semibold text-white">

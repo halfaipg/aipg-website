@@ -308,18 +308,18 @@ test.describe('/validate smoke', () => {
     await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Download Linux installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.17\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.18\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.17\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.17\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
-      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.17'),
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.18'),
     ).toBeVisible();
     await expect(page.getByRole('link', { name: 'Open Docker quickstart' })).toHaveAttribute(
       'href',
@@ -327,6 +327,7 @@ test.describe('/validate smoke', () => {
     );
     await expect(page.getByText(/mounts credentials read-only after setup/)).toBeVisible();
     await expect(page.getByText(/preserves the assignment and evidence journal across restarts/)).toBeVisible();
+    await expect(page.getByText(/Check for updates, then Update and restart/)).toBeVisible();
 
     await page.getByPlaceholder('val_...').fill(validatorId);
     await page.getByRole('button', { name: 'Check status' }).click();
