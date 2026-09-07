@@ -128,18 +128,26 @@ with server-visible product, worker, and API entry points).
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
   capability contract with exact validator-purpose endpoint scopes. It targets
-  the immutable `v0.1.0-preview.16` release and exposes its exact public GHCR
+  the immutable `v0.1.0-preview.17` release and exposes its exact public GHCR
   tag for Linux x64/ARM64; GitHub artifacts alone must never
   unlock downloads.
   Its desktop onboarding uses the local operator app (Windows menu option 8)
   for consent-based dedicated-account setup and automatic start in a fresh child,
   plus explicit stop/start and acknowledged status. Promote the pinned
   download only after immutable artifacts and a first-party canary are verified;
-  Core PR #119 is deployed with explicit preview.13/.15/.16 compatibility and
-  preserved qualification history. Preview.16 passed protected Windows canary
-  `34092210339`, its independent retirement audit, four native clean installs
-  and published payload/provenance verification. This does not grant economic
-  authority or establish model identity or independent operator control.
+  Core PR #122 is deployed with explicit preview.13/.15/.16/.17 compatibility
+  and preserved qualification history. Preview.17 passed release workflow
+  `34136400434`, four native handoff/recovery and clean-install lanes, published
+  payload/provenance verification, and an owned Linux upgrade with fresh signed
+  evidence. The second owned Linux canary passed at 17:04:11 UTC on September 7:
+  a lost accepted response left the signed report pending across .15-to-.17,
+  then the same committed-record duplicate receipt drained it. Independent
+  Core signature/binding and zero-economic-row checks passed; configuration
+  was unchanged and the temporary proxy/watchdog were removed. This qualifies
+  the pending-report service-upgrade path, not a human desktop one-click test.
+  Preview promotion does not declare the paid beta
+  complete: that separately requires the bounded independent-operator pilot
+  and approved compensation. Neither grants penalty authority or model identity.
   The linked runbook retains `enroll` and headless commands. No private keys are pasted
   into setup or handled on the marketing site. Existing-account pairing remains
   a separate, unshipped flow; never direct users to replace an existing identity.
@@ -153,7 +161,7 @@ with server-visible product, worker, and API entry points).
   The Linux cohort path must show the complete headless install, enrollment,
   no-probe check, systemd persistence, and service-health sequence directly on
   the page. It pins the service helper to a reviewed immutable commit and
-  verifies its SHA-256 separately from the frozen preview.16 binary; never use
+  verifies its SHA-256 separately from the frozen preview.17 binary; never use
   a mutable branch download, curl-to-shell, or credentials in command arguments.
   Its versioned Docker card links to the canonical first-run enrollment path,
   which runs as the host user, mounts credentials read-only after setup, and
