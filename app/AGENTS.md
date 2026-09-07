@@ -139,8 +139,13 @@ with server-visible product, worker, and API entry points).
   and preserved qualification history. Preview.17 passed release workflow
   `34136400434`, four native handoff/recovery and clean-install lanes, published
   payload/provenance verification, and an owned Linux upgrade with fresh signed
-  evidence. The real queued-report replay canary must pass before this promotion
-  candidate is deployed. Preview promotion does not declare the paid beta
+  evidence. The second owned Linux canary passed at 17:04:11 UTC on September 7:
+  a lost accepted response left the signed report pending across .15-to-.17,
+  then the same committed-record duplicate receipt drained it. Independent
+  Core signature/binding and zero-economic-row checks passed; configuration
+  was unchanged and the temporary proxy/watchdog were removed. This qualifies
+  the pending-report service-upgrade path, not a human desktop one-click test.
+  Preview promotion does not declare the paid beta
   complete: that separately requires the bounded independent-operator pilot
   and approved compensation. Neither grants penalty authority or model identity.
   The linked runbook retains `enroll` and headless commands. No private keys are pasted
