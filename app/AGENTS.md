@@ -128,21 +128,23 @@ with server-visible product, worker, and API entry points).
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic
   capability contract with exact validator-purpose endpoint scopes. It targets
-  the immutable `v0.1.0-preview.18` release and exposes its exact public GHCR
+  the immutable `v0.1.0-preview.20` release and exposes its exact public GHCR
   tag for Linux x64/ARM64; GitHub artifacts alone must never
   unlock downloads.
   Its desktop onboarding uses the local operator app (Windows menu option 8)
   for consent-based dedicated-account setup and automatic start in a fresh child,
   plus explicit stop/start and acknowledged status. Promote the pinned
   download only after immutable artifacts and a first-party canary are verified;
-  Core `84fe0fd6` is deployed with explicit preview.13/.15/.16/.17/.18 compatibility
-  and preserved qualification history. Preview.18 (`fef5e924`) passed native
-  workflow `34160189029`, four-platform clean installs and frozen checks, and
-  downloaded payload/provenance verification. An owned Linux service retained
-  its identity/configuration/journal across .17-to-.18 at 20:55 UTC September 7.
-  Fresh accepted report `123657` at 21:03:21 UTC passed independent signature,
-  commitment, assignment-binding and zero-economic-row verification. This is
-  first-party service evidence, not live human compensation consent. Preview.17 passed release workflow
+  Core `d606e4d8` / Alembic `0042` admits preview.13 and .15-.20 with preserved
+  qualification history. Preview.20 (`c73a284f`) passed native workflow
+  `34736178270`, all four clean installs and exact-source downloaded artifact
+  provenance. Three owned Linux nodes upgraded with configuration, identities
+  and journals preserved. Fresh v2 reports at 04:48 UTC and fully empty replies
+  without worker-error flags at 04:56 UTC September 13 passed independent
+  signature, assignment, disclosure/response commitment and zero-economic-row
+  verification. Failed worker verdicts were preserved, not treated as cheating.
+  See the validator repo's `PREVIEW20_ROLLOUT.md`; public promotion grants no
+  payout, independence or model-identity authority. Preview.17 passed release workflow
   `34136400434`, four native handoff/recovery and clean-install lanes, published
   payload/provenance verification, and an owned Linux upgrade with fresh signed
   evidence. The second owned Linux canary passed at 17:04:11 UTC on September 7:
@@ -170,7 +172,7 @@ with server-visible product, worker, and API entry points).
   The Linux cohort path must show the complete headless install, enrollment,
   no-probe check, systemd persistence, and service-health sequence directly on
   the page. It pins the service helper to a reviewed immutable commit and
-  verifies its SHA-256 separately from the frozen preview.18 binary; never use
+  verifies its SHA-256 separately from the frozen preview.20 binary; never use
   a mutable branch download, curl-to-shell, or credentials in command arguments.
   Its versioned Docker card links to the canonical first-run enrollment path,
   which runs as the host user, mounts credentials read-only after setup, and

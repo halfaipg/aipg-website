@@ -319,7 +319,7 @@ test.describe('/validate smoke', () => {
       /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
-      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.18'),
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.20'),
     ).toBeVisible();
     await expect(page.getByRole('link', { name: 'Open Docker quickstart' })).toHaveAttribute(
       'href',
