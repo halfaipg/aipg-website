@@ -76,7 +76,16 @@ test.describe('/run smoke', () => {
       page.getByText(/Jobs per worker is a rough workload-share signal, not a payout forecast/i),
     ).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Check the rail before you commit a GPU' })).toBeVisible();
-    await expect(page.getByText(/arithmetic on settled history, not a payout forecast/i)).toBeVisible();
+    const payoutDisclaimer = page.getByText(/arithmetic on settled history, not a payout forecast/i);
+    const payoutUnavailable = page.getByText('Public payout evidence is unavailable, so no estimate is shown.');
+    await expect(payoutDisclaimer.or(payoutUnavailable)).toBeVisible();
+    if (await payoutUnavailable.isVisible()) {
+      await expect(page.getByLabel('Hypothetical share of accepted den')).toHaveCount(0);
+      await expect(page.getByText('Same-window scenario', { exact: true })).toHaveCount(0);
+    } else {
+      await expect(page.getByLabel('Hypothetical share of accepted den')).toBeVisible();
+      await expect(payoutDisclaimer).toBeVisible();
+    }
     await expect(page.getByText(/One verified binary opens the local setup wizard/i)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Join the text cohort' })).toHaveAttribute(
       'href',
@@ -308,15 +317,15 @@ test.describe('/validate smoke', () => {
     await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Download Linux installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.18\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.20\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.20\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.20\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
       page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.20'),

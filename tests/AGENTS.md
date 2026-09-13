@@ -51,6 +51,9 @@ onboarding, and staking-withdrawal surfaces.
   trust-boundary copy, bounded validator-opening share text, browser-error, and
   horizontal-overflow checks, including validator onboarding at 320px and
   390px widths.
+  The worker-page smoke accepts either valid recent payout history with its
+  forecast disclaimer, or the explicit unavailable state with no estimate or
+  share slider. Missing live telemetry must not become a fabricated scenario.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
