@@ -135,7 +135,8 @@ test.describe('/run smoke', () => {
       page.getByText(/chmod \+x install-worker\.sh/),
     ).toBeVisible();
     await expect(page.getByText(/grid-inference-worker --verify-runtime/)).toBeVisible();
-    await expect(page.getByText(/Enter it only in the local wizard/)).toBeVisible();
+    await expect(page.getByText(/Enter it only in the local wizard|Follow the credential step shown by this release's local wizard/)).toBeVisible();
+    await expect(page.getByText(/(?:never in|Never put the credential in) a shell command or public issue/)).toBeVisible();
     await expect(page.getByText(/never needs a wallet private key/i)).toBeVisible();
 
     await page.getByRole('button', { name: 'macOS', exact: true }).first().click();
