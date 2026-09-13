@@ -38,7 +38,7 @@ onboarding, and staking-withdrawal surfaces.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
-  the preview.18 operator app, consent-based setup, Windows menu option 8,
+  the preview.20 operator app, consent-based setup, Windows menu option 8,
   explicit exit behavior, and exact versioned downloads without personal
   private-key entry or Console key juggling, plus the
   canonical persistent Docker enrollment handoff, read-only credential mount,
@@ -51,6 +51,12 @@ onboarding, and staking-withdrawal surfaces.
   trust-boundary copy, bounded validator-opening share text, browser-error, and
   horizontal-overflow checks, including validator onboarding at 320px and
   390px widths.
+  The worker-page smoke accepts either valid recent payout history with its
+  forecast disclaimer, or the explicit unavailable state with no estimate or
+  share slider. Missing live telemetry must not become a fabricated scenario.
+  Text-worker download smoke follows the dynamically verified stable release:
+  installer and direct binary must share the same exact GitHub tag. Validator
+  URLs remain pinned to the specifically qualified preview release.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.

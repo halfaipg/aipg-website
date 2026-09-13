@@ -76,7 +76,16 @@ test.describe('/run smoke', () => {
       page.getByText(/Jobs per worker is a rough workload-share signal, not a payout forecast/i),
     ).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Check the rail before you commit a GPU' })).toBeVisible();
-    await expect(page.getByText(/arithmetic on settled history, not a payout forecast/i)).toBeVisible();
+    const payoutDisclaimer = page.getByText(/arithmetic on settled history, not a payout forecast/i);
+    const payoutUnavailable = page.getByText('Public payout evidence is unavailable, so no estimate is shown.');
+    await expect(payoutDisclaimer.or(payoutUnavailable)).toBeVisible();
+    if (await payoutUnavailable.isVisible()) {
+      await expect(page.getByLabel('Hypothetical share of accepted den')).toHaveCount(0);
+      await expect(page.getByText('Same-window scenario', { exact: true })).toHaveCount(0);
+    } else {
+      await expect(page.getByLabel('Hypothetical share of accepted den')).toBeVisible();
+      await expect(payoutDisclaimer).toBeVisible();
+    }
     await expect(page.getByText(/One verified binary opens the local setup wizard/i)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Join the text cohort' })).toHaveAttribute(
       'href',
@@ -108,24 +117,26 @@ test.describe('/run smoke', () => {
     expect((await download.count()) + (await releaseGate.count())).toBe(1);
 
     await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
-    await expect(
-      page.getByRole('link', { name: /Download verified Linux installer/ }),
-    ).toHaveAttribute(
+    const textInstaller = page.getByRole('link', { name: /Download verified Linux installer/ });
+    await expect(textInstaller).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.8\/install-worker\.sh$/,
+      /^https:\/\/github\.com\/AIPowerGrid\/grid-text-worker\/releases\/download\/v\d+\.\d+\.\d+\/install-worker\.sh$/,
     );
+    const installerHref = await textInstaller.getAttribute('href');
+    expect(installerHref).not.toBeNull();
     await expect(
       page.getByRole('link', { name: /Download Linux binary directly/ }),
     ).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.8\/grid-inference-worker-linux-x64$/,
+      installerHref!.replace(/install-worker\.sh$/, 'grid-inference-worker-linux-x64'),
     );
     await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
     await expect(
       page.getByText(/chmod \+x install-worker\.sh/),
     ).toBeVisible();
     await expect(page.getByText(/grid-inference-worker --verify-runtime/)).toBeVisible();
-    await expect(page.getByText(/Enter it only in the local wizard/)).toBeVisible();
+    await expect(page.getByText(/Enter it only in the local wizard|Follow the credential step shown by this release's local wizard/)).toBeVisible();
+    await expect(page.getByText(/(?:never in|Never put the credential in) a shell command or public issue/)).toBeVisible();
     await expect(page.getByText(/never needs a wallet private key/i)).toBeVisible();
 
     await page.getByRole('button', { name: 'macOS', exact: true }).first().click();
@@ -308,18 +319,18 @@ test.describe('/validate smoke', () => {
     await expect(page.getByRole('link', { name: /Link wallet and create key/i })).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Download Linux installer' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.18\/install-validator\.sh$/,
+      /releases\/download\/v0\.1\.0-preview\.20\/install-validator\.sh$/,
     );
     await expect(page.getByRole('link', { name: 'Linux x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-linux-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.20\/aipg-validator-linux-x64\.zip$/,
     );
     await expect(page.getByRole('link', { name: 'Windows x64' })).toHaveAttribute(
       'href',
-      /releases\/download\/v0\.1\.0-preview\.18\/aipg-validator-windows-x64\.zip$/,
+      /releases\/download\/v0\.1\.0-preview\.20\/aipg-validator-windows-x64\.zip$/,
     );
     await expect(
-      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.18'),
+      page.getByText('docker pull ghcr.io/aipowergrid/validator:v0.1.0-preview.20'),
     ).toBeVisible();
     await expect(page.getByRole('link', { name: 'Open Docker quickstart' })).toHaveAttribute(
       'href',
