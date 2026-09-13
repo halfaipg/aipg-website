@@ -117,17 +117,18 @@ test.describe('/run smoke', () => {
     expect((await download.count()) + (await releaseGate.count())).toBe(1);
 
     await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
-    await expect(
-      page.getByRole('link', { name: /Download verified Linux installer/ }),
-    ).toHaveAttribute(
+    const textInstaller = page.getByRole('link', { name: /Download verified Linux installer/ });
+    await expect(textInstaller).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.8\/install-worker\.sh$/,
+      /^https:\/\/github\.com\/AIPowerGrid\/grid-text-worker\/releases\/download\/v\d+\.\d+\.\d+\/install-worker\.sh$/,
     );
+    const installerHref = await textInstaller.getAttribute('href');
+    expect(installerHref).not.toBeNull();
     await expect(
       page.getByRole('link', { name: /Download Linux binary directly/ }),
     ).toHaveAttribute(
       'href',
-      /grid-text-worker\/releases\/download\/v0\.3\.8\/grid-inference-worker-linux-x64$/,
+      installerHref!.replace(/install-worker\.sh$/, 'grid-inference-worker-linux-x64'),
     );
     await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
     await expect(

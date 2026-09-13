@@ -54,6 +54,9 @@ onboarding, and staking-withdrawal surfaces.
   The worker-page smoke accepts either valid recent payout history with its
   forecast disclaimer, or the explicit unavailable state with no estimate or
   share slider. Missing live telemetry must not become a fabricated scenario.
+  Text-worker download smoke follows the dynamically verified stable release:
+  installer and direct binary must share the same exact GitHub tag. Validator
+  URLs remain pinned to the specifically qualified preview release.
 - `unit/validator-release-gate.test.mjs` - pure capability-contract tests that
   prevent GitHub artifacts from unlocking validator downloads against an old,
   weak-quorum, unscoped, or economically authoritative Core.
