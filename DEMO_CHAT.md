@@ -241,6 +241,13 @@ values remain errors. Actual tool calls still require image opt-in, one
 index-zero function, bounded validated arguments, `finish_reason: tool_calls`
 and `[DONE]` before the existing quota reservation and one image dispatch.
 
+DeepSeek may also echo reserved DSML serialization in the content channel.
+Suppress content from its first reserved DSML marker onward, buffering only a
+possible marker prefix across deltas so no partial marker reaches the client.
+Never interpret that text as a tool call. Without a separately validated
+structured call, a serialized-tool response fails rather than claiming success.
+Ordinary angle brackets and incomplete non-matching prefixes remain text.
+
 September 14 campaign preflight reproduced an interruption with DeepSeek:
 the website rejected content chunks carrying empty tool lists before reading
 the later valid image call. The regression fixture mirrors the observed event
