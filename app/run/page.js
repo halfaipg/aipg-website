@@ -1,4 +1,5 @@
 import RunDownloads from "./RunDownloads";
+import { socialMetadata } from "../socialMetadata.mjs";
 import OperatorPaths from "./OperatorPaths";
 import OperatorPlanner from "./OperatorPlanner";
 import OperatorEvidence from "./OperatorEvidence";
@@ -28,11 +29,7 @@ const GRID_API = "https://api.aipowergrid.io";
 const MEDIA_REPOSITORY = "AIPowerGrid/grid-media-worker";
 const TEXT_REPOSITORY = "AIPowerGrid/grid-text-worker";
 
-export const metadata = {
-  title: "Run an AI Power Grid Worker",
-  description:
-    "Connect your inference endpoint or ComfyUI setup to AI Power Grid. Download a worker for your OS and earn AIPG for accepted jobs.",
-};
+export const metadata = socialMetadata("run");
 
 async function getReleaseList(url) {
   const response = await fetch(url, {

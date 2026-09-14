@@ -4,39 +4,16 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Providers from "@/context/Providers";
+import { socialMetadata } from "./socialMetadata.mjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI Power Grid - Community-Powered AI Generation",
-  description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
+  ...socialMetadata("home"),
   icons: {
     icon: [{ url: '/aipg-favicon-v2.ico', type: 'image/x-icon', sizes: '16x16 32x32 48x48' }],
     shortcut: '/aipg-favicon-v2.ico',
     apple: '/favicon.png?v=2',
-  },
-  openGraph: {
-    title: "AI Power Grid - Community-Powered AI Generation",
-    description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
-    url: "https://aipowergrid.io",
-    siteName: "AI Power Grid",
-    images: [
-      {
-        url: "https://aipowergrid.io/opengraph-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "AI Power Grid - Community-Powered AI Generation",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AI Power Grid - Community-Powered AI Generation",
-    description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work.",
-    images: ["https://aipowergrid.io/opengraph-image.jpg"],
-    creator: "@AIPowerGrid",
   },
 };
 export const revalidate = 30;
