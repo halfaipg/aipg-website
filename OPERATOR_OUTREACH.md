@@ -125,7 +125,7 @@ Replace bracketed evidence from the live sources above. Keep the disclosure.
 
 Run one seven-day campaign, starting only after the consumer demo passes:
 
-**Make something on the Grid. Or help power it with the AI setup you already run.**
+**Make your game world on the Grid. Or help power it with the AI setup you already run.**
 
 1. Verify one strong image or music result through the actual consumer app.
    Keep the prompt, settings, model, output, end-to-end time, and quoted cost.
@@ -154,8 +154,8 @@ Status below is an execution record, not authorization to publish.
 
 | Deliverable | State / required evidence |
 | --- | --- |
-| Compact homepage and worker funnel | Local homepage implementation; production deployment pending |
-| Consumer demo | Pending signed-in end-to-end run, repeat run, output review, elapsed time, quote and actual debit |
+| Compact homepage and worker funnel | Live homepage inspected September 14; public `/run` is the operator entry point |
+| Consumer demo | September 14: one Z-Image Turbo result completed and visually inspected through the no-login homepage. The long prompt failed twice; the second trace identified empty tool-list deltas rejected by the website. Parser fix is in a separate PR; deployed repeat success remains open |
 | Creation post | Draft after verified demo; not published |
 | Five worker onboarding slots | 0 campaign participants verified; identify willing operators, track first real completed job |
 | Operator story | Pending completed setup and permission |
@@ -163,10 +163,120 @@ Status below is an execution record, not authorization to publish.
 | Seven-day outcome review | Starts from campaign publication, not document creation |
 
 Baseline observed from the public network status endpoint on
-2026-09-05 at 11:58 UTC: 8 workers, 12 model routes, all 12 below the
+2026-09-14 at 17:35 UTC: 9 workers, 13 model routes, all 13 below the
 three-worker target with one serving worker each. Charging mode was
-`allowlist`, not global. This is a dated operational snapshot, not campaign
-attribution and not proof of successful consumer generation.
+globally `on`; the homepage separately offers a bounded sponsored demo.
+This is a dated operational snapshot, not campaign attribution. The public
+manager-enrollment metric showed zero completions in the preceding seven days;
+it does not measure every worker connection or first completed job.
+
+### Ready-To-Review Campaign: Make Your Game World
+
+One week, one concept-art example, two invitations. No paid ads, giveaway,
+new integration package, token campaign, or validator recruitment mixed in.
+The five slots are a proposed support capacity, not five existing recruits.
+
+**Creation post, official AIPG X account (draft, not posted):**
+
+> What would your game world look like?
+>
+> This little coastal village came from a prompt on AI Power Grid, using
+> Z-Image Turbo on a Grid worker.
+>
+> Try the limited free demo and reply with your scene:
+> https://aipowergrid.io/#try-grid
+
+Attach the actual output below after publication approval, not an unrelated
+illustration. Do not call it a playable level or a production-ready game asset.
+
+**Worker follow-up, half's X account replying to that post (draft):**
+
+> Already running Ollama or vLLM on Linux? Connect spare capacity to AIPG
+> without replacing your setup. I'm helping five operators get started.
+>
+> https://aipowergrid.io/run
+>
+> AIPG rewards depend on accepted work, not a guaranteed rate. Reply if interested.
+
+This recruits text capacity, not image workers. Explain that distinction when
+answering replies; ComfyUI participation follows separate qualification.
+
+**Owned Discord post (draft; one relevant channel, no mass mention):**
+
+> Let's see what you can make on the Grid. Try this in the homepage demo,
+> then post your scene here:
+>
+> Generate an image of a tiny isometric coastal fantasy village: stone
+> cottages, teal roofs, a lighthouse, boats, clear turquoise water and warm
+> morning light. Hand-painted game concept art, readable paths, no text or UI.
+>
+> https://aipowergrid.io/#try-grid
+>
+> The demo has daily limits. Community workers see prompts, so don't include
+> secrets or personal information.
+>
+> Already running Ollama or vLLM on Linux? I'm also helping five people
+> connect spare text-generation capacity: https://aipowergrid.io/run
+> Reply with your backend, GPU/VRAM and OS if interested. No keys or private
+> logs. Work-based AIPG rewards aren't a guaranteed income.
+
+**Observed proof, September 14:**
+
+- Entry point: public homepage, no account sign-in; existing sponsored quota.
+- Input: the exact short Discord prompt above, entered as one paragraph.
+- Result: `z-image-turbo`, served by the publicly displayed worker
+  `half5090beast1`; village, lighthouse, teal roofs and boats visibly rendered.
+- [Actual generated image](https://media.aipg.art/image/4913248a-e2c3-43a4-bbf5-693d47227d57/0.webp).
+  The unchanged 1024x1024 WebP is also retained as
+  [the campaign asset](public/campaign-coastal-village-20260914.webp), exported
+  from the browser's observed image resource. SHA-256:
+  `0f065e78e9177e47d4632b7c62502c0d7992e62d23bbd6f69abac35d5487ad8b`.
+  Use this original for publication; do not substitute a regenerated image.
+- UI reported 5.2 seconds generation. Wall-clock end-to-end time was not
+  measured; do not advertise this as a latency benchmark.
+- This visitor was not charged. The sponsoring service's actual ledger debit
+  was not inspected; do not claim that inference cost the network nothing.
+- Image allowance decreased from one remaining attempt to zero. Do not reset
+  quotas, rotate identities, or silently provision credits to repeat the test.
+- A longer prompt selected DeepSeek and returned "No response received."
+  A text control succeeded on Qwen3-27b. A second long-prompt test reproduced
+  the failure. Inspecting only that synthetic job's event shapes before the
+  replay buffer expired showed content with `tool_calls: []`, followed by one
+  structured call and a `tool_calls` terminal. The website parser rejected the
+  empty lists before reaching the valid call. The fix treats absent/null/empty
+  tool fields as no-ops while retaining real-call validation. Its regressions
+  failed on old code and all 115 unit tests pass with the fix. This is not yet
+  a verified production repair; no additional image was dispatched during the
+  exhausted-quota test. Website dependency patches also restore a zero-finding
+  npm audit. Follow the separate `fix/demo-empty-tool-deltas` PR for release.
+
+**Launch and follow-through:**
+
+1. Confirm a second completed image through the same public entry point after
+   its normal allowance refresh, or an explicitly approved test allowance.
+   Preserve the result and wall-clock duration. Resolve the observed failed
+   path before widening promotion; a quota decrease alone is not success.
+2. Have half approve the exact copy, asset and five support slots. Publish the
+   creation post, founder reply and one owned Discord message. Record their
+   URLs and publication time here; do not infer publication from a draft.
+   The `/run` Linux selector was checked live September 14: installer and
+   direct binary both resolve to v0.3.9. Before the worker reply, correct the
+   two v0.3.7 release references in the existing cohort issue #10 to v0.3.9;
+   preserve the rest of the issue and its historical comments. This correction
+   is pending, not an excuse to publish another recruitment comment.
+3. Answer opt-in replies personally. Aim for ten consenting people with a
+   completed scene and three independent workers completing real jobs, with
+   five onboarding slots maximum. These are targets, not reported outcomes.
+4. On day three, ask participating creators whether they tried a second scene;
+   ask operators about setup friction. Contact only people who opted in.
+5. At seven days, count completed scenes, later-day returners, accepted real
+   worker jobs and observed seven-day activity separately. Use the tables
+   below, not registry downloads or impressions as proxies.
+
+Publication URLs: none. Campaign start: not launched. Verified campaign
+creators: zero (the maintainer's test is excluded). Verified campaign workers:
+zero. Current action: release and live-test the isolated parser fix, then
+review/publish this copy; do not announce that the campaign is already running.
 
 Integration preflight on 2026-09-05: npm confirms the dedicated
 `@aipowergrid/n8n-nodes-aipg@0.1.3` package. The image node, transport, and
