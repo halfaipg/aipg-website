@@ -15,6 +15,8 @@ onboarding, and staking-withdrawal surfaces.
   cancellation, offline models and uncertain outcomes without retries.
   Empty/null tool deltas preserve ordinary content and fragmented calls without
   bypassing terminal validation, image opt-in, or single-dispatch constraints.
+  DSML suppression covers every content split, ordinary angle brackets, and
+  prose-only serialization that must never dispatch or report success.
 - `e2e/chat-images.spec.ts` - labelled local raster fixtures for inline results,
   mobile/desktop fit, image allowance persistence, description-only follow-ups,
   unsafe URL rejection and continued text access after image failure/exhaustion.

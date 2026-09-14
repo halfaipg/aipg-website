@@ -155,7 +155,7 @@ Status below is an execution record, not authorization to publish.
 | Deliverable | State / required evidence |
 | --- | --- |
 | Compact homepage and worker funnel | Live homepage inspected September 14; public `/run` is the operator entry point |
-| Consumer demo | September 14: one Z-Image Turbo result completed and visually inspected through the no-login homepage. The long prompt failed twice; the second trace identified empty tool-list deltas rejected by the website. Parser fix is in a separate PR; deployed repeat success remains open |
+| Consumer demo | September 14: one Z-Image Turbo result completed and visually inspected. PR #81 is deployed; the formerly interrupted long request reached the expected image quota, but exposed raw DSML content. Suppression is prepared on `fix/demo-hide-tool-markup`; a completed post-deploy image remains unverified |
 | Creation post | Draft after verified demo; not published |
 | Five worker onboarding slots | 0 campaign participants verified; identify willing operators, track first real completed job |
 | Operator story | Pending completed setup and permission |
@@ -245,10 +245,13 @@ answering replies; ComfyUI participation follows separate qualification.
   structured call and a `tool_calls` terminal. The website parser rejected the
   empty lists before reaching the valid call. The fix treats absent/null/empty
   tool fields as no-ops while retaining real-call validation. Its regressions
-  failed on old code and all 115 unit tests pass with the fix. This is not yet
-  a verified production repair; no additional image was dispatched during the
-  exhausted-quota test. Website dependency patches also restore a zero-finding
-  npm audit. Follow the separate `fix/demo-empty-tool-deltas` PR for release.
+  failed on old code and all 115 unit tests passed with the fix. PR #81 deployed
+  as `504563e` on September 14. The same long prompt reached the expected
+  exhausted-image-allowance error instead of interruption, but exposed raw
+  DeepSeek DSML content. A follow-up suppression fix on `fix/demo-hide-tool-markup`
+  passes 118 unit tests; it is not yet production-verified. A plain-text control
+  completed on Qwen3-27b, served by `rack-qwen3-27b`. No additional image was
+  dispatched. Website dependency patches restore a zero-finding npm audit.
 
 **Launch and follow-through:**
 
@@ -256,14 +259,14 @@ answering replies; ComfyUI participation follows separate qualification.
    its normal allowance refresh, or an explicitly approved test allowance.
    Preserve the result and wall-clock duration. Resolve the observed failed
    path before widening promotion; a quota decrease alone is not success.
-2. Have half approve the exact copy, asset and five support slots. Publish the
+2. Half approved the exact copy, asset and five support slots on September 14.
+   After the live image gate passes, publish the
    creation post, founder reply and one owned Discord message. Record their
    URLs and publication time here; do not infer publication from a draft.
    The `/run` Linux selector was checked live September 14: installer and
-   direct binary both resolve to v0.3.9. Before the worker reply, correct the
-   two v0.3.7 release references in the existing cohort issue #10 to v0.3.9;
-   preserve the rest of the issue and its historical comments. This correction
-   is pending, not an excuse to publish another recruitment comment.
+   direct binary both resolve to v0.3.9. The two stale release references in
+   cohort issue #10 were corrected to v0.3.9 on September 14; its other text
+   and historical comments were preserved. No new recruitment comment was sent.
 3. Answer opt-in replies personally. Aim for ten consenting people with a
    completed scene and three independent workers completing real jobs, with
    five onboarding slots maximum. These are targets, not reported outcomes.
@@ -275,8 +278,9 @@ answering replies; ComfyUI participation follows separate qualification.
 
 Publication URLs: none. Campaign start: not launched. Verified campaign
 creators: zero (the maintainer's test is excluded). Verified campaign workers:
-zero. Current action: release and live-test the isolated parser fix, then
-review/publish this copy; do not announce that the campaign is already running.
+zero. PRs #80 and #81 are merged. Current action: finish the DSML follow-up
+and complete a post-deploy image test, then publish the approved copy. Do not
+announce that the campaign is already running or ask for the same copy approval again.
 
 Integration preflight on 2026-09-05: npm confirms the dedicated
 `@aipowergrid/n8n-nodes-aipg@0.1.3` package. The image node, transport, and
