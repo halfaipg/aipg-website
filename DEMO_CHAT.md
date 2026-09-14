@@ -231,3 +231,18 @@ do not describe that skipped run as a concurrency proof.
 
 Primary contracts: [Vercel request headers](https://vercel.com/docs/headers/request-headers),
 [Turnstile server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/).
+
+## Stream Compatibility
+
+Ordinary backend deltas may include `tool_calls: []` or `null`. These fields
+must not cancel text or a later structured image call. The parser treats them
+as no-ops while preserving content and finish metadata; malformed non-array
+values remain errors. Actual tool calls still require image opt-in, one
+index-zero function, bounded validated arguments, `finish_reason: tool_calls`
+and `[DONE]` before the existing quota reservation and one image dispatch.
+
+September 14 campaign preflight reproduced an interruption with DeepSeek:
+the website rejected content chunks carrying empty tool lists before reading
+the later valid image call. The regression fixture mirrors the observed event
+shape with synthetic content, not customer data. Unit coverage is not proof of
+a deployed fix or a completed production image; retain separate live evidence.

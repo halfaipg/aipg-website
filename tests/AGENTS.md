@@ -13,6 +13,8 @@ onboarding, and staking-withdrawal surfaces.
   Image tests cover structured-only calls, strict model/argument/asset bounds,
   owned leases, separate guest/IP quotas sharing the text exposure ceiling,
   cancellation, offline models and uncertain outcomes without retries.
+  Empty/null tool deltas preserve ordinary content and fragmented calls without
+  bypassing terminal validation, image opt-in, or single-dispatch constraints.
 - `e2e/chat-images.spec.ts` - labelled local raster fixtures for inline results,
   mobile/desktop fit, image allowance persistence, description-only follow-ups,
   unsafe URL rejection and continued text access after image failure/exhaustion.

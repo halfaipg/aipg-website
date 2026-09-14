@@ -68,6 +68,48 @@ test("generated tool-like prose never executes an image", async () => {
   assert.equal(calls.some(c => c.url.endsWith("/generations")), false);
 });
 
+test("empty tool-call deltas preserve text before a completed image call", async () => {
+  // DeepSeek's live stream includes an empty list alongside ordinary content.
+  const stream = frame({ choices: [{ delta: { reasoning_content: "private reasoning" } }] }) +
+    frame({ choices: [{ delta: { content: "I will generate that scene.", tool_calls: [] } }] }) +
+    frame({ choices: [{ delta: { tool_calls: [{ index: 0, function: { name: "generate_image", arguments: '{"prompt":' } }] } }] }) +
+    frame({ choices: [{ delta: { tool_calls: [] } }] }) +
+    frame({ choices: [{ delta: { tool_calls: [{ index: 0, function: { arguments: '"A city"}' } }] } }] }) +
+    frame({ choices: [{ delta: { tool_calls: null }, finish_reason: "tool_calls" }] }) + frame("[DONE]");
+  const { handle, calls } = fixture({ stream });
+  const output = await (await handle(request())).text();
+  const events = output.trim().split("\n").map(JSON.parse);
+  assert.deepEqual(events.map(e => e.type), ["meta", "delta", "image_start", "image", "done"]);
+  assert.equal(events[1].text, "I will generate that scene.");
+  assert.doesNotMatch(output, /private reasoning/);
+  assert.equal(calls.filter(c => c.url.endsWith("/generations")).length, 1);
+  assert.equal(JSON.parse(calls.find(c => c.url.endsWith("/generations")).init.body).prompt, "A city");
+});
+
+test("empty and null tool fields are no-ops even when image tools are disabled", async () => {
+  for (const tool_calls of [[], null]) {
+    const stream = frame({ choices: [{ delta: { content: "Hello", tool_calls } }] }) +
+      frame({ choices: [{ delta: { tool_calls }, finish_reason: "stop" }] }) + frame("[DONE]");
+    for (const allowImageTool of [false, true]) {
+      const events = [];
+      for await (const event of chatEvents(new Response(stream).body, { allowImageTool })) events.push(event);
+      assert.deepEqual(events, [{ type: "delta", text: "Hello" }, { type: "done", truncated: false }]);
+    }
+  }
+});
+
+test("empty tool fields cannot turn missing or malformed calls into success", async () => {
+  for (const tool_calls of [[], null, {}, "", false, 0, [null], [{ index: 1 }]]) {
+    const stream = frame({ choices: [{ delta: { tool_calls } }] }) +
+      frame({ choices: [{ finish_reason: "tool_calls" }] }) + frame("[DONE]");
+    const { handle, calls } = fixture({ stream });
+    const output = await (await handle(request())).text();
+    assert.match(output, /"type":"error"/);
+    assert.doesNotMatch(output, /"type":"done"|"type":"image"/);
+    assert.equal(calls.some(c => c.url.endsWith("/generations")), false);
+  }
+});
+
 for (const model of IMAGE_MODELS) test(`valid tool calls generate one bounded image using ${model}`, async () => {
   const { handle, calls } = fixture({ model });
   const events = (await (await handle(request())).text()).trim().split("\n").map(JSON.parse);
