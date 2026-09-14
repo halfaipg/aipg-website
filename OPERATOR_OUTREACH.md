@@ -155,7 +155,7 @@ Status below is an execution record, not authorization to publish.
 | Deliverable | State / required evidence |
 | --- | --- |
 | Compact homepage and worker funnel | Live homepage inspected September 14; public `/run` is the operator entry point |
-| Consumer demo | September 14: one Z-Image Turbo result completed and visually inspected through the no-login homepage. An earlier long request failed; another image attempt has no retained result. Repeat success and failure diagnosis remain open; do not label this broadly reliable |
+| Consumer demo | September 14: one Z-Image Turbo result completed and visually inspected through the no-login homepage. The long prompt failed twice; the second trace identified empty tool-list deltas rejected by the website. Parser fix is in a separate PR; deployed repeat success remains open |
 | Creation post | Draft after verified demo; not published |
 | Five worker onboarding slots | 0 campaign participants verified; identify willing operators, track first real completed job |
 | Operator story | Pending completed setup and permission |
@@ -235,10 +235,17 @@ answering replies; ComfyUI participation follows separate qualification.
   was not inspected; do not claim that inference cost the network nothing.
 - Image allowance decreased from one remaining attempt to zero. Do not reset
   quotas, rotate identities, or silently provision credits to repeat the test.
-- A prior longer prompt selected DeepSeek and returned "No response received."
-  A text control succeeded on Qwen3-27b. Read-only diagnostics did not retain
-  sufficient terminal-event evidence to assign the image-request failure to
-  Core, the model, or the website parser. The failure remains unresolved.
+- A longer prompt selected DeepSeek and returned "No response received."
+  A text control succeeded on Qwen3-27b. A second long-prompt test reproduced
+  the failure. Inspecting only that synthetic job's event shapes before the
+  replay buffer expired showed content with `tool_calls: []`, followed by one
+  structured call and a `tool_calls` terminal. The website parser rejected the
+  empty lists before reaching the valid call. The fix treats absent/null/empty
+  tool fields as no-ops while retaining real-call validation. Its regressions
+  failed on old code and all 115 unit tests pass with the fix. This is not yet
+  a verified production repair; no additional image was dispatched during the
+  exhausted-quota test. Website dependency patches also restore a zero-finding
+  npm audit. Follow the separate `fix/demo-empty-tool-deltas` PR for release.
 
 **Launch and follow-through:**
 
@@ -260,8 +267,8 @@ answering replies; ComfyUI participation follows separate qualification.
 
 Publication URLs: none. Campaign start: not launched. Verified campaign
 creators: zero (the maintainer's test is excluded). Verified campaign workers:
-zero. Current action: repeat/diagnose the public image flow and review this
-copy; do not announce that the campaign is already running.
+zero. Current action: release and live-test the isolated parser fix, then
+review/publish this copy; do not announce that the campaign is already running.
 
 Integration preflight on 2026-09-05: npm confirms the dedicated
 `@aipowergrid/n8n-nodes-aipg@0.1.3` package. The image node, transport, and
