@@ -8,6 +8,12 @@ with server-visible product, worker, and API entry points).
 
 ## Ownership
 
+- `socialMetadata.mjs` owns route-specific Open Graph and X metadata for the
+  homepage, `/run`, and `/validate`. Approved artwork lives in versioned
+  `public/social/*-v1.png` files with actual PNG dimensions and alt text.
+  Both OG and X must use the same route image; never inherit the homepage
+  image/title on the worker and validator routes. `/use` stays a redirect;
+  its developer artwork is owned by the documentation site's theme.
 - `layout.js` — root layout: metadata/OpenGraph, agent-discovery links, fonts,
   `context/Providers` wrapper, Navbar/Footer.
   Favicon sources (`app/favicon.ico`, `public/favicon.ico`, and the versioned

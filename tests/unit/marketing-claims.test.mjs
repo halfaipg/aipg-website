@@ -17,6 +17,7 @@ const MARKETING_FILES = [
   "components/VoiceAgentWidget.js",
   "app/about/page.js",
   "app/layout.js",
+  "app/socialMetadata.mjs",
 ];
 
 async function marketingCopy() {

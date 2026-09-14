@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { socialMetadata } from "../socialMetadata.mjs";
 import {
   FiCheck,
   FiDownload,
@@ -33,11 +34,7 @@ const COHORT_RUNBOOK_URL =
 const DOCKER_QUICKSTART_URL =
   "https://github.com/AIPowerGrid/grid-validator/blob/master/QUICKSTART.md#docker";
 
-export const metadata = {
-  title: "Run an AI Power Grid Validator",
-  description:
-    "Install the verified unsigned CPU-only validator preview, create a dedicated local signing identity, and contribute independent worker evidence.",
-};
+export const metadata = socialMetadata("validate");
 
 async function getValidatorRelease() {
   try {

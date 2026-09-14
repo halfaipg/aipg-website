@@ -7,6 +7,10 @@ onboarding, and staking-withdrawal surfaces.
 
 ## Ownership
 
+- `unit/social-metadata.test.mjs` checks the shipped PNG dimensions, size,
+  route URL and matching OG/X image metadata. `e2e/social.spec.ts` verifies
+  one route-specific social image in server-rendered HTML without JavaScript,
+  public image responses, and the unchanged `/use` redirect.
 - `unit/demo-chat*.test.mjs` - disabled/configuration gates, request bounds,
   cookies, trusted IPs, bot checks, cap rejection, sanitized terminal streaming,
   and real isolated Redis Lua concurrency when Redis tools are installed.
