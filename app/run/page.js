@@ -2,7 +2,6 @@ import RunDownloads from "./RunDownloads";
 import OperatorPaths from "./OperatorPaths";
 import OperatorPlanner from "./OperatorPlanner";
 import OperatorEvidence from "./OperatorEvidence";
-import OperatorRecruitment from "./OperatorRecruitment";
 import MediaQualificationStatus from "./MediaQualificationStatus";
 import { summarizePayoutEvidence } from "./operatorEvidenceLogic.mjs";
 import { normalizeMediaQualificationStatus } from "./qualificationStatus.mjs";
@@ -32,7 +31,7 @@ const TEXT_REPOSITORY = "AIPowerGrid/grid-text-worker";
 export const metadata = {
   title: "Run an AI Power Grid Worker",
   description:
-    "Find verified AI Power Grid worker releases, validate hardware locally, and inspect current network capacity needs.",
+    "Connect your inference endpoint or ComfyUI setup to AI Power Grid. Download a worker for your OS and earn AIPG for accepted jobs.",
 };
 
 async function getReleaseList(url) {
@@ -355,22 +354,29 @@ export default async function RunPage() {
         textRelease={textRelease}
       />
 
-      <OperatorPaths />
+      <details className="border-b border-white/10">
+        <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-base font-semibold md:px-8">Not running a model yet? Plan your setup</summary>
+        <OperatorPlanner
+          opportunities={opportunities}
+          mediaPlatforms={mediaRelease?.platforms || {}}
+          textPlatforms={textRelease?.platforms || {}}
+        />
+      </details>
 
-      <OperatorRecruitment />
-
-      <OperatorPlanner
-        opportunities={opportunities}
-        mediaPlatforms={mediaRelease?.platforms || {}}
-        textPlatforms={textRelease?.platforms || {}}
-      />
+      <details className="border-b border-white/10">
+        <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-base font-semibold md:px-8">Compatibility, controls &amp; privacy</summary>
+        <OperatorPaths />
+      </details>
 
       <details className="border-y border-white/10">
         <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-xl font-semibold md:px-8">Media qualification progress</summary>
         <MediaQualificationStatus status={qualificationStatus} />
       </details>
 
-      <OperatorEvidence payoutEvidence={payoutEvidence} />
+      <details className="border-b border-white/10">
+        <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-base font-semibold md:px-8">Payout history &amp; check my worker</summary>
+        <OperatorEvidence payoutEvidence={payoutEvidence} />
+      </details>
 
       <details className="border-y border-white/10">
         <summary className="mx-auto max-w-6xl cursor-pointer px-6 py-6 text-xl font-semibold md:px-8">How local checks and Grid connection work</summary>

@@ -414,8 +414,15 @@ export function assessTextReleaseAvailability(
     checksumText,
   );
   const integrityReady = integrityReasons.length === 0;
-  const macosReady = integrityReady && macosSigningVerified(manifest);
-  const windowsReady = integrityReady && windowsSigningVerified(manifest);
+  const macosSigned = macosSigningVerified(manifest);
+  const windowsSigned = windowsSigningVerified(manifest);
+  const macosUnsigned = manifest?.platform_signing?.macos?.verified === false &&
+    manifest.platform_signing.macos.identity === "adhoc" &&
+    manifest.platform_signing.macos.notarized === false;
+  const windowsUnsigned = manifest?.platform_signing?.windows?.verified === false &&
+    manifest.platform_signing.windows.identity === "unsigned";
+  const macosReady = integrityReady && (macosSigned || macosUnsigned);
+  const windowsReady = integrityReady && (windowsSigned || windowsUnsigned);
 
   return {
     integrityReady,
@@ -425,18 +432,24 @@ export function assessTextReleaseAvailability(
       linuxArm64: { ready: integrityReady, reason: null },
       macos: {
         ready: macosReady,
+        warning: macosReady && !macosSigned
+          ? "Not Apple-notarized. macOS may block opening this app. Review the release notes and checksum before opening; do not disable Gatekeeper globally."
+          : null,
         reason: macosReady
           ? null
           : integrityReady
-            ? "macOS build is not Developer ID signed and notarized"
+            ? "macOS signing state is missing or inconsistent"
             : "Release integrity verification failed",
       },
       windows: {
         ready: windowsReady,
+        warning: windowsReady && !windowsSigned
+          ? "Unsigned Windows app. SmartScreen may show a warning. Review the release notes and checksum before opening; do not disable Windows protections."
+          : null,
         reason: windowsReady
           ? null
           : integrityReady
-            ? "Windows build is not Authenticode signed"
+            ? "Windows signing state is missing or inconsistent"
             : "Release integrity verification failed",
       },
     },

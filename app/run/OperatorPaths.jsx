@@ -50,8 +50,8 @@ const backends = [
   {
     runtime: "ComfyUI",
     workload: "Image / video",
-    path: "Reviewed model and recipe profiles",
-    status: "Qualification",
+    path: "Existing ComfyUI bridge; supported models and workflows",
+    status: "Manual setup",
     guide: "/docs/backends/comfyui",
   },
   {
@@ -166,9 +166,11 @@ export default function OperatorPaths() {
             </table>
           </div>
           <p className="mt-3 text-xs leading-5 text-gray-500">
-            Open means operators can connect through the current public text
-            worker. Qualification means the runtime needs a reviewed Grid
-            profile and canary before it may advertise that capability.
+            Open describes protocol compatibility, not every model or hardware
+            configuration. Check your platform above. ComfyUI uses the existing
+            bridge and supported workflows; the managed installer is separate.
+            Qualification requires a reviewed Grid profile and canary before
+            that capability may be advertised.
           </p>
         </div>
 

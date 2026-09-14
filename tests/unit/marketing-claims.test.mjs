@@ -142,8 +142,10 @@ test("operator onboarding preserves sidecar and maturity boundaries", async () =
   ]) {
     assert.match(paths, new RegExp(`/docs/backends/${guide}`));
   }
-  assert.match(downloads, /Before you download/);
-  assert.match(downloads, /Network need/);
+  assert.match(downloads, /Connect your inference endpoint/);
+  assert.match(downloads, /SGLang/);
+  assert.match(downloads, /LMDeploy/);
+  assert.match(downloads, /Anthropic-only endpoints are not supported yet/);
   assert.match(downloads, /Qualification benchmarks are unpaid/);
   assert.match(downloads, /one job at a time/);
 });
