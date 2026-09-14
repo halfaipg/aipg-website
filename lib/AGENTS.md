@@ -50,6 +50,9 @@ the site reads/writes.
   tool calls, models and generation settings remain forbidden. Only sanitized
   Core-returned image URLs reach clients. Verify real auto tool selection and
   the selected image model before public activation; see `DEMO_CHAT.md`.
+  Absent, null and empty `tool_calls` deltas are no-ops; preserve content and
+  terminal metadata on those frames. Nonempty calls still require exactly one
+  index-zero function and valid completed arguments before image dispatch.
 
 ## Local Contracts
 
