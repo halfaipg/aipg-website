@@ -35,17 +35,25 @@ onboarding, and staking-withdrawal surfaces.
   Streaming-scroll fixtures check stable input/document positions across chunks,
   scroll-up auto-follow suspension, and Jump to latest restoring following.
   Opening near either viewport edge must fit the expanded panel below navigation.
+  Wait for fonts before the opening-position fixture measures layout; preserve
+  its original header and viewport spacing assertions.
   Delayed follow-up fixtures verify one Thinking status, preserved context,
   stable composer position, and removal of pending status on completion/stop.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
+  the simplified endpoint/OS/download path at 320/390/768/1440px, per-engine
+  guides, desktop warnings and matching installation steps, separate ComfyUI
+  and audio paths, optional planner and worker lookup. Browser tests verify
+  download links, not native installation or completed worker jobs.
+  Text policy unit tests allow explicit unsigned metadata with warnings but
+  keep unknown signing states and integrity failures closed. Includes
   the preview.20 operator app, consent-based setup, Windows menu option 8,
   explicit exit behavior, and exact versioned downloads without personal
   private-key entry or Console key juggling, plus the
   canonical persistent Docker enrollment handoff, read-only credential mount,
   durable evidence-journal requirement, and
-  public network-status surface, existing-stack worker onramp, pre-download
+  public network-status surface, existing-stack worker onramp, optional
   compatibility and maturity facts, local hardware-path recommendation, telemetry
   disclaimers, evidence-bound payout scenario, exact public worker-status
   lookup, unreviewed-validator cohort-review handoff, artifact-specific Linux

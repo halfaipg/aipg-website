@@ -17,6 +17,7 @@ for (const width of [320, 1280]) {
         ? route.fulfill({ json: { available: true, remaining: 15, limit: 15 } })
         : route.fulfill({ contentType: 'application/x-ndjson', body: '{"type":"delta","text":"Local fixture reply"}\n{"type":"done"}\n' }));
       await page.goto('/');
+      await page.evaluate(() => document.fonts.ready);
       const input = page.getByRole('textbox', { name: 'Your message' });
       await input.fill('Test opening the chat');
       await input.evaluate((el, edge) => {

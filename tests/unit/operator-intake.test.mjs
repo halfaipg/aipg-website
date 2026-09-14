@@ -49,12 +49,12 @@ test("run onboarding gives blocked platforms an immediate operator action", asyn
   ]);
 
   assert.ok(
-    page.indexOf("<OperatorRecruitment") < page.indexOf("<OperatorPlanner"),
-    "operator recruitment must appear before the long hardware planner",
+    page.indexOf("<RunDownloads") < page.indexOf("<OperatorPlanner"),
+    "setup and help must appear before the optional hardware planner",
   );
-  assert.match(downloads, /Use verified Linux worker/);
-  assert.match(downloads, /Register this hardware/);
-  assert.match(downloads, /Join the operator cohort for setup support/);
+  assert.match(downloads, /Need setup help/);
+  assert.match(downloads, /Ask about my hardware/);
+  assert.match(page, /Not running a model yet/);
   assert.match(links, /AIPowerGrid\/grid-text-worker\/issues\/10/);
   assert.match(links, /operator-interest\.yml/);
 });

@@ -29,101 +29,39 @@ with server-visible product, worker, and API entry points).
 - `about/page.js` — about page. `use/page.js` — permanent redirect to the
   canonical `/docs/integrations` guide. `wallet/page.js` — AIPG token info + "add to wallet" (Base).
 - `staking/page.js` — withdrawal-only staking page; renders `components/StakingInterface`.
-- `run/` — worker download and onboarding surface. Text-worker downloads require
-  an immutable, stable `v*` release whose exact four-platform binary set, SPDX
-  SBOM, release manifest, aggregate checksums, GitHub digests, and sizes agree;
-  the server hashes the manifest and checksum bytes it actually downloads and
-  requires those byte lengths and digests to match GitHub's immutable asset
-  metadata before parsing either file; it also resolves the immutable Git tag
-  to an exact commit and requires the manifest to name that same commit.
-  Linux x64/ARM64 availability depends on that complete release-integrity
-  contract, not on unrelated desktop identities. macOS remains hidden until
-  Developer ID/notarization is verified and Windows remains hidden until
-  Authenticode is verified. Mutable, unverified, and legacy releases fail
-  closed per platform. Starting with `v0.3.7`, the exact payload must also
-  include `install-worker.sh` in the manifest, aggregate checksums, and GitHub
-  asset identities. `/run` prefers that non-executing, architecture-detecting
-  installer for Linux while retaining the exact platform binary as a direct
-  fallback; earlier immutable releases remain bound to their original payload.
-  Media-manager downloads require a public,
-  non-prerelease `manager-v*` release with both the aggregate checksum and
-  machine-readable release manifest plus SPDX SBOM assets present. The server
-  must verify immutable-release state, manifest profile gates, GitHub asset
-  digests and sizes, and exact aggregate-checksum coverage before exposing a
-  media download. Linux availability depends on those shared gates, not an
-  unrelated Windows identity. Windows remains hidden until the final manager
-  manifest records verified Authenticode. Its local operator planner uses
-  coarse browser-only OS, accelerator model, VRAM, RAM, disk, and
-  expected/measured throughput inputs to recommend a worker path. The download
-  panel and planner must derive their initial OS from the same conservative
-  browser-platform detector through a hydration-safe external-store snapshot,
-  so a gated desktop build is never presented as available through a mismatched
-  Linux recommendation and desktop detection cannot replace the server tree;
-  exact capability approval remains local to signed profiles. Live opportunity rows combine
-  public worker counts with 30-day job and observed-performance telemetry. The planner's
-  network-priority text route ranks under-target routes by accepted 30-day den multiplied by
-  missing replicas; raw request count remains display evidence, not the priority input. It is a
-  supply-priority signal, not a hardware-compatibility verdict. An
-  operator must never advertise that route unless the detected backend genuinely serves the
-  named model.
-  Its share action derives a bounded operator-opening message from that same
-  normalized priority row, preserves the redundancy target, links only to
-  `/run`, and explicitly refuses an earnings forecast.
-  The download facts use that same normalized opportunity data to show a
-  current route/redundancy snapshot before the download action. Missing or
-  malformed data must say that coverage is unavailable, never fabricate demand.
-  While the media release is gated, the download panel links to the public
-  qualification cohort runbook. A complete `manager-qualification-v*`
-  prerelease may expose a separately labelled benchmark-only binary, checksum,
-  and SBOM only after the same payload-identity checks plus explicit
-  no-enrollment/no-advertisement restrictions pass; it must never be presented
-  as a worker release.
-  The page also consumes the worker repo's versioned
-  `docs/qualification-status.json` contract to show accepted evidence counts
-  for the required hardware classes. Invalid or unavailable status data must
-  fail soft while keeping the media release gated and linking only to the
-  tracked cohort issue.
-  Jobs per worker is only a historical workload-share signal; capacity risk and
-  workload must remain separate and neither may be described as a hardware
-  benchmark, payout forecast, or earnings promise.
-  The operator evidence panel may model a user-selected share of accepted den
-  against the rolling 24-hour pool returned by `GET /v1/payouts/public`; it
-  must label the result as same-window arithmetic, exclude token price and GPU
-  assumptions, and show nothing when evidence is invalid. Server-rendered payout
-  timestamps must use an explicit UTC formatter so browser locale cannot break
-  hydration. Its worker check
-  matches an exact name or ID against the public `GET /v1/workers` online feed;
-  a missing match is not proof of a local failure.
-  The recruitment section links first to the open paid Linux text-worker cohort
-  in `AIPowerGrid/grid-text-worker#10`, then to this repository's generic public
-  operator-interest issue form for other hardware. The page and both GitHub
-  paths must state that only coarse hardware and availability belong there;
-  private setup details stay out of public GitHub issues.
-  Recruitment belongs immediately after the verified download surface, before
-  the long planner/evidence sections. A gated macOS or Windows selection must
-  offer both a switch to the verified Linux artifact and the generic hardware
-  intake; a successful text download must link to cohort setup support.
-  A verified Linux text download must be followed immediately by the exact
-  artifact-specific first-run commands, local wizard URL, scoped-key boundary,
-  and online/public-worker verification steps. Never teach operators to place a
-  Grid key or wallet secret in a shell command. Its full-bleed hero uses
-  purpose-specific GPU-worker hardware imagery; do not replace it with the
-  generic network wallpaper or validator imagery.
-  The operator story is sidecar-first: keep the operator's existing runtime and
-  connect only explicitly selected capabilities. Show the existing-stack and
-  start-fresh paths, backend maturity, capacity controls, local model custody,
-  and plaintext-workload boundary before making broad media availability claims.
-  Compatibility rows link to the matching `/docs/backends/*` quickstart so a
-  runtime choice leads directly to its verified setup and limitations.
-  Keep the hero compact and its existing-backend CTA anchored to the separate
-  download section, not back to the hero itself. On desktop, first-run steps
-  sit beside downloads; on phones they follow them. Runtime availability must
-  remain readable without horizontally scrolling the compatibility table.
-  The planner respects the chosen text/image-video/audio workload; media
-  readiness is platform-specific. Missing desktop artifacts must not imply
-  that all text releases are unpublished. Detailed network telemetry, media
-  qualification counts, and background connection explanations are disclosures,
-  not mandatory steps before downloading.
+- `run/` - worker onboarding: endpoint selection, OS, download, matching
+  first-run steps. Popular engines are examples of compatible endpoints.
+  OpenAI chat is required by the current text worker's registration probe;
+  Anthropic Messages is an additionally probed passthrough format, not a
+  standalone enrollment promise.
+  The server binds exact immutable stable releases to their Git commit,
+  downloaded manifest/checksum byte digests and lengths, and the complete
+  platform payload with GitHub digests and sizes. From v0.3.7 the installer is
+  part of that exact checksummed payload. Never replace this with guessed
+  latest-release URLs.
+  Explicit Windows unsigned and macOS ad-hoc/unnotarized manifest states may
+  expose integrity-checked downloads with adjacent warnings. Unknown or
+  contradictory signing states remain closed. macOS is Apple Silicon only.
+  Keep integrity verification distinct from platform signing and supervised
+  native end-to-end qualification. The strict `assessTextRelease` helper still
+  reports fully signed readiness; the download surface uses the platform
+  availability helper with warning metadata.
+  ComfyUI image/video uses the existing bridge and supported workflows.
+  Managed audio releases retain their existing signed profile, RecipeVault,
+  hardware qualification, immutable payload and Windows Authenticode gates.
+  Qualification binaries remain benchmark-only, no enrollment or rewards.
+  Never present an audio-manager artifact as a generic ComfyUI installer.
+  The optional planner uses hydration-safe OS detection shared with downloads;
+  macOS defaults to Apple silicon unless the operator explicitly chooses a
+  different accelerator. Browser specs do not prove model compatibility.
+  Optional capacity recommendations use accepted den and missing replicas,
+  never earnings forecasts. Payout scenarios remain same-window arithmetic
+  on validated evidence, and the worker lookup remains an exact public
+  registry match. Missing evidence cannot imply success or zero activity.
+  Setup-help links stay alongside installation. Public intake must exclude
+  credentials, wallet details, network addresses and private logs. Models stay
+  local; worker inputs and outputs are plaintext. No private wallet key is
+  entered during setup. See ../RUN_ONBOARDING.md.
 - `validate/` — validator preview onboarding. It release-gates all four binaries
   and the checksum-covered installer on the presence of `SHA256SUMS` and the
   SPDX SBOM plus the live Core `shared_quorum_preview`, 3-of-5, non-economic

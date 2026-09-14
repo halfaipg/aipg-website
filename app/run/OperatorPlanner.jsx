@@ -64,7 +64,7 @@ export default function OperatorPlanner({
 }) {
   const [selectedOs, setSelectedOs] = useState(null);
   const [workload, setWorkload] = useState("text");
-  const [accelerator, setAccelerator] = useState("nvidia");
+  const [selectedAccelerator, setAccelerator] = useState(null);
   const [gpuModel, setGpuModel] = useState("");
   const [vram, setVram] = useState(24);
   const [ram, setRam] = useState(64);
@@ -74,6 +74,7 @@ export default function OperatorPlanner({
   const detectedPlatform = useDetectedOperatorPlatform();
   const hydrated = useOperatorPlatformHydrated();
   const os = selectedOs || detectedPlatform.os;
+  const accelerator = selectedAccelerator || (os === "macos" ? "apple" : "nvidia");
   const mediaReady = Boolean(mediaPlatforms?.[os]?.ready);
   const textReady = Boolean(
     os === "linux"

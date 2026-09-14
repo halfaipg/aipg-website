@@ -224,7 +224,7 @@ test("rejects text releases without verified platform signing", () => {
   );
 });
 
-test("keeps verified Linux downloads available when desktop signing is absent", () => {
+test("offers explicitly unsigned desktop artifacts with warnings after integrity checks", () => {
   const value = fixture();
   value.manifest.platform_signing.macos = {
     verified: false,
@@ -247,10 +247,23 @@ test("keeps verified Linux downloads available when desktop signing is absent", 
   assert.equal(result.integrityReady, true);
   assert.equal(result.platforms.linux.ready, true);
   assert.equal(result.platforms.linuxArm64.ready, true);
-  assert.equal(result.platforms.macos.ready, false);
-  assert.equal(result.platforms.windows.ready, false);
-  assert.match(result.platforms.macos.reason, /not Developer ID signed/i);
-  assert.match(result.platforms.windows.reason, /not Authenticode signed/i);
+  assert.equal(result.platforms.macos.ready, true);
+  assert.equal(result.platforms.windows.ready, true);
+  assert.match(result.platforms.macos.warning, /Not Apple-notarized/);
+  assert.match(result.platforms.windows.warning, /Unsigned Windows app/);
+  assert.equal(result.platforms.macos.reason, null);
+  assert.equal(result.platforms.windows.reason, null);
+});
+
+test("missing or inconsistent desktop signing metadata stays closed", () => {
+  for (const signing of [undefined, {}, { macos: { verified: true, identity: "adhoc", notarized: false }, windows: { verified: true, identity: "unsigned" } }]) {
+    const value = fixture();
+    value.manifest.platform_signing = signing;
+    const result = assessTextReleaseAvailability(value.release, value.manifest, value.checksums);
+    assert.equal(result.platforms.linux.ready, true);
+    assert.equal(result.platforms.macos.ready, false);
+    assert.equal(result.platforms.windows.ready, false);
+  }
 });
 
 test("blocks every platform when the release payload fails integrity", () => {

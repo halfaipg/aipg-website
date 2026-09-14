@@ -95,33 +95,24 @@ on Vercel.
   external script/media origin must be added to the CSP there or it will be blocked in prod.
 - `/docs` and `/docs/*` are Vercel rewrites to the separate aipg-documentation deployment
   (`vercel.json`) — not routes in this repo.
-- `/run` verifies the complete immutable text-worker release envelope before
-  exposing any artifact. Linux x64/ARM64 may download from a provenance- and
-  checksum-verified release without depending on unrelated desktop signing;
-  `v0.3.7+` additionally requires and prefers the release-stamped,
-  checksum-covered Linux installer while preserving direct binary access;
-  macOS remains hidden until Developer ID notarization is verified and Windows
-  remains hidden until Authenticode is verified.
-  Media-manager availability follows the same platform-scoped rule after its
-  signed profile, hardware qualification, RecipeVault, immutable payload,
-  SBOM, provenance, and supervised-staging gates pass: Linux may open while
-  Windows remains hidden until Authenticode is verified.
-  It also exposes a fail-closed rolling payout scenario and an exact public
-  worker-registry check; neither may turn hardware, job counts, or token price
-  into an earnings promise.
-  The open paid Linux text-worker cohort is tracked in
-  `AIPowerGrid/grid-text-worker#10`; `/run` links to it as the primary operator
-  action while the generic operator-interest handoff remains owned by
-  `.github/ISSUE_TEMPLATE/operator-interest.yml`. Both public paths collect
-  coarse hardware, region, and availability only and must reject credentials,
-  wallet details, network addresses, private logs, and account identifiers.
-  An auto-detected gated desktop platform must never leave the visitor at a
-  disabled control: offer the verified Linux path when available and the safe
-  generic hardware intake immediately beside the gate.
-  The page leads with two operator paths: connect an already-running backend or
-  start from hardware guidance. Its compatibility matrix must keep the public
-  text-worker path distinct from qualification-gated media profiles, and its
-  security copy must state that community workers receive plaintext workloads.
+- `/run` leads with endpoint, OS, verified download and platform-specific setup.
+  LM Studio, Ollama, vLLM, SGLang, LMDeploy and KoboldCpp are examples, not an
+  engine allowlist. Text registration currently requires OpenAI chat; Anthropic
+  passthrough is available only after its additional protocol probe.
+  Text artifacts require the complete immutable release envelope, exact tag
+  commit, manifest, checksums, GitHub digests and sizes. Linux installers remain
+  checksum-bound from v0.3.7 onward. Explicitly unsigned Windows and ad-hoc,
+  unnotarized Apple Silicon builds may be offered with adjacent OS warnings;
+  absent or inconsistent signing metadata stays blocked. Do not disable OS
+  protections or imply native desktop E2E qualification.
+  ComfyUI's existing manual bridge is distinct from the managed ACE-Step audio
+  installer. Media-manager signature, profile, hardware qualification,
+  RecipeVault, release payload and platform-signing gates remain unchanged.
+  Keep planner, detailed compatibility, payout scenarios, worker lookup and
+  qualification evidence behind optional disclosures. They must not fabricate
+  compatibility, availability or earnings. Public support accepts coarse
+  hardware and availability only, never credentials or private infrastructure.
+  See `RUN_ONBOARDING.md` for the publication policy and verification scope.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.

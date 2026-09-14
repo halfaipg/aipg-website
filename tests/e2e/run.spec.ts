@@ -1,245 +1,92 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('/run smoke', () => {
-  test('renders the release-gated worker download surface', async ({ page }) => {
-    const browserErrors: string[] = [];
-
-    page.on('console', (message) => {
-      if (message.type() === 'error') browserErrors.push(message.text());
-    });
-    page.on('pageerror', (error) => {
-      browserErrors.push(`pageerror: ${error.message}`);
-    });
-    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+for (const width of [320, 390, 768, 1440]) {
+  test(`/run simple endpoint onboarding at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
     await page.addInitScript(() => {
-      Object.defineProperty(navigator, 'share', {
-        configurable: true,
-        value: undefined,
-      });
+      Object.defineProperty(navigator, 'userAgentData', { get: () => ({ platform: 'macOS' }) });
+      Object.defineProperty(navigator, 'platform', { get: () => 'MacIntel' });
+      Object.defineProperty(navigator, 'userAgent', { get: () => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)' });
     });
+    await page.goto('/run');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Earn AIPG');
+    await expect(page.getByRole('button', { name: 'macOS', exact: true }).first()).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByRole('link', { name: 'Download for macOS', exact: true })).toHaveAttribute('href', /grid-inference-worker-macos-arm64.zip$/);
+    await expect(page.getByText(/Not Apple-notarized/)).toBeVisible();
+    await expect(page.getByText(/not Intel Macs/)).toBeVisible();
+    await expect(page.getByText(/Unzip the download and open/)).toBeVisible();
+    await expect(page.getByLabel('GPU or accelerator model')).not.toBeVisible();
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await page.screenshot({ path: `test-results/run-macos-${width}.png`, fullPage: true });
 
-    await page.route('https://api.aipowergrid.io/v1/workers', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          count: 1,
-          workers: [
-            {
-              id: 'worker-e2e-123',
-              name: 'E2E Worker',
-              online: true,
-              models: ['gpt-oss-120b'],
-              job_types: ['text'],
-            },
-          ],
-        }),
-      });
-    });
-
-    const response = await page.goto('/run', { waitUntil: 'domcontentloaded' });
-
-    expect(response?.ok()).toBeTruthy();
-    await expect(page.getByRole('heading', { name: 'AI Power Grid Workers' })).toBeVisible();
-    await page.getByText('Media qualification progress', { exact: true }).click();
-    await page.getByText('See current capacity needs and workload history', { exact: true }).click();
-    await expect(page.getByRole('button', { name: 'Text worker' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Media manager' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Linux', exact: true }).first()).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Windows', exact: true }).first()).toBeVisible();
-    await expect(
-      page.getByRole('heading', { name: 'Find the useful path for your machine' }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole('heading', { name: 'Help qualify the media worker.' }),
-    ).toBeVisible();
-    await expect(page.getByRole('link', { name: 'View cohort status' })).toHaveAttribute(
-      'href',
-      'https://github.com/AIPowerGrid/grid-media-worker/issues/8',
-    );
-    await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
-    await expect(page.getByLabel('GPU or accelerator model')).toBeVisible();
-    await expect(page.getByLabel('GPU VRAM')).toHaveValue('24');
-    await expect(page.getByLabel('Expected text speed')).toHaveValue('0');
-    await expect(page.getByText('Network-priority text route')).toBeVisible();
-    const shareOpening = page.getByRole('button', { name: 'Share opening' });
-    await expect(shareOpening).toBeVisible();
-    await shareOpening.click();
-    await expect(page.getByRole('status')).toHaveText('Opening copied.');
-    await expect
-      .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-      .toMatch(/Independent GPU operators wanted.*Historical workload is not an earnings forecast.*https:\/\/aipowergrid\.io\/run/);
-    await expect(
-      page.getByText(/Priority uses accepted den and missing replicas/i),
-    ).toBeVisible();
-    await expect(
-      page.getByText(/Jobs per worker is a rough workload-share signal, not a payout forecast/i),
-    ).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Check the rail before you commit a GPU' })).toBeVisible();
-    const payoutDisclaimer = page.getByText(/arithmetic on settled history, not a payout forecast/i);
-    const payoutUnavailable = page.getByText('Public payout evidence is unavailable, so no estimate is shown.');
-    await expect(payoutDisclaimer.or(payoutUnavailable)).toBeVisible();
-    if (await payoutUnavailable.isVisible()) {
-      await expect(page.getByLabel('Hypothetical share of accepted den')).toHaveCount(0);
-      await expect(page.getByText('Same-window scenario', { exact: true })).toHaveCount(0);
-    } else {
-      await expect(page.getByLabel('Hypothetical share of accepted den')).toBeVisible();
-      await expect(payoutDisclaimer).toBeVisible();
+    for (const [value, label] of [['lm-studio', 'LM Studio'], ['ollama', 'Ollama'], ['vllm', 'vLLM'], ['sglang', 'SGLang'], ['lmdeploy', 'LMDeploy'], ['koboldcpp', 'KoboldCpp'], ['openai-compatible', 'OpenAI-compatible endpoint']]) {
+      await page.getByLabel('1. Connect your inference endpoint').selectOption(value);
+      await expect(page.getByRole('heading', { name: 'Get connected with ' + label, exact: true })).toBeVisible();
+      await expect(page.getByRole('link', { name: label + ' setup guide', exact: true })).toHaveAttribute('href', /^\/docs\/backends\//);
     }
-    await expect(page.getByText(/One verified binary opens the local setup wizard/i)).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Join the text cohort' })).toHaveAttribute(
-      'href',
-      'https://github.com/AIPowerGrid/grid-text-worker/issues/10',
-    );
-    await expect(page.getByRole('link', { name: 'Register other hardware' })).toHaveAttribute(
-      'href',
-      'https://github.com/halfaipg/aipg-website/issues/new?template=operator-interest.yml',
-    );
-
-    await page.getByPlaceholder('Worker name or ID').fill('E2E Worker');
-    await page.getByRole('button', { name: 'Check now' }).click();
-    await expect(page.getByText('Online in the public registry')).toBeVisible();
-    await expect(page.getByText('Models: gpt-oss-120b')).toBeVisible();
-
-    await page.getByLabel('GPU or accelerator model').fill('RTX 3090');
-    await page.getByLabel('Expected text speed').fill('42');
-    await expect(
-      page.getByRole('heading', {
-        name: /Start with the text worker and your existing backend|Prepare your backend on/,
-      }),
-    ).toBeVisible();
-    await expect(page.getByText('RTX 3090', { exact: true })).toBeVisible();
-
-    const download = page.getByRole('link', { name: /Download .* for/ });
-    const releaseGate = page.getByRole('button', {
-      name: /release unavailable|qualification in progress|not .*signed/i,
-    });
-    expect((await download.count()) + (await releaseGate.count())).toBe(1);
-
-    await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
-    const textInstaller = page.getByRole('link', { name: /Download verified Linux installer/ });
-    await expect(textInstaller).toHaveAttribute(
-      'href',
-      /^https:\/\/github\.com\/AIPowerGrid\/grid-text-worker\/releases\/download\/v\d+\.\d+\.\d+\/install-worker\.sh$/,
-    );
-    const installerHref = await textInstaller.getAttribute('href');
-    expect(installerHref).not.toBeNull();
-    await expect(
-      page.getByRole('link', { name: /Download Linux binary directly/ }),
-    ).toHaveAttribute(
-      'href',
-      installerHref!.replace(/install-worker\.sh$/, 'grid-inference-worker-linux-x64'),
-    );
-    await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
-    await expect(
-      page.getByText(/chmod \+x install-worker\.sh/),
-    ).toBeVisible();
-    await expect(page.getByText(/grid-inference-worker --verify-runtime/)).toBeVisible();
-    await expect(page.getByText(/Enter it only in the local wizard|Follow the credential step shown by this release's local wizard/)).toBeVisible();
-    await expect(page.getByText(/(?:never in|Never put the credential in) a shell command or public issue/)).toBeVisible();
-    await expect(page.getByText(/never needs a wallet private key/i)).toBeVisible();
-
-    await page.getByRole('button', { name: 'macOS', exact: true }).first().click();
-    await expect(
-      page.getByRole('button', { name: /macOS build is not Developer ID signed/i }),
-    ).toBeVisible();
+    await page.getByText('Anthropic / Messages endpoints', { exact: true }).click();
+    await expect(page.getByText(/Anthropic-only endpoints are not supported yet/)).toBeVisible();
 
     await page.getByRole('button', { name: 'Windows', exact: true }).first().click();
-    await expect(
-      page.getByRole('button', { name: /Windows build is not Authenticode signed/i }),
-    ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Download for Windows', exact: true })).toHaveAttribute('href', /grid-inference-worker-windows-x64.exe$/);
+    await expect(page.getByText(/Unsigned Windows app/)).toBeVisible();
+    await expect(page.getByText(/Open the downloaded grid-inference-worker-windows/)).toBeVisible();
+    await expect(page.getByText(/chmod/)).not.toBeVisible();
 
-    await page
-      .getByRole('group', { name: 'Operating system' })
-      .getByRole('button', { name: 'Linux' })
-      .click();
-    await expect(
-      page.getByRole('heading', { name: 'Start with the text worker and your existing backend' }),
-    ).toBeVisible();
-
-    const overflow = await page.evaluate(() =>
-      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
-      window.innerWidth,
-    );
-    expect(overflow).toBe(false);
-    expect(browserErrors, `browser errors on /run:\n${browserErrors.join('\n')}`).toEqual([]);
-  });
-});
-
-test.describe('/run mobile smoke', () => {
-  test.use({ viewport: { width: 390, height: 844 } });
-
-  test('keeps the download path readable without horizontal overflow', async ({ page }) => {
-    const browserErrors: string[] = [];
-    page.on('console', (message) => {
-      if (message.type() === 'error') browserErrors.push(message.text());
-    });
-    page.on('pageerror', (error) => {
-      browserErrors.push(`pageerror: ${error.message}`);
-    });
-    await page.addInitScript(() => {
-      Object.defineProperty(navigator, 'userAgentData', {
-        get: () => ({ platform: 'Darwin' }),
-      });
-      Object.defineProperty(navigator, 'platform', { get: () => 'Darwin' });
-      Object.defineProperty(navigator, 'userAgent', {
-        get: () => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
-      });
-    });
-    await page.goto('/run', { waitUntil: 'domcontentloaded' });
-
-    await expect(page.getByRole('heading', { name: 'AI Power Grid Workers' })).toBeVisible();
-    await page.getByRole('link', { name: 'I already run AI', exact: true }).click();
-    await expect(page).toHaveURL(/#worker-downloads$/);
-    await expect.poll(() => page.locator('#worker-downloads').evaluate(el => el.getBoundingClientRect().top)).toBeLessThan(150);
-    await expect(page.locator('[data-operator-planner-ready="true"]')).toBeAttached();
-    await expect(page.getByRole('button', { name: 'macOS' }).first()).toHaveAttribute(
-      'aria-pressed',
-      'true',
-    );
-    await expect(
-      page
-        .getByRole('group', { name: 'Operating system' })
-        .getByRole('button', { name: 'macOS' }),
-    ).toHaveAttribute('aria-pressed', 'true');
-    await page.getByLabel('Accelerator type', { exact: true }).selectOption('apple');
-    await expect(
-      page.getByRole('heading', {
-        name: /Prepare your backend on macOS/,
-      }),
-    ).toBeVisible();
-
-    await page.getByLabel('What do you want to run?').selectOption('audio');
-    await expect(page.getByRole('link', { name: 'Read the ACE-Step setup guide' })).toHaveAttribute('href', '/docs/backends/ace-step');
-    await page.getByLabel('What do you want to run?').selectOption('media');
-    await expect(page.getByRole('link', { name: 'Read the ComfyUI setup guide' })).toHaveAttribute('href', '/docs/backends/comfyui');
-    await page.getByLabel('Accelerator type', { exact: true }).selectOption('cpu');
-    await expect(page.getByRole('link', { name: 'Open validator setup' })).toHaveAttribute('href', '/validate');
-
-    const overflow = await page.evaluate(() =>
-      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) >
-      window.innerWidth,
-    );
-    expect(overflow).toBe(false);
-    expect(browserErrors, `browser errors on mobile /run:\n${browserErrors.join('\n')}`).toEqual([]);
-
-    await page.screenshot({ path: 'test-results/run-mobile.png', fullPage: true });
-  });
-});
-
-for (const width of [320, 768, 1440]) {
-  test(`/run layout at ${width}px contains Linux setup and media controls`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto('/run');
     await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
-    await expect(page.getByRole('heading', { name: 'First run on Linux' })).toBeVisible();
+    const installer = page.getByRole('link', { name: 'Download Linux installer', exact: true });
+    await expect(installer).toHaveAttribute('href', /releases\/download\/v\d+\.\d+\.\d+\/install-worker.sh$/);
+    await expect(page.getByText(/chmod \+x install-worker.sh/)).toBeVisible();
+    await expect(page.getByText(/--verify-runtime/)).toBeVisible();
+    await page.getByText('Release details & checksums', { exact: true }).click();
+    await expect(page.getByRole('link', { name: 'Download Linux binary directly' })).toHaveAttribute('href', (await installer.getAttribute('href'))!.replace('install-worker.sh', 'grid-inference-worker-linux-x64'));
+    await page.getByRole('button', { name: 'Linux ARM64', exact: true }).first().click();
+    await expect(page.getByRole('link', { name: 'Download Linux ARM64 binary directly' })).toHaveAttribute('href', (await installer.getAttribute('href'))!.replace('install-worker.sh', 'grid-inference-worker-linux-arm64'));
+    await page.getByRole('button', { name: 'Linux', exact: true }).first().click();
+    await expect(page.getByRole('link', { name: 'Need setup help?' })).toBeVisible();
+    await expect(page.getByText(/never needs a wallet private key/)).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-    await page.screenshot({ path: `test-results/run-linux-${width}.png`, fullPage: true });
-    await page.getByRole('button', { name: 'Media manager', exact: true }).click();
-    await expect(page.getByRole('link', { name: 'Qualification instructions', exact: true })).toBeVisible();
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await page.screenshot({ path: `test-results/run-simple-${width}.png`, fullPage: true });
+
+    await page.getByRole('button', { name: 'Images & video', exact: true }).click();
+    await expect(page.getByRole('link', { name: 'Open ComfyUI setup guide' })).toHaveAttribute('href', 'https://github.com/AIPowerGrid/grid-media-worker#comfyui-worker');
+    await expect(page.getByRole('link', { name: /Download for|Download Linux installer/ })).toHaveCount(0);
+    await page.getByRole('button', { name: 'Audio', exact: true }).click();
+    await expect(page.getByRole('link', { name: 'Open ACE-Step setup guide' })).toHaveAttribute('href', '/docs/backends/ace-step');
+    await page.getByText('Managed installer & qualification', { exact: true }).click();
+    await expect(page.getByText(/Qualification benchmarks are unpaid/)).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    expect(errors).toEqual([]);
   });
 }
+
+test('/run optional planner and worker check remain usable', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'userAgentData', { get: () => ({ platform: 'macOS' }) });
+    Object.defineProperty(navigator, 'platform', { get: () => 'MacIntel' });
+    Object.defineProperty(navigator, 'userAgent', { get: () => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)' });
+  });
+  await page.route('https://api.aipowergrid.io/v1/workers', route => route.fulfill({
+    json: { count: 1, workers: [{ id: 'worker-e2e-123', name: 'E2E Worker', online: true, models: ['gpt-oss-120b'], job_types: ['text'] }] },
+  }));
+  await page.goto('/run');
+  await page.getByText('Not running a model yet? Plan your setup', { exact: true }).click();
+  await expect(page.getByLabel('Accelerator type', { exact: true })).toHaveValue('apple');
+  await page.getByLabel('What do you want to run?').selectOption('audio');
+  await expect(page.getByRole('link', { name: 'Read the ACE-Step setup guide' })).toBeVisible();
+  await page.getByLabel('What do you want to run?').selectOption('media');
+  await expect(page.getByRole('link', { name: 'Read the ComfyUI setup guide' })).toBeVisible();
+  await page.getByText('See current capacity needs and workload history', { exact: true }).click();
+  await expect(page.getByText(/Jobs per worker is a rough workload-share signal/)).toBeVisible();
+  await page.getByText('Payout history & check my worker', { exact: true }).click();
+  await page.getByPlaceholder('Worker name or ID').fill('E2E Worker');
+  await page.getByRole('button', { name: 'Check now' }).click();
+  await expect(page.getByText('Online in the public registry')).toBeVisible();
+  await expect(page.getByText(/arithmetic on settled history, not a payout forecast/).or(page.getByText('Public payout evidence is unavailable, so no estimate is shown.'))).toBeVisible();
+});
 
 test.describe('/validate smoke', () => {
   test('states the preview trust boundary and renders verified preview downloads', async ({ page }) => {
