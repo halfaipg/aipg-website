@@ -227,8 +227,11 @@ answering replies; ComfyUI participation follows separate qualification.
 - Result: `z-image-turbo`, served by the publicly displayed worker
   `half5090beast1`; village, lighthouse, teal roofs and boats visibly rendered.
 - [Actual generated image](https://media.aipg.art/image/4913248a-e2c3-43a4-bbf5-693d47227d57/0.webp).
-  This is the returned artifact, not a durable-retention guarantee. Recheck it
-  before posting and retain the original through the normal download flow.
+  The unchanged 1024x1024 WebP is also retained as
+  [the campaign asset](public/campaign-coastal-village-20260914.webp), exported
+  from the browser's observed image resource. SHA-256:
+  `0f065e78e9177e47d4632b7c62502c0d7992e62d23bbd6f69abac35d5487ad8b`.
+  Use this original for publication; do not substitute a regenerated image.
 - UI reported 5.2 seconds generation. Wall-clock end-to-end time was not
   measured; do not advertise this as a latency benchmark.
 - This visitor was not charged. The sponsoring service's actual ledger debit
@@ -256,6 +259,11 @@ answering replies; ComfyUI participation follows separate qualification.
 2. Have half approve the exact copy, asset and five support slots. Publish the
    creation post, founder reply and one owned Discord message. Record their
    URLs and publication time here; do not infer publication from a draft.
+   The `/run` Linux selector was checked live September 14: installer and
+   direct binary both resolve to v0.3.9. Before the worker reply, correct the
+   two v0.3.7 release references in the existing cohort issue #10 to v0.3.9;
+   preserve the rest of the issue and its historical comments. This correction
+   is pending, not an excuse to publish another recruitment comment.
 3. Answer opt-in replies personally. Aim for ten consenting people with a
    completed scene and three independent workers completing real jobs, with
    five onboarding slots maximum. These are targets, not reported outcomes.
