@@ -84,6 +84,10 @@ on Vercel.
   wallet SDK schemas into synthetic test fixtures before a validator migration.
   It records source versions and hashes; never replace the baseline with the
   migrated output to hide a compatibility regression.
+- **`scripts/compare-wallet-schema-contracts.mjs`** compares bounded nested-field
+  mutations against a separately installed original SDK graph, verifies its
+  recorded source hashes and Zod versions, and fails on behavioral differences.
+  It runs offline; never install the original vulnerable SDK graph in production.
 
 ## Local Contracts
 

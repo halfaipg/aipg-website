@@ -18,6 +18,11 @@ Zod 3 has no patched release. Upgrading Coinbase or Reown alone does not fix
 their Zod 3 dependency; upstream tracks this in
 [Coinbase #863](https://github.com/coinbase/cdp-sdk/issues/863) and
 [Reown #5828](https://github.com/reown-com/appkit/issues/5828).
+As checked on 2026-11-09, the proposed fixes
+[Coinbase #867](https://github.com/coinbase/cdp-sdk/pull/867) and
+[Reown #5830](https://github.com/reown-com/appkit/pull/5830) remain unmerged;
+the official latest npm releases still require Zod 3. Do not replace the
+runtime ports with an unreviewed dependency-range-only override.
 
 The candidate uses native Zod 4.6.7, not its unpatched `zod/v3` subpath.
 Two version-bound `patch-package` patches explicitly port the runtime:
@@ -47,6 +52,24 @@ nonempty EIP-712 records in ESM/CommonJS, reject malformed addresses/events,
 and prove an oversized constrained array is rejected before element visits.
 This is bounded regression coverage, not exhaustive protocol equivalence.
 
+`scripts/compare-wallet-schema-contracts.mjs` independently mutates up to 20
+nested paths in each valid baseline example and compares the original and
+candidate parsers. It checks acceptance, parsed output and thrown-error class,
+not human-readable validation messages or Zod's internal error layout.
+It refuses originals whose source hashes or Zod versions do not match the
+recorded baseline. To reproduce in an isolated scratch directory:
+
+```sh
+original="$(mktemp -d)"
+npm install --prefix "$original" --ignore-scripts --no-audit --no-fund \
+  @coinbase/cdp-sdk@1.51.2 @reown/appkit-wallet@1.8.19
+node scripts/compare-wallet-schema-contracts.mjs "$original"
+```
+
+Use no credentials or real wallet data. This command installs known-vulnerable
+original validators only for offline comparison; never run it in production or
+use that scratch dependency graph to build/deploy the website.
+
 The browser qualification uses actual RainbowKit/wagmi with a clearly labelled
 synthetic injected wallet and mocked public RPC reads. It must verify the
 existing wallet choices, connect, reload without a prompt, disconnect, and a
@@ -61,6 +84,9 @@ transaction test. Report these untested paths explicitly in the release review.
 - Dependency audit: zero known vulnerabilities at every severity.
 - Unit suite: 125 passed, including real isolated Redis concurrency checks
   and the 1,299-case wallet fixture replay.
+- Independent nested-field comparison: 16,920 variations, including 1,374
+  accepted by the original parsers, with zero acceptance/output differences.
+  Coverage by module: frame 8,784; EVM 4,932; Solana 2,664; policy 540.
 - Production build and browser suite: 53 passed, including read-only wallet
   connect/reload/disconnect/reload at 390px and 1280px. Screenshots inspected.
 - Lint: exit 0, with 11 existing warnings. Build retains the existing MetaMask
