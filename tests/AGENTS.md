@@ -7,6 +7,15 @@ onboarding, and staking-withdrawal surfaces.
 
 ## Ownership
 
+- `unit/wallet-schemas.test.mjs` replays the generated original SDK contract
+  in `fixtures/wallet-schema-baseline.json`, checks both ESM/CommonJS typed-data
+  records, malformed frames and EVM bounds. These are synthetic parser fixtures,
+  not a signed transaction, relay pairing or real wallet-access proof.
+- `e2e/wallet.spec.ts` keeps all current wallet choices visible and tests the
+  actual RainbowKit/wagmi injected-connector lifecycle against an explicit
+  EIP-6963/EIP-1193 fixture: connect, read-only balances, reload, disconnect,
+  reload without another prompt, and zero signing/send calls. Public RPC reads
+  are mocked. It does not prove a human WalletConnect pairing or a real transfer.
 - `unit/security-headers.test.mjs` verifies real Next route matching, docs-only
   WASM permission, unchanged non-docs CSP and preserved security headers.
   `e2e/security-headers.spec.ts` proves the emitted production policy allows
@@ -49,6 +58,9 @@ onboarding, and staking-withdrawal surfaces.
   stable composer position, and removal of pending status on completion/stop.
 
 - `e2e/staking.spec.ts` - page mount, withdrawal UI, and browser-error checks.
+- `e2e/docs-handoff.spec.ts` keeps the navbar Build link a document navigation
+  across the separate-app `/use` redirect; never fetch docs RSC into the
+  marketing app's router/chunk namespace. The destination is a labelled fixture.
 - `e2e/run.spec.ts` - release-gated worker and validator onboarding, including
   the simplified endpoint/OS/download path at 320/390/768/1440px, per-engine
   guides, desktop warnings and matching installation steps, separate ComfyUI

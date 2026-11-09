@@ -1,0 +1,23 @@
+diff --git a/node_modules/@reown/appkit-wallet/package.json b/node_modules/@reown/appkit-wallet/package.json
+--- a/node_modules/@reown/appkit-wallet/package.json
++++ b/node_modules/@reown/appkit-wallet/package.json
+@@ -25,1 +25,1 @@
+-    "zod": "3.22.4",
++    "zod": "4.6.7",
+diff --git a/node_modules/@reown/appkit-wallet/dist/esm/src/W3mFrameSchema.js b/node_modules/@reown/appkit-wallet/dist/esm/src/W3mFrameSchema.js
+--- a/node_modules/@reown/appkit-wallet/dist/esm/src/W3mFrameSchema.js
++++ b/node_modules/@reown/appkit-wallet/dist/esm/src/W3mFrameSchema.js
+@@ -365,8 +365,8 @@
+ export const WalletRevokePermissionsRequest = z.object({
+     method: z.literal('wallet_revokePermissions'),
+-    params: z.any()
++    params: z.any().optional()
+ });
+ export const WalletGetAssetsRequest = z.object({
+     method: z.literal('wallet_getAssets'),
+-    params: z.any()
++    params: z.any().optional()
+ });
+@@ -551,1 +551,1 @@
+-        .or(EventSchema.extend({ type: zType('FRAME_RPC_REQUEST_SUCCESS'), payload: RpcResponse }))
++        .or(EventSchema.extend({ type: zType('FRAME_RPC_REQUEST_SUCCESS'), payload: RpcResponse.optional() }))

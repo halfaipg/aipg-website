@@ -4,6 +4,12 @@
 marketing site. Validate the public URL as well as the direct docs preview:
 the main site's response headers also apply to the rewritten content.
 
+Builder links through `/use` must use normal document navigation. Next client
+prefetch follows that redirect into a different application and tries to load
+its RSC JavaScript from the marketing app's `/_next` namespace. The navbar
+anchor and `tests/e2e/docs-handoff.spec.ts` preserve this boundary. The test was
+confirmed to reject the old client-link behavior before applying the fix.
+
 ## Pagefind Policy
 
 Pagefind search compiles WebAssembly. Production docs responses need

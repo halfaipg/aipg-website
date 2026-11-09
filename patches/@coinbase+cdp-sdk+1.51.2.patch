@@ -1,0 +1,28 @@
+diff --git a/node_modules/@coinbase/cdp-sdk/package.json b/node_modules/@coinbase/cdp-sdk/package.json
+--- a/node_modules/@coinbase/cdp-sdk/package.json
++++ b/node_modules/@coinbase/cdp-sdk/package.json
+@@ -24,1 +24,1 @@
+-    "abitype": "1.0.6",
++    "abitype": "1.2.3",
+@@ -32,1 +32,1 @@
+-    "zod": "^3.25.76"
++    "zod": "4.6.7"
+diff --git a/node_modules/@coinbase/cdp-sdk/_esm/policies/evmSchema.js b/node_modules/@coinbase/cdp-sdk/_esm/policies/evmSchema.js
+--- a/node_modules/@coinbase/cdp-sdk/_esm/policies/evmSchema.js
++++ b/node_modules/@coinbase/cdp-sdk/_esm/policies/evmSchema.js
+@@ -210,1 +210,1 @@
+-        types: z.record(z.array(z.object({
++        types: z.record(z.string(), z.array(z.object({
+diff --git a/node_modules/@coinbase/cdp-sdk/_cjs/policies/evmSchema.js b/node_modules/@coinbase/cdp-sdk/_cjs/policies/evmSchema.js
+--- a/node_modules/@coinbase/cdp-sdk/_cjs/policies/evmSchema.js
++++ b/node_modules/@coinbase/cdp-sdk/_cjs/policies/evmSchema.js
+@@ -214,1 +214,1 @@
+-        types: zod_2.z.record(zod_2.z.array(zod_2.z.object({
++        types: zod_2.z.record(zod_2.z.string(), zod_2.z.array(zod_2.z.object({
+diff --git a/node_modules/@coinbase/cdp-sdk/src/policies/evmSchema.ts b/node_modules/@coinbase/cdp-sdk/src/policies/evmSchema.ts
+--- a/node_modules/@coinbase/cdp-sdk/src/policies/evmSchema.ts
++++ b/node_modules/@coinbase/cdp-sdk/src/policies/evmSchema.ts
+@@ -264,2 +264,3 @@
+     types: z.record(
++      z.string(),
+       z.array(

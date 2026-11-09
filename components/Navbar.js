@@ -32,13 +32,13 @@ export default function Navbar() {
       >
         About
       </Link>
-      <Link
+      <a
         className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="/use"
         onClick={() => setIsOpen(false)}
       >
         Build
-      </Link>
+      </a>
       <Link
         className="font-medium text-white hover:text-gray-200 xl:py-6 pb-2 dark:hover:text-gray-300 text-center xl:text-left"
         href="https://console.aipowergrid.io"
