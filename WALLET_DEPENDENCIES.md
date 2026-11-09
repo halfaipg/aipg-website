@@ -2,10 +2,11 @@
 
 ## Status
 
-Local candidate for [security remediation #85](https://github.com/halfaipg/aipg-website/issues/85).
-Not production-qualified or maintainer-approved yet. Keep PR #86 draft until
-the release gates below pass. Wallet choices, Base chain, contract addresses,
-staking hooks and withdrawal-only behavior are unchanged.
+Candidate for [security remediation #85](https://github.com/halfaipg/aipg-website/issues/85).
+The maintainer explicitly approved these tested compatibility patches and
+their maintenance on 2026-11-09. Production qualification is still pending;
+keep PR #86 draft until the release gates below pass. Wallet choices, Base
+chain, contract addresses, staking hooks and withdrawal-only behavior are unchanged.
 
 ## Decision
 
@@ -105,7 +106,8 @@ transactions, signatures, paid inference or Core/worker changes were performed.
 
 ## Release Gates
 
-1. Explicit maintainer approval of the ongoing compatibility-patch maintenance.
+1. Explicit maintainer approval of the ongoing compatibility-patch maintenance
+   (received 2026-11-09).
 2. Clean Node 22 `npm ci`, successful patch application, valid `npm ls zod
    abitype --all`, and zero vulnerabilities from `npm audit --audit-level=low`.
 3. Full unit suite, production build, lint, browser suite and secret scans.

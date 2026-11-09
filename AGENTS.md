@@ -108,7 +108,7 @@ on Vercel.
 - Node 22 is pinned by `package.json` and CI; the Vercel project runtime must
   match. Clean npm installation and the all-severity dependency audit gate
   deployment. Keep security patches on reviewed compatible release lines.
-- `patches/` contains experimental pinned wallet-validator migration patches.
+- `patches/` contains version-pinned wallet-validator migration patches.
   `patch-package --error-on-fail` applies them during installation, never by
   hand-editing vendored files. They require explicit maintainer approval,
   baseline replay and wallet browser qualification before deployment. A clean
