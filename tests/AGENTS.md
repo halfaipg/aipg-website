@@ -7,6 +7,10 @@ onboarding, and staking-withdrawal surfaces.
 
 ## Ownership
 
+- `unit/security-headers.test.mjs` verifies real Next route matching, docs-only
+  WASM permission, unchanged non-docs CSP and preserved security headers.
+  `e2e/security-headers.spec.ts` proves the emitted production policy allows
+  docs WASM while continuing to reject JavaScript string evaluation.
 - `unit/social-metadata.test.mjs` checks the shipped PNG dimensions, size,
   route URL and matching OG/X image metadata. `e2e/social.spec.ts` verifies
   one route-specific social image in server-rendered HTML without JavaScript,

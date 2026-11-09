@@ -76,6 +76,8 @@ on Vercel.
   playbook. It defines channel boundaries, evidence requirements, approved
   claims, reusable drafts, and outcome metrics; it never authorizes automated
   posting or earnings promises.
+- **`DOCS_PROXY.md`** — public docs proxy/CSP ownership, approved scoped edge
+  rule, verification, source-deployment gate and rollback.
 
 ## Local Contracts
 
@@ -95,6 +97,10 @@ on Vercel.
   external script/media origin must be added to the CSP there or it will be blocked in prod.
 - `/docs` and `/docs/*` are Vercel rewrites to the separate aipg-documentation deployment
   (`vercel.json`) — not routes in this repo.
+  Their last-matching CSP permits Pagefind's WebAssembly using
+  `'wasm-unsafe-eval'`, never JavaScript `'unsafe-eval'` in production. Other
+  routes keep the original CSP. Any edge header override must mirror this
+  scoped source policy and pass the public docs search test after changes.
 - `/run` leads with endpoint, OS, verified download and platform-specific setup.
   LM Studio, Ollama, vLLM, SGLang, LMDeploy and KoboldCpp are examples, not an
   engine allowlist. Text registration currently requires OpenAI chat; Anthropic
