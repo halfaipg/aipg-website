@@ -2,11 +2,12 @@
 
 ## Status
 
-Candidate for [security remediation #85](https://github.com/halfaipg/aipg-website/issues/85).
-The maintainer explicitly approved these tested compatibility patches and
-their maintenance on 2026-11-09. Production qualification is still pending;
-keep PR #86 draft until the release gates below pass. Wallet choices, Base
-chain, contract addresses, staking hooks and withdrawal-only behavior are unchanged.
+Deployed through [PR #86](https://github.com/halfaipg/aipg-website/pull/86)
+on 2026-11-09 for
+[security remediation #85](https://github.com/halfaipg/aipg-website/issues/85).
+The maintainer explicitly approved the tested compatibility patches and their
+ongoing maintenance. Wallet choices, Base chain, contract addresses, staking
+hooks and withdrawal-only behavior are unchanged.
 
 ## Decision
 
@@ -25,7 +26,7 @@ As checked on 2026-11-09, the proposed fixes
 the official latest npm releases still require Zod 3. Do not replace the
 runtime ports with an unreviewed dependency-range-only override.
 
-The candidate uses native Zod 4.6.7, not its unpatched `zod/v3` subpath.
+The deployed graph uses native Zod 4.6.7, not its unpatched `zod/v3` subpath.
 Two version-bound `patch-package` patches explicitly port the runtime:
 
 - Coinbase CDP 1.51.2: supply the string key schema for the EIP-712 types
@@ -98,11 +99,34 @@ transaction test. Report these untested paths explicitly in the release review.
 - Docs boundary regression: the test rejected the old RSC-prefetch link;
   normal document navigation passes without changing the destination.
 
-The unchanged production site's wallet lifecycle reached its final assertion,
+The pre-release production site's wallet lifecycle reached its final assertion,
 but background `/use` prefetch loaded docs chunks from the wrong namespace and
-returned 404s. Do not report that live run as clean. The navbar fix is local
-until the approved candidate is published and publicly rechecked. No wallet
-transactions, signatures, paid inference or Core/worker changes were performed.
+returned 404s. That run was not clean; the deployed navbar fix passed the public
+browser recheck below. No wallet transactions, signatures, paid inference or
+Core/worker changes were performed.
+
+## Production Qualification, 2026-11-09
+
+- Reviewed source: `245c5ca5c1bb11010904041541cb57316a725cb5`; merged main:
+  `62bc2984cb829cbe913a601d0096cf1c0f414653`, with an identical Git tree.
+- Initial production artifact: `dpl_Q4Woe6QH4xRRdRrnADV3XcJNnjpF`, Node 22.
+  This identifies the security rollout, not later documentation-only rebuilds.
+- [Required CI](https://github.com/halfaipg/aipg-website/actions/runs/42686202421)
+  passed. The exact-source, protected Node 22 Vercel QA preview passed all
+  53 original browser checks with only Vercel toolbar instrumentation disabled.
+- The public website then passed all 53 checks without a QA credential or
+  toolbar override, including read-only wallet lifecycle tests at both sizes.
+  Real wallet signing and mobile/hardware pairing remain outside this coverage.
+- Production build: 124 unit checks passed, one Redis-tool-availability skip,
+  zero failures. The local 125-pass run above included real isolated Redis.
+- Merged dependency graph: `npm audit --audit-level=low` reports zero known
+  vulnerabilities. Existing lint/optional-module warnings remain as noted above.
+- Both temporary project-scoped QA bypasses were revoked immediately after
+  their suites. Website and docs SSO settings stayed unchanged.
+- Direct-origin Pagefind search/navigation passed with TLS validation and no
+  Cloudflare in the path. Only then was the temporary docs CSP transform
+  disabled. All six public security headers on `/`, `/run`, `/staking` and
+  `/docs` matched the pre-release snapshot afterward.
 
 ## Release Gates
 
@@ -123,12 +147,13 @@ releases replace them, then rerun the same baseline and browser checks.
 
 ## Rollback
 
-Record the last known production deployment before promotion. If wallet
+The pre-rollout production artifact was `dpl_yrhrEvpapBfc4MpdoH8e48qRrBfR`
+(source `56995ce2f2d7dcdbe7fc86150a49a64d15ef6391`). If wallet
 behavior regresses, promote that exact artifact, not a fresh build of old
 dependencies. It temporarily restores the previously vulnerable graph, so
 treat rollback as an incident measure and keep #85 open. Do not disable the
 audit gate or mix old SDK validators with the new Zod major.
 
-Keep the docs edge CSP rule active until source deployment is verified. A
+The docs edge CSP rule is now disabled after source verification. A
 website rollback may require restoring that rule; it does not require rolling
 back the separate, already-patched documentation deployment.
