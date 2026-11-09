@@ -18,21 +18,41 @@ Pagefind search compiles WebAssembly. Production docs responses need
 policy, other security headers, media sources and script origins stay unchanged.
 
 The maintainer-approved Cloudflare response-header rule **Docs Pagefind WASM
-CSP**, ID `fdde0733d8fe47b6a5ab674630d97ade`, is active with this exact match:
+CSP**, ID `fdde0733d8fe47b6a5ab674630d97ade`, is **disabled** after the
+2026-11-09 source rollout. It is retained as a scoped rollback option with
+this exact match:
 
 ```text
 (http.host eq "aipowergrid.io" and (http.request.uri.path eq "/docs" or starts_with(http.request.uri.path, "/docs/")))
 ```
 
-It sets (not appends) `Content-Security-Policy` to the matching production
-docs policy from `next.config.js`. Keep the edge value synchronized when the
-source policy changes. Do not modify the existing unrelated transform rules.
+If re-enabled for rollback, it sets (not appends) `Content-Security-Policy`
+to the matching production docs policy from `next.config.js`. Review the edge
+value against source before re-enabling it. Do not modify unrelated rules.
 
-The source change is not yet deployed. A website rebuild remains gated on
-[dependency remediation #85](https://github.com/halfaipg/aipg-website/issues/85).
-The edge rule restores search without redeploying that dependency graph; it
-does not remediate the dependencies. Remove this transitional deployment note
-after the source policy has safely shipped and the public checks pass.
+The source policy shipped through
+[PR #86](https://github.com/halfaipg/aipg-website/pull/86), merged source
+`62bc2984cb829cbe913a601d0096cf1c0f414653`, initial production artifact
+`dpl_Q4Woe6QH4xRRdRrnADV3XcJNnjpF` on Node 22. The dependency remediation,
+compatibility limits and release evidence are in `WALLET_DEPENDENCIES.md`.
+There is no documentation content/database migration in this website release.
+
+Before disabling the edge rule, an actual browser connected directly to the
+verified Vercel origin with ordinary TLS validation, confirmed no Cloudflare
+response headers, and found/followed a real Pagefind result. The origin's CSP
+included `'wasm-unsafe-eval'` and excluded JavaScript `'unsafe-eval'`.
+After disabling only the named rule, all 53 public website browser checks
+passed, including the docs WASM/eval test and cross-application navigation.
+All six public security headers on `/`, `/run`, `/staking` and `/docs`
+matched the pre-release baseline. The API's separate urllib BIC exception
+and the unrelated web-wallet CORS transform were not changed.
+
+The separate docs release
+[PR #50](https://github.com/AIPowerGrid/aipg-documentation/pull/50), source
+`a0b49c6950807e017c89cf72e7e0ad2f45cc3424`, deployed as
+`dpl_2kj3p5Rnn2MpFimHiSDkkCCAhjQX` on Node 22. All seven public docs checks
+then passed: 44 public routes, private-path 404s, search navigation, metadata,
+API/funding discovery, Mermaid and responsive/mobile layouts.
 
 ## Verification And Rollback
 
