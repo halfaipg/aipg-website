@@ -109,7 +109,7 @@ test("builder entry points converge on the canonical 60-second guide", async () 
   assert.match(hero, /href="#try-grid"[\s\S]*Try the Grid/);
   assert.match(hero, /href="\/run"[\s\S]*Provide compute/);
   assert.match(products, /href: "https:\/\/aipowergrid\.io\/use"/);
-  assert.match(navbar, /href="\/use"[\s\S]*?>\s*Build\s*<\/Link>/);
+  assert.match(navbar, /<a\s+[\s\S]*?href="\/use"[\s\S]*?>\s*Build\s*<\/a>/);
   assert.match(footer, /href="\/use"[\s\S]*?>\s*60-second setup\s*<\/a>/);
   assert.match(
     usePage,

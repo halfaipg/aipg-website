@@ -23,6 +23,10 @@ const nextConfig = {
     ];
   },
   async headers() {
+    const scriptSources = process.env.NODE_ENV === 'development'
+      ? ["'self'", "'unsafe-eval'", "'unsafe-inline'", 'https://challenges.cloudflare.com', 'https://omnivox.io', 'https://cdn.jsdelivr.net']
+      : ["'self'", "'unsafe-inline'", 'https://challenges.cloudflare.com', 'https://static.cloudflareinsights.com', 'https://omnivox.io', 'https://cdn.jsdelivr.net'];
+    const mediaPolicy = "media-src 'self' blob: https://omnivox.io;";
     return [
       {
         source: '/:path*', // Apply these headers to all routes
@@ -33,9 +37,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: process.env.NODE_ENV === 'development'
-              ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com https://omnivox.io https://cdn.jsdelivr.net; media-src 'self' blob: https://omnivox.io;"
-              : "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://omnivox.io https://cdn.jsdelivr.net; media-src 'self' blob: https://omnivox.io;",
+            value: `script-src ${scriptSources.join(' ')}; ${mediaPolicy}`,
           },
           {
             key: 'X-Frame-Options',
@@ -54,7 +56,15 @@ const nextConfig = {
             value: 'camera=(), microphone=*, geolocation=(), browsing-topics=()'
           }
         ]
-      }
+      },
+      {
+        // Last matching CSP overrides only docs; Pagefind needs WASM, not JavaScript eval.
+        source: '/docs/:path*',
+        headers: [{
+          key: 'Content-Security-Policy',
+          value: `script-src ${[...scriptSources, "'wasm-unsafe-eval'"].join(' ')}; ${mediaPolicy}`,
+        }],
+      },
     ]
   }
 };

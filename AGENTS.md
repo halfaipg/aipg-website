@@ -76,6 +76,18 @@ on Vercel.
   playbook. It defines channel boundaries, evidence requirements, approved
   claims, reusable drafts, and outcome metrics; it never authorizes automated
   posting or earnings promises.
+- **`DOCS_PROXY.md`** — public docs proxy/CSP ownership, approved scoped edge
+  rule, verification, source-deployment gate and rollback.
+- **`WALLET_DEPENDENCIES.md`** — pinned runtime compatibility-patch rationale,
+  baseline provenance, known declaration/pairing limitations and release gates.
+- **`scripts/capture-wallet-schema-baseline.mjs`** captures the pinned original
+  wallet SDK schemas into synthetic test fixtures before a validator migration.
+  It records source versions and hashes; never replace the baseline with the
+  migrated output to hide a compatibility regression.
+- **`scripts/compare-wallet-schema-contracts.mjs`** compares bounded nested-field
+  mutations against a separately installed original SDK graph, verifies its
+  recorded source hashes and Zod versions, and fails on behavioral differences.
+  It runs offline; never install the original vulnerable SDK graph in production.
 
 ## Local Contracts
 
@@ -93,8 +105,20 @@ on Vercel.
   stakes. Keep stake/approve paths out of rendered flows even though the hook still exports them.
 - Security headers (CSP, HSTS, etc.) are defined in `next.config.js` `headers()` — any new
   external script/media origin must be added to the CSP there or it will be blocked in prod.
+- Node 22 is pinned by `package.json` and CI; the Vercel project runtime must
+  match. Clean npm installation and the all-severity dependency audit gate
+  deployment. Keep security patches on reviewed compatible release lines.
+- `patches/` contains version-pinned wallet-validator migration patches.
+  `patch-package --error-on-fail` applies them during installation, never by
+  hand-editing vendored files. They require explicit maintainer approval,
+  baseline replay and wallet browser qualification before deployment. A clean
+  audit alone does not qualify them or prove upstream Zod 4 support.
 - `/docs` and `/docs/*` are Vercel rewrites to the separate aipg-documentation deployment
   (`vercel.json`) — not routes in this repo.
+  Their last-matching CSP permits Pagefind's WebAssembly using
+  `'wasm-unsafe-eval'`, never JavaScript `'unsafe-eval'` in production. Other
+  routes keep the original CSP. Any edge header override must mirror this
+  scoped source policy and pass the public docs search test after changes.
 - `/run` leads with endpoint, OS, verified download and platform-specific setup.
   LM Studio, Ollama, vLLM, SGLang, LMDeploy and KoboldCpp are examples, not an
   engine allowlist. Text registration currently requires OpenAI chat; Anthropic

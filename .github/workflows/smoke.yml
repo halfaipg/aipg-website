@@ -27,6 +27,9 @@ jobs:
       - name: Install deps
         run: npm ci --no-audit --no-fund
 
+      - name: Audit every dependency severity
+        run: npm audit --audit-level=low
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
