@@ -140,6 +140,8 @@ on Vercel.
 - Agent discovery is intentionally thin: `/llms.txt` links to the canonical docs and
   `/.well-known/skills/grid/SKILL.md` redirects to the `grid-skill` repository. Do not copy the
   skill body into this repo; one canonical copy prevents endpoint and authentication drift.
+  It may link to live public API endpoints (models, price book, status) but must not copy
+  model names or prices, which change without a site deploy.
 - `/use` is the permanent short entry point for the canonical 60-second
   integration guide at `/docs/integrations`. Builder CTAs should converge there
   instead of copying client setup into the marketing repository.
