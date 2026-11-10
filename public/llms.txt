@@ -24,6 +24,12 @@ send the human through the authenticated console handoff described by the skill.
 - [Media worker](https://aipowergrid.io/docs/worker-media): Run an image or video worker.
 - [Validator node](https://aipowergrid.io/docs/validator-node): Validator design and current authority.
 
+## Live API
+
+- [Models online now](https://api.aipowergrid.io/v1/models): OpenAI-format list of text models that currently have a worker, each with its USD price per million tokens.
+- [Price book](https://api.aipowergrid.io/v1/pricing): Every configured rate in USD for text, image, video, audio, and 3D. A listed rate does not mean the model is online.
+- [Network status](https://api.aipowergrid.io/v1/status/models): Which text, image, video, and audio models have workers online, with worker counts.
+
 ## Public Products
 
 - [Developer console](https://console.aipowergrid.io): Human authentication, API keys, usage, and credits.
