@@ -98,6 +98,39 @@ test("empty and null tool fields are no-ops even when image tools are disabled",
   }
 });
 
+test("fragmented DSML content stays private while only structured calls dispatch", async () => {
+  const markup = '<\uff5cDSML\uff5ctool_calls><\uff5cDSML\uff5cinvoke name="generate_image">private serialization';
+  for (let split = 1; split < markup.length; split++) {
+    const stream = frame({ choices: [{ delta: { content: "Making your scene. " + markup.slice(0, split), tool_calls: [] } }] }) +
+      frame({ choices: [{ delta: { content: markup.slice(split), tool_calls: [] } }] }) + callStream();
+    const { handle, calls } = fixture({ stream });
+    const events = (await (await handle(request())).text()).trim().split("\n").map(JSON.parse);
+    assert.equal(events.filter(e => e.type === "delta").map(e => e.text).join(""), "Making your scene. ");
+    assert.equal(calls.filter(c => c.url.endsWith("/generations")).length, 1);
+    assert.equal(events.at(-1).type, "done");
+  }
+});
+
+test("DSML prose alone never dispatches or claims completion", async () => {
+  const stream = frame({ choices: [{ delta: { content: '<\uff5cDSML\uff5ctool_calls>generate_image({"prompt":"city"})' } }] }) +
+    frame({ choices: [{ finish_reason: "stop" }] }) + frame("[DONE]");
+  const { handle, calls } = fixture({ stream });
+  const events = (await (await handle(request())).text()).trim().split("\n").map(JSON.parse);
+  assert.deepEqual(events.map(e => e.type), ["meta", "error"]);
+  assert.equal(calls.some(c => c.url.endsWith("/generations")), false);
+});
+
+test("ordinary angle brackets and unfinished marker prefixes remain text", async () => {
+  for (const content of ["x < y", "Use <tag>", "A trailing <", "A trailing <\uff5cDS"]) {
+    const stream = [...content].map(c => frame({ choices: [{ delta: { content: c } }] })).join("") +
+      frame({ choices: [{ finish_reason: "stop" }] }) + frame("[DONE]");
+    const events = [];
+    for await (const event of chatEvents(new Response(stream).body)) events.push(event);
+    assert.equal(events.filter(e => e.type === "delta").map(e => e.text).join(""), content);
+    assert.equal(events.at(-1).type, "done");
+  }
+});
+
 test("empty tool fields cannot turn missing or malformed calls into success", async () => {
   for (const tool_calls of [[], null, {}, "", false, 0, [null], [{ index: 1 }]]) {
     const stream = frame({ choices: [{ delta: { tool_calls } }] }) +

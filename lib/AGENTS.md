@@ -53,6 +53,9 @@ the site reads/writes.
   Absent, null and empty `tool_calls` deltas are no-ops; preserve content and
   terminal metadata on those frames. Nonempty calls still require exactly one
   index-zero function and valid completed arguments before image dispatch.
+  Reserved DeepSeek DSML content is suppressed from its first marker onward,
+  including markers split across deltas. It is never parsed into a tool call;
+  without a valid structured call it cannot produce a successful terminal.
 
 ## Local Contracts
 
